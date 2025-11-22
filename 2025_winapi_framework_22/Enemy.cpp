@@ -32,21 +32,6 @@ void Enemy::Render(HDC _hdc)
 void Enemy::EnterCollision(Collider* _other)
 {
 	cout << "Enter" << endl;
-	//if (_other->IsTrigger())
-	//{
-	//	if (_other->GetName() == L"PlayerBullet")
-	//	{
-	//		// 뭔지 확인하고 삭제.
-	//		_other->GetOwner();
-	//		
-	//	}
-	//}
-	//// 물리충돌
-	//else
-	//{
-
-
-	//}
 }
 
 void Enemy::StayCollision(Collider* _other)
