@@ -157,6 +157,9 @@
     <ClInclude Include="IDamageable.h">
       <Filter>Engine\03. Object\Interface</Filter>
     </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>Engine\03. Object\Enemy\Boss</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc">
@@ -246,6 +249,9 @@
     </ClCompile>
     <ClCompile Include="IDamageable.cpp">
       <Filter>Engine\03. Object\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>Engine\03. Object\Enemy\Boss</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
