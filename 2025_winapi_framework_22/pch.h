@@ -38,8 +38,8 @@ using std::wstring;
 
 // 각종 define값
 #define PI 3.14159265358979f
-#define WINDOW_WIDTH 1280
-#define WINDOW_HEIGHT 720
+#define WINDOW_WIDTH 720
+#define WINDOW_HEIGHT 820
 
 
 // 메모리 릭

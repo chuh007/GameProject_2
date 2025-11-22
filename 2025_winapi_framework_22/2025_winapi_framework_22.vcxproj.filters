@@ -47,6 +47,18 @@
     <Filter Include="Engine\02. Manager\Framework">
       <UniqueIdentifier>{b4df280d-99d4-4098-9967-569d0836c34f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\03. Object\Enemy">
+      <UniqueIdentifier>{b2075e89-f292-414b-a62e-6e2de91956e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03. Object\Enemy\Boss">
+      <UniqueIdentifier>{d8cfd052-9104-45bc-8edb-1ec4825105ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03. Object\Player">
+      <UniqueIdentifier>{18c90c66-cc2f-4459-af09-db51328f3d04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\03. Object\Interface">
+      <UniqueIdentifier>{7a977107-d27e-4a79-8dd5-598a1dc855b4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2025_winapi_framework_22.h">
@@ -91,17 +103,8 @@
     <ClInclude Include="DevScene.h">
       <Filter>Engine\04. Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Engine\03. Object</Filter>
-    </ClInclude>
     <ClInclude Include="TestScene.h">
       <Filter>Engine\04. Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Engine\03. Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Projectile.h">
-      <Filter>Engine\03. Object</Filter>
     </ClInclude>
     <ClInclude Include="ResourceBase.h">
       <Filter>Engine\05. Resource</Filter>
@@ -139,7 +142,21 @@
     <ClInclude Include="Rigidbody.h">
       <Filter>Engine\06. Component\Physics</Filter>
     </ClInclude>
-    <ClInclude Include="Floor.h" />
+    <ClInclude Include="Enemy.h">
+      <Filter>Engine\03. Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Health.h">
+      <Filter>Engine\06. Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Engine\03. Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>Engine\03. Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="IDamageable.h">
+      <Filter>Engine\03. Object\Interface</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc">
@@ -176,17 +193,8 @@
     <ClCompile Include="DevScene.cpp">
       <Filter>Engine\04. Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Engine\03. Object</Filter>
-    </ClCompile>
     <ClCompile Include="TestScene.cpp">
       <Filter>Engine\04. Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Engine\03. Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Projectile.cpp">
-      <Filter>Engine\03. Object</Filter>
     </ClCompile>
     <ClCompile Include="ResourceBase.cpp">
       <Filter>Engine\05. Resource</Filter>
@@ -224,6 +232,20 @@
     <ClCompile Include="Rigidbody.cpp">
       <Filter>Engine\06. Component\Physics</Filter>
     </ClCompile>
-    <ClCompile Include="Floor.cpp" />
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Engine\03. Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Health.cpp">
+      <Filter>Engine\06. Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Engine\03. Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>Engine\03. Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="IDamageable.cpp">
+      <Filter>Engine\03. Object\Interface</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

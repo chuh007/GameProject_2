@@ -7,7 +7,6 @@
 #include "Enemy.h"
 #include "CollisionManager.h"
 #include "ResourceManager.h"
-#include "Floor.h"
 void DevScene::Init()
 {	
 	Object* obj = new Player;
@@ -16,7 +15,6 @@ void DevScene::Init()
 	// obj->SetScene(this);
 	AddObject(obj, Layer::PLAYER);
 
-	Spawn<Floor>(Layer::DEFAULT, { WINDOW_WIDTH / 2, 600}, { 100.f,100.f });
 	Spawn<Enemy>(Layer::ENEMY, { WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4 }, { 100.f,100.f });
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PROJECTILE, Layer::ENEMY);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::DEFAULT);

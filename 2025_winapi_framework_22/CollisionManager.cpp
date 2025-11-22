@@ -130,11 +130,14 @@ bool CollisionManager::IsCollision(Collider* _left, Collider* _right)
 {
 	Vec2 leftPos = _left->GetUpdatedPos();
 	Vec2 rightPos = _right->GetUpdatedPos();
-	Vec2 leftSize = _left->GetSize();
-	Vec2 rightSize = _right->GetSize();
+	float leftSize = _left->GetSize();
+	float rightSize = _right->GetSize();
 
-	return (fabsf(rightPos.x - leftPos.x) < (leftSize.x + rightSize.x) / 2.f
-		&& fabsf(rightPos.y - leftPos.y) < (leftSize.y + rightSize.y) / 2.f);
+	float dx = leftPos.x - rightPos.x;
+	float dy = leftPos.y - rightPos.y;
+	float r = leftSize + rightSize;
+
+	return dx * dx + dy * dy <= r * r;
 }
 
 ULONGLONG CollisionManager::MakePairKey(UINT a, UINT b)

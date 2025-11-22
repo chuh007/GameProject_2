@@ -3,9 +3,13 @@
 #include "Collider.h"
 #include "SceneManager.h"
 #include "Rigidbody.h"
+#include "Health.h"
 Enemy::Enemy()
 {
 	AddComponent<Collider>();
+	auto* health = AddComponent<Health>();
+	health->SetMaxHP(100);
+	health->SetCurrentHP(100);
 }
 Enemy::~Enemy()
 {
@@ -16,37 +20,33 @@ void Enemy::Update()
 
 void Enemy::Render(HDC _hdc)
 {
-	//HBRUSH hbrush = ::CreateSolidBrush(RGB(rand() % 255, rand() % 255, rand() % 255));
-	//HBRUSH holdbrush = (HBRUSH)::SelectObject(_hdc, hbrush);
 	
 	Vec2 pos = GetPos();
 	Vec2 size = GetSize();
 	RECT_RENDER(_hdc, pos.x, pos.y
 		, size.x, size.y);
 
-	//::SelectObject(_hdc, holdbrush);
-	//::DeleteObject(hbrush);
 	ComponentRender(_hdc);
 }
 
 void Enemy::EnterCollision(Collider* _other)
 {
 	cout << "Enter" << endl;
-	if (_other->IsTrigger())
-	{
-		if (_other->GetName() == L"PlayerBullet")
-		{
-			// 뭔지 확인하고 삭제.
-			GET_SINGLE(SceneManager)->RequestDestroy(this);
-			GET_SINGLE(SceneManager)->RequestDestroy(_other->GetOwner());
-		}
-	}
-	// 물리충돌
-	else
-	{
+	//if (_other->IsTrigger())
+	//{
+	//	if (_other->GetName() == L"PlayerBullet")
+	//	{
+	//		// 뭔지 확인하고 삭제.
+	//		_other->GetOwner();
+	//		
+	//	}
+	//}
+	//// 물리충돌
+	//else
+	//{
 
 
-	}
+	//}
 }
 
 void Enemy::StayCollision(Collider* _other)
@@ -57,4 +57,16 @@ void Enemy::StayCollision(Collider* _other)
 void Enemy::ExitCollision(Collider* _other)
 {
 	cout << "Exit" << endl;
+}
+
+void Enemy::TakeDamage(int _damage)
+{
+	Health* health = GetComponent<Health>();
+	health->TakeDamage(_damage);
+	cout << _damage << endl;
+}
+
+void Enemy::HPZero()
+{
+	GET_SINGLE(SceneManager)->RequestDestroy(this);
 }

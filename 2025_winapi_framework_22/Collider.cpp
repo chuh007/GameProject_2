@@ -4,7 +4,7 @@
 #include "ResourceManager.h"
 UINT Collider::m_nextID = 0;
 Collider::Collider()
-	: m_size{30.f,30.f}
+	: m_size{20.f}
 	, m_updatedPos{0.f,0.f}
 	, m_offsetPos{0.f,0.f}
 	, m_ID(m_nextID++)
@@ -22,10 +22,6 @@ void Collider::LateUpdate()
 
 void Collider::Render(HDC _hDC)
 {
-	::TextOut(_hDC, 0, 0, L"안녕", 2);
-	GDISelector font(_hDC, FontType::TITLE);
-	::TextOut(_hDC, 10, 10, L"하세요", 3);
-
 	//// 기즈모?
 	//GET_SINGLE(ResourceManager)->GetPen();
 
@@ -35,8 +31,9 @@ void Collider::Render(HDC _hDC)
 		colorPen = PenType::RED;
 	GDISelector pen(_hDC, colorPen);
 	GDISelector brush(_hDC, BrushType::HOLLOW);
-	RECT_RENDER(_hDC, m_updatedPos.x, m_updatedPos.y,
-		m_size.x, m_size.y);
+
+	ELLIPSE_RENDER(_hDC, m_updatedPos.x, m_updatedPos.y,
+		m_size * 2, m_size * 2);
 }
 void Collider::EnterCollision(Collider* _other)
 {

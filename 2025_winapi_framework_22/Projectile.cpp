@@ -3,9 +3,13 @@
 #include "Texture.h"
 #include "ResourceManager.h"
 #include "Collider.h"
-Projectile::Projectile()
+#include "IDamageable.h"
+#include "SceneManager.h"
+PlayerProjectile::PlayerProjectile()
 	: m_angle(0.f)
 	, m_dir(1.f, 1.f)
+	, m_speed(500.f)
+	, m_damage(10)
 {
 	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Bullet");
 	auto* col = AddComponent<Collider>();
@@ -13,7 +17,7 @@ Projectile::Projectile()
 	col->SetTrigger(true);
 }
 
-void Projectile::Render(HDC _hdc)
+void PlayerProjectile::Render(HDC _hdc)
 {
 	Vec2 pos = GetPos();
 	Vec2 size = GetSize();
@@ -31,14 +35,23 @@ void Projectile::Render(HDC _hdc)
 	ComponentRender(_hdc);
 }
 
-Projectile::~Projectile()
+PlayerProjectile::~PlayerProjectile()
 {
 
 }
 
-void Projectile::Update()
+void PlayerProjectile::Update()
 {
 	//Translate({cosf(m_angle) * 500.f * fDT, sinf(m_angle) * 500.f * fDT});
-	Translate({ m_dir.x * 500.f * fDT, m_dir.y * 500.f * fDT});
+	Translate({ m_dir.x * m_speed * fDT, m_dir.y * m_speed * fDT });
 }
 
+void PlayerProjectile::EnterCollision(Collider* _other)
+{
+	IDamageable* damageable = dynamic_cast<IDamageable*>(_other->GetOwner());
+	if (damageable)
+	{
+		damageable->TakeDamage(m_damage);
+		GET_SINGLE(SceneManager)->RequestDestroy(this);
+	}
+}

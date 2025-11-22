@@ -18,7 +18,8 @@ Player::Player()
 	//m_pTex->Load(path);
 	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Jiwoo");
 	AddComponent<Collider>();
-	AddComponent<Rigidbody>();
+	auto* rb = AddComponent<Rigidbody>();
+	rb->SetUseGravity(false);
 	auto* animator = AddComponent<Animator>();
 	animator->CreateAnimation
 	(L"JiwooFront",
@@ -43,41 +44,6 @@ void Player::Render(HDC _hdc)
 	LONG width = m_pTex->GetWidth();
 	LONG height = m_pTex->GetHeight();
 
-	// blt 5총사 
-	// 1. bitblt - 가장 빠른 대신 무식합니다. 
-	//::BitBlt(_hdc
-	//	, (int)(pos.x - size.x / 2)
-	//	, (int)(pos.y - size.y / 2)
-	//	, width
-	//	, height
-	//	, m_pTex->GetTextureDC()
-	//	, 0, 0, SRCCOPY);
-
-	////// 2. Transparent - 색깔을 뺄 수 있음
-	//::TransparentBlt(_hdc
-	//	, (int)(pos.x - size.x / 2)
-	//	, (int)(pos.y - size.y / 2)
-	//	, size.x
-	//	, size.y
-	//	, m_pTex->GetTextureDC()
-	//	, 0, 0,width, height,
-	//	RGB(255,0,255));
-
-	////// 3. StretchBlt - 확대, 축소, 반전
-	//::StretchBlt(_hdc
-	//	, (int)(pos.x - size.x / 2)
-	//	, (int)(pos.y - size.y / 2)
-	//	, size.x
-	//	, size.y
-	//	, m_pTex->GetTextureDC()
-	//	, 0, 0, width, height,SRCCOPY);
-
-	//// 4. 회전
-	//::PlgBlt()
-	//
-	
-	//// 5. 
-	//::AlphaBlend()
 	ComponentRender(_hdc);
 }
 
@@ -87,11 +53,7 @@ void Player::StayCollision(Collider* _other)
 
 void Player::EnterCollision(Collider* _other)
 {
-	if (_other->GetName() == L"Floor")
-	{
-		Rigidbody* rb = GetComponent<Rigidbody>();
-		rb->SetGrounded(true);
-	}
+
 }
 
 
@@ -102,18 +64,6 @@ void Player::ExitCollision(Collider* _other)
 
 void Player::Update()
 {
-	//Vec2 pos = GetPos();
-
-	//if (GET_KEY(KEY_TYPE::W))
-	//	pos.y -= 200.f * fDT;
-	//if (GET_KEY(KEY_TYPE::S))
-	//	pos.y += 200.f * fDT;
-	//if (GET_KEY(KEY_TYPE::A))
-	//	pos.x -= 200.f * fDT;
-	//if (GET_KEY(KEY_TYPE::D))
-	//	pos.x += 200.f * fDT;
-	//SetPos(pos);
-
 	Vec2 dir = {};
 	if (GET_KEY(KEY_TYPE::W)) dir.y -= 1.f;
 	if (GET_KEY(KEY_TYPE::S)) dir.y += 1.f;
@@ -136,7 +86,7 @@ void Player::Update()
 
 void Player::CreateProjectile()
 {
-	Projectile* proj = new Projectile;
+	PlayerProjectile* proj = new PlayerProjectile;
 	Vec2 pos = GetPos();
 	pos.y -= GetSize().y / 2.f;
 	proj->SetPos(pos);
