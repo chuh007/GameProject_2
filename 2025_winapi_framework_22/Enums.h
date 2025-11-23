@@ -29,3 +29,8 @@ enum class PlayMode
 {
 	Once, Loop, Counted
 };
+
+enum class MoveState
+{
+	Stop, MoveTo, MoveDir
+};
