@@ -5,7 +5,6 @@
 #include "InputManager.h"
 #include "SceneManager.h"
 #include "Enemy.h"
-#include "Boss.h"
 #include "CollisionManager.h"
 #include "ResourceManager.h"
 void DevScene::Init()
@@ -16,10 +15,10 @@ void DevScene::Init()
 	// obj->SetScene(this);
 	AddObject(obj, Layer::PLAYER);
 
-	Spawn<Boss>(Layer::ENEMY, { WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4 }, { 100.f,100.f });
+	Spawn<Enemy>(Layer::ENEMY, { WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4 }, { 100.f,100.f });
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PROJECTILE, Layer::ENEMY);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::DEFAULT);
-	GET_SINGLE(ResourceManager)->Play(L"BGM");
+	//GET_SINGLE(ResourceManager)->Play(L"BGM");
 }
 
 void DevScene::Update()

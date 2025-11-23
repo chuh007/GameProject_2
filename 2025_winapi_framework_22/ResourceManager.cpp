@@ -46,8 +46,8 @@ void ResourceManager::Release()
 
 void ResourceManager::RegisterSound()
 {
-	LoadSound(L"BGM", L"Sound\\U.N. Owen Was Her.mp3", true);
-	//LoadSound(L"BGM", L"Sound\\laserShoot.wav", false);
+	LoadSound(L"BGM", L"Sound\\Retro_bgm.wav", true);
+	LoadSound(L"BGM", L"Sound\\laserShoot.wav", false);
 }
 
 void ResourceManager::FmodUpdate()
