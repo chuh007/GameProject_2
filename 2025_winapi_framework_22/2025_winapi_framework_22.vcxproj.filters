@@ -160,6 +160,7 @@
     <ClInclude Include="Boss.h">
       <Filter>Engine\03. Object\Enemy\Boss</Filter>
     </ClInclude>
+    <ClInclude Include="EnemySpawnManger.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc">
@@ -253,5 +254,6 @@
     <ClCompile Include="Boss.cpp">
       <Filter>Engine\03. Object\Enemy\Boss</Filter>
     </ClCompile>
+    <ClCompile Include="EnemySpawnManger.cpp" />
   </ItemGroup>
 </Project>

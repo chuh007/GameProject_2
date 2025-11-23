@@ -171,6 +171,7 @@
     <ClInclude Include="Core.h" />
     <ClInclude Include="DevScene.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemySpawnManger.h" />
     <ClInclude Include="Enums.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GDISelector.h" />
@@ -205,6 +206,7 @@
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="DevScene.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemySpawnManger.cpp" />
     <ClCompile Include="GDISelector.cpp" />
     <ClCompile Include="Health.cpp" />
     <ClCompile Include="IDamageable.cpp" />
