@@ -20,12 +20,6 @@ void DevScene::Init()
 	Spawn<Boss>(Layer::ENEMY, { WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4 }, { 100.f,100.f });
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PROJECTILE, Layer::ENEMY);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::DEFAULT);
-	Enemy* enemy = new Enemy;
-	enemy->SetSize({ 100.0f, 100.0f });
-	enemy->SetPos({ 200.0f, 0.0f });
-	GET_SINGLE(EnemySpawnManger)->SetSpawnScene(this);
-	GET_SINGLE(EnemySpawnManger)->AddEnemySpawnQueue({ 1.0f, enemy});
-	GET_SINGLE(EnemySpawnManger)->Init();
 	GET_SINGLE(ResourceManager)->Play(L"BGM");
 }
 
