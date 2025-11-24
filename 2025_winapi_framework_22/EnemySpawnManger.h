@@ -6,7 +6,7 @@ struct SpawnInfo
 {
 	float spawnTime;
 	Enemy* enemy;
-	Vec2 position;
+
 };
 struct CompareSpawnInfo
 {
@@ -14,21 +14,21 @@ struct CompareSpawnInfo
 		return a.spawnTime > b.spawnTime;
 	}
 };
-bool CmpSpawnInfo(SpawnInfo& a, SpawnInfo& b)
-{
-	return a.spawnTime < b.spawnTime;
-}
 class EnemySpawnManger
 { 
 	DECLARE_SINGLE(EnemySpawnManger)
 
 public:
-	void StartSpawn(Scene* targetScene);
-	void Update(float deltaTime);
+	void Init();
+	void Update();
 	void StopSpawn();
 	void Realese();
 public:
-	void AddEnemySpawn(SpawnInfo _spawn);
+	void AddEnemySpawnQueue(SpawnInfo _spawn);
+	void SetSpawnScene(Scene* scene)
+	{
+		m_spawnTargetScene = scene;
+	}
 private: 
 	bool TryToSpawn();
 private:

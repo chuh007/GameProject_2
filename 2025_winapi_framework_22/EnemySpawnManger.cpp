@@ -1,15 +1,16 @@
 #include "pch.h"
-#include "EnemySpawnManger.h"
 #include "Scene.h"
 #include "Enemy.h"
-void EnemySpawnManger::StartSpawn(Scene* targetScene)
+#include "EnemySpawnManger.h"
+void EnemySpawnManger::Init()
 {
-	m_spawnTargetScene = targetScene;
+	cout << "spawn manager init" << endl;
+	m_currentTime = 0;
 }
 
-void EnemySpawnManger::Update(float deltaTime)
+void EnemySpawnManger::Update()
 {
-	m_currentTime += deltaTime;
+	m_currentTime += fDT;
 	TryToSpawn();
 }
 
@@ -29,8 +30,9 @@ void EnemySpawnManger::Realese()
     }
 }
 
-void EnemySpawnManger::AddEnemySpawn(SpawnInfo _spawnInfo)
+void EnemySpawnManger::AddEnemySpawnQueue(SpawnInfo _spawnInfo)
 {
+	cout << "enemy added" << endl;
 	m_enemySpawnQueue.push(_spawnInfo);
 }
 

@@ -160,9 +160,8 @@
     <ClInclude Include="Boss.h">
       <Filter>Engine\03. Object\Enemy\Boss</Filter>
     </ClInclude>
-    <ClInclude Include="BossMover.h">
-      <Filter>Engine\06. Component</Filter>
-    </ClInclude>
+    <ClInclude Include="EnemySpawnManger.h" />
+    <ClInclude Include="CommonEnemy.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc">
@@ -256,8 +255,7 @@
     <ClCompile Include="Boss.cpp">
       <Filter>Engine\03. Object\Enemy\Boss</Filter>
     </ClCompile>
-    <ClCompile Include="BossMover.cpp">
-      <Filter>Engine\06. Component</Filter>
-    </ClCompile>
+    <ClCompile Include="EnemySpawnManger.cpp" />
+    <ClCompile Include="CommonEnemy.cpp" />
   </ItemGroup>
 </Project>

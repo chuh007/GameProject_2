@@ -1,6 +1,7 @@
 #pragma once
+#include "Collider.h"
 class Component;
-class Collider;
+
 class Object
 {
 public:
