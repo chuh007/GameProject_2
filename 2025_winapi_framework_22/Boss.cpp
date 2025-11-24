@@ -1,12 +1,19 @@
 #include "pch.h"
 #include "Boss.h"
 #include "Health.h"
+#include "Collider.h"
+#include "BossMover.h"
+#include "SceneManager.h"
 Boss::Boss()
+	: m_lifeCount(2)
 {
-	AddComponent<Collider>();
+	auto* col = AddComponent<Collider>();
+	col->SetSize(50.f);
 	auto* health = AddComponent<Health>();
 	health->SetMaxHP(100);
 	health->SetCurrentHP(100);
+	auto* mover = AddComponent<BossMover>();
+	mover->MoveTo({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 10 }, 3.f);
 }
 
 Boss::~Boss()
@@ -34,8 +41,21 @@ void Boss::EnterCollision(Collider* _other)
 
 void Boss::TakeDamage(int _damage)
 {
+	Health* health = GetComponent<Health>();
+	health->TakeDamage(_damage);
+	cout << _damage << endl;
 }
 
 void Boss::HPZero()
 {
+	m_lifeCount--;
+	if (m_lifeCount > 0)
+	{
+		Health* health = GetComponent<Health>();
+		health->SetCurrentHP(health->GetMaxHP());
+	}
+	else
+	{
+		GET_SINGLE(SceneManager)->RequestDestroy(this);
+	}
 }

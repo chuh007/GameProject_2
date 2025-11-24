@@ -53,5 +53,6 @@ void Enemy::TakeDamage(int _damage)
 
 void Enemy::HPZero()
 {
+	cout << "dho";
 	GET_SINGLE(SceneManager)->RequestDestroy(this);
 }

@@ -31,9 +31,6 @@ void Health::Dead()
 	m_isDead = true;
 	Object* owner = GetOwner();
 	IDamageable* damageable = dynamic_cast<IDamageable*>(owner);
-	if (damageable)
-	{
-		GET_SINGLE(SceneManager)->RequestDestroy(owner);
-	}
+	damageable->HPZero();
 }
 	

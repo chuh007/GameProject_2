@@ -1,7 +1,8 @@
 #pragma once
 #include "Enemy.h"
 class Boss :
-    public Enemy
+    public Object
+    , public IDamageable
 {
 public:
     Boss();
@@ -14,5 +15,7 @@ public:
 public:
     virtual void TakeDamage(int _damage) override;
     virtual void HPZero() override;
+private:
+    int m_lifeCount;
 };
 

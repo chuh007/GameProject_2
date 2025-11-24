@@ -2,9 +2,10 @@
 #include "DevScene.h"
 #include "Object.h"
 #include "Player.h"
-#include "Enemy.h"
 #include "InputManager.h"
 #include "SceneManager.h"
+#include "Enemy.h"
+#include "Boss.h"
 #include "CollisionManager.h"
 #include "ResourceManager.h"
 #include "EnemySpawnManger.h"
@@ -16,7 +17,7 @@ void DevScene::Init()
 	// obj->SetScene(this);
 	AddObject(obj, Layer::PLAYER);
 
-	Spawn<Enemy>(Layer::ENEMY, { WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4 }, { 100.f,100.f });
+	Spawn<Boss>(Layer::ENEMY, { WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4 }, { 100.f,100.f });
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PROJECTILE, Layer::ENEMY);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::DEFAULT);
 	Enemy* enemy = new Enemy;
@@ -25,7 +26,7 @@ void DevScene::Init()
 	GET_SINGLE(EnemySpawnManger)->SetSpawnScene(this);
 	GET_SINGLE(EnemySpawnManger)->AddEnemySpawnQueue({ 1.0f, enemy});
 	GET_SINGLE(EnemySpawnManger)->Init();
-	//GET_SINGLE(ResourceManager)->Play(L"BGM");
+	GET_SINGLE(ResourceManager)->Play(L"BGM");
 }
 
 void DevScene::Update()
@@ -34,5 +35,4 @@ void DevScene::Update()
 	GET_SINGLE(EnemySpawnManger)->Update();
 	if (GET_KEYDOWN(KEY_TYPE::ENTER))
 		GET_SINGLE(SceneManager)->LoadScene(L"TestScene");
-
 }
