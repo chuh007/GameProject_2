@@ -16,7 +16,7 @@ Vec2 GetBezierPoint(const std::vector<Vec2>& _points, double t)
 	int n = _points.size();
 
 	if (n == 0)
-		return;
+		assert(n != 0 && "vector is null!!");
 	else if(n==1)
 		return _points[0];
 	std::vector<Vec2> currentPoints = _points;

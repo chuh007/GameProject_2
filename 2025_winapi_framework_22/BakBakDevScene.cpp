@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "DevScene.h"
+#include "BakBakDevScene.h"
 #include "Object.h"
 #include "Player.h"
 #include "InputManager.h"
@@ -9,8 +9,8 @@
 #include "CollisionManager.h"
 #include "ResourceManager.h"
 #include "EnemySpawnManger.h"
-void DevScene::Init()
-{	
+void BakBakDevScene::Init()
+{
 	Object* obj = new Player;
 	obj->SetPos({ WINDOW_WIDTH / 2, 300 });
 	obj->SetSize({ 100.f, 100.f });
@@ -23,7 +23,7 @@ void DevScene::Init()
 	GET_SINGLE(ResourceManager)->Play(L"BGM");
 }
 
-void DevScene::Update()
+void BakBakDevScene::Update()
 {
 	Scene::Update();
 	if (GET_KEYDOWN(KEY_TYPE::ENTER))

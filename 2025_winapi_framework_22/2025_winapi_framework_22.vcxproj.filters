@@ -161,7 +161,12 @@
       <Filter>Engine\03. Object\Enemy\Boss</Filter>
     </ClInclude>
     <ClInclude Include="EnemySpawnManger.h" />
-    <ClInclude Include="CommonEnemy.h" />
+    <ClInclude Include="BossMover.h" />
+    <ClInclude Include="EnemyMovement.h" />
+    <ClInclude Include="MathHelper.h">
+      <Filter>Engine\99. Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="BakBakDevScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc">
@@ -256,6 +261,8 @@
       <Filter>Engine\03. Object\Enemy\Boss</Filter>
     </ClCompile>
     <ClCompile Include="EnemySpawnManger.cpp" />
-    <ClCompile Include="CommonEnemy.cpp" />
+    <ClCompile Include="BossMover.cpp" />
+    <ClCompile Include="EnemyMovement.cpp" />
+    <ClCompile Include="BakBakDevScene.cpp" />
   </ItemGroup>
 </Project>
