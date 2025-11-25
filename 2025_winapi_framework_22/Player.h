@@ -1,5 +1,6 @@
-#pragma once
+﻿#pragma once
 #include "Object.h"
+#include "StateMachine.h"
 class Texture;
 class Player :
     public Object
@@ -15,6 +16,10 @@ public:
 	void EnterCollision(Collider* _other)override;
 	void StayCollision(Collider* _other) override;
 	void ExitCollision(Collider* _other) override;
+public:
+	void RequestTranslate(Vec2 _delta) {
+		Translate(_delta);
+	}
 private:
 	void CreateProjectile();
 private:
