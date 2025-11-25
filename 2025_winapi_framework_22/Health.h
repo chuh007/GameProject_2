@@ -12,9 +12,9 @@ public:
     void LateUpdate() override;
     void Render(HDC hDC) override;
 public:
-    int GetHP()
+    const int& GetHP()
     { return m_currentHp; }
-    int GetMaxHP()
+    const int& GetMaxHP()
     { return m_maxHp; }
     void SetCurrentHP(int _value)
     {

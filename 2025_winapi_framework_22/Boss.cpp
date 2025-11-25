@@ -10,10 +10,10 @@ Boss::Boss()
 	auto* col = AddComponent<Collider>();
 	col->SetSize(50.f);
 	auto* health = AddComponent<Health>();
-	health->SetMaxHP(100);
-	health->SetCurrentHP(100);
+	health->SetMaxHP(2000);
+	health->SetCurrentHP(2000);
 	auto* mover = AddComponent<BossMover>();
-	mover->MoveTo({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 10 }, 3.f);
+	mover->MoveTo({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 5 }, 3.f);
 }
 
 Boss::~Boss()

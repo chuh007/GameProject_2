@@ -46,7 +46,7 @@ void ResourceManager::Release()
 
 void ResourceManager::RegisterSound()
 {
-	LoadSound(L"BGM", L"Sound\\U.N. Owen Was Her.mp3", true);
+	LoadSound(L"BGM", L"Sound\\Native Faith_orgin.mp3", true);
 	//LoadSound(L"BGM", L"Sound\\laserShoot.wav", false);
 }
 
@@ -187,6 +187,7 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"Plane", L"Texture\\plane.bmp");
 	LoadTexture(L"Bullet", L"Texture\\Bullet.bmp");
 	LoadTexture(L"Jiwoo", L"Texture\\jiwoo.bmp");
+	LoadTexture(L"EnemyBullet1", L"Texture\\Bullet1.bmp");
 }
 
 void ResourceManager::LoadTexture(const wstring& _key, const wstring& _path)

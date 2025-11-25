@@ -1,5 +1,6 @@
 #pragma once
-#include "Enemy.h"
+#include "Object.h"
+#include "IDamageable.h"
 class Boss :
     public Object
     , public IDamageable
