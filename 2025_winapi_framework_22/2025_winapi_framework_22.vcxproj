@@ -178,7 +178,9 @@
     <ClInclude Include="GDISelector.h" />
     <ClInclude Include="Health.h" />
     <ClInclude Include="IDamageable.h" />
+    <ClInclude Include="IdleState.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="MoveState.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="PatternCompo.h" />
     <ClInclude Include="pch.h" />
@@ -191,6 +193,8 @@
     <ClInclude Include="Rigidbody.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="State.h" />
+    <ClInclude Include="StateMachine.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Defines.h" />
     <ClInclude Include="TestScene.h" />
@@ -214,8 +218,10 @@
     <ClCompile Include="GDISelector.cpp" />
     <ClCompile Include="Health.cpp" />
     <ClCompile Include="IDamageable.cpp" />
+    <ClCompile Include="IdleState.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MoveState.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="PatternCompo.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -226,6 +232,8 @@
     <ClCompile Include="Rigidbody.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="State.cpp" />
+    <ClCompile Include="StateMachine.cpp" />
     <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TimeManager.cpp" />
