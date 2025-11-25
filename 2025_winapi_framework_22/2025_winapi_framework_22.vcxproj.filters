@@ -166,7 +166,18 @@
     <ClInclude Include="MathHelper.h">
       <Filter>Engine\99. Headers</Filter>
     </ClInclude>
-    <ClInclude Include="BakBakDevScene.h" />
+    <ClInclude Include="StateMachine.h">
+      <Filter>Engine\06. Component</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Engine\06. Component</Filter>
+    </ClInclude>
+    <ClInclude Include="IdleState.h">
+      <Filter>Engine\03. Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveState.h">
+      <Filter>Engine\03. Object\Player</Filter>
+      </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc">
@@ -260,8 +271,22 @@
     <ClCompile Include="Boss.cpp">
       <Filter>Engine\03. Object\Enemy\Boss</Filter>
     </ClCompile>
+    <ClCompile Include="BossMover.cpp">
+      <Filter>Engine\06. Component</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMachine.cpp">
+      <Filter>Engine\06. Component</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>Engine\06. Component</Filter>
+    </ClCompile>
+    <ClCompile Include="IdleState.cpp">
+      <Filter>Engine\03. Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveState.cpp">
+      <Filter>Engine\03. Object\Player</Filter>
+    </ClCompile>
     <ClCompile Include="EnemySpawnManger.cpp" />
-    <ClCompile Include="BossMover.cpp" />
     <ClCompile Include="EnemyMovement.cpp" />
     <ClCompile Include="BakBakDevScene.cpp" />
   </ItemGroup>
