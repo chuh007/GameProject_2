@@ -175,6 +175,15 @@
     <ClInclude Include="MoveState.h">
       <Filter>Engine\03. Object\Player</Filter>
     </ClInclude>
+    <ClInclude Include="EnemyProjectile.h">
+      <Filter>Engine\03. Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PatternCompo.h">
+      <Filter>Engine\06. Component</Filter>
+    </ClInclude>
+    <ClInclude Include="PoolManager.h">
+      <Filter>Engine\02. Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc">
@@ -282,6 +291,15 @@
     </ClCompile>
     <ClCompile Include="MoveState.cpp">
       <Filter>Engine\03. Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyProjectile.cpp">
+      <Filter>Engine\03. Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PatternCompo.cpp">
+      <Filter>Engine\06. Component</Filter>
+    </ClCompile>
+    <ClCompile Include="PoolManager.cpp">
+      <Filter>Engine\02. Manager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
