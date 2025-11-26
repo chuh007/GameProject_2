@@ -4,7 +4,7 @@
 #include "Player.h"
 #include "InputManager.h"
 #include "SceneManager.h"
-#include "Enemy.h"
+#include "TestEnemy.h"
 #include "Boss.h"
 #include "CollisionManager.h"
 #include "ResourceManager.h"
@@ -21,10 +21,17 @@ void BakBakDevScene::Init()
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PROJECTILE, Layer::ENEMY);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::DEFAULT);
 	GET_SINGLE(ResourceManager)->Play(L"BGM");
+
+	Enemy* testEnemy = new TestEnemy;
+	testEnemy->SetPos({ 100, 100 });
+	testEnemy->SetSize({ 100,100 });
+	GET_SINGLE(EnemySpawnManger)->SetSpawnScene(this);
+	GET_SINGLE(EnemySpawnManger)->AddEnemySpawnQueue({ 3.f, testEnemy });
 }
 
 void BakBakDevScene::Update()
 {
+	GET_SINGLE(EnemySpawnManger)->Update();
 	Scene::Update();
 	if (GET_KEYDOWN(KEY_TYPE::ENTER))
 		GET_SINGLE(SceneManager)->LoadScene(L"TestScene");
