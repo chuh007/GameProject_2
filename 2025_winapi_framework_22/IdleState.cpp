@@ -3,17 +3,18 @@
 #include "StateMachine.h"
 #include "Player.h"
 #include "MoveState.h"
+#include "PlayerAttackState.h"
 #include "InputManager.h"
 
 void PlayerIdleState::Enter(StateMachine* fsm) {
 	assert(fsm != nullptr && 
 		"PlayerIdleState::Enter called with a nullptr StateMachine.");
 
-	Player* player = static_cast<Player*>(fsm->GetOwner());
-	assert(player != nullptr && 
+	m_player = static_cast<Player*>(fsm->GetOwner());
+	assert(m_player != nullptr && 
 		"StateMachine's owner object is nullptr. Check SetOwner");
 
-	if (player) {
+	if (m_player) {
 		// Idle 애니메이션 재생
 	}
 	std::cout << "Enter Idle State" << std::endl;
@@ -23,10 +24,14 @@ void PlayerIdleState::Excute(StateMachine* fsm) {
 	// 상태 전이 검사 해주기
 	assert(fsm != nullptr && 
 		"IdlelState::Excute called with a nullptr StateMachine");
-
-	Player* player = static_cast<Player*>(fsm->GetOwner());
-	assert(player != nullptr && 
+	assert(m_player != nullptr && 
 		"StateMachine's Owner object is nullptr");
+
+	if (GET_KEYDOWN(KEY_TYPE::SPACE))
+	{
+		fsm->ChangeState(new PlayerAttackState());
+		return;
+	}
 
 	bool isInputW = GET_KEY(KEY_TYPE::W);
 	bool isInputS = GET_KEY(KEY_TYPE::S);
@@ -38,11 +43,6 @@ void PlayerIdleState::Excute(StateMachine* fsm) {
 		fsm->ChangeState(new PlayerMoveState());
 		return;
 	}
-
-	//if (GET_KEYDOWN(KEY_TYPE::SPACE))
-	//{
-	//	//player->CreateProjectile();
-	//}
 }
 
 void PlayerIdleState::Exit(StateMachine* fsm) {

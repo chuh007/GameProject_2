@@ -22,6 +22,8 @@ public:
 	const Vec2& GetSize()const { return m_size; }
 	bool GetIsDead() const { return m_isDie; }
 	void SetDead() { m_isDie = true; }
+	bool IsActive() const { return m_isActive; }
+	void SetActive(bool _active) { m_isActive = _active; }
 protected:
 	void Translate(Vec2 _delta)
 	{
@@ -59,6 +61,7 @@ public:
 		return component;
 	}
 private:
+	bool m_isActive;
 	bool m_isDie;
 	Vec2 m_pos;
 	Vec2 m_size;

@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "State.h"
+class Player;
 class PlayerIdleState : public State
 {
 public:
@@ -9,5 +10,7 @@ public:
 	virtual void Enter(StateMachine* fsm) override;
 	virtual void Excute(StateMachine* fsm) override;
 	virtual void Exit(StateMachine* fsm) override;
+private:
+	Player* m_player = nullptr;
 };
 

@@ -41,6 +41,7 @@ using std::wstring;
 #define PI 3.14159265358979f
 #define WINDOW_WIDTH 720
 #define WINDOW_HEIGHT 820
+#define D2R (PI / 180.0f)
 
 
 // 메모리 릭

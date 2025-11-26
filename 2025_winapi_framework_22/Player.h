@@ -20,7 +20,7 @@ public:
 	void RequestTranslate(Vec2 _delta) {
 		Translate(_delta);
 	}
-private:
+public:
 	void CreateProjectile();
 private:
 	Texture* m_pTex;
