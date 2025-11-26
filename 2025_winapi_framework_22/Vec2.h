@@ -33,6 +33,7 @@ public:
 	{
 		return Vec2(-x, -y);
 	}
+	
 	void operator+=(const Vec2& _other)
 	{
 		x += _other.x;
@@ -42,6 +43,12 @@ public:
 	{
 		x -= _other.x;
 		y -= _other.y;
+	}
+	float Dist(const Vec2& other) {
+		float dx = x - other.x;
+		float dy = y - other.y;
+
+		return std::sqrt(dx * dx + dy * dy);
 	}
 	float LengthSquared()
 	{

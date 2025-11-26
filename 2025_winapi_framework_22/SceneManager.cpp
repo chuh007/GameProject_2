@@ -4,6 +4,7 @@
 #include "TestScene.h"
 #include "Collider.h"
 #include "Object.h"
+#include "BakBakDevScene.h"
 void SceneManager::Init()
 {
 	m_curScene = nullptr;
@@ -11,10 +12,11 @@ void SceneManager::Init()
 	// 등록
 	RegisterScene(L"DevScene", std::make_shared<DevScene>());
 	RegisterScene(L"TestScene", std::make_shared<TestScene>());
+	RegisterScene(L"BakBakDev", std::make_shared<BakBakDevScene>());
 	// Scene 추가
 	
 	// 로드
-	LoadScene(L"DevScene");
+	LoadScene(L"BakBakDev");
 
 	// todo
 	//dynamic_cast<> 
