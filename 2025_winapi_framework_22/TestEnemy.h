@@ -1,5 +1,6 @@
 #pragma once
 #include "Enemy.h"
+#include "MathHelper.h"
 class TestEnemy :
     public Enemy
 {
@@ -8,9 +9,8 @@ public :
     ~TestEnemy();
 
 public:
-    void Update() override;
-
-    virtual void TakeDamage(int _damage) override;
-    virtual void HPZero() override;
+    void SetPath(BezierPathData* path);
+private:
+    BezierPathData* pathData;
 };
 

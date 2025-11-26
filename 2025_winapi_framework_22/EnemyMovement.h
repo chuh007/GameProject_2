@@ -1,20 +1,23 @@
 #pragma once
 #include "Component.h"
-class EnemyMovement :
-    public Component
+#include "MathHelper.h" 
+
+class EnemyMovement : public Component
 {
+private:
+    const BezierPathData* m_pathData = nullptr;
+    float m_distanceTraveled = 0.0f;
+    float m_speed = 0.0f;
+
 public:
-    // Component을(를) 통해 상속됨
+    // 기본 생성자만 사용하도록 수정
+    EnemyMovement();
+
     void Init() override;
+    // fDT 인자 제거 (매크로 사용)
     void LateUpdate() override;
     void Render(HDC hDC) override;
-    bool GetEnded() { return isEnded; };
-public:
-    void SetBezierPoints(vector<Vec2>& point);
-private:
-    vector<Vec2> points;
-    float movingTime;
-    float currentTime;
-    bool isEnded;
-};
 
+    void SetPathData(const BezierPathData* path);
+    void SetSpeed(float _speed);
+};

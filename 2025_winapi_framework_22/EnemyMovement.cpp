@@ -1,29 +1,60 @@
 #include "pch.h"
 #include "Object.h"
 #include "EnemyMovement.h"
-#include "MathHelper.h"
+
+EnemyMovement::EnemyMovement()
+{
+}
 
 void EnemyMovement::Init()
 {
+    m_distanceTraveled = 0.0f;
 }
 
 void EnemyMovement::LateUpdate()
 {
-	currentTime += fDT;
-    GetOwner()->SetPos(GetBezierPoint(points, currentTime));
-}
-
-void EnemyMovement::Render(HDC hDC)
-{
-    PenType colorPen = PenType::MAGENTA;
-    GDISelector pen(hDC, colorPen);
-    GDISelector brush(hDC, BrushType::HOLLOW);
-    if (points.size() < 2) 
+    if (!m_pathData || m_pathData->totalLength <= 0.0f)
     {
         return;
     }
 
-    const int segments = 100; 
+    m_distanceTraveled += m_speed * fDT;
+
+    if (m_distanceTraveled >= m_pathData->totalLength)
+    {
+        m_distanceTraveled = m_pathData->totalLength;
+    }
+
+    double target_t = m_pathData->FindTValueForDistance(m_distanceTraveled);
+
+    Vec2 newPos = GetBezierPoint(m_pathData->points, target_t);
+
+    if (GetOwner()) {
+        GetOwner()->SetPos(newPos);
+    }
+}
+
+void EnemyMovement::SetSpeed(float _speed)
+{
+    m_speed = _speed;
+}
+
+void EnemyMovement::SetPathData(const BezierPathData* path)
+{
+    m_pathData = path;
+    m_distanceTraveled = 0.0f;
+}
+
+void EnemyMovement::Render(HDC hDC)
+{
+    const std::vector<Vec2>& points = m_pathData->points;
+
+    if (points.size() < 2)
+    {
+        return;
+    }
+
+    const int segments = 100;
 
     Vec2 first_v = GetBezierPoint(points, 0.0);
 
@@ -43,9 +74,4 @@ void EnemyMovement::Render(HDC hDC)
 
         LineTo(hDC, current_x, current_y);
     }
-}
-
-void EnemyMovement::SetBezierPoints(vector<Vec2>& point)
-{
-	points = point;
 }
