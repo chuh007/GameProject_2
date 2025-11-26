@@ -185,6 +185,7 @@
     <ClInclude Include="PatternCompo.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerAttackState.h" />
     <ClInclude Include="PoolManager.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="Resource.h" />
@@ -225,6 +226,7 @@
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="PatternCompo.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerAttackState.cpp" />
     <ClCompile Include="PoolManager.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="ResourceBase.cpp" />
