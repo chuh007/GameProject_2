@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "State.h"
+class Player;
 class PlayerMoveState : public State
 {
 public:
@@ -10,6 +11,7 @@ public:
 	virtual void Excute(StateMachine* fsm) override;
 	virtual void Exit(StateMachine* fsm) override;
 private:
-	float m_moveSpeed = 100.f;
+	Player* m_player = nullptr;
+	float m_moveSpeed = 50.f;
 };
 
