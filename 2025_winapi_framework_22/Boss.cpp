@@ -13,7 +13,7 @@ Boss::Boss()
 	health->SetMaxHP(2000);
 	health->SetCurrentHP(2000);
 	auto* mover = AddComponent<BossMover>();
-	mover->MoveTo({ WINDOW_WIDTH / 2, WINDOW_HEIGHT / 5 }, 3.f);
+	mover->MoveTo({ GAME_WIDTH / 2, GAME_HEIGHT / 5 }, 3.f);
 }
 
 Boss::~Boss()

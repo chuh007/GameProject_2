@@ -6,20 +6,24 @@
 #include "SceneManager.h"
 #include "Enemy.h"
 #include "Boss.h"
+#include "EnemyProjectile.h"
 #include "CollisionManager.h"
 #include "ResourceManager.h"
+#include "PoolManager.h"
 void DevScene::Init()
 {	
 	Object* obj = new Player;
-	obj->SetPos({ WINDOW_WIDTH / 2, 300 });
+	obj->SetPos({ GAME_WIDTH / 2, 300 });
 	obj->SetSize({ 100.f, 100.f });
 	// obj->SetScene(this);
 	AddObject(obj, Layer::PLAYER);
 
-	Spawn<Boss>(Layer::ENEMY, { WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4 }, { 100.f,100.f });
+	Spawn<Boss>(Layer::ENEMY, { GAME_WIDTH / 2, GAME_HEIGHT / 4 }, { 100.f,100.f });
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PROJECTILE, Layer::ENEMY);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::DEFAULT);
 	GET_SINGLE(ResourceManager)->Play(L"BGM");
+	GET_SINGLE(PoolManager)->AddPool<EnemyProjectile>
+		(PoolType::BossProjectile, 200, Layer::ENEMYPROJECTILE);
 }
 
 void DevScene::Update()

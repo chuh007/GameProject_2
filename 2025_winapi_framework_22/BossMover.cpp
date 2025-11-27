@@ -3,8 +3,8 @@
 #include "Object.h"
 
 BossMover::BossMover()
-	: m_movePos(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4)
-	, m_startPos(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4)
+	: m_movePos(GAME_WIDTH / 2, GAME_HEIGHT / 4)
+	, m_startPos(GAME_WIDTH / 2, GAME_HEIGHT / 4)
 	, m_timer(0.f)
 	, m_speed(50.f)
 	, m_dir({0.f,0.f})

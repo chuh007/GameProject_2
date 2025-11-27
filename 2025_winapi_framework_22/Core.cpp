@@ -16,7 +16,7 @@ bool Core::Init(HWND _hWnd)
 
     // 더블버퍼링
     // 1. 생성
-    m_hBackBit = ::CreateCompatibleBitmap(m_hDC, WINDOW_WIDTH, WINDOW_HEIGHT);
+    m_hBackBit = ::CreateCompatibleBitmap(m_hDC, GAME_WIDTH, GAME_HEIGHT);
     m_hBackDC = ::CreateCompatibleDC(m_hDC);
 
     // 2. 연결
@@ -75,7 +75,7 @@ void Core::MainRender()
     //::Rectangle(m_hBackDC, -1, -1, WINDOW_WIDTH +1 , WINDOW_HEIGHT +1 );
 
     // 1. clear
-    ::PatBlt(m_hBackDC, 0,0, WINDOW_WIDTH,WINDOW_HEIGHT, WHITENESS);
+    ::PatBlt(m_hBackDC, 0,0, GAME_WIDTH, GAME_HEIGHT, WHITENESS);
     
     //Vec2 pos = m_obj.GetPos();
     //Vec2 size = m_obj.GetSize();
@@ -85,7 +85,7 @@ void Core::MainRender()
     GET_SINGLE(SceneManager)->Render(m_hBackDC);
 
     // 3. display
-    ::BitBlt(m_hDC, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, m_hBackDC, 0,0,SRCCOPY);
+    ::BitBlt(m_hDC, 0, 0, GAME_WIDTH, GAME_HEIGHT, m_hBackDC, 0,0,SRCCOPY);
 
 }
 
