@@ -1,4 +1,4 @@
-#include "pch.h"
+Ôªø#include "pch.h"
 #include "Player.h"
 #include "InputManager.h"
 #include "Projectile.h"
@@ -10,6 +10,8 @@
 #include "Animator.h"
 #include "Animation.h"
 #include "Rigidbody.h"
+#include "StateMachine.h"
+#include "IdleState.h"
 Player::Player()
 {
 	//m_pTex = new Texture;
@@ -30,6 +32,10 @@ Player::Player()
 		5,0.1f
 	);
 	animator->Play(L"JiwooFront");
+
+	StateMachine* fsm = AddComponent<StateMachine>();
+	assert(fsm != nullptr && "fsm is null in player");
+	fsm->ChangeState(new PlayerIdleState());
 }
 
 Player::~Player()
@@ -64,14 +70,14 @@ void Player::ExitCollision(Collider* _other)
 
 void Player::Update()
 {
-	Vec2 dir = {};
-	if (GET_KEY(KEY_TYPE::W)) dir.y -= 1.f;
-	if (GET_KEY(KEY_TYPE::S)) dir.y += 1.f;
-	if (GET_KEY(KEY_TYPE::A)) dir.x -= 1.f;
-	if (GET_KEY(KEY_TYPE::D)) dir.x += 1.f;
-	Translate({dir.x * fDT * 200.f, dir.y * fDT * 200.f});
+	//Vec2 dir = {};
+	//if (GET_KEY(KEY_TYPE::W)) dir.y -= 1.f;
+	//if (GET_KEY(KEY_TYPE::S)) dir.y += 1.f;
+	//if (GET_KEY(KEY_TYPE::A)) dir.x -= 1.f;
+	//if (GET_KEY(KEY_TYPE::D)) dir.x += 1.f;
+	//Translate({dir.x * fDT * 200.f, dir.y * fDT * 200.f});
 
-	// Q, E ≈©∞‘ ¿€∞‘ 
+	// Q, E ÌÅ¨Í≤å ÏûëÍ≤å 
 	float scaleDelta = 0.f;
 	float scaleSpeed = 1.f;
 	if (GET_KEY(KEY_TYPE::Q))
@@ -80,8 +86,9 @@ void Player::Update()
 		scaleDelta -= scaleSpeed * fDT;
 	float factor = scaleSpeed + scaleDelta;
 	Scale({ factor, factor });
-	if (GET_KEYDOWN(KEY_TYPE::SPACE))
-		CreateProjectile();
+	//if (GET_KEYDOWN(KEY_TYPE::SPACE))
+	//	CreateProjectile();
+	Object::LateUpdate();
 }
 
 void Player::CreateProjectile()

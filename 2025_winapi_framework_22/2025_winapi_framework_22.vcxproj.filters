@@ -160,9 +160,8 @@
     <ClInclude Include="Boss.h">
       <Filter>Engine\03. Object\Enemy\Boss</Filter>
     </ClInclude>
-    <ClInclude Include="BossMover.h">
-      <Filter>Engine\06. Component</Filter>
-    </ClInclude>
+    <ClInclude Include="EnemySpawnManger.h" />
+    <ClInclude Include="EnemyMovement.h" />
     <ClInclude Include="StateMachine.h">
       <Filter>Engine\06. Component</Filter>
     </ClInclude>
@@ -172,8 +171,12 @@
     <ClInclude Include="IdleState.h">
       <Filter>Engine\03. Object\Player</Filter>
     </ClInclude>
-    <ClInclude Include="MoveState.h">
-      <Filter>Engine\03. Object\Player</Filter>
+    <ClInclude Include="BakBakDevScene.h" />
+    <ClInclude Include="TestEnemy.h">
+      <Filter>Engine\03. Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="BossMover.h">
+      <Filter>Engine\06. Component</Filter>
     </ClInclude>
     <ClInclude Include="EnemyProjectile.h">
       <Filter>Engine\03. Object\Enemy</Filter>
@@ -183,6 +186,9 @@
     </ClInclude>
     <ClInclude Include="PoolManager.h">
       <Filter>Engine\02. Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAttackState.h">
+      <Filter>Engine\03. Object\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -300,6 +306,15 @@
     </ClCompile>
     <ClCompile Include="PoolManager.cpp">
       <Filter>Engine\02. Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerAttackState.cpp">
+      <Filter>Engine\03. Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemySpawnManger.cpp" />
+    <ClCompile Include="EnemyMovement.cpp" />
+    <ClCompile Include="BakBakDevScene.cpp" />
+    <ClCompile Include="TestEnemy.cpp">
+      <Filter>Engine\03. Object\Enemy</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

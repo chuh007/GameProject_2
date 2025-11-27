@@ -140,6 +140,7 @@ void ResourceManager::RegisterGDI()
 	// PEN 
 	m_Pens[(UINT)PenType::RED] = ::CreatePen(PS_SOLID, 1, RGB(255, 0, 0));
 	m_Pens[(UINT)PenType::GREEN] = ::CreatePen(PS_SOLID, 1, RGB(0, 255, 0));
+	m_Pens[(UINT)PenType::MAGENTA] = ::CreatePen(PS_SOLID, 1, RGB(255, 0, 255));
 
 	// 폰트 등록
 	RegisterFont(FontType::TITLE, L"나눔손글씨 암스테르담", 0);

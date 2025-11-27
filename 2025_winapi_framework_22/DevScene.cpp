@@ -9,6 +9,7 @@
 #include "EnemyProjectile.h"
 #include "CollisionManager.h"
 #include "ResourceManager.h"
+#include "EnemySpawnManger.h"
 #include "PoolManager.h"
 void DevScene::Init()
 {	
