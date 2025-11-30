@@ -1,5 +1,6 @@
 #pragma once
 #include "Collider.h"
+#include <functional>
 class Component;
 
 class Object
@@ -8,13 +9,14 @@ public:
 	Object();
 	virtual ~Object(); // °¡»ó ¼Ò¸êÀÚ 
 public:
-	virtual void Update() abstract;
+	virtual void Update();
 	virtual void LateUpdate();
 	void ComponentRender(HDC _hdc);
 	virtual void Render(HDC _hdc) abstract;
 	virtual void EnterCollision(Collider* _other) {}
 	virtual void StayCollision(Collider* _other) {}
 	virtual void ExitCollision(Collider* _other) {}
+	void Coroutine(std::function<void()> func, float delay);
 public:
 	void SetPos(Vec2 _pos) { m_pos = _pos; }
 	void SetSize(Vec2 _size) { m_size = _size; }
@@ -66,5 +68,7 @@ private:
 	Vec2 m_pos;
 	Vec2 m_size;
 	vector<Component*> m_vecComponents;
+	protected:
+	vector<std::pair<std::function<void()>, float>> m_corutines;
 };
 

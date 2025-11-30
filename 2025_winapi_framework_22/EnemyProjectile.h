@@ -1,9 +1,10 @@
 #pragma once
 #include "Object.h"
+#include "PoolManager.h"
 
 class Texture;
 class EnemyProjectile :
-    public Object
+    public Object, public IPoolable
 {
 public:
     EnemyProjectile();
@@ -15,8 +16,8 @@ public:
     virtual void Render(HDC _hdc) override;
 
 public:
-    virtual void Init();
-
+    virtual void Reset() override;
+    void SetColliderSize(float _size);
 public:
     void SetSpeed(float speed) { m_speed = speed; }
     const float& GetSpeed() const { return m_speed; }

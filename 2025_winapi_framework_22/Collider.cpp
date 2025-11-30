@@ -4,7 +4,7 @@
 #include "ResourceManager.h"
 UINT Collider::m_nextID = 0;
 Collider::Collider()
-	: m_size{20.f}
+	: m_size{0.f}
 	, m_updatedPos{0.f,0.f}
 	, m_offsetPos{0.f,0.f}
 	, m_ID(m_nextID++)

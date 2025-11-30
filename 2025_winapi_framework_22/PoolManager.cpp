@@ -1,17 +1,11 @@
 #include "pch.h"
 #include "PoolManager.h"
-#include "EnemyProjectile.h"
-
-void PoolManager::Init()
-{
-	
-}
 
 PoolManager::~PoolManager()
 {
-    for (auto const& item : m_pools)
+    for (auto& item : m_pools)
     {
-        delete item.second;
+        SAFE_DELETE(item.second);
     }
     m_pools.clear();
 }

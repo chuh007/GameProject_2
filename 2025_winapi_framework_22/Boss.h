@@ -1,6 +1,9 @@
 #pragma once
 #include "Object.h"
 #include "IDamageable.h"
+
+class PatternCompo;
+class Health;
 class Boss :
     public Object
     , public IDamageable
@@ -18,5 +21,9 @@ public:
     virtual void HPZero() override;
 private:
     int m_lifeCount;
+    PatternCompo* m_patternCompo;
+    Health* m_healthCompo;
+    float m_decDamage;
+    Object* m_target;
 };
 

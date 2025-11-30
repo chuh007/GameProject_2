@@ -35,3 +35,8 @@ enum class MoveState
 {
 	Stop, MoveTo, MoveDir
 };
+
+enum class PoolType
+{
+	Circle1,
+};

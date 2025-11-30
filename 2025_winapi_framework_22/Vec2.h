@@ -9,27 +9,27 @@ public:
 	Vec2(int _x, int _y) : x((float)_x), y((float)_y) {}
 	Vec2(const Vec2& _other) : x(_other.x), y(_other.y) {}
 public:
-	Vec2 operator + (const Vec2& _vOther)
+	Vec2 operator + (const Vec2& _vOther) const
 	{
 		return Vec2(x + _vOther.x, y + _vOther.y);
 	}
-	Vec2 operator - (const Vec2& _vOther)
+	Vec2 operator - (const Vec2& _vOther) const
 	{
 		return Vec2(x - _vOther.x, y - _vOther.y);
 	}
-	Vec2 operator * (const Vec2& _vOther)
+	Vec2 operator * (const Vec2& _vOther) const
 	{
 		return Vec2(x * _vOther.x, y * _vOther.y);
 	}
-	Vec2 operator * (float _val)
+	Vec2 operator * (float _val) const
 	{
 		return Vec2(x * _val, y * _val);
 	}
-	Vec2 operator / (float _val)
+	Vec2 operator / (float _val) const
 	{
 		return Vec2(x / _val, y / _val);
 	}
-	Vec2 operator -()
+	Vec2 operator -() const
 	{
 		return Vec2(-x, -y);
 	}

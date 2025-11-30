@@ -12,19 +12,34 @@ EnemyProjectile::EnemyProjectile()
 	, m_speed(500.f)
 {
 	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"EnemyBullet1");
+	auto* col = AddComponent<Collider>();
 }
 
 EnemyProjectile::~EnemyProjectile()
 {
 }
 
-void EnemyProjectile::Init()
+void EnemyProjectile::Reset()
 {
+	m_corutines.clear();
+}
 
+void EnemyProjectile::SetColliderSize(float _size)
+{
+	auto* col = AddComponent<Collider>();
+	col->SetSize(_size);
 }
 
 void EnemyProjectile::Update()
 {
+	Object::Update();
+	Vec2 pos = GetPos();
+	SetPos(pos + m_dir * m_speed * fDT);
+	if (GetPos().x < -200 || GAME_WIDTH + 200 < GetPos().x ||
+		GetPos().y < -200 || GAME_HEIGHT + 200 < GetPos().y)
+	{
+		PoolManager::GetInst()->Push<EnemyProjectile>(PoolType::Circle1, this);
+	}
 }
 
 void EnemyProjectile::Render(HDC _hdc)

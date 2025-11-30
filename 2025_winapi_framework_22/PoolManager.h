@@ -4,11 +4,6 @@
 #include <unordered_map>
 #include <stack>
 
-enum class PoolType
-{
-	BossProjectile,
-};
-
 class IPool
 {
 public:
@@ -17,8 +12,7 @@ public:
 class IPoolable
 {
 public:
-	virtual ~IPoolable() {}
-	virtual void Reset() {}
+	virtual void Reset() abstract;
 };
 
 template <typename T>
@@ -27,6 +21,7 @@ class Pool : public IPool
 public:
 	Pool(int _initSize, Layer _layer)
 	{
+		m_layer = _layer;
 		auto curScene = GET_SINGLE(SceneManager)->GetCurScene();
 		for (int i = 0; i < _initSize; ++i)
 		{
@@ -37,12 +32,12 @@ public:
 	}
 
 public:
-	T* Pop(Layer _layer)
+	T* Pop()
 	{
 		T* obj = nullptr;
 		if (m_pool.empty())
 		{
-			obj = GET_SINGLE(SceneManager)->GetCurScene()->Spawn<T>(_layer, { 0, 0 }, { 10.f,10.f });
+			obj = GET_SINGLE(SceneManager)->GetCurScene()->Spawn<T>(m_layer, { 0, 0 }, { 10.f,10.f });
 		}
 		else
 		{
@@ -60,13 +55,13 @@ public:
 	}
 private:
 	std::stack<T*> m_pool;
+	Layer m_layer;
 };
 
 class PoolManager
 {
 	DECLARE_SINGLE(PoolManager);
 public:
-	void Init();
 	~PoolManager();
 public:
 	template <typename T>
@@ -76,10 +71,10 @@ public:
 		m_pools[_type] = newPool;
 	}
 	template <typename T>
-	T* Pop(const PoolType& _type, Layer _layer)
+	T* Pop(const PoolType& _type)
 	{
 		Pool<T>* pool = static_cast<Pool<T>*>(m_pools[_type]);
-		return pool->Pop(_layer);
+		return pool->Pop();
 	}
 	template <typename T>
 	void Push(const PoolType& _type, T* obj)
