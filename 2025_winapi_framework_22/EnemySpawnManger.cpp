@@ -4,7 +4,7 @@
 #include "EnemySpawnManger.h"
 void EnemySpawnManger::Init()
 {
-	cout << "spawn manager init" << endl;
+	AssignPath();
 	m_currentTime = 0;
 }
 
@@ -51,4 +51,11 @@ bool EnemySpawnManger::TryToSpawn()
 		return true;
 	}
 	return false;
+}
+
+void EnemySpawnManger::AssignPath()
+{
+	BezierPathData* defaultPath = new BezierPathData;
+	defaultPath->BezierPathData::CalculateArcLengthMap({ {0,0},{300,300},{600,600},{500,800} });
+	m_calcedPath.insert({ L"Default", defaultPath });
 }

@@ -26,10 +26,10 @@ void BakBakDevScene::Init()
 	BezierPathData* pathData = new BezierPathData;
 	pathData->CalculateArcLengthMap({ {0,0},{300,300},{600,600},{500,800} });
 	
+	GET_SINGLE(EnemySpawnManger)->Init();
 	TestEnemy* testEnemy = new TestEnemy;
 	testEnemy->SetPos({ 100, 100 });
 	testEnemy->SetSize({ 100,100 });
-	testEnemy->SetPath(pathData);
 	GET_SINGLE(EnemySpawnManger)->SetSpawnScene(this);
 	GET_SINGLE(EnemySpawnManger)->AddEnemySpawnQueue({ 3.f, testEnemy });
 }
