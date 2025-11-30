@@ -106,4 +106,19 @@ void Player::CreateProjectile()
 	
 }
 
+void Player::TryContinueFire(float _fDT) {
+	if (GET_KEY(KEY_TYPE::SPACE)) {
+		m_projCooldown += _fDT;
+		if (m_projCooldown >= PROJECTILE_INTERVAL) {
+			CreateProjectile();
+			m_projCooldown = 0.f;
+		}
+	}
+}
+
+bool Player::IsMovingInputProcessed() const {
+	return GET_KEY(KEY_TYPE::W) || GET_KEY(KEY_TYPE::A) ||
+		GET_KEY(KEY_TYPE::S) || GET_KEY(KEY_TYPE::D);
+}
+
 
