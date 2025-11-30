@@ -19,6 +19,22 @@ Object::~Object()
 	m_vecComponents.clear();
 }
 
+void Object::Update()
+{
+	if (m_corutines.size() == 0) return;
+	for (auto iter = m_corutines.begin(); iter != m_corutines.end();)
+	{
+		iter->second -= fDT;
+		if (iter->second <= 0)
+		{
+			iter->first();
+			iter = m_corutines.erase(iter);
+			continue;
+		}
+		iter++;
+	}
+}
+
 void Object::LateUpdate()
 {
 	for (Component* com : m_vecComponents)
@@ -34,4 +50,9 @@ void Object::ComponentRender(HDC _hdc)
 		if (com != nullptr)
 			com->Render(_hdc);
 	}
+}
+
+void Object::Coroutine(std::function<void()> func, float delay)
+{
+	m_corutines.push_back({ func, delay });
 }

@@ -9,6 +9,7 @@ public:
 	void Update();
 	void FixedUpdate(float _fixedDT);
 	void PhysicsSyncColliders();
+
 	void Render(HDC _hdc);
 	// 씬 바꾸는것도 할거고 ㅇㅇ 할거야.
 public:

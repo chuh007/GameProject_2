@@ -39,8 +39,10 @@ using std::wstring;
 
 // °¢Á¾ define°ª
 #define PI 3.14159265358979f
-#define WINDOW_WIDTH 720
+#define WINDOW_WIDTH 1080
 #define WINDOW_HEIGHT 820
+#define GAME_WIDTH 720
+#define GAME_HEIGHT 820
 #define D2R (PI / 180.0f)
 
 

@@ -16,7 +16,7 @@ void SceneManager::Init()
 	// Scene 추가
 	
 	// 로드
-	LoadScene(L"BakBakDev");
+	LoadScene(L"DevScene");
 
 	// todo
 	//dynamic_cast<> 
