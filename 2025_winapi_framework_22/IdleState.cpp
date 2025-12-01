@@ -14,33 +14,19 @@ void PlayerIdleState::Enter(StateMachine* fsm) {
 	assert(m_player != nullptr && 
 		"StateMachine's owner object is nullptr. Check SetOwner");
 
-	if (m_player) {
-		// Idle 애니메이션 재생
-	}
-	std::cout << "Enter Idle State" << std::endl;
+	// Idle 애니메이션 재생
 }
 
 void PlayerIdleState::Excute(StateMachine* fsm) {
-	// 상태 전이 검사 해주기
-	assert(fsm != nullptr && 
-		"IdlelState::Excute called with a nullptr StateMachine");
-	assert(m_player != nullptr && 
-		"StateMachine's Owner object is nullptr");
+	m_player->TryContinueFire(fDT);
 
-	if (GET_KEYDOWN(KEY_TYPE::SPACE))
-	{
-		fsm->ChangeState(new PlayerAttackState());
+	if (m_player->IsMovingInputProcessed()) {
+		fsm->ChangeState(new PlayerMoveState());
 		return;
 	}
 
-	bool isInputW = GET_KEY(KEY_TYPE::W);
-	bool isInputS = GET_KEY(KEY_TYPE::S);
-	bool isInputA = GET_KEY(KEY_TYPE::A);
-	bool isInputD = GET_KEY(KEY_TYPE::D);
-
-	if (isInputW || isInputS || isInputA || isInputD)
-	{
-		fsm->ChangeState(new PlayerMoveState());
+	if (GET_KEY(KEY_TYPE::SPACE)) {
+		fsm->ChangeState(new PlayerAttackState());
 		return;
 	}
 }
@@ -48,6 +34,4 @@ void PlayerIdleState::Excute(StateMachine* fsm) {
 void PlayerIdleState::Exit(StateMachine* fsm) {
 	assert(fsm != nullptr && 
 		"PlayerIdleState::Exit called with a nullptr StateMachine");
-
-	std::cout << "Exiting Idle State" << std::endl;
 }

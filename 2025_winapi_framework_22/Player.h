@@ -22,7 +22,11 @@ public:
 	}
 public:
 	void CreateProjectile();
+	void TryContinueFire(float _fDT);
+	bool IsMovingInputProcessed() const;
 private:
 	Texture* m_pTex;
+	float m_projCooldown = 0.f;
+	const float PROJECTILE_INTERVAL = 0.15f; // 총알 연속 발사 간격
 };
 
