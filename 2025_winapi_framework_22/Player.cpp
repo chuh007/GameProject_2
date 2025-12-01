@@ -12,6 +12,7 @@
 #include "Rigidbody.h"
 #include "StateMachine.h"
 #include "IdleState.h"
+#include "PoolManager.h"
 Player::Player()
 {
 	//m_pTex = new Texture;
@@ -33,6 +34,8 @@ Player::Player()
 	);
 	animator->Play(L"JiwooFront");
 
+	//GET_SINGLE(PoolManager)->AddPool<PlayerProjectile>
+	//	(PoolType::Circle1, 100, Layer::PROJECTILE);
 	StateMachine* fsm = AddComponent<StateMachine>();
 	assert(fsm != nullptr && "fsm is null in player");
 	fsm->ChangeState(new PlayerIdleState());
@@ -93,16 +96,16 @@ void Player::Update()
 
 void Player::CreateProjectile()
 {
-	PlayerProjectile* proj = new PlayerProjectile;
+	m_proj = GET_SINGLE(PoolManager)->Pop<PlayerProjectile>(PoolType::PlayerProj);
 	Vec2 pos = GetPos();
 	pos.y -= GetSize().y / 2.f;
-	proj->SetPos(pos);
-	proj->SetSize({ 30.f,30.f });
+	m_proj->SetPos(pos);
+	m_proj->SetSize({ 30.f,30.f });
 	//static float angle = 0.f;
  	//proj->SetAngle(angle * PI / 180.f);
 	//angle += 10.f;
-	proj->SetDir({0.f, -1.f});
-	GET_SINGLE(SceneManager)->GetCurScene()->AddObject(proj, Layer::PROJECTILE);
+	m_proj->SetDir({0.f, -1.f});
+	//GET_SINGLE(SceneManager)->GetCurScene()->AddObject(m_proj, Layer::PROJECTILE);
 	
 }
 

@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include "Object.h"
 #include "StateMachine.h"
+#include "Projectile.h"
 class Texture;
 class Player :
     public Object
@@ -26,6 +27,7 @@ public:
 	bool IsMovingInputProcessed() const;
 private:
 	Texture* m_pTex;
+	PlayerProjectile* m_proj;
 	float m_projCooldown = 0.f;
 	const float PROJECTILE_INTERVAL = 0.15f; // 총알 연속 발사 간격
 };

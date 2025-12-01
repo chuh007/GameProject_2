@@ -5,12 +5,14 @@
 #include "IdleState.h"
 #include "PlayerAttackState.h"
 #include "InputManager.h"
+#include "Projectile.h"
 
 void PlayerMoveState::Enter(StateMachine* fsm) {
 	assert(fsm != nullptr && 
 		"PlayerMoveState::Enter StateMachine is nullptr");
 
 	m_player = static_cast<Player*>(fsm->GetOwner());
+	// 오브젝트 풀링
 	assert(m_player != nullptr, 
 		"PlayerMoveState::Enter Owner Obejct is nullptr");
 
