@@ -1,19 +1,22 @@
-#pragma once
+ï»¿#pragma once
 #include "Object.h"
+#include "PoolManager.h"
 class Texture;
 class PlayerProjectile :
-    public Object
+    public Object, public IPoolable
 {
 public:
     PlayerProjectile();
     ~PlayerProjectile();
 public:
-    // ObjectÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
+    // Objectì„(ë¥¼) í†µí•´ ìƒì†ë¨
     void Update() override;
     void Render(HDC _hdc) override;
     void EnterCollision(Collider* _other) override;
 public:
-    // ÀÎ¶óÀÎ ÇÔ¼ö
+    virtual void Reset() override;
+public:
+    // ì¸ë¼ì¸ í•¨ìˆ˜
     void SetAngle(float _angle)
     {
         m_angle = _angle;
