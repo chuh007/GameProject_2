@@ -1,13 +1,14 @@
-#pragma once
+Ôªø#pragma once
 enum class Layer
 {
 	DEFAULT,
 	BACKGROUND,
-	// πÿø° ∫Ø∞Ê ∞°¥…
+	// Î∞ëÏóê Î≥ÄÍ≤Ω Í∞ÄÎä•
 	PLAYER,
 	ENEMY,
 	PROJECTILE,
 	ENEMYPROJECTILE,
+	UI,
 	END
 };
 
@@ -18,7 +19,7 @@ enum class PenType
 
 enum class BrushType
 {
-	HOLLOW, RED, GREEN, END
+	HOLLOW, RED, GREEN, GREY, END
 };
 
 enum class FontType
@@ -38,7 +39,7 @@ enum class MoveState
 
 enum class PoolType
 {
-	Circle1,
+	Circle1, PlayerProj
 };
 
 enum class MoveRepeatType

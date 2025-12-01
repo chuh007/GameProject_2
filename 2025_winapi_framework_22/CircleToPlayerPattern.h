@@ -13,6 +13,7 @@ public:
 
 public:
     void CirCleToPlayerShoot();
+    void RayShout();
 
 private:
     PoolType m_projectileType;

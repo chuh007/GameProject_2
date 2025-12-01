@@ -9,7 +9,8 @@
 #include "CircleToPlayerPattern.h"
 #include "PlayerManager.h"
 Boss::Boss()
-	: m_lifeCount(2)
+	: m_isDie(false)
+	, m_lifeCount(3)
 	, m_decDamage(1.f)
 	, m_target(nullptr)
 {
@@ -22,12 +23,20 @@ Boss::Boss()
 	auto* mover = AddComponent<BossMover>();
 
 	m_patternCompo = AddComponent<PatternCompo>();
-	m_patternCompo->ResizePattenList(3);
+	m_patternCompo->ResizePattenList(4);
 
 	auto* pattern1 = new CirclePattern(this, m_target, 0.5f, mover);
 	m_patternCompo->AddNomalPattern(1, pattern1);
 	auto* spell1 = new CircleToPlayerPattern(this, m_target, 0.75f, mover);
 	m_patternCompo->AddSpellPattern(1, spell1);
+	auto* pattern2 = new CirclePattern(this, m_target, 0.5f, mover);
+	m_patternCompo->AddNomalPattern(2, pattern2);
+	auto* spell2 = new CircleToPlayerPattern(this, m_target, 0.75f, mover);
+	m_patternCompo->AddSpellPattern(2, spell2);
+	auto* pattern3 = new CirclePattern(this, m_target, 0.5f, mover);
+	m_patternCompo->AddNomalPattern(3, pattern3);
+	auto* spell3 = new CircleToPlayerPattern(this, m_target, 0.75f, mover);
+	m_patternCompo->AddSpellPattern(3, spell3);
 
 	m_patternCompo->UseNomalPattern();
 }
@@ -58,13 +67,15 @@ void Boss::EnterCollision(Collider* _other)
 void Boss::TakeDamage(int _damage)
 {
 	m_healthCompo->TakeDamage(_damage * m_decDamage);
+	if (m_isDie) return;
 	cout << _damage << endl;
 	if (m_patternCompo->IsUseSpell())
 		return;
 	if(m_healthCompo->GetHP() <= m_healthCompo->GetMaxHP() * 0.5f)
 	{
 		m_patternCompo->UseSpellPattern();
-		m_decDamage = m_patternCompo->GetCurrentPattern()->GetDecValue();
+		if (m_patternCompo->GetCurrentPattern() != nullptr)
+			m_decDamage = m_patternCompo->GetCurrentPattern()->GetDecValue();
 		GetComponent<BossMover>()->MoveTo({ GAME_WIDTH / 2, GAME_HEIGHT / 4 }, 0.25f);
 	}
 }
@@ -79,6 +90,7 @@ void Boss::HPZero()
 	}
 	else
 	{
+		m_isDie = true;
 		GET_SINGLE(SceneManager)->RequestDestroy(this);
 	}
 }
