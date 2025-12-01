@@ -6,10 +6,13 @@
 #include "SceneManager.h"
 #include "Boss.h"
 #include "TestEnemy.h"
+#include "CircleMoveEnemy.h"
 #include "CollisionManager.h"
 #include "ResourceManager.h"
 #include "EnemySpawnManger.h"
-#include "MathHelper.h"
+#include "PoolManager.h"
+#include "EnemyProjectile.h"
+#include "TripleShotEnemy.h"
 void BakBakDevScene::Init()
 {
 	Object* obj = new Player;
@@ -18,20 +21,28 @@ void BakBakDevScene::Init()
 	// obj->SetScene(this);
 	AddObject(obj, Layer::PLAYER);
 
-	Spawn<Boss>(Layer::ENEMY, { WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4 }, { 100.f,100.f });
+	//Spawn<Boss>(Layer::ENEMY, { WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4 }, { 100.f,100.f });
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PROJECTILE, Layer::ENEMY);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::DEFAULT);
 	GET_SINGLE(ResourceManager)->Play(L"BGM");
 
-	BezierPathData* pathData = new BezierPathData;
-	pathData->CalculateArcLengthMap({ {0,0},{300,300},{600,600},{500,800} });
-	
 	GET_SINGLE(EnemySpawnManger)->Init();
+	GET_SINGLE(PoolManager)->AddPool<EnemyProjectile>
+		(PoolType::Circle1, 100, Layer::ENEMYPROJECTILE);
+	
 	TestEnemy* testEnemy = new TestEnemy;
+	CircleMoveEnemy* circleEnemy = new CircleMoveEnemy;
+	TripleShotEnemy* tripleshot = new TripleShotEnemy;
 	testEnemy->SetPos({ 100, 100 });
-	testEnemy->SetSize({ 100,100 });
+	testEnemy->SetSize({ 75,75 });
+	circleEnemy->SetPos({ 100, 100 });
+	circleEnemy->SetSize({ 50,50 });
+	tripleshot->SetPos({ 100,100 });
+	tripleshot->SetSize({ 100,100 });
 	GET_SINGLE(EnemySpawnManger)->SetSpawnScene(this);
 	GET_SINGLE(EnemySpawnManger)->AddEnemySpawnQueue({ 3.f, testEnemy });
+	GET_SINGLE(EnemySpawnManger)->AddEnemySpawnQueue({ 6.f, circleEnemy });
+	GET_SINGLE(EnemySpawnManger)->AddEnemySpawnQueue({ 9.f, tripleshot });
 }
 
 void BakBakDevScene::Update()

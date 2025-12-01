@@ -40,3 +40,8 @@ enum class PoolType
 {
 	Circle1,
 };
+
+enum class MoveRepeatType
+{
+	Stop, Loop, PingPong, Repeat
+};

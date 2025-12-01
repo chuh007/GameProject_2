@@ -167,6 +167,7 @@
     <ClInclude Include="BaseWindow.h" />
     <ClInclude Include="Boss.h" />
     <ClInclude Include="BossMover.h" />
+    <ClInclude Include="CircleMoveEnemy.h" />
     <ClInclude Include="CirclePattern.h" />
     <ClInclude Include="CircleToPlayerPattern.h" />
     <ClInclude Include="Collider.h" />
@@ -208,6 +209,7 @@
     <ClInclude Include="TestScene.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TimeManager.h" />
+    <ClInclude Include="TripleShotEnemy.h" />
     <ClInclude Include="UIBase.h" />
     <ClInclude Include="Vec2.h" />
   </ItemGroup>
@@ -218,6 +220,7 @@
     <ClCompile Include="BaseWindow.cpp" />
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="BossMover.cpp" />
+    <ClCompile Include="CircleMoveEnemy.cpp" />
     <ClCompile Include="CirclePattern.cpp" />
     <ClCompile Include="CircleToPlayerPattern.cpp" />
     <ClCompile Include="Collider.cpp" />
@@ -255,6 +258,7 @@
     <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TimeManager.cpp" />
+    <ClCompile Include="TripleShotEnemy.cpp" />
     <ClCompile Include="UIBase.cpp" />
   </ItemGroup>
   <ItemGroup>
