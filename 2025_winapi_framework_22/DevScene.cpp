@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "DevScene.h"
 #include "Object.h"
 #include "Player.h"
@@ -13,6 +13,7 @@
 #include "PoolManager.h"
 #include "PlayerManager.h"
 #include "BossHPBar.h"
+#include "Projectile.h"
 void DevScene::Init()
 {	
 	//Object* obj = new Player;
@@ -28,6 +29,8 @@ void DevScene::Init()
 	GET_SINGLE(ResourceManager)->Play(L"BGM");
 	GET_SINGLE(PoolManager)->AddPool<EnemyProjectile>
 		(PoolType::Circle1, 100, Layer::ENEMYPROJECTILE);
+	GET_SINGLE(PoolManager)->AddPool<PlayerProjectile>
+		(PoolType::PlayerProj, 100, Layer::PROJECTILE);
 
 	auto* hpBar = Spawn<BossHPBar>(Layer::UI, { GAME_WIDTH / 2, 25 }, { GAME_WIDTH - 20, 50 });
 	hpBar->SetBoss(boss);
