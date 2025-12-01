@@ -8,6 +8,7 @@ enum class Layer
 	ENEMY,
 	PROJECTILE,
 	ENEMYPROJECTILE,
+	UI,
 	END
 };
 
@@ -18,7 +19,7 @@ enum class PenType
 
 enum class BrushType
 {
-	HOLLOW, RED, GREEN, END
+	HOLLOW, RED, GREEN, GREY, END
 };
 
 enum class FontType

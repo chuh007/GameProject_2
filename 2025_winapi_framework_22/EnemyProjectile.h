@@ -14,7 +14,7 @@ public:
     // Object을(를) 통해 상속됨
     virtual void Update() override;
     virtual void Render(HDC _hdc) override;
-
+    virtual void EnterCollision(Collider* _other) override;
 public:
     virtual void Reset() override;
     void SetColliderSize(float _size);

@@ -38,7 +38,7 @@ void EnemyProjectile::Update()
 	if (GetPos().x < -200 || GAME_WIDTH + 200 < GetPos().x ||
 		GetPos().y < -200 || GAME_HEIGHT + 200 < GetPos().y)
 	{
-		PoolManager::GetInst()->Push<EnemyProjectile>(PoolType::Circle1, this);
+		GET_SINGLE(PoolManager)->Push<EnemyProjectile>(PoolType::Circle1, this);
 	}
 }
 
@@ -57,4 +57,13 @@ void EnemyProjectile::Render(HDC _hdc)
 		, 0, 0, width, height,
 		RGB(255, 0, 255));
 	ComponentRender(_hdc);
+}
+
+void EnemyProjectile::EnterCollision(Collider* _other)
+{
+	IDamageable* damageable = dynamic_cast<IDamageable*>(_other->GetOwner());
+	if (damageable)
+	{
+		damageable->TakeDamage(1);
+	}
 }

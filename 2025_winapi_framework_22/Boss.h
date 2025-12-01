@@ -19,7 +19,14 @@ public:
 public:
     virtual void TakeDamage(int _damage) override;
     virtual void HPZero() override;
+
+public:
+    int GetLifeCount()
+    {
+        return m_lifeCount;
+    }
 private:
+    bool m_isDie;
     int m_lifeCount;
     PatternCompo* m_patternCompo;
     Health* m_healthCompo;
