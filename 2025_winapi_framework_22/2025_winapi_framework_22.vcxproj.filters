@@ -202,9 +202,6 @@
     <ClInclude Include="Pattern.h">
       <Filter>Engine\09. Pattern</Filter>
     </ClInclude>
-    <ClInclude Include="UIBase.h">
-      <Filter>Engine\07. UI</Filter>
-    </ClInclude>
     <ClInclude Include="CirclePattern.h">
       <Filter>Engine\09. Pattern</Filter>
     </ClInclude>
@@ -213,6 +210,13 @@
     </ClInclude>
     <ClInclude Include="CircleToPlayerPattern.h">
       <Filter>Engine\09. Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="BossHPBar.h" />
+    <ClInclude Include="PlayerDeadState.h">
+      <Filter>Engine\03. Object\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerHitState.h">
+      <Filter>Engine\03. Object\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -349,9 +353,6 @@
     <ClCompile Include="Pattern.cpp">
       <Filter>Engine\09. Pattern</Filter>
     </ClCompile>
-    <ClCompile Include="UIBase.cpp">
-      <Filter>Engine\07. UI</Filter>
-    </ClCompile>
     <ClCompile Include="CirclePattern.cpp">
       <Filter>Engine\09. Pattern</Filter>
     </ClCompile>
@@ -360,6 +361,13 @@
     </ClCompile>
     <ClCompile Include="CircleToPlayerPattern.cpp">
       <Filter>Engine\09. Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="BossHPBar.cpp" />
+    <ClCompile Include="PlayerDeadState.cpp">
+      <Filter>Engine\03. Object\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHitState.cpp">
+      <Filter>Engine\03. Object\Player</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
