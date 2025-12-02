@@ -45,6 +45,12 @@ void PlayerProjectile::Update()
 {
 	//Translate({cosf(m_angle) * 500.f * fDT, sinf(m_angle) * 500.f * fDT});
 	Translate({ m_dir.x * m_speed * fDT, m_dir.y * m_speed * fDT });
+
+	if (GetPos().x < -200 || GAME_WIDTH + 200 < GetPos().x ||
+		GetPos().y < -200 || GAME_HEIGHT + 200 < GetPos().y)
+	{
+		GET_SINGLE(PoolManager)->Push<PlayerProjectile>(PoolType::PlayerProj, this);
+	}
 }
 
 void PlayerProjectile::EnterCollision(Collider* _other)
