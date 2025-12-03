@@ -20,7 +20,6 @@ void DeleteBullet::Render(HDC _hdc)
 
 void DeleteBullet::EnterCollision(Collider* _other)
 {
-	cout << "นึ";
 	auto* bullet = static_cast<EnemyProjectile*>(_other->GetOwner());
 	bullet->PushSelf();
 
