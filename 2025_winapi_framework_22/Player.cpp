@@ -13,16 +13,23 @@
 #include "StateMachine.h"
 #include "IdleState.h"
 #include "PoolManager.h"
-Player::Player()
+#include "Health.h"
+#include "PlayerHitState.h"
+#include "PlayerDeadState.h"
+
+Player::Player() : m_isDead(false), m_life(3), m_projCooldown(0.f), 
+m_proj(nullptr), col(nullptr), fsm(nullptr)
 {
 	//m_pTex = new Texture;
 	//wstring path = GET_SINGLE(ResourceManager)->GetResPath();
 	//path += L"Texture\\plane.bmp";
 	//m_pTex->Load(path);
 	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Jiwoo");
-	AddComponent<Collider>();
 	auto* rb = AddComponent<Rigidbody>();
 	rb->SetUseGravity(false);
+	auto* col = AddComponent<Collider>();
+	col->SetName(L"Player");
+	col->SetSize(20.0f);
 	auto* animator = AddComponent<Animator>();
 	animator->CreateAnimation
 	(L"JiwooFront",
@@ -34,9 +41,13 @@ Player::Player()
 	);
 	animator->Play(L"JiwooFront");
 
+	m_health = AddComponent<Health>();
+	m_health->SetMaxHP(3);
+	m_health->SetCurrentHP(3);
+
 	//GET_SINGLE(PoolManager)->AddPool<PlayerProjectile>
 	//	(PoolType::Circle1, 100, Layer::PROJECTILE);
-	StateMachine* fsm = AddComponent<StateMachine>();
+	fsm = AddComponent<StateMachine>();
 	assert(fsm != nullptr && "fsm is null in player");
 	fsm->ChangeState(new PlayerIdleState());
 }
@@ -122,6 +133,25 @@ void Player::TryContinueFire(float _fDT) {
 bool Player::IsMovingInputProcessed() const {
 	return GET_KEY(KEY_TYPE::W) || GET_KEY(KEY_TYPE::A) ||
 		GET_KEY(KEY_TYPE::S) || GET_KEY(KEY_TYPE::D);
+}
+
+void Player::TakeDamage(int _damage) {
+	m_health->TakeDamage(_damage);
+	if (m_isDead) return;
+
+	cout << "P : " << _damage << endl;
+}
+
+void Player::HPZero() {
+	m_life--;
+	if (m_life > 0) {
+		m_health->SetCurrentHP(m_health->GetHP());
+		fsm->ChangeState(new PlayerHitState());
+	}
+	else {
+		m_isDead = true;
+		fsm->ChangeState(new PlayerDeadState());
+	}
 }
 
 
