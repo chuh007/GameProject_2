@@ -16,6 +16,7 @@
 #include "Health.h"
 #include "PlayerHitState.h"
 #include "PlayerDeadState.h"
+#include "CombatCompo.h"
 
 Player::Player() : m_isDead(false), m_life(3), m_projCooldown(0.f), 
 m_proj(nullptr), col(nullptr), fsm(nullptr)
@@ -29,7 +30,7 @@ m_proj(nullptr), col(nullptr), fsm(nullptr)
 	rb->SetUseGravity(false);
 	auto* col = AddComponent<Collider>();
 	col->SetName(L"Player");
-	col->SetSize(20.0f);
+	col->SetSize(5.0f);
 	auto* animator = AddComponent<Animator>();
 	animator->CreateAnimation
 	(L"JiwooFront",
@@ -54,8 +55,9 @@ m_proj(nullptr), col(nullptr), fsm(nullptr)
 
 Player::~Player()
 {
-	// DELETE
+	// 여기 DELETE 해줘야해
 }
+
 void Player::Render(HDC _hdc)
 {
 	Vec2 pos = GetPos();
