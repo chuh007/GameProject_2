@@ -1,9 +1,9 @@
-#pragma once
+Ôªø#pragma once
 enum class Layer
 {
 	DEFAULT,
 	BACKGROUND,
-	// πÿø° ∫Ø∞Ê ∞°¥…
+	// Î∞ëÏóê Î≥ÄÍ≤Ω Í∞ÄÎä•
 	PLAYER,
 	ENEMY,
 	PROJECTILE,
@@ -40,5 +40,5 @@ enum class MoveState
 
 enum class PoolType
 {
-	Circle1,
+	Circle1, PlayerProj
 };

@@ -1,4 +1,4 @@
-#pragma once
+Ôªø#pragma once
 //#include "Object.h"
 class Object;
 struct SpawnObject
@@ -32,7 +32,7 @@ public:
 	template<typename T>
 	T* Spawn(Layer _type, Vec2 _pos, Vec2 _size)
 	{
-		static_assert(std::is_base_of<Object, T>::value, "Object∑Œ∫Œ≈Õ ªÛº”πﬁæ∆æﬂ «‘");
+		static_assert(std::is_base_of<Object, T>::value, "ObjectÎ°úÎ∂ÄÌÑ∞ ÏÉÅÏÜçÎ∞õÏïÑÏïº Ìï®");
 		T* obj = new T;
 		obj->SetPos(_pos);
 		obj->SetSize(_size);

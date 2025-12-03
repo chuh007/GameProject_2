@@ -10,7 +10,7 @@ void PlayerAttackState::Enter(StateMachine* fsm) {
 	m_player = static_cast<Player*>(fsm->GetOwner());
 
 	// 공격 판정 처리
-	m_player->CreateProjectile();
+	//m_player->CreateProjectile();
 	m_attackTimer = 0.f;
 }
 

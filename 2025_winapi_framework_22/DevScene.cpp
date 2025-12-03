@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "DevScene.h"
 #include "Object.h"
 #include "Player.h"
@@ -13,9 +13,9 @@
 #include "PoolManager.h"
 #include "PlayerManager.h"
 #include "BossHPBar.h"
+#include "Projectile.h"
 void DevScene::Init()
 {	
-	srand(time(nullptr));
 	//Object* obj = new Player;
 	//obj->SetPos({ GAME_WIDTH / 2, 500 });
 	//obj->SetSize({ 100.f, 100.f });
@@ -26,10 +26,12 @@ void DevScene::Init()
 	Boss* boss = Spawn<Boss>(Layer::ENEMY, { GAME_WIDTH / 2, GAME_HEIGHT / 4 }, { 50.f,75.f });
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PROJECTILE, Layer::ENEMY);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::DEFAULT);
-	GET_SINGLE(CollisionManager)->CheckLayer(Layer::ENEMYPROJECTILE, Layer::PROJECTILEDELETER);
+	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::ENEMYPROJECTILE);
 	GET_SINGLE(ResourceManager)->Play(L"BGM");
 	GET_SINGLE(PoolManager)->AddPool<EnemyProjectile>
 		(PoolType::Circle1, 100, Layer::ENEMYPROJECTILE);
+	GET_SINGLE(PoolManager)->AddPool<PlayerProjectile>
+		(PoolType::PlayerProj, 100, Layer::PROJECTILE);
 
 	auto* hpBar = Spawn<BossHPBar>(Layer::UI, { GAME_WIDTH / 2, 25 }, { GAME_WIDTH - 20, 50 });
 	hpBar->SetBoss(boss);

@@ -1,10 +1,11 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "Projectile.h"
 #include "Texture.h"
 #include "ResourceManager.h"
 #include "Collider.h"
 #include "IDamageable.h"
 #include "SceneManager.h"
+#include "PoolManager.h"
 PlayerProjectile::PlayerProjectile()
 	: m_angle(0.f)
 	, m_dir(1.f, 1.f)
@@ -44,6 +45,12 @@ void PlayerProjectile::Update()
 {
 	//Translate({cosf(m_angle) * 500.f * fDT, sinf(m_angle) * 500.f * fDT});
 	Translate({ m_dir.x * m_speed * fDT, m_dir.y * m_speed * fDT });
+
+	if (GetPos().x < -200 || GAME_WIDTH + 200 < GetPos().x ||
+		GetPos().y < -200 || GAME_HEIGHT + 200 < GetPos().y)
+	{
+		GET_SINGLE(PoolManager)->Push<PlayerProjectile>(PoolType::PlayerProj, this);
+	}
 }
 
 void PlayerProjectile::EnterCollision(Collider* _other)
@@ -52,6 +59,11 @@ void PlayerProjectile::EnterCollision(Collider* _other)
 	if (damageable)
 	{
 		damageable->TakeDamage(m_damage);
-		GET_SINGLE(SceneManager)->RequestDestroy(this);
+		GET_SINGLE(PoolManager)->Push<PlayerProjectile>(PoolType::PlayerProj, this);
+		//GET_SINGLE(SceneManager)->RequestDestroy(this);
 	}
+}
+
+void PlayerProjectile::Reset() {
+	m_corutines.clear();
 }
