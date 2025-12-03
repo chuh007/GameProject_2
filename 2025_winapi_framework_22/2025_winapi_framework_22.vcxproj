@@ -172,6 +172,7 @@
     <ClInclude Include="CircleToPlayerPattern.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CollisionManager.h" />
+    <ClInclude Include="CombatCompo.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="DevScene.h" />
@@ -225,6 +226,7 @@
     <ClCompile Include="CircleToPlayerPattern.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
+    <ClCompile Include="CombatCompo.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="DevScene.cpp" />
