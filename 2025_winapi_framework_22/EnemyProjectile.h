@@ -18,6 +18,7 @@ public:
 public:
     virtual void Reset() override;
     void SetColliderSize(float _size);
+    void PushSelf();
 public:
     void SetSpeed(float speed) { m_speed = speed; }
     const float& GetSpeed() const { return m_speed; }

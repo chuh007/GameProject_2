@@ -50,6 +50,7 @@ public:
 	}
 	void Push(T* _obj)
 	{
+		cout <<"풀 오브젝트" << m_pool.size() << '\n';
 		m_pool.push(_obj);
 		_obj->SetActive(false);
 	}

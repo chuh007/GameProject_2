@@ -71,6 +71,14 @@ void Scene::RemoveObject(Object* _obj)
 
 void Scene::Update()
 {
+	static float accmulator = 0.f;
+	const float fixedDT = 1.f;
+	accmulator += fDT;
+	while (accmulator >= fixedDT)
+	{
+		cout << "현존 오브젝트 :" << m_vecObj[(UINT)Layer::ENEMYPROJECTILE].size() <<'\n';
+		accmulator -= fixedDT;
+	}
 	//Scene* pScene = new DevScene;
 	for (UINT i = 0; i < (UINT)Layer::END; ++i)
 	{

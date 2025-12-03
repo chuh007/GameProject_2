@@ -7,6 +7,7 @@
 #include "SceneManager.h"
 #include "CirclePattern.h"
 #include "CircleToPlayerPattern.h"
+#include "IcicleFallPattern.h"
 #include "PlayerManager.h"
 Boss::Boss()
 	: m_isDie(false)
@@ -18,20 +19,20 @@ Boss::Boss()
 	col->SetSize(50.f);
 	m_target = GET_SINGLE(PlayerManager)->GetPlayer();
 	m_healthCompo = AddComponent<Health>();
-	m_healthCompo->SetMaxHP(100);
-	m_healthCompo->SetCurrentHP(100);
+	m_healthCompo->SetMaxHP(1000);
+	m_healthCompo->SetCurrentHP(1000);
 	auto* mover = AddComponent<BossMover>();
 
 	m_patternCompo = AddComponent<PatternCompo>();
 	m_patternCompo->ResizePattenList(4);
 
-	auto* pattern1 = new CirclePattern(this, m_target, 0.5f, mover);
+	auto* pattern1 = new CirclePattern(this, m_target, 0.75f, mover);
 	m_patternCompo->AddNomalPattern(1, pattern1);
 	auto* spell1 = new CircleToPlayerPattern(this, m_target, 0.75f, mover);
 	m_patternCompo->AddSpellPattern(1, spell1);
-	auto* pattern2 = new CirclePattern(this, m_target, 0.5f, mover);
+	auto* pattern2 = new CirclePattern(this, m_target, 0.4f, mover);
 	m_patternCompo->AddNomalPattern(2, pattern2);
-	auto* spell2 = new CircleToPlayerPattern(this, m_target, 0.75f, mover);
+	auto* spell2 = new IcicleFallPattern(this, m_target, 0.5f, mover);
 	m_patternCompo->AddSpellPattern(2, spell2);
 	auto* pattern3 = new CirclePattern(this, m_target, 0.5f, mover);
 	m_patternCompo->AddNomalPattern(3, pattern3);
@@ -68,14 +69,13 @@ void Boss::TakeDamage(int _damage)
 {
 	m_healthCompo->TakeDamage(_damage * m_decDamage);
 	if (m_isDie) return;
-	cout << _damage << endl;
+	cout << _damage * m_decDamage << endl;
 	if (m_patternCompo->IsUseSpell())
 		return;
 	if(m_healthCompo->GetHP() <= m_healthCompo->GetMaxHP() * 0.5f)
 	{
 		m_patternCompo->UseSpellPattern();
-		if (m_patternCompo->GetCurrentPattern() != nullptr)
-			m_decDamage = m_patternCompo->GetCurrentPattern()->GetDecValue();
+		m_decDamage = m_patternCompo->GetCurrentPattern()->GetDecValue();
 		GetComponent<BossMover>()->MoveTo({ GAME_WIDTH / 2, GAME_HEIGHT / 4 }, 0.25f);
 	}
 }
@@ -87,6 +87,7 @@ void Boss::HPZero()
 	{
 		m_healthCompo->SetCurrentHP(m_healthCompo->GetMaxHP());
 		m_patternCompo->UseNomalPattern();
+		m_decDamage = m_patternCompo->GetCurrentPattern()->GetDecValue();
 	}
 	else
 	{

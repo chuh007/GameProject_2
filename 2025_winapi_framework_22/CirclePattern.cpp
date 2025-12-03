@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "CirclePattern.h"
 #include "EnemyProjectile.h"
-
+// 원형 사격
 CirclePattern::CirclePattern(Object* _owner, Object* _target, float _patternUseTime, BossMover* _mover)
 	: Pattern(_owner, _target, _patternUseTime, _mover)
 	, m_projectileType(PoolType::Circle1)
@@ -18,17 +18,16 @@ CirclePattern::~CirclePattern()
 void CirclePattern::Update()
 {
 	m_curTime += fDT;
-	if (m_curTime > m_patternUseTime)
+	if (m_curTime > m_BaseShoutCooldown)
 	{
 		m_curTime = 0;
 		int x = (rand() % GAME_WIDTH / 2) + GAME_WIDTH / 4;
 		int y = (GAME_HEIGHT / 5) + rand() % 100;
-		m_mover->MoveTo({ x,y }, m_patternUseTime);
-		CirCleShoot();
+		m_mover->MoveTo({ x,y }, m_BaseShoutCooldown);
+		BaseShoot();
 	}
 }
-
-void CirclePattern::CirCleShoot()
+void CirclePattern::BaseShoot()
 {
 	float angle = 360.f / (float)m_fireCount;
 	for (int i = 0; i < m_fireCount; ++i)

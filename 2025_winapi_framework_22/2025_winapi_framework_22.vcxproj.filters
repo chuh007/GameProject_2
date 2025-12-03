@@ -202,9 +202,6 @@
     <ClInclude Include="Pattern.h">
       <Filter>Engine\09. Pattern</Filter>
     </ClInclude>
-    <ClInclude Include="UIBase.h">
-      <Filter>Engine\07. UI</Filter>
-    </ClInclude>
     <ClInclude Include="CirclePattern.h">
       <Filter>Engine\09. Pattern</Filter>
     </ClInclude>
@@ -213,6 +210,15 @@
     </ClInclude>
     <ClInclude Include="CircleToPlayerPattern.h">
       <Filter>Engine\09. Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="BossHPBar.h">
+      <Filter>Engine\07. UI</Filter>
+    </ClInclude>
+    <ClInclude Include="IcicleFallPattern.h">
+      <Filter>Engine\09. Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="DeleteBullet.h">
+      <Filter>Engine\03. Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -349,9 +355,6 @@
     <ClCompile Include="Pattern.cpp">
       <Filter>Engine\09. Pattern</Filter>
     </ClCompile>
-    <ClCompile Include="UIBase.cpp">
-      <Filter>Engine\07. UI</Filter>
-    </ClCompile>
     <ClCompile Include="CirclePattern.cpp">
       <Filter>Engine\09. Pattern</Filter>
     </ClCompile>
@@ -360,6 +363,15 @@
     </ClCompile>
     <ClCompile Include="CircleToPlayerPattern.cpp">
       <Filter>Engine\09. Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="BossHPBar.cpp">
+      <Filter>Engine\07. UI</Filter>
+    </ClCompile>
+    <ClCompile Include="IcicleFallPattern.cpp">
+      <Filter>Engine\09. Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="DeleteBullet.cpp">
+      <Filter>Engine\03. Object</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

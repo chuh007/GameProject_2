@@ -26,8 +26,13 @@ void EnemyProjectile::Reset()
 
 void EnemyProjectile::SetColliderSize(float _size)
 {
-	auto* col = AddComponent<Collider>();
+	auto* col = GetComponent<Collider>();
 	col->SetSize(_size);
+}
+
+void EnemyProjectile::PushSelf()
+{
+	GET_SINGLE(PoolManager)->Push<EnemyProjectile>(PoolType::Circle1, this);
 }
 
 void EnemyProjectile::Update()
@@ -38,7 +43,7 @@ void EnemyProjectile::Update()
 	if (GetPos().x < -200 || GAME_WIDTH + 200 < GetPos().x ||
 		GetPos().y < -200 || GAME_HEIGHT + 200 < GetPos().y)
 	{
-		GET_SINGLE(PoolManager)->Push<EnemyProjectile>(PoolType::Circle1, this);
+		PushSelf();
 	}
 }
 

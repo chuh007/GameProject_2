@@ -15,6 +15,7 @@
 #include "BossHPBar.h"
 void DevScene::Init()
 {	
+	srand(time(nullptr));
 	//Object* obj = new Player;
 	//obj->SetPos({ GAME_WIDTH / 2, 500 });
 	//obj->SetSize({ 100.f, 100.f });
@@ -25,6 +26,7 @@ void DevScene::Init()
 	Boss* boss = Spawn<Boss>(Layer::ENEMY, { GAME_WIDTH / 2, GAME_HEIGHT / 4 }, { 50.f,75.f });
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PROJECTILE, Layer::ENEMY);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::DEFAULT);
+	GET_SINGLE(CollisionManager)->CheckLayer(Layer::ENEMYPROJECTILE, Layer::PROJECTILEDELETER);
 	GET_SINGLE(ResourceManager)->Play(L"BGM");
 	GET_SINGLE(PoolManager)->AddPool<EnemyProjectile>
 		(PoolType::Circle1, 100, Layer::ENEMYPROJECTILE);

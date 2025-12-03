@@ -8,7 +8,7 @@ Pattern::Pattern(Object* _owner, Object* _target, float _patternUseTime, BossMov
 {
 	m_owner = _owner;
 	m_target = _target;
-	m_patternUseTime = _patternUseTime;
+	m_BaseShoutCooldown = _patternUseTime;
 	m_mover = _mover;
 }
 

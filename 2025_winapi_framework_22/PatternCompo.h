@@ -34,7 +34,7 @@ public:
 public:
     void UseNomalPattern();
     void UseSpellPattern();
-
+    void DeleteProjectile();
 private:
     Pattern* m_curPattern;
     vector<Pattern*> m_nomalPatternList;

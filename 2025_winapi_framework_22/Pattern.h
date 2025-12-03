@@ -9,13 +9,13 @@ public:
 
 public:
 	virtual void Update() abstract;
-
+	virtual void BaseShoot() abstract;
 public:
 	float GetDecValue() { return m_decValue; }
 protected:
 	Object* m_owner;
 	Object* m_target;
-	float m_patternUseTime;
+	float m_BaseShoutCooldown;
 	BossMover* m_mover;
 
 	float m_curTime;
