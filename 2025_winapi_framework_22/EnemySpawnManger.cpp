@@ -14,7 +14,7 @@ void EnemySpawnManger::Update()
 	TryToSpawn();
 }
 
-void EnemySpawnManger::StopSpawn()
+void  EnemySpawnManger::StopSpawn()
 {
 }
 
@@ -28,6 +28,10 @@ void EnemySpawnManger::Realese()
 
         m_enemySpawnQueue.pop();
     }
+	for (std::pair<wstring, BezierPathData*> kvp : m_calcedPath)
+	{
+		SAFE_DELETE(kvp.second)
+	}
 }
 
 void EnemySpawnManger::AddEnemySpawnQueue(SpawnInfo _spawnInfo)
@@ -56,7 +60,7 @@ bool EnemySpawnManger::TryToSpawn()
 void EnemySpawnManger::AssignPath()
 {
 	BezierPathData* defaultPath = new BezierPathData;
-	defaultPath->BezierPathData::CalculateArcLengthMap({ {0,0},{200,200},{400,-200},{600,300} });
+	defaultPath->BezierPathData::CalculateArcLengthMap({ {0,0},{200,200},{400,-200},{600,0} });
 	m_calcedPath.insert({ L"Default", defaultPath });
 	BezierPathData* reverse = new BezierPathData;
 	reverse->BezierPathData::CalculateArcLengthMap({ {0,0},{-200,-500},{-400,100},{-600,-300} });

@@ -202,9 +202,6 @@
     <ClInclude Include="Pattern.h">
       <Filter>Engine\09. Pattern</Filter>
     </ClInclude>
-    <ClInclude Include="UIBase.h">
-      <Filter>Engine\07. UI</Filter>
-    </ClInclude>
     <ClInclude Include="CirclePattern.h">
       <Filter>Engine\09. Pattern</Filter>
     </ClInclude>
@@ -214,10 +211,11 @@
     <ClInclude Include="CircleToPlayerPattern.h">
       <Filter>Engine\09. Pattern</Filter>
     </ClInclude>
-    <ClInclude Include="TripleShotEnemy.h">
+    <ClInclude Include="CircleMoveEnemy.h">
       <Filter>Engine\03. Object\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="CircleMoveEnemy.h">
+    <ClInclude Include="BossHPBar.h" />
+    <ClInclude Include="TripleShotEnemy.h">
       <Filter>Engine\03. Object\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
@@ -355,9 +353,6 @@
     <ClCompile Include="Pattern.cpp">
       <Filter>Engine\09. Pattern</Filter>
     </ClCompile>
-    <ClCompile Include="UIBase.cpp">
-      <Filter>Engine\07. UI</Filter>
-    </ClCompile>
     <ClCompile Include="CirclePattern.cpp">
       <Filter>Engine\09. Pattern</Filter>
     </ClCompile>
@@ -370,6 +365,7 @@
     <ClCompile Include="CircleMoveEnemy.cpp">
       <Filter>Engine\03. Object\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="BossHPBar.cpp" />
     <ClCompile Include="TripleShotEnemy.cpp">
       <Filter>Engine\03. Object\Enemy</Filter>
     </ClCompile>

@@ -5,22 +5,24 @@
 #include "InputManager.h"
 #include "SceneManager.h"
 #include "Boss.h"
-#include "TestEnemy.h"
-#include "CircleMoveEnemy.h"
 #include "CollisionManager.h"
 #include "ResourceManager.h"
+#include "EnemyProjectile.h"
 #include "EnemySpawnManger.h"
 #include "PoolManager.h"
-#include "EnemyProjectile.h"
+#include "TestEnemy.h"
+#include "CircleMoveEnemy.h"
 #include "TripleShotEnemy.h"
+#include "PlayerManager.h"
 void BakBakDevScene::Init()
 {
-	Object* obj = new Player;
+	Player* obj = new Player;
 	obj->SetPos({ WINDOW_WIDTH / 2, 300 });
 	obj->SetSize({ 100.f, 100.f });
 	// obj->SetScene(this);
 	AddObject(obj, Layer::PLAYER);
 
+	GET_SINGLE(PlayerManager)->SetPlayer(obj);
 	//Spawn<Boss>(Layer::ENEMY, { WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4 }, { 100.f,100.f });
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PROJECTILE, Layer::ENEMY);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::DEFAULT);
@@ -29,6 +31,8 @@ void BakBakDevScene::Init()
 	GET_SINGLE(EnemySpawnManger)->Init();
 	GET_SINGLE(PoolManager)->AddPool<EnemyProjectile>
 		(PoolType::Circle1, 100, Layer::ENEMYPROJECTILE);
+	GET_SINGLE(PoolManager)->AddPool<PlayerProjectile>
+		(PoolType::PlayerProj, 100, Layer::PROJECTILE );
 	
 	TestEnemy* testEnemy = new TestEnemy;
 	CircleMoveEnemy* circleEnemy = new CircleMoveEnemy;

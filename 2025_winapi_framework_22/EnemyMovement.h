@@ -2,7 +2,13 @@
 #include "Component.h"
 #include "MathHelper.h" 
 #include <queue>
-
+struct QueueModule
+{
+    BezierPathData* moveOrder;
+    float m_pingPongDirection;
+    MoveRepeatType repeatType;
+    int repeatTime;
+};
 class EnemyMovement : public Component
 {
 private:
