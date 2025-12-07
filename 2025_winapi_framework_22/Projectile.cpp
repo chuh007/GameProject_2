@@ -62,7 +62,6 @@ void PlayerProjectile::EnterCollision(Collider* _other)
 		damageable->TakeDamage(m_damage);
 		GET_SINGLE(PoolManager)->Push<PlayerProjectile>(PoolType::PlayerProj, this);
 		GetComponent<Collider>()->SetActive(false);
-		//GET_SINGLE(SceneManager)->RequestDestroy(this);
 	}
 }
 
