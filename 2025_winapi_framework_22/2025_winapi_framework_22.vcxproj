@@ -166,6 +166,7 @@
     <ClInclude Include="Background.h" />
     <ClInclude Include="BakBakDevScene.h" />
     <ClInclude Include="BaseWindow.h" />
+    <ClInclude Include="BombItem.h" />
     <ClInclude Include="Boss.h" />
     <ClInclude Include="BossHPBar.h" />
     <ClInclude Include="BossMover.h" />
@@ -197,6 +198,8 @@
     <ClInclude Include="IDamageable.h" />
     <ClInclude Include="IdleState.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="ItemDropCompo.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Pattern.h" />
     <ClInclude Include="PatternCompo.h" />
@@ -235,6 +238,7 @@
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="BakBakDevScene.cpp" />
     <ClCompile Include="BaseWindow.cpp" />
+    <ClCompile Include="BombItem.cpp" />
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="BossHPBar.cpp" />
     <ClCompile Include="BossMover.cpp" />
@@ -264,6 +268,8 @@
     <ClCompile Include="IDamageable.cpp" />
     <ClCompile Include="IdleState.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ItemDropCompo.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MoveState.cpp" />
     <ClCompile Include="Object.cpp" />

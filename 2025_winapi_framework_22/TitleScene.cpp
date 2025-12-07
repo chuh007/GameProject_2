@@ -4,6 +4,7 @@
 #include "Button.h"
 #include "StartButton.h"
 #include "ButtonSelector.h"
+#include "ExitButton.h"
 
 void TitleScene::Init()
 {
@@ -16,6 +17,17 @@ void TitleScene::Init()
 	button->SetSize({ 200.f, 50.f });
 	button->SetPos({ GAME_WIDTH - button->GetSize().x / 2 - 25, btnpositionY});
 	button->SetText(L"Start");
+
+	btnpositionY += 60.0f;
+
+	Button* exit = new ExitButton;
+	exit->SetSize({ 200.f, 50.f });
+	exit->SetPos({ GAME_WIDTH - button->GetSize().x / 2 - 25, btnpositionY });
+	button->SetText(L"Exit");
+
+
 	AddObject(button, Layer::UI);
+	AddObject(exit, Layer::UI);
 	selector->AssignButton(button);
+	selector->AssignButton(exit);
 }
