@@ -5,6 +5,8 @@
 #include "MoveState.h"
 #include "PlayerAttackState.h"
 #include "InputManager.h"
+#include "CombatCompo.h"
+#include "TimeManager.h"
 
 void PlayerIdleState::Enter(StateMachine* fsm) {
 	assert(fsm != nullptr && 
@@ -18,17 +20,18 @@ void PlayerIdleState::Enter(StateMachine* fsm) {
 }
 
 void PlayerIdleState::Excute(StateMachine* fsm) {
-	m_player->TryContinueFire(fDT);
+	float _fDT = GET_SINGLE(TimeManager)->GetDT();
+	m_player->TryContinueFire(_fDT);
 
 	if (m_player->IsMovingInputProcessed()) {
 		fsm->ChangeState(new PlayerMoveState());
 		return;
 	}
 
-	if (GET_KEY(KEY_TYPE::SPACE)) {
+	/*if (GET_KEY(KEY_TYPE::SPACE)) {
 		fsm->ChangeState(new PlayerAttackState());
 		return;
-	}
+	}*/
 }
 
 void PlayerIdleState::Exit(StateMachine* fsm) {
