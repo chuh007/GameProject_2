@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "TimeManager.h"
 #include "Core.h"
 #include "InputManager.h"
@@ -7,10 +7,10 @@ void TimeManager::Init()
 	//time(NULL);
 	//clock();
 	
-	// ÇöÀç Ä«¿îÆ®ÀÇ Æ½À» °¡Á®¿Â´Ù.
+	// í˜„ì¬ ì¹´ìš´íŠ¸ì˜ í‹±ì„ ê°€ì ¸ì˜¨ë‹¤.
 	::QueryPerformanceCounter(&m_llPrevCnt);
 
-	// ÃÊ´ç Ä«¿îÆ® 1000¸¸À» ¹İÈ¯
+	// ì´ˆë‹¹ ì¹´ìš´íŠ¸ 1000ë§Œì„ ë°˜í™˜
 	::QueryPerformanceFrequency(&m_llFrequency);
 }
 
@@ -22,9 +22,9 @@ void TimeManager::Update()
 		/ (float)m_llFrequency.QuadPart;
 	m_llPrevCnt = m_llCurCnt;
 
-	// ÀÌ¹øÇÁ·¹ÀÓ(ÀÌÀü - ÇöÀç)¿¡ ¸îÃÊ°¡ Èê·¶´Â°¡
+	// ì´ë²ˆí”„ë ˆì„(ì´ì „ - í˜„ì¬)ì— ëª‡ì´ˆê°€ í˜ë €ëŠ”ê°€
 
-	// 1ÃÊ¿¡ ¸îÇÁ·¹ÀÓÀÌ Èê·¯°¡´Â°¡
+	// 1ì´ˆì— ëª‡í”„ë ˆì„ì´ í˜ëŸ¬ê°€ëŠ”ê°€
 	//1.f / m_deltaTime;
 	m_frameCnt++;
 	m_frameTime += m_deltaTime;
