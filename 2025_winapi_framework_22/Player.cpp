@@ -266,6 +266,7 @@ bool Player::UseBomb() {
 
 void Player::GainPower(int _amount) {
 	m_powerLevel += _amount;
+	m_proj->SetDamage(5.f);
 
 	m_powerLevel = std::min(m_powerLevel, MAX_POWER);
 	std::cout << "Power Level: " << m_powerLevel << std::endl;
