@@ -57,7 +57,7 @@ void SpiralPattern::BaseShoot()
                 Pop<EnemyProjectile>(PoolType::Circle1);
             projectile->SetSize({ 10.f, 20.f });
             projectile->SetColliderSize(5.f);
-            projectile->SetPos({ -spawnPos.x, spawnPos.y });
+            projectile->SetPos(spawnPos);
             projectile->SetDir(angle * j);
             projectile->SetSpeed(0.f);
             projectile->Coroutine([=]()
