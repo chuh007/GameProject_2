@@ -14,6 +14,8 @@
 #include "PlayerManager.h"
 #include "BossHPBar.h"
 #include "Projectile.h"
+#include "Effect.h"
+#include "Background.h"
 void DevScene::Init()
 {	
 	//Object* obj = new Player;
@@ -22,6 +24,7 @@ void DevScene::Init()
 	//// obj->SetScene(this);
 	//AddObject(obj, Layer::PLAYER);
 	srand(time(nullptr));
+	Spawn<Background>(Layer::BACKGROUND, { GAME_WIDTH * 0.5f, GAME_HEIGHT * 0.5f }, { GAME_WIDTH, GAME_HEIGHT });
 	auto* player = Spawn<Player>(Layer::PLAYER, { GAME_WIDTH / 2, 500 }, { 100.f, 100.f });
 	GET_SINGLE(PlayerManager)->SetPlayer(player);
 	Boss* boss = Spawn<Boss>(Layer::ENEMY, { GAME_WIDTH / 2, GAME_HEIGHT / 4 }, { 50.f,75.f });
@@ -32,8 +35,13 @@ void DevScene::Init()
 	GET_SINGLE(ResourceManager)->Play(L"BGM");
 	GET_SINGLE(PoolManager)->AddPool<EnemyProjectile>
 		(PoolType::Circle1, 100, Layer::ENEMYPROJECTILE);
+	GET_SINGLE(PoolManager)->AddPool<EnemyProjectile>
+		(PoolType::IceProj, 50, Layer::ENEMYPROJECTILE);
 	GET_SINGLE(PoolManager)->AddPool<PlayerProjectile>
 		(PoolType::PlayerProj, 100, Layer::PROJECTILE);
+	GET_SINGLE(PoolManager)->AddPool<Effect>
+		(PoolType::Effect, 10, Layer::ENEMYPROJECTILE);
+	//GET_SINGLE(PoolManager)->AddPool
 
 	auto* hpBar = Spawn<BossHPBar>(Layer::UI, { GAME_WIDTH / 2, 25 }, { GAME_WIDTH - 20, 50 });
 	hpBar->SetBoss(boss);
@@ -45,3 +53,4 @@ void DevScene::Update()
 	if (GET_KEYDOWN(KEY_TYPE::ENTER))
 		GET_SINGLE(SceneManager)->LoadScene(L"TestScene");
 }
+

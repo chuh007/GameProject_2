@@ -5,7 +5,7 @@ class CirclePattern :
     public Pattern
 {
 public:
-    CirclePattern(Object* _owner, Object* _target, float _patternUseTime, BossMover* _mover);
+    CirclePattern(Object* _owner, Object* _target, float _patternUseTime, BossMover* _mover, wstring _name);
     ~CirclePattern();
 
 public:

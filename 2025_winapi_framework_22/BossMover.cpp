@@ -30,9 +30,9 @@ void BossMover::LateUpdate()
 	{
 	case MoveState::MoveTo:
 	{
-		float t = m_timer / m_sec;
+float t = m_timer / m_sec;
 		if (t >= 1) Stop();
-		else GetOwner()->SetPos(m_startPos + (m_movePos - m_startPos) * t);
+		else GetOwner()->SetPos(m_startPos + (m_movePos - m_startPos) * t);		
 		break;
 	}
 	case MoveState::MoveDir:

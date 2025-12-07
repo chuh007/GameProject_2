@@ -33,11 +33,12 @@ public:
 
     void SetTrigger(bool t) { m_isTrigger = t; }
     bool IsTrigger() const { return m_isTrigger; }
-
+    void SetActive(bool _active) { m_isActive = _active; }
+    bool GetActive() { return m_isActive; }
 private:
     wstring m_name;   // 콜라이더 식별용 이름
     bool m_isTrigger = false;
-
+    bool m_isActive;
     float m_size; // 콜라이더 크기
     // Object로부터 상대적인 위치
     Vec2 m_offsetPos;

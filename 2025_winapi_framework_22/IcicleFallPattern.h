@@ -5,7 +5,7 @@ class IcicleFallPattern :
     public Pattern
 {
 public:
-    IcicleFallPattern(Object* _owner, Object* _target, float _patternUseTime, BossMover* _mover);
+    IcicleFallPattern(Object* _owner, Object* _target, float _patternUseTime, BossMover* _mover, wstring _name);
     ~IcicleFallPattern();
     
 public:

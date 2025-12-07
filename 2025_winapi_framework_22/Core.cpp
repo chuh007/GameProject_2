@@ -5,6 +5,7 @@
 #include "SceneManager.h"
 #include "ResourceManager.h"
 #include "CollisionManager.h"
+#include "Texture.h"
 bool Core::Init(HWND _hWnd)
 {
     m_hWnd = _hWnd;
@@ -18,9 +19,11 @@ bool Core::Init(HWND _hWnd)
     // 1. 积己
     m_hBackBit = ::CreateCompatibleBitmap(m_hDC, GAME_WIDTH, GAME_HEIGHT);
     m_hBackDC = ::CreateCompatibleDC(m_hDC);
-
+    m_hBackgroundBit = ::CreateCompatibleBitmap(m_hDC, GAME_WIDTH, GAME_HEIGHT);
+    m_hBackgroundDC = ::CreateCompatibleDC(m_hDC);
     // 2. 楷搬
     ::SelectObject(m_hBackDC, m_hBackBit);
+    ::SelectObject(m_hBackgroundDC, m_hBackgroundBit);
 
     // 1
     GET_SINGLE(TimeManager)->Init();
@@ -30,6 +33,7 @@ bool Core::Init(HWND _hWnd)
  
     if (!GET_SINGLE(ResourceManager)->Init())
         return false;
+    m_backgroundTex = GET_SINGLE(ResourceManager)->GetTexture(L"Background");
     GET_SINGLE(SceneManager)->Init();
 
     return true;
@@ -81,11 +85,25 @@ void Core::MainRender()
     //Vec2 size = m_obj.GetSize();
     //RECT_RENDER(m_hBackDC, pos.x, pos.y, size.x, size.y);
     
+    // 硅版贸府
+    ::StretchBlt(m_hBackgroundDC
+        , 0, 0
+        , GAME_WIDTH, GAME_HEIGHT
+        , m_backgroundTex->GetTextureDC()
+        , 0, 0,
+        m_backgroundTex->GetWidth(),
+        m_backgroundTex->GetHeight(),
+        SRCCOPY);
+
     // 2. draw
     GET_SINGLE(SceneManager)->Render(m_hBackDC);
 
     // 3. display
-    ::BitBlt(m_hDC, 0, 0, GAME_WIDTH, GAME_HEIGHT, m_hBackDC, 0,0,SRCCOPY);
+    ::TransparentBlt(
+        m_hBackgroundDC, 0, 0, GAME_WIDTH, GAME_HEIGHT,
+        m_hBackDC, 0, 0, GAME_WIDTH, GAME_HEIGHT,
+        RGB(255, 0, 255));
+    ::BitBlt(m_hDC, 0, 0, GAME_WIDTH, GAME_HEIGHT, m_hBackgroundDC, 0, 0, SRCCOPY);
 
 }
 
@@ -113,6 +131,8 @@ void Core::CleanUp()
     ::DeleteObject(m_hBackBit);
     ::DeleteDC(m_hBackDC);
     ::ReleaseDC(m_hWnd, m_hDC);
+    ::DeleteObject(m_hBackgroundBit);
+    ::DeleteDC(m_hBackgroundDC);
     GET_SINGLE(ResourceManager)->Release();
 }
 

@@ -5,6 +5,7 @@
 
 PatternCompo::PatternCompo()
 	: m_curPattern(nullptr)
+	, m_spellNameText(nullptr)
 	, m_usingPattern(false)
 	, m_isUseSpell(false)
 	, m_phase(0)
@@ -27,7 +28,8 @@ PatternCompo::~PatternCompo()
 
 void PatternCompo::Init()
 {
-
+	m_spellNameText = GET_SINGLE(SceneManager)->GetCurScene()
+		->Spawn<SpellNameText>(Layer::UI, { 0,0 }, { 10.f,10.f });
 }
 
 void PatternCompo::LateUpdate()
@@ -46,6 +48,8 @@ void PatternCompo::UseNomalPattern()
 	m_phase++;
 	m_curPattern = m_nomalPatternList[m_phase];
 	m_isUseSpell = false;
+	auto* text = m_spellNameText;
+	text->MoveTo({ GAME_WIDTH, 25 }, 0.25f);
 }
 
 void PatternCompo::UseSpellPattern()
@@ -53,6 +57,16 @@ void PatternCompo::UseSpellPattern()
 	DeleteProjectile();
 	m_curPattern = m_spellPatternList[m_phase];
 	m_isUseSpell = true;
+	auto* text = m_spellNameText;
+	int textSize = m_curPattern->GetName().size();
+	text->SetName(m_curPattern->GetName());
+	text->SetPos({ GAME_WIDTH + 20, GAME_HEIGHT - 50 });
+	text->MoveTo({ GAME_WIDTH - 15 * textSize, GAME_HEIGHT - 50 }, 0.5f);
+	text->Coroutine([=]()
+		{
+			text->MoveTo({ GAME_WIDTH - 15 * textSize, 25 }, 1.f);
+		}, 0.75f);
+	
 }
 
 void PatternCompo::DeleteProjectile()

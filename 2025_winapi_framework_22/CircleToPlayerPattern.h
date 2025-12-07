@@ -4,7 +4,7 @@ class CircleToPlayerPattern :
     public Pattern
 {
 public:
-    CircleToPlayerPattern(Object* _owner, Object* _target, float _patternUseTime, BossMover* _mover);
+    CircleToPlayerPattern(Object* _owner, Object* _target, float _patternUseTime, BossMover* _mover, wstring _name);
     ~CircleToPlayerPattern();
 
 public:

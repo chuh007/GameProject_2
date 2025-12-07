@@ -1,6 +1,8 @@
 #pragma once
 #include "Component.h"
 #include "Pattern.h"
+#include "SpellNameText.h"
+
 class PatternCompo :
     public Component
 {
@@ -36,6 +38,7 @@ public:
     void UseSpellPattern();
     void DeleteProjectile();
 private:
+    SpellNameText* m_spellNameText;
     Pattern* m_curPattern;
     vector<Pattern*> m_nomalPatternList;
     vector<Pattern*> m_spellPatternList;

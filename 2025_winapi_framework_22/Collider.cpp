@@ -9,6 +9,7 @@ Collider::Collider()
 	, m_offsetPos{0.f,0.f}
 	, m_ID(m_nextID++)
 	, m_showDebug(false)
+	, m_isActive(true)
 {
 
 }

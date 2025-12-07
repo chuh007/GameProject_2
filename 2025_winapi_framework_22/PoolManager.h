@@ -50,7 +50,6 @@ public:
 	}
 	void Push(T* _obj)
 	{
-		cout <<"풀 오브젝트" << m_pool.size() << '\n';
 		m_pool.push(_obj);
 		_obj->SetActive(false);
 	}
@@ -64,6 +63,7 @@ class PoolManager
 	DECLARE_SINGLE(PoolManager);
 public:
 	~PoolManager();
+	void Release();
 public:
 	template <typename T>
 	void AddPool(PoolType _type, int _initCount, Layer _layer)
@@ -83,6 +83,7 @@ public:
 		Pool<T>* pool = static_cast<Pool<T>*>(m_pools[_type]);
 		return pool->Push(obj);
 	}
+	
 private:
 	std::unordered_map<PoolType, IPool*> m_pools;
 };

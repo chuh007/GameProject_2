@@ -2,11 +2,12 @@
 #include "CirclePattern.h"
 #include "EnemyProjectile.h"
 // 원형 사격
-CirclePattern::CirclePattern(Object* _owner, Object* _target, float _patternUseTime, BossMover* _mover)
-	: Pattern(_owner, _target, _patternUseTime, _mover)
+// 타탕 하고 속도 다르게 두번쏘기
+CirclePattern::CirclePattern(Object* _owner, Object* _target, float _patternUseTime, BossMover* _mover, wstring _name)
+	: Pattern(_owner, _target, _patternUseTime, _mover, _name)
 	, m_projectileType(PoolType::Circle1)
 	, m_fireCount(30)
-	, m_speed(250)
+	, m_speed(225)
 {
 	m_decValue = 1.f;
 }
@@ -17,6 +18,7 @@ CirclePattern::~CirclePattern()
 
 void CirclePattern::Update()
 {
+	Pattern::Update();
 	m_curTime += fDT;
 	if (m_curTime > m_BaseShoutCooldown)
 	{
@@ -30,14 +32,25 @@ void CirclePattern::Update()
 void CirclePattern::BaseShoot()
 {
 	float angle = 360.f / (float)m_fireCount;
+	GET_SINGLE(ResourceManager)->Play(L"FireSound");
 	for (int i = 0; i < m_fireCount; ++i)
 	{
 		auto* projectile = PoolManager::GetInst()->
 			Pop<EnemyProjectile>(PoolType::Circle1);
-		projectile->SetSize({ 10.f, 10.f });
-		projectile->SetColliderSize(7.5f);
+		projectile->SetSize({ 10.f, 20.f });
+		projectile->SetColliderSize(5.f);
 		projectile->SetPos(m_owner->GetPos());
 		projectile->SetDir(angle * i);
 		projectile->SetSpeed(m_speed);
+	}
+	for (int i = 0; i < m_fireCount; ++i)
+	{
+		auto* projectile = PoolManager::GetInst()->
+			Pop<EnemyProjectile>(PoolType::Circle1);
+		projectile->SetSize({ 10.f, 20.f });
+		projectile->SetColliderSize(5.f);
+		projectile->SetPos(m_owner->GetPos());
+		projectile->SetDir(angle * i);
+		projectile->SetSpeed(m_speed * 0.8f);
 	}
 }

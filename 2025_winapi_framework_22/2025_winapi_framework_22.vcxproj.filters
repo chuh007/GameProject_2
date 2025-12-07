@@ -220,6 +220,19 @@
     <ClInclude Include="DeleteBullet.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
+    <ClInclude Include="CombatCompo.h" />
+    <ClInclude Include="PlayerDeadState.h" />
+    <ClInclude Include="PlayerHitState.h" />
+    <ClInclude Include="GateOfBabylonPattern.h">
+      <Filter>Engine\09. Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="SpellNameText.h">
+      <Filter>Engine\07. UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect.h" />
+    <ClInclude Include="Background.h">
+      <Filter>Engine\03. Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc">
@@ -371,6 +384,19 @@
       <Filter>Engine\09. Pattern</Filter>
     </ClCompile>
     <ClCompile Include="DeleteBullet.cpp">
+      <Filter>Engine\03. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="CombatCompo.cpp" />
+    <ClCompile Include="PlayerDeadState.cpp" />
+    <ClCompile Include="PlayerHitState.cpp" />
+    <ClCompile Include="GateOfBabylonPattern.cpp">
+      <Filter>Engine\09. Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="SpellNameText.cpp">
+      <Filter>Engine\07. UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect.cpp" />
+    <ClCompile Include="Background.cpp">
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
   </ItemGroup>

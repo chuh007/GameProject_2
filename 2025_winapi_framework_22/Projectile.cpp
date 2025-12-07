@@ -50,6 +50,7 @@ void PlayerProjectile::Update()
 		GetPos().y < -200 || GAME_HEIGHT + 200 < GetPos().y)
 	{
 		GET_SINGLE(PoolManager)->Push<PlayerProjectile>(PoolType::PlayerProj, this);
+		GetComponent<Collider>()->SetActive(false);
 	}
 }
 
@@ -60,10 +61,12 @@ void PlayerProjectile::EnterCollision(Collider* _other)
 	{
 		damageable->TakeDamage(m_damage);
 		GET_SINGLE(PoolManager)->Push<PlayerProjectile>(PoolType::PlayerProj, this);
+		GetComponent<Collider>()->SetActive(false);
 		//GET_SINGLE(SceneManager)->RequestDestroy(this);
 	}
 }
 
 void PlayerProjectile::Reset() {
 	m_corutines.clear();
+	GetComponent<Collider>()->SetActive(true);
 }

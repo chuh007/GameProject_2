@@ -62,13 +62,13 @@ void CollisionManager::CollisionLayerUpdate(Layer _left, Layer _right)
 	{
 		Collider* pLeftCollider = vecLeftLayer[i]->GetComponent<Collider>();
 		// 충돌체 없는 경우
-		if (nullptr == pLeftCollider)
+		if (nullptr == pLeftCollider || pLeftCollider->GetActive() == false)
 			continue;
 		for (size_t j = 0; j < vecRightLayer.size(); j++)
 		{
 			Collider* pRightCollider = vecRightLayer[j]->GetComponent<Collider>();
 			// 충돌체가 없거나, 자기자신과의 충돌인 경우
-			if (nullptr == pRightCollider || vecLeftLayer[i] == vecRightLayer[j])
+			if (nullptr == pRightCollider || vecLeftLayer[i] == vecRightLayer[j] || pRightCollider->GetActive() == false)
 				continue;
 
 			// 두 충돌체로만 만들 수 있는 ID

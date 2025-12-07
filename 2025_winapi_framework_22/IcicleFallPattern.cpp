@@ -7,8 +7,8 @@
 // 꺾은 뒤로는 속도 같음
 // 부체꼴 5갈래쯤으로 플레이어한테 쏨
 // 부체꼴은 좌우사격 2번당 1번
-IcicleFallPattern::IcicleFallPattern(Object* _owner, Object* _target, float _patternUseTime, BossMover* _mover)
-	: Pattern(_owner, _target, _patternUseTime, _mover)
+IcicleFallPattern::IcicleFallPattern(Object* _owner, Object* _target, float _patternUseTime, BossMover* _mover, wstring _name)
+	: Pattern(_owner, _target, _patternUseTime, _mover, _name)
 	, m_projectileType(PoolType::Circle1)
 	, m_fireCount(11)
 	, m_curCnt(0)
@@ -19,7 +19,7 @@ IcicleFallPattern::IcicleFallPattern(Object* _owner, Object* _target, float _pat
 	, circularShootCount(5)
 	, circularSpeed(200)
 {
-	m_decValue = 0.4f;
+	m_decValue = 0.6f;
 }
 
 IcicleFallPattern::~IcicleFallPattern()
@@ -28,6 +28,7 @@ IcicleFallPattern::~IcicleFallPattern()
 
 void IcicleFallPattern::Update()
 {
+	Pattern::Update();
 	m_curTime += fDT;
 	if (m_curTime > m_BaseShoutCooldown)
 	{
@@ -45,12 +46,13 @@ void IcicleFallPattern::Update()
 
 void IcicleFallPattern::BaseShoot()
 {
+	GET_SINGLE(ResourceManager)->Play(L"FireSound");
 	for (int i = 1; i <= m_iceShootCount; ++i)
 	{
 		float speed = m_iceSpeed;
 		int cnt = m_curCnt;
 		auto* projectile1 = PoolManager::GetInst()->
-			Pop<EnemyProjectile>(PoolType::Circle1);
+			Pop<EnemyProjectile>(PoolType::IceProj);
 		projectile1->SetSize({ 10.f, 10.f });
 		projectile1->SetColliderSize(7.5f);
 		projectile1->SetPos(m_owner->GetPos());
@@ -63,7 +65,7 @@ void IcicleFallPattern::BaseShoot()
 			}, 1.f);
 
 		auto* projectile2 = PoolManager::GetInst()->
-			Pop<EnemyProjectile>(PoolType::Circle1);
+			Pop<EnemyProjectile>(PoolType::IceProj);
 		projectile2->SetSize({ 10.f, 10.f });
 		projectile2->SetColliderSize(7.5f);
 		projectile2->SetPos(m_owner->GetPos());
