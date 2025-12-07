@@ -63,6 +63,7 @@ private:
 	const float PROJECTILE_INTERVAL = 0.1f;
 private:
 	int m_bombCnt;
+	float m_bombDurationTimer;
 	const int MAX_BOMB_COUNT = 3;
 private:
 	int m_powerLevel;

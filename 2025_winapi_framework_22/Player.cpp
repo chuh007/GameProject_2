@@ -17,15 +17,12 @@
 #include "PlayerHitState.h"
 #include "PlayerDeadState.h"
 #include "DeleteBullet.h"
+#include "TimeManager.h"
 
 Player::Player() : m_isDead(false), m_life(3), m_powerLevel(0), m_isInvincible(false),
-m_projCooldown(0.f), m_bombCnt(0), m_invincibleTime(0.f),
+m_projCooldown(0.f), m_bombCnt(0), m_invincibleTime(0.f), m_bombDurationTimer(0.f),
 col(nullptr), fsm(nullptr), m_health(nullptr),  m_proj(nullptr), delBullet(nullptr)
 {
-	//m_pTex = new Texture;
-	//wstring path = GET_SINGLE(ResourceManager)->GetResPath();
-	//path += L"Texture\\plane.bmp";
-	//m_pTex->Load(path);
 	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Jiwoo");
 	auto* rb = AddComponent<Rigidbody>();
 	rb->SetUseGravity(false);
@@ -47,10 +44,7 @@ col(nullptr), fsm(nullptr), m_health(nullptr),  m_proj(nullptr), delBullet(nullp
 	m_health->SetMaxHP(3);
 	m_health->SetCurrentHP(3);
 	m_bombCnt = MAX_BOMB_COUNT;
-	//delBullet = AddComponent<DeleteBullet>();
 
-	//GET_SINGLE(PoolManager)->AddPool<PlayerProjectile>
-	//	(PoolType::Circle1, 100, Layer::PROJECTILE);
 	fsm = AddComponent<StateMachine>();
 	assert(fsm != nullptr && "fsm is null in player");
 	fsm->ChangeState(new PlayerIdleState());
@@ -69,7 +63,6 @@ void Player::Render(HDC _hdc)
 {
 	Vec2 pos = GetPos();
 	Vec2 size = GetSize();
-	//RECT_RENDER(_hdc, pos.x, pos.y, size.x, size.y);
 	LONG width = m_pTex->GetWidth();
 	LONG height = m_pTex->GetHeight();
 
@@ -114,27 +107,22 @@ void Player::ExitCollision(Collider* _other)
 
 void Player::Update()
 {
-	//Vec2 dir = {};
-	//if (GET_KEY(KEY_TYPE::W)) dir.y -= 1.f;
-	//if (GET_KEY(KEY_TYPE::S)) dir.y += 1.f;
-	//if (GET_KEY(KEY_TYPE::A)) dir.x -= 1.f;
-	//if (GET_KEY(KEY_TYPE::D)) dir.x += 1.f;
-	//Translate({dir.x * fDT * 200.f, dir.y * fDT * 200.f});
+	float _fDT = GET_SINGLE(TimeManager)->GetDT();
+	const float BOMB_DURATION = 2.f;
 
-	// Q, E 크게 작게 
-	//float scaleDelta = 0.f;
-	//float scaleSpeed = 1.f;
-	//if (GET_KEY(KEY_TYPE::Q))
-	//	scaleDelta += scaleSpeed * fDT;
-	//if (GET_KEY(KEY_TYPE::E))
-	//	scaleDelta -= scaleSpeed * fDT;
-	//float factor = scaleSpeed + scaleDelta;
-	//Scale({ factor, factor });
+	if (delBullet != nullptr) {
+		m_bombDurationTimer += _fDT;
+		if (m_bombDurationTimer >= BOMB_DURATION) {
+			GET_SINGLE(SceneManager)->RequestDestroy(delBullet);
+			delBullet = nullptr;
+			m_bombDurationTimer = 0.f;
+		}
+	}
 
-	//if (GET_KEYDOWN(KEY_TYPE::SPACE))
-	//	CreateProjectile();
 	if (GET_KEYDOWN(KEY_TYPE::Q)) {
-		UseBomb();
+		if (delBullet == nullptr) {
+			UseBomb();
+		}
 	}
 	if (GET_KEY(KEY_TYPE::Z)) {
 		GainPower(1);
@@ -179,8 +167,6 @@ void Player::CreateProjectile()
 		float current_angle_rad = current_angle_deg * PI / 180.f;
 
 		proj->SetDir({ sinf(current_angle_rad), -cosf(current_angle_rad) });
-
-		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(proj, Layer::PROJECTILE);
 	}
 }
 
@@ -242,7 +228,6 @@ void Player::TryContinueFire(float _fDT) {
 
 bool Player::UseBomb() {
 	if (m_bombCnt > 0) {
-
 		m_bombCnt--;
 
 		delBullet = new DeleteBullet();
@@ -251,13 +236,10 @@ bool Player::UseBomb() {
 		GET_SINGLE(SceneManager)->GetCurScene()->
 			AddObject(delBullet, Layer::PROJECTILEDELETER);
 
+		m_bombDurationTimer = 0.f;
+
 		std::cout << "use bomb : " << m_bombCnt << std::endl;
 		return true;
-	}
-
-	if (delBullet) {
-		GET_SINGLE(SceneManager)->RequestDestroy(delBullet);
-		delBullet = nullptr;
 	}
 
 	std::cout << "no bomb left or bomb ended" << std::endl;
