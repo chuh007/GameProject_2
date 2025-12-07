@@ -9,8 +9,8 @@
 PlayerProjectile::PlayerProjectile()
 	: m_angle(0.f)
 	, m_dir(1.f, 1.f)
-	, m_speed(500.f)
-	, m_damage(10)
+	, m_speed(300.f)
+	, m_damage(5)
 {
 	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Bullet");
 	auto* col = AddComponent<Collider>();

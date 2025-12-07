@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "Core.h"
 #include "TimeManager.h"
 #include "InputManager.h"
@@ -15,13 +15,13 @@ bool Core::Init(HWND _hWnd)
     m_hBackBit = 0;
     m_hBackDC = 0;
 
-    // ´õºí¹öÆÛ¸µ
-    // 1. »ý¼º
-    m_hBackBit = ::CreateCompatibleBitmap(m_hDC, GAME_WIDTH, GAME_HEIGHT);
+    // ë”ë¸”ë²„í¼ë§
+    // 1. ìƒì„±
+    m_hBackBit = ::CreateCompatibleBitmap(m_hDC, WINDOW_WIDTH, WINDOW_HEIGHT);
     m_hBackDC = ::CreateCompatibleDC(m_hDC);
-    m_hBackgroundBit = ::CreateCompatibleBitmap(m_hDC, GAME_WIDTH, GAME_HEIGHT);
+    m_hBackgroundBit = ::CreateCompatibleBitmap(m_hDC, WINDOW_WIDTH, WINDOW_HEIGHT);
     m_hBackgroundDC = ::CreateCompatibleDC(m_hDC);
-    // 2. ¿¬°á
+    // 2. ì—°ê²°
     ::SelectObject(m_hBackDC, m_hBackBit);
     ::SelectObject(m_hBackgroundDC, m_hBackgroundBit);
 
@@ -79,13 +79,14 @@ void Core::MainRender()
     //::Rectangle(m_hBackDC, -1, -1, WINDOW_WIDTH +1 , WINDOW_HEIGHT +1 );
 
     // 1. clear
-    ::PatBlt(m_hBackDC, 0,0, GAME_WIDTH, GAME_HEIGHT, WHITENESS);
+    ::PatBlt(m_hBackDC, 0,0, WINDOW_WIDTH, WINDOW_HEIGHT, WHITENESS);
     
     //Vec2 pos = m_obj.GetPos();
     //Vec2 size = m_obj.GetSize();
     //RECT_RENDER(m_hBackDC, pos.x, pos.y, size.x, size.y);
+    GET_SINGLE(SceneManager)->Render(m_hBackDC);
     
-    // ¹è°æÃ³¸®
+    // ë°°ê²½ì²˜ë¦¬
     ::StretchBlt(m_hBackgroundDC
         , 0, 0
         , GAME_WIDTH, GAME_HEIGHT
@@ -103,8 +104,13 @@ void Core::MainRender()
         m_hBackgroundDC, 0, 0, GAME_WIDTH, GAME_HEIGHT,
         m_hBackDC, 0, 0, GAME_WIDTH, GAME_HEIGHT,
         RGB(255, 0, 255));
-    ::BitBlt(m_hDC, 0, 0, GAME_WIDTH, GAME_HEIGHT, m_hBackgroundDC, 0, 0, SRCCOPY);
+    ::BitBlt(m_hDC, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, m_hBackgroundDC, 0, 0, SRCCOPY);
 
+    ::BitBlt(m_hDC,
+        GAME_WIDTH, 0,
+        UI_WIDTH, WINDOW_HEIGHT,
+        m_hBackDC, GAME_WIDTH, 0,
+        SRCCOPY);
 }
 
 

@@ -45,6 +45,25 @@ void DevScene::Init()
 
 	auto* hpBar = Spawn<BossHPBar>(Layer::UI, { GAME_WIDTH / 2, 25 }, { GAME_WIDTH - 20, 50 });
 	hpBar->SetBoss(boss);
+
+	m_uiWidth = WINDOW_WIDTH - GAME_WIDTH;
+	m_uiHeight = WINDOW_HEIGHT;
+
+	HWND hWnd = GetActiveWindow();
+	HDC hScreenDC = GetDC(hWnd);
+	m_hdc = CreateCompatibleDC(hScreenDC);
+
+	m_hUIBitmap = CreateCompatibleBitmap(hScreenDC, m_uiWidth, m_uiHeight);
+	ReleaseDC(hWnd, hScreenDC);
+
+	m_hOldBitmap = (HBITMAP)SelectObject(m_hdc, m_hUIBitmap);
+
+	HBRUSH hUIBrush = CreateSolidBrush(RGB(230, 230, 230));
+	RECT rect = { 0, 0, m_uiWidth, m_uiHeight };
+
+	FillRect(m_hdc, &rect, hUIBrush);
+
+	DeleteObject(hUIBrush);
 }
 
 void DevScene::Update()
@@ -52,5 +71,53 @@ void DevScene::Update()
 	Scene::Update();
 	if (GET_KEYDOWN(KEY_TYPE::ENTER))
 		GET_SINGLE(SceneManager)->LoadScene(L"TestScene");
+}
+
+void DevScene::Render(HDC _hdc) {
+	Scene::Render(_hdc);
+
+	if (m_hdc != nullptr && m_hUIBitmap != nullptr)
+	{
+		BitBlt(_hdc,
+			GAME_WIDTH, 0,
+			m_uiWidth, m_uiHeight,
+			m_hdc, 0, 0,
+			SRCCOPY);
+	}
+
+	Player* player = GET_SINGLE(PlayerManager)->GetPlayer();
+	if (!player) return;
+
+	int life = player->GetLifeCount();
+	int bombCnt = player->GetBombCount();
+	int power = player->GetPowerLevel();
+
+	SetTextColor(_hdc, RGB(0, 0, 0));
+	SetBkMode(_hdc, TRANSPARENT);
+
+	const int TEXT_START_X = GAME_WIDTH + 30;
+
+	TextOut(_hdc, TEXT_START_X, 10, L"Render Test", 11);
+
+	wstring lifeStr = std::format(L"LIFE : {}", life);
+	TextOut(_hdc, TEXT_START_X, 50, lifeStr.c_str(), (int)lifeStr.length());
+
+	wstring bombStr = std::format(L"BOMB : {}", bombCnt);
+	TextOut(_hdc, TEXT_START_X, 100, bombStr.c_str(), (int)bombStr.length());
+
+	wstring powerStr = std::format(L"POWER: {} / {}", power, 128);
+	TextOut(_hdc, TEXT_START_X, 150, powerStr.c_str(), (int)powerStr.length());
+}
+
+void DevScene::Release() {
+	if (m_hdc != nullptr) {
+		SelectObject(m_hdc, m_hOldBitmap);
+		DeleteDC(m_hdc);
+		m_hdc = nullptr;
+	}
+	if (m_hUIBitmap != nullptr) {
+		DeleteObject(m_hUIBitmap);
+		m_hUIBitmap = nullptr;
+	}
 }
 
