@@ -3,6 +3,7 @@
 #include "Object.h"
 #include "CollisionManager.h"
 #include "Rigidbody.h"
+#include "PoolManager.h"
 Scene::Scene()
 {
 
@@ -23,6 +24,7 @@ void Scene::Release()
 		vec.clear();
 	}
 	GET_SINGLE(CollisionManager)->CheckReset();
+	GET_SINGLE(PoolManager)->Release();
 }
 
 void Scene::RequestDestroy(Object* obj)

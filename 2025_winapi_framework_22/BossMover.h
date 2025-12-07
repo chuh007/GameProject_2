@@ -27,8 +27,8 @@ private:
 
 	float m_speed;
 	Vec2 m_dir;
-	float m_sec;
 
+	float m_sec;
 	MoveState m_state;
 };
 

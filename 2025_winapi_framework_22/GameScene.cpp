@@ -9,6 +9,7 @@
 #include "EnemyProjectile.h"
 #include "CircleMoveEnemy.h"
 #include "TripleShotEnemy.h"
+#include "InputManager.h"
 
 
 void GameScene::Init()
@@ -48,4 +49,8 @@ void GameScene::Init()
 
 void GameScene::Update()
 {
+	GET_SINGLE(EnemySpawnManger)->Update();
+	Scene::Update();
+	if (GET_KEYDOWN(KEY_TYPE::ENTER))
+		GET_SINGLE(SceneManager)->LoadScene(L"TestScene");
 }

@@ -11,7 +11,7 @@ EnemyProjectile::EnemyProjectile()
 	, m_dir(0.f, 0.f)
 	, m_speed(500.f)
 {
-	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"EnemyBullet1");
+	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"IceBullet");
 	auto* col = AddComponent<Collider>();
 }
 
@@ -22,12 +22,19 @@ EnemyProjectile::~EnemyProjectile()
 void EnemyProjectile::Reset()
 {
 	m_corutines.clear();
+	GetComponent<Collider>()->SetActive(true);
 }
 
 void EnemyProjectile::SetColliderSize(float _size)
 {
-	auto* col = AddComponent<Collider>();
+	auto* col = GetComponent<Collider>();
 	col->SetSize(_size);
+}
+
+void EnemyProjectile::PushSelf()
+{
+	GetComponent<Collider>()->SetActive(false);
+	GET_SINGLE(PoolManager)->Push<EnemyProjectile>(PoolType::Circle1, this);
 }
 
 void EnemyProjectile::Update()
@@ -38,24 +45,50 @@ void EnemyProjectile::Update()
 	if (GetPos().x < -200 || GAME_WIDTH + 200 < GetPos().x ||
 		GetPos().y < -200 || GAME_HEIGHT + 200 < GetPos().y)
 	{
-		GET_SINGLE(PoolManager)->Push<EnemyProjectile>(PoolType::Circle1, this);
+		PushSelf();
 	}
 }
 
+
+// È¸Àü °ø½Ä
+// x = x*cos - y*sin
+// y = x*sin + y*cos
 void EnemyProjectile::Render(HDC _hdc)
 {
+	if (m_pTex == nullptr) return;
+
 	Vec2 pos = GetPos();
 	Vec2 size = GetSize();
+
 	LONG width = m_pTex->GetWidth();
 	LONG height = m_pTex->GetHeight();
-	::TransparentBlt(_hdc
-		, (int)(pos.x - size.x / 2)
-		, (int)(pos.y - size.y / 2)
-		, size.x
-		, size.y
-		, m_pTex->GetTextureDC()
-		, 0, 0, width, height,
-		RGB(255, 0, 255));
+
+	float angle = atan2(m_dir.y, m_dir.x);
+	angle -= PI / 2;
+	float cosA = cosf(angle);
+	float sinA = sinf(angle);
+
+	POINT vertices[3];
+
+	float hW = size.x / 2.0f;
+	float hH = size.y / 2.0f;
+
+	//ÁÂ»ó
+	vertices[0].x = (LONG)(pos.x + (-hW * cosA - -hH * sinA));
+	vertices[0].y = (LONG)(pos.y + (-hW * sinA + -hH * cosA));
+
+	//¿ì»ó
+	vertices[1].x = (LONG)(pos.x + (hW * cosA - -hH * sinA));
+	vertices[1].y = (LONG)(pos.y + (hW * sinA + -hH * cosA));
+	
+	//ÁÂÇÏ
+	vertices[2].x = (LONG)(pos.x + (-hW * cosA - hH * sinA));
+	vertices[2].y = (LONG)(pos.y + (-hW * sinA + hH * cosA));
+
+	::PlgBlt(_hdc, vertices, m_pTex->GetTextureDC(),
+		0, 0, width, height,
+		NULL, 0, 0);
+
 	ComponentRender(_hdc);
 }
 

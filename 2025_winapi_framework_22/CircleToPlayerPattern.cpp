@@ -1,15 +1,15 @@
 #include "pch.h"
 #include "CircleToPlayerPattern.h"
-#include "CirclePattern.h"
 #include "EnemyProjectile.h"
-
-CircleToPlayerPattern::CircleToPlayerPattern(Object* _owner, Object* _target, float _patternUseTime, BossMover* _mover)
-	: Pattern(_owner, _target, _patternUseTime, _mover)
+// 직선으로 내려오는 탄이 있음.
+// 원탄 만들고 플레이어쪽으로 보내기
+CircleToPlayerPattern::CircleToPlayerPattern(Object* _owner, Object* _target, float _patternUseTime, BossMover* _mover, wstring _name)
+	: Pattern(_owner, _target, _patternUseTime, _mover, _name)
 	, m_projectileType(PoolType::Circle1)
 	, m_fireCount(20)
 	, m_speed(250)
 {
-	m_decValue = 0.5f;
+	m_decValue = 0.7f;
 }
 
 CircleToPlayerPattern::~CircleToPlayerPattern()
@@ -18,27 +18,28 @@ CircleToPlayerPattern::~CircleToPlayerPattern()
 
 void CircleToPlayerPattern::Update()
 {
+	Pattern::Update();
 	m_curTime += fDT;
-	if (m_curTime > m_patternUseTime)
+	if (m_curTime > m_BaseShoutCooldown)
 	{
 		m_curTime = 0;
 		int x = (rand() % GAME_WIDTH / 2) + GAME_WIDTH / 4;
 		int y = (GAME_HEIGHT / 5) + rand() % 100;
-		//m_mover->MoveTo({ x,y }, 1.f);
-		CirCleToPlayerShoot();
+		BaseShoot();
 		RayShout();
 	}
 }
 
-void CircleToPlayerPattern::CirCleToPlayerShoot()
+void CircleToPlayerPattern::BaseShoot()
 {
+	GET_SINGLE(ResourceManager)->Play(L"FireSound");
 	float angle = 360.f / (float)m_fireCount;
+	auto target = m_target;
+	float speed = m_speed;
 	for (int i = 0; i < m_fireCount; ++i)
 	{
 		auto* projectile = PoolManager::GetInst()->
 			Pop<EnemyProjectile>(PoolType::Circle1);
-		auto target = m_target;
-		float speed = m_speed;
 		projectile->SetSize({ 10.f, 10.f });
 		projectile->SetColliderSize(7.5f);
 		projectile->SetPos(m_owner->GetPos());
@@ -65,3 +66,4 @@ void CircleToPlayerPattern::RayShout()
 		projectile->SetSpeed(m_speed);
 	}
 }
+

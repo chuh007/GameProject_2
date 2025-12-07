@@ -4,6 +4,7 @@
 // 언제든지 부를 수 있어야돼? => #include 
 //#include "Defines.h"
 //#include "Object.h"
+class Texture;
 class Core
 {
 	DECLARE_SINGLE(Core);
@@ -24,6 +25,11 @@ private:
 
 	HBITMAP m_hBackBit; 
 	HDC  m_hBackDC;
+
+	HDC m_hBackgroundDC;
+	HBITMAP m_hBackgroundBit;
+
+	Texture* m_backgroundTex;
 };
 
 

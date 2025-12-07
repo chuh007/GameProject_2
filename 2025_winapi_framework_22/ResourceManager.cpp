@@ -47,6 +47,7 @@ void ResourceManager::Release()
 void ResourceManager::RegisterSound()
 {
 	LoadSound(L"BGM", L"Sound\\Native Faith_orgin.mp3", true);
+	LoadSound(L"FireSound", L"Sound\\FireSound.mp3", false);
 	//LoadSound(L"BGM", L"Sound\\laserShoot.wav", false);
 }
 
@@ -190,6 +191,9 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"Bullet", L"Texture\\Bullet.bmp");
 	LoadTexture(L"Jiwoo", L"Texture\\jiwoo.bmp");
 	LoadTexture(L"EnemyBullet1", L"Texture\\CINEMA.bmp");
+	LoadTexture(L"IceBullet", L"Texture\\IceBullet.bmp");
+	LoadTexture(L"Magic", L"Texture\\magic.bmp");
+	LoadTexture(L"Background", L"Texture\\Background.bmp");
 }
 
 void ResourceManager::LoadTexture(const wstring& _key, const wstring& _path)
