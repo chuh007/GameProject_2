@@ -10,6 +10,7 @@
 #include "IcicleFallPattern.h"
 #include "GateOfBabylonPattern.h"
 #include "PlayerManager.h"
+#include "SpiralPattern.h";
 Boss::Boss()
 	: m_isDie(false)
 	, m_lifeCount(4)
@@ -27,7 +28,7 @@ Boss::Boss()
 	m_patternCompo = AddComponent<PatternCompo>();
 	m_patternCompo->ResizePattenList(m_lifeCount + 1);
 
-	auto* pattern1 = new CirclePattern(this, m_target, 1.f, mover, L"");
+	auto* pattern1 = new SpiralPattern(this, m_target, 2.f, mover, L"");
 	m_patternCompo->AddNomalPattern(1, pattern1);
 	auto* spell1 = new CircleToPlayerPattern(this, m_target, 0.75f, mover, L"구속「부여잡는 올가미」");
 	m_patternCompo->AddSpellPattern(1, spell1);
@@ -35,11 +36,11 @@ Boss::Boss()
 	m_patternCompo->AddNomalPattern(2, pattern2);
 	auto* spell2 = new IcicleFallPattern(this, m_target, 0.5f, mover, L"빙설「아이시클 폴」");
 	m_patternCompo->AddSpellPattern(2, spell2);
-	auto* pattern3 = new CirclePattern(this, m_target, 0.6f, mover, L"");
+	auto* pattern3 = new SpiralPattern(this, m_target, 2.5f, mover, L"");
 	m_patternCompo->AddNomalPattern(3, pattern3);
 	auto* spell3 = new GateOfBabylonPattern(this, m_target, 0.7f, mover, L"보구「게이트 오브 바빌론」");
 	m_patternCompo->AddSpellPattern(3, spell3);
-	auto* pattern4 = new CirclePattern(this, m_target, 0.5f, mover, L"");
+	auto* pattern4 = new SpiralPattern(this, m_target, 2.f, mover, L"");
 	m_patternCompo->AddNomalPattern(4, pattern4);
 	auto* spell4 = new GateOfBabylonPattern(this, m_target, 0.6f, mover, L"보구「게이트 오브 바빌론」");
 	m_patternCompo->AddSpellPattern(4, spell4);

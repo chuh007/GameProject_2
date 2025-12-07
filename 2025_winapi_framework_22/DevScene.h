@@ -1,12 +1,18 @@
-#pragma once
+ï»¿#pragma once
 #include "Scene.h"
 class DevScene : public Scene
 {
 public:
-	// SceneÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
+	// Sceneì„(ë¥¼) í†µí•´ ìƒì†ë¨
 	void Init() override;
 	void Update() override;
-	//void Render(HDC _hdc) override;
-	//void Release() override;
+	void Render(HDC _hdc) override;
+	void Release() override;
+private:
+	HDC m_hdc = nullptr;
+	HBITMAP m_hUIBitmap = nullptr;
+	HBITMAP m_hOldBitmap = nullptr;
+	int m_uiWidth = 0;
+	int m_uiHeight = 0;
 };
 

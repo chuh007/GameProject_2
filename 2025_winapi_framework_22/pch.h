@@ -1,5 +1,5 @@
-#pragma once
-// Ç¥ÁØ Çì´õ
+ï»¿#pragma once
+// í‘œì¤€ í—¤ë”
 #define WIN32_LEAN_AND_MEAN
 #include<Windows.h>
 #include<tchar.h>
@@ -20,33 +20,35 @@
 
 namespace fs = std::filesystem;
 
-// My Çì´õ
+// My í—¤ë”
 #include "Defines.h"
 #include "Vec2.h"
 #include "Enums.h"
 #include "TimeManager.h"
 #include "GDISelector.h"
 
-// Á¤Àû ¶óÀÌºê·¯¸®
+// ì •ì  ë¼ì´ë¸ŒëŸ¬ë¦¬
 #pragma comment(lib, "winmm.lib")
 #pragma comment(lib, "Msimg32.lib")
 
-// °¢Á¾ using
+// ê°ì¢… using
 using std::vector;
 using std::list;
 using std::map;
 using std::wstring;
 
-// °¢Á¾ define°ª
+// ê°ì¢… defineê°’
 #define PI 3.14159265358979f
 #define WINDOW_WIDTH 1080
 #define WINDOW_HEIGHT 820
 #define GAME_WIDTH 720
 #define GAME_HEIGHT 820
 #define D2R (PI / 180.0f)
+#define UI_WIDTH (WINDOW_WIDTH - GAME_WIDTH)
+#define UI_HEIGHT 820
 
 
-// ¸Ş¸ğ¸® ¸¯
+// ë©”ëª¨ë¦¬ ë¦­
 #ifdef _DEBUG
 #define _CRTDBG_MAP_ALLOC
 #include <cstdlib>
@@ -55,7 +57,7 @@ using std::wstring;
 #endif
 
 
-// µğ¹ö±ë¿ë ÄÜ¼ÖÃ¢
+// ë””ë²„ê¹…ìš© ì½˜ì†”ì°½
 #ifdef _DEBUG
 #ifdef UNICODE
 #pragma comment(linker, "/entry:wWinMainCRTStartup /subsystem:console")

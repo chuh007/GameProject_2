@@ -19,10 +19,12 @@ void PlayerAttackState::Excute(StateMachine* fsm) {
 
 	if (m_player->IsMovingInputProcessed()) {
 		fsm->ChangeState(new PlayerMoveState());
+		return;
 	}
 
 	if (!GET_KEY(KEY_TYPE::SPACE)) {
 		m_attackTimer += fDT;
+
 		if (m_attackTimer >= 0.1f) {
 			fsm->ChangeState(new PlayerIdleState());
 			return;

@@ -216,6 +216,7 @@
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="StartButton.h" />
     <ClInclude Include="SpellNameText.h" />
+    <ClInclude Include="SpiralPattern.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateMachine.h" />
     <ClInclude Include="targetver.h" />
@@ -282,6 +283,7 @@
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SpellNameText.cpp" />
     <ClCompile Include="StartButton.cpp" />
+    <ClCompile Include="SpiralPattern.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateMachine.cpp" />
     <ClCompile Include="TestEnemy.cpp" />

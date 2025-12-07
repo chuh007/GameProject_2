@@ -86,24 +86,24 @@ void Core::MainRender()
     //RECT_RENDER(m_hBackDC, pos.x, pos.y, size.x, size.y);
     
     // 배경처리
-    ::StretchBlt(m_hBackgroundDC
-        , 0, 0
-        , GAME_WIDTH, GAME_HEIGHT
-        , m_backgroundTex->GetTextureDC()
-        , 0, 0,
-        m_backgroundTex->GetWidth(),
-        m_backgroundTex->GetHeight(),
-        SRCCOPY);
+    //::StretchBlt(m_hBackgroundDC
+    //    , 0, 0
+    //    , GAME_WIDTH, GAME_HEIGHT
+    //    , m_backgroundTex->GetTextureDC()
+    //    , 0, 0,
+    //    m_backgroundTex->GetWidth(),
+    //    m_backgroundTex->GetHeight(),
+    //    SRCCOPY);
 
     // 2. draw
     GET_SINGLE(SceneManager)->Render(m_hBackDC);
 
     // 3. display
     ::TransparentBlt(
-        m_hBackgroundDC, 0, 0, GAME_WIDTH, GAME_HEIGHT,
+        m_hDC, 0, 0, GAME_WIDTH, GAME_HEIGHT,
         m_hBackDC, 0, 0, GAME_WIDTH, GAME_HEIGHT,
         RGB(255, 0, 255));
-    ::BitBlt(m_hDC, 0, 0, GAME_WIDTH, GAME_HEIGHT, m_hBackgroundDC, 0, 0, SRCCOPY);
+    //::BitBlt(m_hDC, 0, 0, GAME_WIDTH, GAME_HEIGHT, m_hBackgroundDC, 0, 0, SRCCOPY);
 
 }
 
