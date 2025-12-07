@@ -234,7 +234,7 @@ bool Player::UseBomb() {
 		delBullet->SetPos(GetPos());
 
 		GET_SINGLE(SceneManager)->GetCurScene()->
-			AddObject(delBullet, Layer::PROJECTILEDELETER);
+			Spawn<DeleteBullet>(Layer::PROJECTILEDELETER, GetPos(), GetSize());
 
 		m_bombDurationTimer = 0.f;
 
