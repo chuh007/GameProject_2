@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "Component.h"
+#include "DeleteBullet.h"
 
 class CombatCompo : public Component
 {
@@ -14,6 +15,7 @@ public:
 	void TryContinueFire(float _fDT);
 	bool UseBomb();
 private:
+	DeleteBullet* delBullet;
 	float m_projCooldown;
 	const float PROJECTILE_INTERVAL = 0.15f; // 총알 연속 발사 간격
 private:
