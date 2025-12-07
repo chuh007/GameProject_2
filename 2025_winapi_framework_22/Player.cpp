@@ -19,7 +19,7 @@
 #include "DeleteBullet.h"
 
 Player::Player() : m_isDead(false), m_life(3), m_powerLevel(0), m_isInvincible(false),
-m_projCooldown(0.f), m_bombCnt(0),
+m_projCooldown(0.f), m_bombCnt(0), m_invincibleTime(0.f),
 col(nullptr), fsm(nullptr), m_health(nullptr),  m_proj(nullptr), delBullet(nullptr)
 {
 	//m_pTex = new Texture;
@@ -230,7 +230,7 @@ float Player::GetMaxInvincibleTime() const {
 void Player::TryContinueFire(float _fDT) {
 	if (GET_KEY(KEY_TYPE::SPACE)) {
 		m_projCooldown += _fDT;
-		if (m_projCooldown > PROJECTILE_INTERVAL) {
+		while (m_projCooldown >= PROJECTILE_INTERVAL) {
 			CreateProjectile();
 			m_projCooldown -= PROJECTILE_INTERVAL;
 		}
@@ -242,6 +242,7 @@ void Player::TryContinueFire(float _fDT) {
 
 bool Player::UseBomb() {
 	if (m_bombCnt > 0) {
+
 		m_bombCnt--;
 
 		delBullet = new DeleteBullet();

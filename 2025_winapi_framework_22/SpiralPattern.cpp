@@ -34,6 +34,11 @@ Vec2 SpiralPattern::GetSpiralPos(Vec2 centerPos, float radius, int armCount, int
 {
     float angleDeg = (360.f / (float)armCount) * armIndex + 90.f;
 
+    if (m_isleft)
+    {
+        angleDeg = 180.f - angleDeg;
+    }
+
     float rad = angleDeg * D2R;
 
     float x = centerPos.x + cosf(rad) * radius;
@@ -46,25 +51,34 @@ void SpiralPattern::BaseShoot()
 {
     float radius = 50.f;
     float speed = m_speed;
+
     for (int i = 0; i < m_armCount; ++i)
     {
         Vec2 spawnPos = GetSpiralPos(m_owner->GetPos(), radius, m_armCount, i);
-        float angle = 360.f / (float)m_fireCount;
+
         radius += 20.f;
+
+        float angleStep = 360.f / (float)m_fireCount;
+
         for (int j = 0; j < m_fireCount; ++j)
         {
-            auto* projectile = PoolManager::GetInst()->
-                Pop<EnemyProjectile>(PoolType::Circle1);
+            auto* projectile = PoolManager::GetInst()->Pop<EnemyProjectile>(PoolType::Circle1);
+
             projectile->SetSize({ 10.f, 20.f });
             projectile->SetColliderSize(5.f);
             projectile->SetPos(spawnPos);
-            projectile->SetDir(angle * j);
+
+            float finalAngle = angleStep * j;
+
+
+            projectile->SetDir(finalAngle);
             projectile->SetSpeed(0.f);
+
             projectile->Coroutine([=]()
                 {
                     projectile->SetSpeed(speed);
                 }, i * 0.1f);
         }
     }
-    m_isleft != m_isleft;
+    m_isleft = !m_isleft;
 }

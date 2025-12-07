@@ -60,7 +60,7 @@ private:
 	PlayerProjectile* m_proj;
 	DeleteBullet* delBullet;
 	float m_projCooldown;
-	const int PROJECTILE_INTERVAL = 0.75f;
+	const float PROJECTILE_INTERVAL = 0.1f;
 private:
 	int m_bombCnt;
 	const int MAX_BOMB_COUNT = 3;
