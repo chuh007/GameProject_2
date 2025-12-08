@@ -23,7 +23,7 @@ void TitleScene::Init()
 	Button* exit = new ExitButton;
 	exit->SetSize({ 200.f, 50.f });
 	exit->SetPos({ GAME_WIDTH - button->GetSize().x / 2 - 25, btnpositionY });
-	button->SetText(L"Exit");
+	exit->SetText(L"Exit");
 
 
 	AddObject(button, Layer::UI);

@@ -10,6 +10,8 @@
 #include "CircleMoveEnemy.h"
 #include "TripleShotEnemy.h"
 #include "InputManager.h"
+#include "ItemDropCompo.h"
+#include "BombItem.h"
 
 
 void GameScene::Init()
@@ -41,10 +43,26 @@ void GameScene::Init()
 	circleEnemy->SetSize({ 50,50 });
 	tripleshot->SetPos({ 100,100 });
 	tripleshot->SetSize({ 100,100 });
+
+	auto* itemCompo = tripleshot->AddComponent<ItemDropCompo>();
+	Item* bomb = new BombItem;
+	bomb->SetSize({ 50.f,50.f });
+	itemCompo->SetItem(bomb);
+	
 	GET_SINGLE(EnemySpawnManger)->SetSpawnScene(this);
 	GET_SINGLE(EnemySpawnManger)->AddEnemySpawnQueue({ 3.f, testEnemy });
 	GET_SINGLE(EnemySpawnManger)->AddEnemySpawnQueue({ 6.f, circleEnemy });
 	GET_SINGLE(EnemySpawnManger)->AddEnemySpawnQueue({ 9.f, tripleshot });
+
+	for (float i = 0; i < 9; i+= 3)
+	{
+		TripleShotEnemy* enemy = new TripleShotEnemy;
+
+		enemy->SetPos({ 100, 100 });
+		enemy->SetSize({ 75,75 });
+		GET_SINGLE(EnemySpawnManger)->AddEnemySpawnQueue({ 10.f + i, enemy });
+	}
+
 }
 
 void GameScene::Update()

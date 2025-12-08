@@ -1,9 +1,9 @@
 #pragma once
-#include "Object.h"
+#include "Item.h"
 class BombItem :
-    public Object
+    public Item
 {
-    // Object을(를) 통해 상속됨
-    void Render(HDC _hdc) override;
+public:
+    void OnCollect() override;
 };
 

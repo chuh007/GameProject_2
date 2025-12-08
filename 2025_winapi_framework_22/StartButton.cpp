@@ -4,5 +4,5 @@
 
 void StartButton::OnClick()
 {
-	GET_SINGLE(SceneManager)->LoadScene(L"BakBakDev");
+	GET_SINGLE(SceneManager)->LoadScene(L"Game");
 }

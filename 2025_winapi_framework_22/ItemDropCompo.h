@@ -1,5 +1,7 @@
 #pragma once
 #include "Component.h"
+class Item;
+class Health;
 class ItemDropCompo :
     public Component
 {
@@ -9,6 +11,10 @@ public:
     void LateUpdate() override;
     void Render(HDC hDC) override;
 public:
-    void SetItem();
+    void SpawnItem();
+    void SetItem(Item* item);
+private:
+    Health* m_healthCompo;
+    Item* m_item;
 };
 

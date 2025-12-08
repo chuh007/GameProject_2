@@ -6,6 +6,7 @@
 #include "Object.h"
 #include "BakBakDevScene.h"
 #include "TitleScene.h"
+#include "GameScene.h"
 void SceneManager::Init()
 {
 	m_curScene = nullptr;
@@ -14,6 +15,7 @@ void SceneManager::Init()
 	RegisterScene(L"DevScene", std::make_shared<DevScene>());
 	RegisterScene(L"TestScene", std::make_shared<TestScene>());
 	RegisterScene(L"BakBakDev", std::make_shared<BakBakDevScene>());
+	RegisterScene(L"Game", std::make_shared<GameScene>());
 	RegisterScene(L"Title", std::make_shared<TitleScene>());
 	// Scene Ãß°¡
 	
