@@ -9,7 +9,7 @@
 PlayerProjectile::PlayerProjectile()
 	: m_angle(0.f)
 	, m_dir(1.f, 1.f)
-	, m_speed(300.f)
+	, m_speed(400.f)
 	, m_damage(5)
 {
 	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Bullet");
@@ -24,7 +24,6 @@ void PlayerProjectile::Render(HDC _hdc)
 	Vec2 size = GetSize();
 	LONG width = m_pTex->GetWidth();
 	LONG height = m_pTex->GetHeight();
-	//ELLIPSE_RENDER(_hdc, pos.x, pos.y, size.x, size.y);
 	::TransparentBlt(_hdc
 		, (int)(pos.x - size.x / 2)
 		, (int)(pos.y - size.y / 2)
