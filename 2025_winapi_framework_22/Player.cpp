@@ -156,16 +156,21 @@ void Player::CreateProjectile()
 		start_angle_deg = -(num_proj - 1) * ANGLE_STEP / 2.f;
 	}
 
+	float baseDmg = 10.f;
+	float totalDmg = baseDmg + m_amountDmg;
+
 	for (int i = 0; i < num_proj; ++i)
 	{
 		PlayerProjectile* proj = GET_SINGLE(PoolManager)->
 			Pop<PlayerProjectile>(PoolType::PlayerProj);
 
+		proj->Reset();
 		Vec2 pos = GetPos();
 		pos.y -= GetSize().y / 2.f;
 		proj->SetPos(pos);
 		proj->SetSize({ 30.f,30.f });
-		proj->SetDamage(m_amountDmg);
+
+		proj->SetDamage(totalDmg);
 
 		float current_angle_deg = start_angle_deg + (float)i * ANGLE_STEP;
 		float current_angle_rad = current_angle_deg * PI / 180.f;
@@ -252,7 +257,7 @@ bool Player::UseBomb() {
 
 void Player::GainPower(int _amount) {
 	m_powerLevel += _amount;
-	m_amountDmg += 5.f;
+	m_amountDmg += 1.f;
 
 	m_powerLevel = std::min(m_powerLevel, MAX_POWER);
 	std::cout << "Power Level: " << m_powerLevel << std::endl;

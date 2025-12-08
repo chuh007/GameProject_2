@@ -32,7 +32,7 @@ public:
     }
     void SetDamage(float _damage)
     { m_damage = _damage; }
-    int getDamage(int _damage)
+    int getDamage()
     { return m_damage; }
 private:
     //float m_dir;
