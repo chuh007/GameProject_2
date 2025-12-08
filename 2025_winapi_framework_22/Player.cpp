@@ -21,6 +21,7 @@
 
 Player::Player() : m_isDead(false), m_life(3), m_powerLevel(0), m_isInvincible(false),
 m_projCooldown(0.f), m_bombCnt(0), m_invincibleTime(0.f), m_bombDurationTimer(0.f),
+m_amountDmg(0.f),
 col(nullptr), fsm(nullptr), m_health(nullptr),  m_proj(nullptr), delBullet(nullptr)
 {
 	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Jiwoo");
@@ -124,8 +125,10 @@ void Player::Update()
 			UseBomb();
 		}
 	}
-	if (GET_KEY(KEY_TYPE::Z)) {
-		GainPower(1);
+	if (GET_KEYDOWN(KEY_TYPE::Z)) {
+		if (m_powerLevel <= MAX_POWER) {
+			GainPower(1);
+		}
 	}
 	Object::LateUpdate();
 }
@@ -162,6 +165,7 @@ void Player::CreateProjectile()
 		pos.y -= GetSize().y / 2.f;
 		proj->SetPos(pos);
 		proj->SetSize({ 30.f,30.f });
+		proj->SetDamage(m_amountDmg);
 
 		float current_angle_deg = start_angle_deg + (float)i * ANGLE_STEP;
 		float current_angle_rad = current_angle_deg * PI / 180.f;
@@ -248,7 +252,7 @@ bool Player::UseBomb() {
 
 void Player::GainPower(int _amount) {
 	m_powerLevel += _amount;
-	m_proj->SetDamage(5.f);
+	m_amountDmg += 5.f;
 
 	m_powerLevel = std::min(m_powerLevel, MAX_POWER);
 	std::cout << "Power Level: " << m_powerLevel << std::endl;
