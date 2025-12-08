@@ -29,6 +29,7 @@ public:
 	void CreateProjectile();
 	void TryContinueFire(float _fDT);
 	bool UseBomb();
+	void InvokeBomb();
 	void GainPower(int _amount);
 public:
 	virtual void TakeDamage(int _damage) override;
@@ -64,13 +65,16 @@ private:
 	const int MAX_HP = 3;
 private:
 	PlayerProjectile* m_proj;
-	DeleteBullet* delBullet;
 	float m_projCooldown;
 	const float PROJECTILE_INTERVAL = 0.15f;
 private:
 	int m_bombCnt;
 	float m_bombDurationTimer;
+	float m_invokeBombTimer = 0.f;
+	bool m_isInvokedBomb = false;
 	const int MAX_BOMB_COUNT = 3;
+	const float BOMB_DURATION = 2.f;
+	const float INVOKE_BOMB_DURATION = 1.0f;
 private:
 	int m_powerLevel;
 	int m_amountDmg;

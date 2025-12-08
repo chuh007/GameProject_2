@@ -35,7 +35,7 @@ void PlayerHitState::Excute(StateMachine* _fsm) {
 void PlayerHitState::Exit(StateMachine* _fsm) {
 	Player* player = static_cast<Player*>(_fsm->GetOwner());
 	if (player) {
-		player->UseBomb();
+		player->InvokeBomb();
 		player->SetInvincible(false);
 		player->GetInvincibleTime() = 0.f;
 	}

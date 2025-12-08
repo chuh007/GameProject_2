@@ -35,7 +35,7 @@ void CircleMoveEnemy::Update()
 		for (int i = 0; i < 6; ++i)
 		{
 			auto* projectile = PoolManager::GetInst()->
-				Pop<EnemyProjectile>(PoolType::Circle1);
+				Pop<EnemyProjectile>(PoolType::EnemyProjectile);
 			projectile->SetSize({ 10.f, 10.f });
 			projectile->SetColliderSize(7.5f);
 			projectile->SetPos(GetPos());

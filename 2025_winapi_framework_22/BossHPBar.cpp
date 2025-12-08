@@ -23,6 +23,9 @@ void BossHPBar::Render(HDC _hdc)
 		cur, 5);
 	for (int i = 0; i < m_boss->GetLifeCount() - 1; ++i)
 	{
-		ELLIPSE_RENDER(_hdc, 20 + i * 30, 75, 25, 25);
+		ELLIPSE_RENDER(_hdc, 20 + i * 25, 75, 25, 25);
 	}
+	SetTextColor(_hdc, RGB(255, 0, 0));
+	int oldMode = SetBkMode(_hdc, TRANSPARENT);
+	TextOut(_hdc, 10, 35, L"Kischur Zelretch Schweinorg", 27);
 }

@@ -12,6 +12,7 @@ DeleteBullet::DeleteBullet()
 
 DeleteBullet::~DeleteBullet()
 {
+	Object::~Object();
 }
 
 void DeleteBullet::Render(HDC _hdc)

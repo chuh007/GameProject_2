@@ -17,7 +17,7 @@ GateOfBabylonPattern::GateOfBabylonPattern(Object* _owner, Object* _target, floa
 	, m_baseSpeed(300.f)
 {
 
-	m_decValue = 0.4f;
+	m_decValue = 0.5f;
 }
 
 GateOfBabylonPattern::~GateOfBabylonPattern()
@@ -62,7 +62,7 @@ void GateOfBabylonPattern::BaseShoot()
 			}, randomLaunchDelay + 0.1f);
 		for (int j = 0; j < m_trailCount; ++j)
 		{
-			auto* projectile = PoolManager::GetInst()->Pop<EnemyProjectile>(PoolType::Circle1);
+			auto* projectile = GET_SINGLE(PoolManager)->Pop<EnemyProjectile>(PoolType::EnemyProjectile);
 
 			projectile->SetSize({ 15.f, 15.f });
 			projectile->SetColliderSize(10.f);

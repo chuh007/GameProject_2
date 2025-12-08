@@ -28,7 +28,7 @@ void TestEnemy::Update()
 	if (fireTime >= 1.f)
 	{
 		auto* projectile = PoolManager::GetInst()->
-			Pop<EnemyProjectile>(PoolType::Circle1);
+			Pop<EnemyProjectile>(PoolType::EnemyProjectile);
 		projectile->SetSize({ 10.f, 10.f });
 		projectile->SetColliderSize(7.5f);
 		projectile->SetPos(GetPos());

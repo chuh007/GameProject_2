@@ -30,7 +30,7 @@ void GameScene::Init()
 
 	GET_SINGLE(EnemySpawnManger)->Init();
 	GET_SINGLE(PoolManager)->AddPool<EnemyProjectile>
-		(PoolType::Circle1, 100, Layer::ENEMYPROJECTILE);
+		(PoolType::EnemyProjectile, 100, Layer::ENEMYPROJECTILE);
 	GET_SINGLE(PoolManager)->AddPool<PlayerProjectile>
 		(PoolType::PlayerProj, 100, Layer::PROJECTILE);
 

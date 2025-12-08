@@ -17,6 +17,7 @@ EnemyProjectile::EnemyProjectile()
 
 EnemyProjectile::~EnemyProjectile()
 {
+	Object::~Object();
 }
 
 void EnemyProjectile::Reset()
@@ -34,7 +35,12 @@ void EnemyProjectile::SetColliderSize(float _size)
 void EnemyProjectile::PushSelf()
 {
 	GetComponent<Collider>()->SetActive(false);
-	GET_SINGLE(PoolManager)->Push<EnemyProjectile>(PoolType::Circle1, this);
+	GET_SINGLE(PoolManager)->Push<EnemyProjectile>(PoolType::EnemyProjectile, this);
+}
+
+void EnemyProjectile::SetTexture(Texture* _texture)
+{
+	m_pTex = _texture;
 }
 
 void EnemyProjectile::Update()
