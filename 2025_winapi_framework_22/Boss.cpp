@@ -43,12 +43,12 @@ Boss::Boss()
 	m_patternCompo->AddSpellPattern(3, spell3);
 	auto* pattern4 = new SpiralPattern(this, m_target, 1.75f, mover, L"");
 	m_patternCompo->AddNomalPattern(4, pattern4);
-	auto* spell4 = new PureBulletHellPattern(this, m_target, 1.5f, mover, L"사람을 죽이기 위한 순수한 탄막");
+	auto* spell4 = new PureBulletHellPattern(this, m_target, 3.f, mover, L"사람을 죽이기 위한 순수한 탄막");
 	m_patternCompo->AddSpellPattern(4, spell4);
 	auto* pattern5 = new SpiralPattern(this, m_target, 1.75f, mover, L"");
-	m_patternCompo->AddNomalPattern(4, pattern5);
+	m_patternCompo->AddNomalPattern(5, pattern5);
 	auto* spell5 = new PureBulletHellPattern(this, m_target, 1.5f, mover, L"제 2마법「」");
-	m_patternCompo->AddSpellPattern(4, spell5);
+	m_patternCompo->AddSpellPattern(5, spell5);
 
 	m_patternCompo->UseNomalPattern();
 }
