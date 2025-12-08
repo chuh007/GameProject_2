@@ -43,6 +43,12 @@ public:
 	int GetPowerLevel() {
 		return m_powerLevel;
 	}
+	void SetBombCount(int _bombCnt) {
+		m_bombCnt = _bombCnt;
+	}
+	void PlusBombCount(int _bombCnt) {
+		m_bombCnt += _bombCnt;
+	}
 public:
 	void SetInvincible(bool isInvincible);
 	float& GetInvincibleTime();
