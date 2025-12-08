@@ -230,11 +230,9 @@ bool Player::UseBomb() {
 				GET_SINGLE(SceneManager)->RequestDestroy(delBullet);
 			}, 2.f);
 
-		std::cout << "use bomb : " << m_bombCnt << std::endl;
 		return true;
 	}
 
-	std::cout << "no bomb left or bomb ended" << std::endl;
 	return false;
 }
 
@@ -242,14 +240,12 @@ void Player::InvokeBomb() {
 	DeleteBullet* delBullet = GET_SINGLE(SceneManager)->GetCurScene()->
 		Spawn<DeleteBullet>(Layer::PROJECTILEDELETER, GetPos(), GetSize());
 
-	if (delBullet != nullptr) return;
+	if (delBullet == nullptr) return;
 
 	delBullet->Coroutine([=]()
 		{
 			GET_SINGLE(SceneManager)->RequestDestroy(delBullet);
 		}, 1.f);
-
-	std::cout << "use bomb in Hit" << std::endl;
 }
 
 void Player::GainPower(int _amount) {
