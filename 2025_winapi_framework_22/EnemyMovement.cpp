@@ -4,32 +4,88 @@
 
 EnemyMovement::EnemyMovement()
 {
+    
 }
 
 void EnemyMovement::Init()
 {
     m_distanceTraveled = 0.0f;
+    m_repeatType = MoveRepeatType::PingPong;
+    defaultPos = GetOwner()->GetPos();
+    m_pingPongDirection = 1;
 }
 
 void EnemyMovement::LateUpdate()
 {
-    if (!m_pathData || m_pathData->totalLength <= 0.0f)
+    if (moveOrder.front()->totalLength <= 0.0f)
     {
         return;
     }
 
-    m_distanceTraveled += m_speed * fDT;
+    m_distanceTraveled += m_speed * fDT * m_pingPongDirection;
 
-    if (m_distanceTraveled >= m_pathData->totalLength)
+    switch (m_repeatType)
     {
-        m_distanceTraveled = m_pathData->totalLength;
+    case MoveRepeatType::Stop:
+        if (m_distanceTraveled >= moveOrder.front()->totalLength)
+        {
+            if (moveOrder.size()<=1)
+            {
+                m_distanceTraveled = moveOrder.front()->totalLength;
+            }
+            else
+            {
+                m_distanceTraveled = 0.0f;
+                defaultPos = GetBezierPoint(moveOrder.front()->points, 1);
+                moveOrder.pop();
+            }
+        }
+        break;
+
+    case MoveRepeatType::Loop:
+        if (m_distanceTraveled >= moveOrder.front()->totalLength)
+        {
+            m_distanceTraveled = fmod(m_distanceTraveled, moveOrder.front()->totalLength);
+        }
+        break;
+
+    case MoveRepeatType::PingPong:
+        if (m_pingPongDirection > 0 && m_distanceTraveled >= moveOrder.front()->totalLength)
+        {
+            m_pingPongDirection = -1;
+            m_distanceTraveled = moveOrder.front()->totalLength;
+        }
+        else if (m_pingPongDirection < 0 && m_distanceTraveled <= 0.0f)
+        {
+            m_pingPongDirection = 1;
+            m_distanceTraveled = 0.0f;
+        }
+
+        break;
+    case MoveRepeatType::Repeat:
+        if (m_distanceTraveled >= moveOrder.front()->totalLength)
+        {
+            if (moveOrder.size() <= 1)
+            {
+                m_distanceTraveled = moveOrder.front()->totalLength;
+            }
+            else
+            {
+                m_distanceTraveled = 0.0f;
+                defaultPos += GetBezierPoint(moveOrder.front()->points, 1);
+                moveOrder.push(moveOrder.front());
+                moveOrder.pop();
+            }
+        }
+        break;
     }
 
-    double target_t = m_pathData->FindTValueForDistance(m_distanceTraveled);
+    double target_t = moveOrder.front()->FindTValueForDistance(m_distanceTraveled);
 
-    Vec2 newPos = GetBezierPoint(m_pathData->points, target_t);
+    Vec2 newPos = GetBezierPoint(moveOrder.front()->points, target_t) + defaultPos;
 
-    if (GetOwner()) {
+    if (GetOwner())
+    {
         GetOwner()->SetPos(newPos);
     }
 }
@@ -39,15 +95,15 @@ void EnemyMovement::SetSpeed(float _speed)
     m_speed = _speed;
 }
 
-void EnemyMovement::SetPathData(const BezierPathData* path)
+void EnemyMovement::AddPathData(BezierPathData* path)
 {
-    m_pathData = path;
+    moveOrder.push(path);
     m_distanceTraveled = 0.0f;
 }
 
 void EnemyMovement::Render(HDC hDC)
 {
-    const std::vector<Vec2>& points = m_pathData->points;
+    const std::vector<Vec2>& points = moveOrder.front()->points;
 
     if (points.size() < 2)
     {
@@ -56,7 +112,7 @@ void EnemyMovement::Render(HDC hDC)
 
     const int segments = 100;
 
-    Vec2 first_v = GetBezierPoint(points, 0.0);
+    Vec2 first_v = GetBezierPoint(points, 0.0) + defaultPos;
 
     LONG first_x = static_cast<LONG>(std::roundf(first_v.x));
     LONG first_y = static_cast<LONG>(std::roundf(first_v.y));
@@ -67,7 +123,7 @@ void EnemyMovement::Render(HDC hDC)
     {
         double t = (double)i / (double)segments;
 
-        Vec2 v = GetBezierPoint(points, t);
+        Vec2 v = GetBezierPoint(points, t) + defaultPos;
 
         LONG current_x = static_cast<LONG>(std::roundf(v.x));
         LONG current_y = static_cast<LONG>(std::roundf(v.y));

@@ -1,23 +1,38 @@
 #pragma once
 #include "Component.h"
 #include "MathHelper.h" 
-
+#include <queue>
+struct QueueModule
+{
+    BezierPathData* moveOrder;
+    float m_pingPongDirection;
+    MoveRepeatType repeatType;
+    int repeatTime;
+};
 class EnemyMovement : public Component
 {
 private:
-    const BezierPathData* m_pathData = nullptr;
     float m_distanceTraveled = 0.0f;
     float m_speed = 0.0f;
 
 public:
-    // 기본 생성자만 사용하도록 수정
     EnemyMovement();
 
     void Init() override;
-    // fDT 인자 제거 (매크로 사용)
     void LateUpdate() override;
     void Render(HDC hDC) override;
 
-    void SetPathData(const BezierPathData* path);
+    void AddPathData(BezierPathData * path);
     void SetSpeed(float _speed);
+    inline void SetDefaultPos(Vec2 pos) { defaultPos = pos; };
+    void SetRepeatType(MoveRepeatType type)
+    {
+        m_repeatType = type;
+    }
+
+private:
+    Vec2 defaultPos = { 0,0 };
+    MoveRepeatType m_repeatType;
+    float m_pingPongDirection;
+    std::queue<BezierPathData*> moveOrder;
 };

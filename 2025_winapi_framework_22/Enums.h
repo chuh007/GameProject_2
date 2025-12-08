@@ -8,6 +8,7 @@ enum class Layer
 	ENEMY,
 	PROJECTILE,
 	ENEMYPROJECTILE,
+	ITEM,
 	PROJECTILEDELETER,
 	UI,
 	END
@@ -41,4 +42,9 @@ enum class MoveState
 enum class PoolType
 {
 	Circle1, PlayerProj, IceProj, Effect
+};
+
+enum class MoveRepeatType
+{
+	Stop, Loop, PingPong, Repeat
 };

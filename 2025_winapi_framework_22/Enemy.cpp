@@ -4,6 +4,7 @@
 #include "SceneManager.h"
 #include "Rigidbody.h"
 #include "Health.h"
+#include "ItemDropCompo.h"
 Enemy::Enemy()
 {
 	AddComponent<Collider>();
@@ -55,4 +56,7 @@ void Enemy::HPZero()
 {
 	cout << "dho";
 	GET_SINGLE(SceneManager)->RequestDestroy(this);
+	ItemDropCompo* dropCompo = GetComponent<ItemDropCompo>();
+	if (dropCompo != nullptr)
+		dropCompo->SpawnItem();
 }
