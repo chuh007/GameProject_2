@@ -37,7 +37,7 @@ void PureBulletHellPattern::BaseShoot()
 		auto* projectile = PoolManager::GetInst()->
 			Pop<EnemyProjectile>(PoolType::EnemyProjectile);
 		projectile->SetSize({ 55.f, 55.f });
-		projectile->SetColliderSize(27.5f);
+		projectile->SetColliderSize(25.f);
 		projectile->SetPos(m_owner->GetPos());
 		projectile->SetDir(angle * i);
 		projectile->SetSpeed(m_speed);

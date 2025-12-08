@@ -12,6 +12,7 @@
 #include "PlayerManager.h"
 #include "SpiralPattern.h";
 #include "PureBulletHellPattern.h"
+#include "SecondMagicPattern.h"
 Boss::Boss()
 	: m_isDie(false)
 	, m_lifeCount(5)
@@ -47,7 +48,7 @@ Boss::Boss()
 	m_patternCompo->AddSpellPattern(4, spell4);
 	auto* pattern5 = new SpiralPattern(this, m_target, 1.75f, mover, L"");
 	m_patternCompo->AddNomalPattern(5, pattern5);
-	auto* spell5 = new PureBulletHellPattern(this, m_target, 1.5f, mover, L"제 2마법「」");
+	auto* spell5 = new SecondMagicPattern(this, m_target, 1.5f, mover, L"제 2마법「보석검 젤레치」");
 	m_patternCompo->AddSpellPattern(5, spell5);
 
 	m_patternCompo->UseNomalPattern();

@@ -14,6 +14,7 @@ CircleToPlayerPattern::CircleToPlayerPattern(Object* _owner, Object* _target, fl
 
 CircleToPlayerPattern::~CircleToPlayerPattern()
 {
+	Pattern::~Pattern();
 }
 
 void CircleToPlayerPattern::Update()
