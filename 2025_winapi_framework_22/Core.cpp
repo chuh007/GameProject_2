@@ -109,7 +109,7 @@ void Core::MainRender()
         GAME_WIDTH, 0,
         UI_WIDTH, WINDOW_HEIGHT,
         m_hBackDC, GAME_WIDTH, 0,
-        SRCCOPY);
+        SRCCOPY); 
 }
 
 

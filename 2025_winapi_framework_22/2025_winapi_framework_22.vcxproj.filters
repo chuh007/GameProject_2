@@ -261,6 +261,7 @@
     <ClInclude Include="PureBulletHellPattern.h" />
     <ClInclude Include="SpiralPattern.h" />
     <ClInclude Include="PowerItem.h" />
+    <ClInclude Include="GameOverScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc">
@@ -455,5 +456,6 @@
     <ClCompile Include="PureBulletHellPattern.cpp" />
     <ClCompile Include="SpiralPattern.cpp" />
     <ClCompile Include="PowerItem.cpp" />
+    <ClCompile Include="GameOverScene.cpp" />
   </ItemGroup>
 </Project>

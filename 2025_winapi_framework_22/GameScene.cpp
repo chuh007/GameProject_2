@@ -13,7 +13,7 @@
 #include "ItemDropCompo.h"
 #include "BombItem.h"
 #include "Background.h"
-
+#include "Boss.h"
 
 void GameScene::Init()
 {
@@ -34,22 +34,6 @@ void GameScene::Init()
 	GET_SINGLE(PoolManager)->AddPool<PlayerProjectile>
 		(PoolType::PlayerProj, 100, Layer::PROJECTILE);
 
-	TestEnemy* testEnemy = new TestEnemy;
-	CircleMoveEnemy* circleEnemy = new CircleMoveEnemy;
-	TripleShotEnemy* tripleshot = new TripleShotEnemy;
-	testEnemy->SetPos({ 100, 100 });
-	testEnemy->SetSize({ 75,75 });
-	circleEnemy->SetPos({ 100, 100 });
-	circleEnemy->SetSize({ 50,50 });
-	tripleshot->SetPos({ 100,100 });
-	tripleshot->SetSize({ 100,100 });
-
-	auto* itemCompo = tripleshot->AddComponent<ItemDropCompo>();
-	Item* bomb = new BombItem;
-	bomb->SetSize({ 50.f,50.f });
-	itemCompo->SetItem(bomb);
-	
-
 	m_uiWidth = WINDOW_WIDTH - GAME_WIDTH;
 	m_uiHeight = WINDOW_HEIGHT;
 
@@ -63,7 +47,21 @@ void GameScene::Init()
 	m_hOldBitmap = (HBITMAP)SelectObject(m_hdc, m_hUIBitmap);
 
 	//여기서부터 적 세팅
+	TestEnemy* testEnemy = new TestEnemy;
+	CircleMoveEnemy* circleEnemy = new CircleMoveEnemy;
+	TripleShotEnemy* tripleshot = new TripleShotEnemy;
 
+	testEnemy->SetPos({ 100, 100 });
+	testEnemy->SetSize({ 75,75 });
+	circleEnemy->SetPos({ 100, 100 });
+	circleEnemy->SetSize({ 50,50 });
+	tripleshot->SetPos({ 100,100 });
+	tripleshot->SetSize({ 100,100 });
+
+	auto* itemCompo = tripleshot->AddComponent<ItemDropCompo>();
+	Item* bomb = new BombItem;
+	bomb->SetSize({ 50.f,50.f });
+	itemCompo->SetItem(bomb);
 	GET_SINGLE(EnemySpawnManger)->SetSpawnScene(this);
 	GET_SINGLE(EnemySpawnManger)->AddEnemySpawnQueue({ 3.f, testEnemy });
 	GET_SINGLE(EnemySpawnManger)->AddEnemySpawnQueue({ 6.f, circleEnemy });
@@ -75,7 +73,7 @@ void GameScene::Init()
 
 		enemy->SetPos({ 100, 100 });
 		enemy->SetSize({ 100,100 });
-		GET_SINGLE(EnemySpawnManger)->AddEnemySpawnQueue({ 10.f + i, enemy });
+		GET_SINGLE(EnemySpawnManger)->AddEnemySpawnQueue({ 12.f + i, enemy });
 	}
 
 	//여기까지 적 세팅
@@ -130,4 +128,18 @@ void GameScene::Render(HDC _hdc) {
 
 	wstring powerStr = std::format(L"POWER: {} / {}", power, 128);
 	TextOut(_hdc, TEXT_START_X, 150, powerStr.c_str(), (int)powerStr.length());
+}
+
+void GameScene::Release()
+{
+	Scene::Release();
+	if (m_hdc != nullptr) {
+		SelectObject(m_hdc, m_hOldBitmap);
+		DeleteDC(m_hdc);
+		m_hdc = nullptr;
+	}
+	if (m_hUIBitmap != nullptr) {
+		DeleteObject(m_hUIBitmap);
+		m_hUIBitmap = nullptr;
+	}
 }
