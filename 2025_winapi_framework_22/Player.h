@@ -43,6 +43,12 @@ public:
 	int GetPowerLevel() {
 		return m_powerLevel;
 	}
+	void SetBombCount(int _bombCnt) {
+		m_bombCnt = _bombCnt;
+	}
+	void PlusBombCount(int _bombCnt) {
+		m_bombCnt += _bombCnt;
+	}
 public:
 	void SetInvincible(bool isInvincible);
 	float& GetInvincibleTime();
@@ -60,13 +66,14 @@ private:
 	PlayerProjectile* m_proj;
 	DeleteBullet* delBullet;
 	float m_projCooldown;
-	const float PROJECTILE_INTERVAL = 0.1f;
+	const float PROJECTILE_INTERVAL = 0.15f;
 private:
 	int m_bombCnt;
 	float m_bombDurationTimer;
 	const int MAX_BOMB_COUNT = 3;
 private:
 	int m_powerLevel;
+	int m_amountDmg;
 	const int MAX_POWER = 128;
 	const int POWER_SMALL_VALUE = 1;
 	const int POWER_BIG_VALUE = 8;
