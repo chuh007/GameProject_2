@@ -28,6 +28,7 @@ public:
         m_dir = { cosf(delta), -sinf(delta) };
     }
     const Vec2& GetDir() const { return m_dir; }
+    void SetTexture(Texture* _texture);
 
 protected:
     float m_angle;

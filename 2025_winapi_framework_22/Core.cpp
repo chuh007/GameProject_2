@@ -80,7 +80,6 @@ void Core::MainRender()
 
     // 1. clear
     ::PatBlt(m_hBackDC, 0,0, GAME_WIDTH, GAME_HEIGHT, WHITENESS);
-    GET_SINGLE(SceneManager)->Render(m_hBackDC);
     
     //Vec2 pos = m_obj.GetPos();
     //Vec2 size = m_obj.GetSize();

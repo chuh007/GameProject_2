@@ -14,7 +14,7 @@ public:
     void BaseShoot() override;
 
 private:
-    int m_basePortalCount;  // 시작 시 마법진 개수
-    int m_trailCount;       // 한 번 발사할 때 겹쳐 쏠 탄의 개수 (잔상용, 5개)
-    float m_baseSpeed;      // 기본 탄속
+    int m_basePortalCount; // 기본 사출 수
+    int m_trailCount; // 쏠때 몇발 쏠지
+    float m_baseSpeed; // 속도
 };

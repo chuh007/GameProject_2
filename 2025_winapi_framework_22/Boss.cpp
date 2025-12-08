@@ -11,9 +11,10 @@
 #include "GateOfBabylonPattern.h"
 #include "PlayerManager.h"
 #include "SpiralPattern.h";
+#include "PureBulletHellPattern.h"
 Boss::Boss()
 	: m_isDie(false)
-	, m_lifeCount(4)
+	, m_lifeCount(5)
 	, m_decDamage(1.f)
 	, m_target(nullptr)
 {
@@ -28,7 +29,7 @@ Boss::Boss()
 	m_patternCompo = AddComponent<PatternCompo>();
 	m_patternCompo->ResizePattenList(m_lifeCount + 1);
 
-	auto* pattern1 = new SpiralPattern(this, m_target, 2.f, mover, L"");
+	auto* pattern1 = new CirclePattern(this, m_target, 1.f, mover, L"");
 	m_patternCompo->AddNomalPattern(1, pattern1);
 	auto* spell1 = new CircleToPlayerPattern(this, m_target, 0.75f, mover, L"구속「부여잡는 올가미」");
 	m_patternCompo->AddSpellPattern(1, spell1);
@@ -40,10 +41,14 @@ Boss::Boss()
 	m_patternCompo->AddNomalPattern(3, pattern3);
 	auto* spell3 = new GateOfBabylonPattern(this, m_target, 0.7f, mover, L"보구「게이트 오브 바빌론」");
 	m_patternCompo->AddSpellPattern(3, spell3);
-	auto* pattern4 = new SpiralPattern(this, m_target, 2.f, mover, L"");
+	auto* pattern4 = new SpiralPattern(this, m_target, 1.75f, mover, L"");
 	m_patternCompo->AddNomalPattern(4, pattern4);
-	auto* spell4 = new GateOfBabylonPattern(this, m_target, 0.6f, mover, L"보구「게이트 오브 바빌론」");
+	auto* spell4 = new PureBulletHellPattern(this, m_target, 1.5f, mover, L"사람을 죽이기 위한 순수한 탄막");
 	m_patternCompo->AddSpellPattern(4, spell4);
+	auto* pattern5 = new SpiralPattern(this, m_target, 1.75f, mover, L"");
+	m_patternCompo->AddNomalPattern(4, pattern5);
+	auto* spell5 = new PureBulletHellPattern(this, m_target, 1.5f, mover, L"제 2마법「」");
+	m_patternCompo->AddSpellPattern(4, spell5);
 
 	m_patternCompo->UseNomalPattern();
 }

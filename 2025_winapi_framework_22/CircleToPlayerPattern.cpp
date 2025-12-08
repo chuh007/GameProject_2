@@ -5,7 +5,7 @@
 // 원탄 만들고 플레이어쪽으로 보내기
 CircleToPlayerPattern::CircleToPlayerPattern(Object* _owner, Object* _target, float _patternUseTime, BossMover* _mover, wstring _name)
 	: Pattern(_owner, _target, _patternUseTime, _mover, _name)
-	, m_projectileType(PoolType::Circle1)
+	, m_projectileType(PoolType::EnemyProjectile)
 	, m_fireCount(20)
 	, m_speed(250)
 {
@@ -39,7 +39,7 @@ void CircleToPlayerPattern::BaseShoot()
 	for (int i = 0; i < m_fireCount; ++i)
 	{
 		auto* projectile = PoolManager::GetInst()->
-			Pop<EnemyProjectile>(PoolType::Circle1);
+			Pop<EnemyProjectile>(PoolType::EnemyProjectile);
 		projectile->SetSize({ 10.f, 10.f });
 		projectile->SetColliderSize(7.5f);
 		projectile->SetPos(m_owner->GetPos());
@@ -58,7 +58,7 @@ void CircleToPlayerPattern::RayShout()
 	for (int i = 0; i < 5; ++i)
 	{
 		auto* projectile = PoolManager::GetInst()->
-			Pop<EnemyProjectile>(PoolType::Circle1);
+			Pop<EnemyProjectile>(PoolType::EnemyProjectile);
 		projectile->SetSize({ 10.f, 10.f });
 		projectile->SetColliderSize(7.5f);
 		projectile->SetPos({ GAME_WIDTH / 6 * (i + 1), 0 });

@@ -40,5 +40,5 @@ enum class MoveState
 
 enum class PoolType
 {
-	Circle1, PlayerProj, IceProj, Effect
+	EnemyProjectile, PlayerProj, IceProj, Effect
 };
