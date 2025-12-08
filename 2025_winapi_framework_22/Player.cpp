@@ -109,14 +109,24 @@ void Player::ExitCollision(Collider* _other)
 void Player::Update()
 {
 	float _fDT = GET_SINGLE(TimeManager)->GetDT();
-	const float BOMB_DURATION = 2.f;
 
 	if (delBullet != nullptr) {
-		m_bombDurationTimer += _fDT;
-		if (m_bombDurationTimer >= BOMB_DURATION) {
-			GET_SINGLE(SceneManager)->RequestDestroy(delBullet);
-			delBullet = nullptr;
-			m_bombDurationTimer = 0.f;
+		if (m_isInvokedBomb) {
+			m_invokeBombTimer += _fDT;
+			if (m_invokeBombTimer >= INVOKE_BOMB_DURATION) {
+				GET_SINGLE(SceneManager)->RequestDestroy(delBullet);
+				delBullet = nullptr;
+				m_isInvokedBomb = false;
+				m_invokeBombTimer = 0.f;
+			}
+		}
+		else {
+			m_bombDurationTimer += _fDT;
+			if (m_bombDurationTimer >= BOMB_DURATION) {
+				GET_SINGLE(SceneManager)->RequestDestroy(delBullet);
+				delBullet = nullptr;
+				m_bombDurationTimer = 0.f;
+			}
 		}
 	}
 
@@ -253,6 +263,21 @@ bool Player::UseBomb() {
 
 	std::cout << "no bomb left or bomb ended" << std::endl;
 	return false;
+}
+
+void Player::InvokeBomb() {
+	if (delBullet != nullptr) return;
+
+	delBullet = new DeleteBullet();
+	delBullet->SetPos(GetPos());
+
+	GET_SINGLE(SceneManager)->GetCurScene()->
+		Spawn<DeleteBullet>(Layer::PROJECTILEDELETER, GetPos(), GetSize());
+
+	m_invokeBombTimer = 0.f;
+	m_isInvokedBomb = true;
+
+	std::cout << "use bomb in Hit" << std::endl;
 }
 
 void Player::GainPower(int _amount) {
