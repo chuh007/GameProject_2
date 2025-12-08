@@ -67,7 +67,7 @@ private:
 	const int MAX_BOMB_COUNT = 3;
 private:
 	int m_powerLevel;
-	float m_amountDmg;
+	int m_amountDmg;
 	const int MAX_POWER = 128;
 	const int POWER_SMALL_VALUE = 1;
 	const int POWER_BIG_VALUE = 8;

@@ -30,7 +30,7 @@ public:
     {
         m_speed = _speed;
     }
-    void SetDamage(float _damage)
+    void SetDamage(int _damage)
     { m_damage = _damage; }
     int getDamage()
     { return m_damage; }
