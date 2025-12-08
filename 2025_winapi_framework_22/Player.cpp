@@ -22,7 +22,7 @@
 Player::Player() : m_isDead(false), m_life(3), m_powerLevel(0), m_isInvincible(false),
 m_projCooldown(0.f), m_bombCnt(0), m_invincibleTime(0.f), m_bombDurationTimer(0.f),
 m_amountDmg(0),
-col(nullptr), fsm(nullptr), m_health(nullptr),  m_proj(nullptr), delBullet(nullptr)
+col(nullptr), fsm(nullptr), m_health(nullptr),  m_proj(nullptr)
 {
 	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Jiwoo");
 	auto* rb = AddComponent<Rigidbody>();
@@ -44,7 +44,8 @@ col(nullptr), fsm(nullptr), m_health(nullptr),  m_proj(nullptr), delBullet(nullp
 	m_health = AddComponent<Health>();
 	m_health->SetMaxHP(3);
 	m_health->SetCurrentHP(3);
-	m_bombCnt = MAX_BOMB_COUNT;
+	//m_bombCnt = MAX_BOMB_COUNT;
+	SetBombCount(MAX_BOMB_COUNT);
 
 	fsm = AddComponent<StateMachine>();
 	assert(fsm != nullptr && "fsm is null in player");
@@ -54,10 +55,6 @@ col(nullptr), fsm(nullptr), m_health(nullptr),  m_proj(nullptr), delBullet(nullp
 Player::~Player()
 {
 	// 여기 DELETE 해줘야해
-	if (delBullet) {
-		delete delBullet;
-		delBullet = nullptr;
-	}
 }
 
 void Player::Render(HDC _hdc)
@@ -110,30 +107,8 @@ void Player::Update()
 {
 	float _fDT = GET_SINGLE(TimeManager)->GetDT();
 
-	if (delBullet != nullptr) {
-		if (m_isInvokedBomb) {
-			m_invokeBombTimer += _fDT;
-			if (m_invokeBombTimer >= INVOKE_BOMB_DURATION) {
-				GET_SINGLE(SceneManager)->RequestDestroy(delBullet);
-				delBullet = nullptr;
-				m_isInvokedBomb = false;
-				m_invokeBombTimer = 0.f;
-			}
-		}
-		else {
-			m_bombDurationTimer += _fDT;
-			if (m_bombDurationTimer >= BOMB_DURATION) {
-				GET_SINGLE(SceneManager)->RequestDestroy(delBullet);
-				delBullet = nullptr;
-				m_bombDurationTimer = 0.f;
-			}
-		}
-	}
-
 	if (GET_KEYDOWN(KEY_TYPE::Q)) {
-		if (delBullet == nullptr) {
-			UseBomb();
-		}
+		UseBomb();
 	}
 	if (GET_KEYDOWN(KEY_TYPE::Z)) {
 		if (m_powerLevel <= MAX_POWER) {
@@ -201,23 +176,21 @@ bool Player::IsMovingInputProcessed() const {
 void Player::TakeDamage(int _damage) {
 	if (m_isInvincible) return;
 
+	m_life--;
 	m_health->TakeDamage(_damage);
+	if (m_life > -1) {
+		m_health->SetCurrentHP(m_health->GetMaxHP());
+		SetPos({ GAME_WIDTH / 2.f, 600.f });
+		fsm->ChangeState(new PlayerHitState());
+	}
+
 	if (m_isDead) return;
 
 	cout << "P : " << _damage << endl;
 }
 
 void Player::HPZero() {
-	m_life--;
-	if (m_life > 0) {
-		m_health->SetCurrentHP(m_health->GetMaxHP());
-		SetPos({ GAME_WIDTH / 2.f, 600.f });
-		fsm->ChangeState(new PlayerHitState());
-	}
-	else {
-		m_isDead = true;
-		fsm->ChangeState(new PlayerDeadState());
-	}
+	fsm->ChangeState(new PlayerDeadState());
 }
 
 void Player::SetInvincible(bool isInvincible) {
@@ -246,16 +219,16 @@ void Player::TryContinueFire(float _fDT) {
 }
 
 bool Player::UseBomb() {
+	DeleteBullet* delBullet = GET_SINGLE(SceneManager)->GetCurScene()->
+		Spawn<DeleteBullet>(Layer::PROJECTILEDELETER, GetPos(), GetSize());
+
 	if (m_bombCnt > 0) {
 		m_bombCnt--;
 
-		delBullet = new DeleteBullet();
-		delBullet->SetPos(GetPos());
-
-		GET_SINGLE(SceneManager)->GetCurScene()->
-			Spawn<DeleteBullet>(Layer::PROJECTILEDELETER, GetPos(), GetSize());
-
-		m_bombDurationTimer = 0.f;
+		delBullet->Coroutine([=]()
+			{
+				GET_SINGLE(SceneManager)->RequestDestroy(delBullet);
+			}, 2.f);
 
 		std::cout << "use bomb : " << m_bombCnt << std::endl;
 		return true;
@@ -266,16 +239,15 @@ bool Player::UseBomb() {
 }
 
 void Player::InvokeBomb() {
-	if (delBullet != nullptr) return;
-
-	delBullet = new DeleteBullet();
-	delBullet->SetPos(GetPos());
-
-	GET_SINGLE(SceneManager)->GetCurScene()->
+	DeleteBullet* delBullet = GET_SINGLE(SceneManager)->GetCurScene()->
 		Spawn<DeleteBullet>(Layer::PROJECTILEDELETER, GetPos(), GetSize());
 
-	m_invokeBombTimer = 0.f;
-	m_isInvokedBomb = true;
+	if (delBullet != nullptr) return;
+
+	delBullet->Coroutine([=]()
+		{
+			GET_SINGLE(SceneManager)->RequestDestroy(delBullet);
+		}, 1.f);
 
 	std::cout << "use bomb in Hit" << std::endl;
 }

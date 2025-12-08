@@ -65,7 +65,6 @@ private:
 	const int MAX_HP = 3;
 private:
 	PlayerProjectile* m_proj;
-	DeleteBullet* delBullet;
 	float m_projCooldown;
 	const float PROJECTILE_INTERVAL = 0.15f;
 private:
