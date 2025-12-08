@@ -26,6 +26,7 @@ void GameScene::Init()
 	//Spawn<Boss>(Layer::ENEMY, { WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4 }, { 100.f,100.f });
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PROJECTILE, Layer::ENEMY);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::DEFAULT);
+	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::ITEM);
 	GET_SINGLE(ResourceManager)->Play(L"BGM");
 
 	GET_SINGLE(EnemySpawnManger)->Init();
@@ -59,7 +60,7 @@ void GameScene::Init()
 		TripleShotEnemy* enemy = new TripleShotEnemy;
 
 		enemy->SetPos({ 100, 100 });
-		enemy->SetSize({ 75,75 });
+		enemy->SetSize({ 100,100 });
 		GET_SINGLE(EnemySpawnManger)->AddEnemySpawnQueue({ 10.f + i, enemy });
 	}
 
