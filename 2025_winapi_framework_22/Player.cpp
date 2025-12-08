@@ -17,15 +17,13 @@
 #include "PlayerHitState.h"
 #include "PlayerDeadState.h"
 #include "DeleteBullet.h"
+#include "TimeManager.h"
 
 Player::Player() : m_isDead(false), m_life(3), m_powerLevel(0), m_isInvincible(false),
-m_projCooldown(0.f), m_bombCnt(0), m_invincibleTime(0.f),
+m_projCooldown(0.f), m_bombCnt(0), m_invincibleTime(0.f), m_bombDurationTimer(0.f),
+m_amountDmg(0),
 col(nullptr), fsm(nullptr), m_health(nullptr),  m_proj(nullptr), delBullet(nullptr)
 {
-	//m_pTex = new Texture;
-	//wstring path = GET_SINGLE(ResourceManager)->GetResPath();
-	//path += L"Texture\\plane.bmp";
-	//m_pTex->Load(path);
 	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Jiwoo");
 	auto* rb = AddComponent<Rigidbody>();
 	rb->SetUseGravity(false);
@@ -47,10 +45,7 @@ col(nullptr), fsm(nullptr), m_health(nullptr),  m_proj(nullptr), delBullet(nullp
 	m_health->SetMaxHP(3);
 	m_health->SetCurrentHP(3);
 	m_bombCnt = MAX_BOMB_COUNT;
-	//delBullet = AddComponent<DeleteBullet>();
 
-	//GET_SINGLE(PoolManager)->AddPool<PlayerProjectile>
-	//	(PoolType::Circle1, 100, Layer::PROJECTILE);
 	fsm = AddComponent<StateMachine>();
 	assert(fsm != nullptr && "fsm is null in player");
 	fsm->ChangeState(new PlayerIdleState());
@@ -69,7 +64,6 @@ void Player::Render(HDC _hdc)
 {
 	Vec2 pos = GetPos();
 	Vec2 size = GetSize();
-	//RECT_RENDER(_hdc, pos.x, pos.y, size.x, size.y);
 	LONG width = m_pTex->GetWidth();
 	LONG height = m_pTex->GetHeight();
 
@@ -114,30 +108,27 @@ void Player::ExitCollision(Collider* _other)
 
 void Player::Update()
 {
-	//Vec2 dir = {};
-	//if (GET_KEY(KEY_TYPE::W)) dir.y -= 1.f;
-	//if (GET_KEY(KEY_TYPE::S)) dir.y += 1.f;
-	//if (GET_KEY(KEY_TYPE::A)) dir.x -= 1.f;
-	//if (GET_KEY(KEY_TYPE::D)) dir.x += 1.f;
-	//Translate({dir.x * fDT * 200.f, dir.y * fDT * 200.f});
+	float _fDT = GET_SINGLE(TimeManager)->GetDT();
+	const float BOMB_DURATION = 2.f;
 
-	// Q, E 크게 작게 
-	//float scaleDelta = 0.f;
-	//float scaleSpeed = 1.f;
-	//if (GET_KEY(KEY_TYPE::Q))
-	//	scaleDelta += scaleSpeed * fDT;
-	//if (GET_KEY(KEY_TYPE::E))
-	//	scaleDelta -= scaleSpeed * fDT;
-	//float factor = scaleSpeed + scaleDelta;
-	//Scale({ factor, factor });
-
-	//if (GET_KEYDOWN(KEY_TYPE::SPACE))
-	//	CreateProjectile();
-	if (GET_KEYDOWN(KEY_TYPE::Q)) {
-		UseBomb();
+	if (delBullet != nullptr) {
+		m_bombDurationTimer += _fDT;
+		if (m_bombDurationTimer >= BOMB_DURATION) {
+			GET_SINGLE(SceneManager)->RequestDestroy(delBullet);
+			delBullet = nullptr;
+			m_bombDurationTimer = 0.f;
+		}
 	}
-	if (GET_KEY(KEY_TYPE::Z)) {
-		GainPower(1);
+
+	if (GET_KEYDOWN(KEY_TYPE::Q)) {
+		if (delBullet == nullptr) {
+			UseBomb();
+		}
+	}
+	if (GET_KEYDOWN(KEY_TYPE::Z)) {
+		if (m_powerLevel <= MAX_POWER) {
+			GainPower(1);
+		}
 	}
 	Object::LateUpdate();
 }
@@ -165,22 +156,26 @@ void Player::CreateProjectile()
 		start_angle_deg = -(num_proj - 1) * ANGLE_STEP / 2.f;
 	}
 
+	int baseDmg = 10;
+	int totalDmg = baseDmg + m_amountDmg;
+
 	for (int i = 0; i < num_proj; ++i)
 	{
 		PlayerProjectile* proj = GET_SINGLE(PoolManager)->
 			Pop<PlayerProjectile>(PoolType::PlayerProj);
 
+		proj->Reset();
 		Vec2 pos = GetPos();
 		pos.y -= GetSize().y / 2.f;
 		proj->SetPos(pos);
 		proj->SetSize({ 30.f,30.f });
 
+		proj->SetDamage(totalDmg);
+
 		float current_angle_deg = start_angle_deg + (float)i * ANGLE_STEP;
 		float current_angle_rad = current_angle_deg * PI / 180.f;
 
 		proj->SetDir({ sinf(current_angle_rad), -cosf(current_angle_rad) });
-
-		GET_SINGLE(SceneManager)->GetCurScene()->AddObject(proj, Layer::PROJECTILE);
 	}
 }
 
@@ -242,22 +237,18 @@ void Player::TryContinueFire(float _fDT) {
 
 bool Player::UseBomb() {
 	if (m_bombCnt > 0) {
-
 		m_bombCnt--;
 
 		delBullet = new DeleteBullet();
 		delBullet->SetPos(GetPos());
 
 		GET_SINGLE(SceneManager)->GetCurScene()->
-			AddObject(delBullet, Layer::PROJECTILEDELETER);
+			Spawn<DeleteBullet>(Layer::PROJECTILEDELETER, GetPos(), GetSize());
+
+		m_bombDurationTimer = 0.f;
 
 		std::cout << "use bomb : " << m_bombCnt << std::endl;
 		return true;
-	}
-
-	if (delBullet) {
-		GET_SINGLE(SceneManager)->RequestDestroy(delBullet);
-		delBullet = nullptr;
 	}
 
 	std::cout << "no bomb left or bomb ended" << std::endl;
@@ -266,6 +257,7 @@ bool Player::UseBomb() {
 
 void Player::GainPower(int _amount) {
 	m_powerLevel += _amount;
+	m_amountDmg += 1;
 
 	m_powerLevel = std::min(m_powerLevel, MAX_POWER);
 	std::cout << "Power Level: " << m_powerLevel << std::endl;

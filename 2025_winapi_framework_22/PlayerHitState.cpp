@@ -21,15 +21,22 @@ void PlayerHitState::Excute(StateMachine* _fsm) {
 		m_player->SetInvincible(false);
 		m_player->GetInvincibleTime() = 0.f;
 		_fsm->ChangeState(new PlayerIdleState());
+		return;
 	}
 	
 	if (m_player->IsMovingInputProcessed()) {
 		_fsm->ChangeState(new PlayerMoveState());
+		return;
 	}
 
 	return;
 }
 
 void PlayerHitState::Exit(StateMachine* _fsm) {
-
+	Player* player = static_cast<Player*>(_fsm->GetOwner());
+	if (player) {
+		player->UseBomb();
+		player->SetInvincible(false);
+		player->GetInvincibleTime() = 0.f;
+	}
 }
