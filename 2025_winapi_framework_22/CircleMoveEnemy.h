@@ -1,12 +1,13 @@
 #pragma once
 #include "Enemy.h"
 #include "MathHelper.h"
-class TestEnemy :
+
+class CircleMoveEnemy :
     public Enemy
 {
-public :
-    TestEnemy();
-    ~TestEnemy();
+public:
+    CircleMoveEnemy();
+    ~CircleMoveEnemy();
     void Update() override;
 protected:
 

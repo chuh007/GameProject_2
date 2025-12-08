@@ -166,9 +166,13 @@
     <ClInclude Include="Background.h" />
     <ClInclude Include="BakBakDevScene.h" />
     <ClInclude Include="BaseWindow.h" />
+    <ClInclude Include="BombItem.h" />
     <ClInclude Include="Boss.h" />
     <ClInclude Include="BossHPBar.h" />
     <ClInclude Include="BossMover.h" />
+    <ClInclude Include="Button.h" />
+    <ClInclude Include="ButtonSelector.h" />
+    <ClInclude Include="CircleMoveEnemy.h" />
     <ClInclude Include="CirclePattern.h" />
     <ClInclude Include="CircleToPlayerPattern.h" />
     <ClInclude Include="Collider.h" />
@@ -184,7 +188,9 @@
     <ClInclude Include="EnemySpawnManger.h" />
     <ClInclude Include="EnemyProjectile.h" />
     <ClInclude Include="Enums.h" />
+    <ClInclude Include="ExitButton.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="GameScene.h" />
     <ClInclude Include="GateOfBabylonPattern.h" />
     <ClInclude Include="GDISelector.h" />
     <ClInclude Include="Health.h" />
@@ -192,6 +198,8 @@
     <ClInclude Include="IDamageable.h" />
     <ClInclude Include="IdleState.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="ItemDropCompo.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Pattern.h" />
     <ClInclude Include="PatternCompo.h" />
@@ -210,6 +218,7 @@
     <ClInclude Include="Rigidbody.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="StartButton.h" />
     <ClInclude Include="SpellNameText.h" />
     <ClInclude Include="SpiralPattern.h" />
     <ClInclude Include="State.h" />
@@ -220,6 +229,8 @@
     <ClInclude Include="TestScene.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TimeManager.h" />
+    <ClInclude Include="TitleScene.h" />
+    <ClInclude Include="TripleShotEnemy.h" />
     <ClInclude Include="Vec2.h" />
   </ItemGroup>
   <ItemGroup>
@@ -228,9 +239,13 @@
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="BakBakDevScene.cpp" />
     <ClCompile Include="BaseWindow.cpp" />
+    <ClCompile Include="BombItem.cpp" />
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="BossHPBar.cpp" />
     <ClCompile Include="BossMover.cpp" />
+    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="ButtonSelector.cpp" />
+    <ClCompile Include="CircleMoveEnemy.cpp" />
     <ClCompile Include="CirclePattern.cpp" />
     <ClCompile Include="CircleToPlayerPattern.cpp" />
     <ClCompile Include="Collider.cpp" />
@@ -245,6 +260,8 @@
     <ClCompile Include="EnemyMovement.cpp" />
     <ClCompile Include="EnemySpawnManger.cpp" />
     <ClCompile Include="EnemyProjectile.cpp" />
+    <ClCompile Include="ExitButton.cpp" />
+    <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="GateOfBabylonPattern.cpp" />
     <ClCompile Include="GDISelector.cpp" />
     <ClCompile Include="Health.cpp" />
@@ -252,6 +269,8 @@
     <ClCompile Include="IDamageable.cpp" />
     <ClCompile Include="IdleState.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ItemDropCompo.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MoveState.cpp" />
     <ClCompile Include="Object.cpp" />
@@ -271,6 +290,7 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SpellNameText.cpp" />
+    <ClCompile Include="StartButton.cpp" />
     <ClCompile Include="SpiralPattern.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateMachine.cpp" />
@@ -278,6 +298,8 @@
     <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TimeManager.cpp" />
+    <ClCompile Include="TitleScene.cpp" />
+    <ClCompile Include="TripleShotEnemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc" />

@@ -1,5 +1,6 @@
 #pragma once
 #include <queue>
+#include "MathHelper.h"
 class Enemy;
 class Scene;
 struct SpawnInfo
@@ -23,6 +24,12 @@ public:
 	void Update();
 	void StopSpawn();
 	void Realese();
+
+public:
+	BezierPathData* GetPath(wstring pathName)
+	{
+		return  m_calcedPath[pathName];
+	}
 public:
 	void AddEnemySpawnQueue(SpawnInfo _spawn);
 	void SetSpawnScene(Scene* scene)
@@ -31,9 +38,11 @@ public:
 	}
 private: 
 	bool TryToSpawn();
+	void AssignPath();
 private:
 	float m_currentTime;
 	Scene* m_spawnTargetScene;
 	std::priority_queue<SpawnInfo, std::vector<SpawnInfo>, CompareSpawnInfo> m_enemySpawnQueue;
+	std::unordered_map<wstring, BezierPathData*> m_calcedPath;
 };
 
