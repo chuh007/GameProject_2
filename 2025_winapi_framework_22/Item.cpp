@@ -7,10 +7,14 @@ Item::Item()
 {
 	auto* coll = AddComponent<Collider>();
 	coll->SetSize(50.f);
+	m_currentSpeed = 0;
 }
 
 void Item::Update()
 {
+	Vec2 curPos = GetPos();
+	SetPos({ curPos.x, curPos.y + m_currentSpeed * fDT });
+	m_currentSpeed += 120.f * fDT;
 }
 
 void Item::EnterCollision(Collider* _other)

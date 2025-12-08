@@ -210,6 +210,7 @@
     <ClInclude Include="PlayerHitState.h" />
     <ClInclude Include="PlayerManager.h" />
     <ClInclude Include="PoolManager.h" />
+    <ClInclude Include="PowerItem.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="PureBulletHellPattern.h" />
     <ClInclude Include="Resource.h" />
@@ -282,6 +283,7 @@
     <ClCompile Include="PlayerHitState.cpp" />
     <ClCompile Include="PlayerManager.cpp" />
     <ClCompile Include="PoolManager.cpp" />
+    <ClCompile Include="PowerItem.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="PureBulletHellPattern.cpp" />
     <ClCompile Include="ResourceBase.cpp" />

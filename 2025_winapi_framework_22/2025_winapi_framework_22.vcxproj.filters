@@ -255,6 +255,12 @@
       <Filter>Engine\03. Object\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="BombItem.h" />
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="ItemDropCompo.h" />
+    <ClInclude Include="PureBulletHellPattern.h" />
+    <ClInclude Include="SpiralPattern.h" />
+    <ClInclude Include="PowerItem.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc">
@@ -443,5 +449,11 @@
       <Filter>Engine\04. Scene</Filter>
     </ClCompile>
     <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="BombItem.cpp" />
+    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ItemDropCompo.cpp" />
+    <ClCompile Include="PureBulletHellPattern.cpp" />
+    <ClCompile Include="SpiralPattern.cpp" />
+    <ClCompile Include="PowerItem.cpp" />
   </ItemGroup>
 </Project>
