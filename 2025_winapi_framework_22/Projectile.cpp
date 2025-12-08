@@ -66,6 +66,7 @@ void PlayerProjectile::EnterCollision(Collider* _other)
 }
 
 void PlayerProjectile::Reset() {
+	m_damage = 0;
 	m_dir = { 0.f, 0.f };
 	m_angle = 0.f;
 	m_corutines.clear();
