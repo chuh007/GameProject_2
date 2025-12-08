@@ -17,6 +17,7 @@ EnemyProjectile::EnemyProjectile()
 
 EnemyProjectile::~EnemyProjectile()
 {
+	Object::~Object();
 }
 
 void EnemyProjectile::Reset()

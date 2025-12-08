@@ -22,8 +22,8 @@ IcicleFallPattern::IcicleFallPattern(Object* _owner, Object* _target, float _pat
 	m_decValue = 0.6f;
 	m_iceTex = GET_SINGLE(ResourceManager)
 		->GetTexture(L"IceBullet");
-	m_bulletTex = GET_SINGLE(ResourceManager)
-		->GetTexture(L"");
+	//m_bulletTex = GET_SINGLE(ResourceManager)
+	//	->GetTexture(L"");
 }
 
 IcicleFallPattern::~IcicleFallPattern()
@@ -95,7 +95,7 @@ void IcicleFallPattern::CircularShoot()
 			Pop<EnemyProjectile>(PoolType::EnemyProjectile);
 		projectile->SetSize({ 20.f, 20.f });
 		projectile->SetColliderSize(15.f);
-		projectile->SetTexture(m_bulletTex);
+		//projectile->SetTexture(m_bulletTex);
 		projectile->SetPos(m_owner->GetPos());
 		projectile->SetDir(-90.f + angle * i);
 		projectile->SetSpeed(speed);
