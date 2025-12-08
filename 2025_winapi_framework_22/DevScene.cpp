@@ -34,7 +34,7 @@ void DevScene::Init()
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::ENEMYPROJECTILE, Layer::PROJECTILEDELETER);
 	GET_SINGLE(ResourceManager)->Play(L"BGM");
 	GET_SINGLE(PoolManager)->AddPool<EnemyProjectile>
-		(PoolType::Circle1, 100, Layer::ENEMYPROJECTILE);
+		(PoolType::EnemyProjectile, 100, Layer::ENEMYPROJECTILE);
 	GET_SINGLE(PoolManager)->AddPool<EnemyProjectile>
 		(PoolType::IceProj, 50, Layer::ENEMYPROJECTILE);
 	GET_SINGLE(PoolManager)->AddPool<PlayerProjectile>

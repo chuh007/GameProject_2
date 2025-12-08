@@ -9,7 +9,7 @@
 // 부체꼴은 좌우사격 2번당 1번
 IcicleFallPattern::IcicleFallPattern(Object* _owner, Object* _target, float _patternUseTime, BossMover* _mover, wstring _name)
 	: Pattern(_owner, _target, _patternUseTime, _mover, _name)
-	, m_projectileType(PoolType::Circle1)
+	, m_projectileType(PoolType::EnemyProjectile)
 	, m_fireCount(11)
 	, m_curCnt(0)
 	, m_iceAngle(100)
@@ -20,6 +20,10 @@ IcicleFallPattern::IcicleFallPattern(Object* _owner, Object* _target, float _pat
 	, circularSpeed(200)
 {
 	m_decValue = 0.6f;
+	m_iceTex = GET_SINGLE(ResourceManager)
+		->GetTexture(L"IceBullet");
+	//m_bulletTex = GET_SINGLE(ResourceManager)
+	//	->GetTexture(L"");
 }
 
 IcicleFallPattern::~IcicleFallPattern()
@@ -55,6 +59,7 @@ void IcicleFallPattern::BaseShoot()
 			Pop<EnemyProjectile>(PoolType::IceProj);
 		projectile1->SetSize({ 10.f, 10.f });
 		projectile1->SetColliderSize(7.5f);
+		projectile1->SetTexture(m_iceTex);
 		projectile1->SetPos(m_owner->GetPos());
 		projectile1->SetDir(-90.f + m_iceAngle - m_curCnt * 5.f);
 		projectile1->SetSpeed(speed / m_iceShootCount * i);
@@ -65,9 +70,10 @@ void IcicleFallPattern::BaseShoot()
 			}, 1.f);
 
 		auto* projectile2 = PoolManager::GetInst()->
-			Pop<EnemyProjectile>(PoolType::IceProj);
+			Pop<EnemyProjectile>(PoolType::EnemyProjectile);
 		projectile2->SetSize({ 10.f, 10.f });
 		projectile2->SetColliderSize(7.5f);
+		projectile2->SetTexture(m_iceTex);
 		projectile2->SetPos(m_owner->GetPos());
 		projectile2->SetDir(-90.f - m_iceAngle + m_curCnt * 5.f);
 		projectile2->SetSpeed(speed / m_iceShootCount * i);
@@ -86,9 +92,10 @@ void IcicleFallPattern::CircularShoot()
 	for (int i = -circularShootCount / 2; i <= circularShootCount / 2; ++i)
 	{
 		auto* projectile = PoolManager::GetInst()->
-			Pop<EnemyProjectile>(PoolType::Circle1);
+			Pop<EnemyProjectile>(PoolType::EnemyProjectile);
 		projectile->SetSize({ 20.f, 20.f });
 		projectile->SetColliderSize(15.f);
+		//projectile->SetTexture(m_bulletTex);
 		projectile->SetPos(m_owner->GetPos());
 		projectile->SetDir(-90.f + angle * i);
 		projectile->SetSpeed(speed);

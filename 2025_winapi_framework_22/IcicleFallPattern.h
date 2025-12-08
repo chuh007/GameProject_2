@@ -28,5 +28,8 @@ private:
     float m_circularAngle; // 부채꼴 각
     int circularShootCount; // 한번에 몇발
     int circularSpeed; // 속도
+
+    Texture* m_iceTex;
+    Texture* m_bulletTex;
 };
 

@@ -6,13 +6,13 @@
 
 SpiralPattern::SpiralPattern(Object* _owner, Object* _target, float _patternUseTime, BossMover* _mover, wstring _name)
     : Pattern(_owner, _target, _patternUseTime, _mover, _name)
-    , m_projectileType(PoolType::Circle1)
-    , m_armCount(11)
+    , m_projectileType(PoolType::EnemyProjectile)
+    , m_armCount(15)
     , m_speed(200)
     , m_fireCount(20)
     , m_isleft(false)
 {
-    m_decValue = 1.f;
+    m_decValue = 0.8f;
 }
 
 SpiralPattern::~SpiralPattern()
@@ -27,6 +27,9 @@ void SpiralPattern::Update()
     if (m_curTime > m_BaseShoutCooldown)
     {
         m_curTime = 0;
+        int x = (rand() % 200) + GAME_WIDTH / 2 - 100;
+        int y = (GAME_HEIGHT / 5) + rand() % 50;
+        m_mover->MoveTo({ x,y }, m_BaseShoutCooldown);
         BaseShoot();
     }
 }
@@ -62,7 +65,7 @@ void SpiralPattern::BaseShoot()
 
         for (int j = 0; j < m_fireCount; ++j)
         {
-            auto* projectile = PoolManager::GetInst()->Pop<EnemyProjectile>(PoolType::Circle1);
+            auto* projectile = PoolManager::GetInst()->Pop<EnemyProjectile>(PoolType::EnemyProjectile);
 
             projectile->SetSize({ 10.f, 20.f });
             projectile->SetColliderSize(5.f);
