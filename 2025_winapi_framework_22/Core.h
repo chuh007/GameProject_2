@@ -26,9 +26,6 @@ private:
 	HBITMAP m_hBackBit; 
 	HDC  m_hBackDC;
 
-	HDC m_hBackgroundDC;
-	HBITMAP m_hBackgroundBit;
-
 	Texture* m_backgroundTex;
 };
 

@@ -5,13 +5,14 @@
 #include "Collider.h"
 #include "IDamageable.h"
 #include "SceneManager.h"
+#include "BulletRenderManager.h"
 
 EnemyProjectile::EnemyProjectile()
 	: m_angle(0.f)
 	, m_dir(0.f, 0.f)
 	, m_speed(500.f)
 {
-	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"IceBullet");
+	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"BlueBullet");
 	auto* col = AddComponent<Collider>();
 }
 
@@ -61,6 +62,7 @@ void EnemyProjectile::Update()
 // y = x*sin + y*cos
 void EnemyProjectile::Render(HDC _hdc)
 {
+	
 	if (m_pTex == nullptr) return;
 
 	Vec2 pos = GetPos();
@@ -91,7 +93,7 @@ void EnemyProjectile::Render(HDC _hdc)
 	vertices[2].x = (LONG)(pos.x + (-hW * cosA - hH * sinA));
 	vertices[2].y = (LONG)(pos.y + (-hW * sinA + hH * cosA));
 
-	::PlgBlt(_hdc, vertices, m_pTex->GetTextureDC(),
+	::PlgBlt(GET_SINGLE(BulletRenderManager)->GetBulletDC(), vertices, m_pTex->GetTextureDC(),
 		0, 0, width, height,
 		NULL, 0, 0);
 

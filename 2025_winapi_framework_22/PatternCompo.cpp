@@ -49,7 +49,7 @@ void PatternCompo::UseNomalPattern()
 	m_curPattern = m_nomalPatternList[m_phase];
 	m_isUseSpell = false;
 	auto* text = m_spellNameText;
-	text->MoveTo({ GAME_WIDTH, 25 }, 0.25f);
+	text->MoveTo({ GAME_WIDTH + 20, 25 }, 0.25f);
 }
 
 void PatternCompo::UseSpellPattern()

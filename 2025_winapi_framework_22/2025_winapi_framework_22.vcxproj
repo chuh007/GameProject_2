@@ -170,6 +170,7 @@
     <ClInclude Include="Boss.h" />
     <ClInclude Include="BossHPBar.h" />
     <ClInclude Include="BossMover.h" />
+    <ClInclude Include="BulletRenderManager.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="ButtonSelector.h" />
     <ClInclude Include="CircleMoveEnemy.h" />
@@ -220,6 +221,7 @@
     <ClInclude Include="Rigidbody.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="SecondMagicPattern.h" />
     <ClInclude Include="StartButton.h" />
     <ClInclude Include="SpellNameText.h" />
     <ClInclude Include="SpiralPattern.h" />
@@ -245,6 +247,7 @@
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="BossHPBar.cpp" />
     <ClCompile Include="BossMover.cpp" />
+    <ClCompile Include="BulletRenderManager.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="ButtonSelector.cpp" />
     <ClCompile Include="CircleMoveEnemy.cpp" />
@@ -293,6 +296,7 @@
     <ClCompile Include="Rigidbody.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="SecondMagicPattern.cpp" />
     <ClCompile Include="SpellNameText.cpp" />
     <ClCompile Include="StartButton.cpp" />
     <ClCompile Include="SpiralPattern.cpp" />

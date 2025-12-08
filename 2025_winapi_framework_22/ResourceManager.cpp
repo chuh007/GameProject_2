@@ -138,6 +138,7 @@ void ResourceManager::RegisterGDI()
 	m_Brushs[(UINT)BrushType::RED] = (HBRUSH)::CreateSolidBrush(RGB(255, 0, 0));
 	m_Brushs[(UINT)BrushType::GREEN] = (HBRUSH)::CreateSolidBrush(RGB(0, 255, 0));
 	m_Brushs[(UINT)BrushType::GREY] = (HBRUSH)::CreateSolidBrush(RGB(76, 76, 77));
+	m_Brushs[(UINT)BrushType::MAGENTA] = (HBRUSH)::CreateSolidBrush(RGB(255, 0, 255));
 
 	// PEN 
 	m_Pens[(UINT)PenType::RED] = ::CreatePen(PS_SOLID, 1, RGB(255, 0, 0));
@@ -190,10 +191,12 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"Plane", L"Texture\\plane.bmp");
 	LoadTexture(L"Bullet", L"Texture\\Bullet.bmp");
 	LoadTexture(L"Jiwoo", L"Texture\\jiwoo.bmp");
-	LoadTexture(L"EnemyBullet1", L"Texture\\CINEMA.bmp");
+	LoadTexture(L"BlueBullet", L"Texture\\2_Circle_Blue_2.bmp");
 	LoadTexture(L"IceBullet", L"Texture\\IceBullet.bmp");
 	LoadTexture(L"Magic", L"Texture\\magic.bmp");
 	LoadTexture(L"Background", L"Texture\\Background.bmp");
+	LoadTexture(L"OrangeBullet", L"Texture\\2_Circle_Orange_3.bmp");
+
 }
 
 void ResourceManager::LoadTexture(const wstring& _key, const wstring& _path)

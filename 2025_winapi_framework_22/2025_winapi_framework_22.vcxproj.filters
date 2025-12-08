@@ -229,7 +229,6 @@
     <ClInclude Include="SpellNameText.h">
       <Filter>Engine\07. UI</Filter>
     </ClInclude>
-    <ClInclude Include="Effect.h" />
     <ClInclude Include="Background.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
@@ -255,13 +254,24 @@
       <Filter>Engine\03. Object\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="PowerItem.h" />
+    <ClInclude Include="GameOverScene.h" />
     <ClInclude Include="BombItem.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemDropCompo.h" />
-    <ClInclude Include="PureBulletHellPattern.h" />
-    <ClInclude Include="SpiralPattern.h" />
-    <ClInclude Include="PowerItem.h" />
-    <ClInclude Include="GameOverScene.h" />
+    <ClInclude Include="PureBulletHellPattern.h">
+      <Filter>Engine\09. Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="SpiralPattern.h">
+      <Filter>Engine\09. Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect.h">
+      <Filter>Engine\03. Object</Filter>
+    </ClInclude>
+    <ClInclude Include="SecondMagicPattern.h">
+      <Filter>Engine\09. Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletRenderManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc">
@@ -424,7 +434,6 @@
     <ClCompile Include="SpellNameText.cpp">
       <Filter>Engine\07. UI</Filter>
     </ClCompile>
-    <ClCompile Include="Effect.cpp" />
     <ClCompile Include="Background.cpp">
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
@@ -453,8 +462,18 @@
     <ClCompile Include="BombItem.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemDropCompo.cpp" />
-    <ClCompile Include="PureBulletHellPattern.cpp" />
-    <ClCompile Include="SpiralPattern.cpp" />
+    <ClCompile Include="PureBulletHellPattern.cpp">
+      <Filter>Engine\09. Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="SpiralPattern.cpp">
+      <Filter>Engine\09. Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect.cpp">
+      <Filter>Engine\03. Object</Filter>
+    </ClCompile>
+    <ClCompile Include="SecondMagicPattern.cpp">
+      <Filter>Engine\09. Pattern</Filter>
+    </ClCompile>
     <ClCompile Include="PowerItem.cpp" />
     <ClCompile Include="GameOverScene.cpp" />
   </ItemGroup>

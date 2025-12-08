@@ -5,6 +5,7 @@
 #include "SceneManager.h"
 #include "ResourceManager.h"
 #include "CollisionManager.h"
+#include "BulletRenderManager.h"
 #include "Texture.h"
 bool Core::Init(HWND _hWnd)
 {
@@ -19,17 +20,19 @@ bool Core::Init(HWND _hWnd)
     // 1. 생성
     m_hBackBit = ::CreateCompatibleBitmap(m_hDC, WINDOW_WIDTH, WINDOW_HEIGHT);
     m_hBackDC = ::CreateCompatibleDC(m_hDC);
-    m_hBackgroundBit = ::CreateCompatibleBitmap(m_hDC, WINDOW_HEIGHT, WINDOW_HEIGHT);
-    m_hBackgroundDC = ::CreateCompatibleDC(m_hDC);
+    GET_SINGLE(BulletRenderManager)
+        ->SetBulletBitMap(::CreateCompatibleBitmap(m_hDC, WINDOW_HEIGHT, WINDOW_HEIGHT));
+    GET_SINGLE(BulletRenderManager)
+        ->SetBulletDC(::CreateCompatibleDC(m_hDC));
     // 2. 연결
     ::SelectObject(m_hBackDC, m_hBackBit);
-    ::SelectObject(m_hBackgroundDC, m_hBackgroundBit);
 
     // 1
     GET_SINGLE(TimeManager)->Init();
     // 2
     GET_SINGLE(InputManager)->Init();
     // 3
+    GET_SINGLE(BulletRenderManager)->Init();
  
     if (!GET_SINGLE(ResourceManager)->Init())
         return false;
@@ -80,6 +83,8 @@ void Core::MainRender()
 
     // 1. clear
     ::PatBlt(m_hBackDC, 0,0, GAME_WIDTH, GAME_HEIGHT, WHITENESS);
+    GDISelector hBrush(GET_SINGLE(BulletRenderManager)->GetBulletDC(), BrushType::MAGENTA);
+    ::PatBlt(GET_SINGLE(BulletRenderManager)->GetBulletDC(), 0, 0, GAME_WIDTH, GAME_HEIGHT, PATCOPY);
     
     //Vec2 pos = m_obj.GetPos();
     //Vec2 size = m_obj.GetSize();
@@ -99,11 +104,17 @@ void Core::MainRender()
     GET_SINGLE(SceneManager)->Render(m_hBackDC);
 
     // 3. display
-    ::TransparentBlt(
-        m_hDC, 0, 0, GAME_WIDTH, GAME_HEIGHT,
-        m_hBackDC, 0, 0, GAME_WIDTH, GAME_HEIGHT,
-        RGB(255, 0, 255));
-    //::BitBlt(m_hDC, 0, 0, GAME_WIDTH, GAME_HEIGHT, m_hBackgroundDC, 0, 0, SRCCOPY);
+    //::TransparentBlt(
+    //    m_hDC, 0, 0, GAME_WIDTH, GAME_HEIGHT,
+    //    m_hBackDC, 0, 0, GAME_WIDTH, GAME_HEIGHT,
+    //    RGB(255, 0, 255));
+
+    //::TransparentBlt(
+    //    m_hBackgroundDC, 0, 0, GAME_WIDTH, GAME_HEIGHT,
+    //    m_hBackDC, 0, 0, GAME_WIDTH, GAME_HEIGHT,
+    //    RGB(255, 0, 255));
+
+    ::BitBlt(m_hDC, 0, 0, GAME_WIDTH, GAME_HEIGHT, m_hBackDC, 0, 0, SRCCOPY);
 
     ::BitBlt(m_hDC,
         GAME_WIDTH, 0,
@@ -136,8 +147,6 @@ void Core::CleanUp()
     ::DeleteObject(m_hBackBit);
     ::DeleteDC(m_hBackDC);
     ::ReleaseDC(m_hWnd, m_hDC);
-    ::DeleteObject(m_hBackgroundBit);
-    ::DeleteDC(m_hBackgroundDC);
     GET_SINGLE(ResourceManager)->Release();
 }
 

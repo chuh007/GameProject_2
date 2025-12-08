@@ -4,6 +4,7 @@
 #include "CollisionManager.h"
 #include "Rigidbody.h"
 #include "PoolManager.h"
+#include "BulletRenderManager.h"
 Scene::Scene()
 {
 
@@ -118,6 +119,25 @@ void Scene::Render(HDC _hdc)
 	for (UINT i = 0; i < (UINT)Layer::END; ++i)
 	{
 		auto& vec = m_vecObj[i];
+
+		if (i == (UINT)Layer::ENEMYPROJECTILE)
+		{
+
+			HDC hBulletDC = GET_SINGLE(BulletRenderManager)->GetBulletDC();
+			for (auto* obj : vec)
+			{
+				if (obj->GetIsDead() || !obj->IsActive()) continue;
+				obj->Render(_hdc);
+			}
+			::TransparentBlt(
+				_hdc, 0, 0, GAME_WIDTH, GAME_HEIGHT,
+				hBulletDC,
+				0, 0, GAME_WIDTH, GAME_HEIGHT,
+				RGB(255, 0, 255));
+
+			continue;
+		}
+
 		for (auto* obj : vec)
 		{
 			if (obj->GetIsDead() || !obj->IsActive()) continue;

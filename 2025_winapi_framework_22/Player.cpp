@@ -183,6 +183,9 @@ void Player::TakeDamage(int _damage) {
 		SetPos({ GAME_WIDTH / 2.f, 600.f });
 		fsm->ChangeState(new PlayerHitState());
 	}
+	else {
+		fsm->ChangeState(new PlayerDeadState());
+	}
 
 	if (m_isDead) return;
 
