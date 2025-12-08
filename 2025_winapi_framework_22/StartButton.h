@@ -5,5 +5,8 @@ class StartButton :
 {
 public: 
     void OnClick() override;
+    void SetSceneName(const wstring name);
+private:
+    wstring m_SceneName;
 };
 

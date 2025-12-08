@@ -7,9 +7,11 @@ ButtonSelector::ButtonSelector()
 	btns = vector<Button*>(0);
 	curSelectedIdx = 0;
 	m_lastSelectTime = 0;
+	m_isActive = false;
 }
 ButtonSelector::~ButtonSelector()
 {
+	btns.erase(btns.begin(), btns.end());
 }
 void ButtonSelector::Render(HDC _hdc)
 {

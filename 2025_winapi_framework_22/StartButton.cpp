@@ -4,5 +4,11 @@
 
 void StartButton::OnClick()
 {
-	GET_SINGLE(SceneManager)->LoadScene(L"DevScene");
+	wstring sceneName = m_SceneName;
+	GET_SINGLE(SceneManager)->LoadScene(sceneName);
+}
+
+void StartButton::SetSceneName(const wstring name)
+{
+	m_SceneName = name;
 }

@@ -1,8 +1,9 @@
 #include "pch.h"
-#include "BombItem.h"
+#include "PowerItem.h"
 #include "PlayerManager.h"
-void BombItem::OnCollect()
+
+void PowerItem::OnCollect()
 {
 	Player* p = GET_SINGLE(PlayerManager)->GetPlayer();
-	p->PlusBombCount(1);
+	p->GainPower(1);
 }
