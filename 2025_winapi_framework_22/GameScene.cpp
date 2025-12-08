@@ -13,6 +13,7 @@
 #include "ItemDropCompo.h"
 #include "BombItem.h"
 #include "Background.h"
+#include "Effect.h"
 #include "Boss.h"
 
 void GameScene::Init()
@@ -23,16 +24,23 @@ void GameScene::Init()
 
 	Spawn<Background>(Layer::BACKGROUND, { GAME_WIDTH * 0.5f, GAME_HEIGHT * 0.5f }, { GAME_WIDTH, GAME_HEIGHT });
 	//Spawn<Boss>(Layer::ENEMY, { WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4 }, { 100.f,100.f });
+	
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PROJECTILE, Layer::ENEMY);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::DEFAULT);
+	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::ENEMYPROJECTILE);
+	GET_SINGLE(CollisionManager)->CheckLayer(Layer::ENEMYPROJECTILE, Layer::PROJECTILEDELETER);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::ITEM);
 	GET_SINGLE(ResourceManager)->Play(L"BGM");
 
 	GET_SINGLE(EnemySpawnManger)->Init();
 	GET_SINGLE(PoolManager)->AddPool<EnemyProjectile>
 		(PoolType::EnemyProjectile, 100, Layer::ENEMYPROJECTILE);
+	GET_SINGLE(PoolManager)->AddPool<EnemyProjectile>
+		(PoolType::IceProj, 50, Layer::ENEMYPROJECTILE);
 	GET_SINGLE(PoolManager)->AddPool<PlayerProjectile>
 		(PoolType::PlayerProj, 100, Layer::PROJECTILE);
+	GET_SINGLE(PoolManager)->AddPool<Effect>
+		(PoolType::Effect, 10, Layer::ENEMYPROJECTILE);
 
 	m_uiWidth = WINDOW_WIDTH - GAME_WIDTH;
 	m_uiHeight = WINDOW_HEIGHT;
@@ -66,6 +74,7 @@ void GameScene::Init()
 	GET_SINGLE(EnemySpawnManger)->AddEnemySpawnQueue({ 3.f, testEnemy });
 	GET_SINGLE(EnemySpawnManger)->AddEnemySpawnQueue({ 6.f, circleEnemy });
 	GET_SINGLE(EnemySpawnManger)->AddEnemySpawnQueue({ 9.f, tripleshot });
+	GET_SINGLE(EnemySpawnManger)->AddBossSpawn(20.f);
 
 	for (float i = 0; i < 9; i+= 3)
 	{
