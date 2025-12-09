@@ -8,6 +8,14 @@ EnemyMovement::EnemyMovement()
     
 }
 
+EnemyMovement::~EnemyMovement()
+{
+    while (moveOrder.empty() == false)
+    {
+        moveOrder.pop();
+    }
+}
+
 void EnemyMovement::Init()
 {
     m_distanceTraveled = 0.0f;
