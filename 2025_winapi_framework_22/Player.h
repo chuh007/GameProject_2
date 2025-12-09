@@ -77,7 +77,7 @@ private:
 	const float INVOKE_BOMB_DURATION = 1.0f;
 private:
 	int m_powerLevel;
-	int m_amountDmg;
+	float m_amountDmg;
 	const int MAX_POWER = 128;
 	const int POWER_SMALL_VALUE = 1;
 	const int POWER_BIG_VALUE = 8;
