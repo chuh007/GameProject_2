@@ -3,6 +3,7 @@
 #include "MathHelper.h"
 class Enemy;
 class Scene;
+class Boss;
 struct SpawnInfo
 {
 	float spawnTime;
@@ -32,17 +33,21 @@ public:
 	}
 public:
 	void AddEnemySpawnQueue(SpawnInfo _spawn);
+	void AddBossSpawn(float _time);
 	void SetSpawnScene(Scene* scene)
 	{
 		m_spawnTargetScene = scene;
 	}
 private: 
 	bool TryToSpawn();
+	bool TryToSpawnBoss();
 	void AssignPath();
 private:
 	float m_currentTime;
 	Scene* m_spawnTargetScene;
 	std::priority_queue<SpawnInfo, std::vector<SpawnInfo>, CompareSpawnInfo> m_enemySpawnQueue;
 	std::unordered_map<wstring, BezierPathData*> m_calcedPath;
+	float m_bossSpawnTime;
+	bool m_bossSpawned;
 };
 

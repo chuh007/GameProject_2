@@ -191,6 +191,7 @@
     <ClInclude Include="Enums.h" />
     <ClInclude Include="ExitButton.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="GameOverScene.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="GateOfBabylonPattern.h" />
     <ClInclude Include="GDISelector.h" />
@@ -211,6 +212,7 @@
     <ClInclude Include="PlayerHitState.h" />
     <ClInclude Include="PlayerManager.h" />
     <ClInclude Include="PoolManager.h" />
+    <ClInclude Include="PowerItem.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="PureBulletHellPattern.h" />
     <ClInclude Include="Resource.h" />
@@ -264,6 +266,7 @@
     <ClCompile Include="EnemySpawnManger.cpp" />
     <ClCompile Include="EnemyProjectile.cpp" />
     <ClCompile Include="ExitButton.cpp" />
+    <ClCompile Include="GameOverScene.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="GateOfBabylonPattern.cpp" />
     <ClCompile Include="GDISelector.cpp" />
@@ -285,6 +288,7 @@
     <ClCompile Include="PlayerHitState.cpp" />
     <ClCompile Include="PlayerManager.cpp" />
     <ClCompile Include="PoolManager.cpp" />
+    <ClCompile Include="PowerItem.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="PureBulletHellPattern.cpp" />
     <ClCompile Include="ResourceBase.cpp" />
