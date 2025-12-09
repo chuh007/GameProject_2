@@ -28,8 +28,8 @@ Boss::Boss()
 	col->SetSize(40.f);
 	m_target = GET_SINGLE(PlayerManager)->GetPlayer();
 	m_healthCompo = AddComponent<Health>();
-	m_healthCompo->SetMaxHP(5000);
-	m_healthCompo->SetCurrentHP(5000);
+	m_healthCompo->SetMaxHP(4500);
+	m_healthCompo->SetCurrentHP(4500);
 	auto* mover = AddComponent<BossMover>();
 
 	m_patternCompo = AddComponent<PatternCompo>();
