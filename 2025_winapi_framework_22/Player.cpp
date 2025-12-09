@@ -262,9 +262,12 @@ void Player::InvokeBomb() {
 		}, 1.f);
 }
 
-void Player::GainPower(int _amount) {
+void Player::GainPower(float _amount) {
 	m_powerLevel += _amount;
-	m_amountDmg += 0.1f;
+	m_amountDmg += _amount / 10.f;
+	if (m_powerLevel < 0) {
+		m_powerLevel = 0;
+	}
 
 	m_powerLevel = std::min(m_powerLevel, MAX_POWER);
 	std::cout << "Power Level: " << m_powerLevel << std::endl;
