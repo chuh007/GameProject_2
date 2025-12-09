@@ -19,5 +19,8 @@ private:
     PoolType m_projectileType;
     int m_fireCount;
     int m_speed;
+
+    Texture* m_swordTex;
+    Texture* m_bulletTex;
 };
 

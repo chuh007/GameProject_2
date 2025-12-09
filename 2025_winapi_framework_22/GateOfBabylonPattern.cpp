@@ -17,7 +17,10 @@ GateOfBabylonPattern::GateOfBabylonPattern(Object* _owner, Object* _target, floa
 	, m_baseSpeed(300.f)
 {
 
-	m_decValue = 0.5f;
+	m_decValue = 0.4f;
+	m_swordTexs[0] = GET_SINGLE(ResourceManager)->GetTexture(L"GreenSword");
+	m_swordTexs[1] = GET_SINGLE(ResourceManager)->GetTexture(L"RedSword");
+	m_swordTexs[2] = GET_SINGLE(ResourceManager)->GetTexture(L"YellowSword");
 }
 
 GateOfBabylonPattern::~GateOfBabylonPattern()
@@ -38,7 +41,6 @@ void GateOfBabylonPattern::Update()
 
 void GateOfBabylonPattern::BaseShoot()
 {
-	GET_SINGLE(ResourceManager)->Play(L"FireSound");
 
 	int currentPortalCount = m_basePortalCount + (int)(m_patternUseTime / 5.0f);
 	float currentBaseSpeed = m_baseSpeed + (m_patternUseTime * 10.f);
@@ -60,11 +62,12 @@ void GateOfBabylonPattern::BaseShoot()
 			{
 				GET_SINGLE(PoolManager)->Push<Effect>(PoolType::Effect, magicEffect);
 			}, randomLaunchDelay + 0.1f);
+		int idx = rand() % 3;
 		for (int j = 0; j < m_trailCount; ++j)
 		{
 			auto* projectile = GET_SINGLE(PoolManager)->Pop<EnemyProjectile>(PoolType::EnemyProjectile);
-
-			projectile->SetSize({ 15.f, 15.f });
+			projectile->SetSize({ 20.f, 24.f });
+			projectile->SetTexture(m_swordTexs[idx]);
 			projectile->SetColliderSize(10.f);
 			projectile->SetPos(startPos);
 			projectile->SetDir(dir);

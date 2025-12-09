@@ -23,4 +23,6 @@ private:
     int m_speed;
     int m_fireCount;
     bool m_isleft;
+
+    Texture* m_bulletTex;
 };

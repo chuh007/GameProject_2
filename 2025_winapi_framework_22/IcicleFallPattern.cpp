@@ -19,7 +19,7 @@ IcicleFallPattern::IcicleFallPattern(Object* _owner, Object* _target, float _pat
 	, circularShootCount(5)
 	, circularSpeed(200)
 {
-	m_decValue = 0.6f;
+	m_decValue = 0.4f;
 	m_iceTex = GET_SINGLE(ResourceManager)
 		->GetTexture(L"IceBullet");
 	m_bulletTex = GET_SINGLE(ResourceManager)
@@ -59,7 +59,7 @@ void IcicleFallPattern::BaseShoot()
 		auto* projectile1 = PoolManager::GetInst()->
 			Pop<EnemyProjectile>(PoolType::IceProj);
 		projectile1->SetSize({ 16.f, 16.f });
-		projectile1->SetColliderSize(7.5f);
+		projectile1->SetColliderSize(6.5f);
 		projectile1->SetTexture(m_iceTex);
 		projectile1->SetPos(m_owner->GetPos());
 		projectile1->SetDir(-90.f + m_iceAngle - m_curCnt * 5.f);
@@ -73,7 +73,7 @@ void IcicleFallPattern::BaseShoot()
 		auto* projectile2 = PoolManager::GetInst()->
 			Pop<EnemyProjectile>(PoolType::EnemyProjectile);
 		projectile2->SetSize({ 16.f, 16.f });
-		projectile2->SetColliderSize(7.5f);
+		projectile2->SetColliderSize(6.5f);
 		projectile2->SetTexture(m_iceTex);
 		projectile2->SetPos(m_owner->GetPos());
 		projectile2->SetDir(-90.f - m_iceAngle + m_curCnt * 5.f);
@@ -94,8 +94,8 @@ void IcicleFallPattern::CircularShoot()
 	{
 		auto* projectile = PoolManager::GetInst()->
 			Pop<EnemyProjectile>(PoolType::EnemyProjectile);
-		projectile->SetSize({ 20.f, 20.f });
-		projectile->SetColliderSize(15.f);
+		projectile->SetSize({ 22.5f, 22.5f });
+		projectile->SetColliderSize(10.5f);
 		projectile->SetTexture(m_bulletTex);
 		projectile->SetPos(m_owner->GetPos());
 		projectile->SetDir(-90.f + angle * i);

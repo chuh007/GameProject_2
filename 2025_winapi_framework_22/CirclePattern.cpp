@@ -10,7 +10,7 @@ CirclePattern::CirclePattern(Object* _owner, Object* _target, float _patternUseT
 	, m_speed(225)
 {
 	m_decValue = 1.f;
-	m_bulletTex = GET_SINGLE(ResourceManager)->GetTexture(L"OrangeBullet");
+	m_bulletTex = GET_SINGLE(ResourceManager)->GetTexture(L"OraneBullet3");
 }
 
 CirclePattern::~CirclePattern()
@@ -39,7 +39,7 @@ void CirclePattern::BaseShoot()
 		auto* projectile = PoolManager::GetInst()->
 			Pop<EnemyProjectile>(PoolType::EnemyProjectile);
 		projectile->SetSize({ 10.f, 20.f });
-		projectile->SetColliderSize(5.f);
+		projectile->SetColliderSize(5.5f);
 		projectile->SetTexture(m_bulletTex);
 		projectile->SetPos(m_owner->GetPos());
 		projectile->SetDir(angle * i);
@@ -50,7 +50,7 @@ void CirclePattern::BaseShoot()
 		auto* projectile = PoolManager::GetInst()->
 			Pop<EnemyProjectile>(PoolType::EnemyProjectile);
 		projectile->SetSize({ 10.f, 20.f });
-		projectile->SetColliderSize(5.f);
+		projectile->SetColliderSize(5.5f);
 		projectile->SetTexture(m_bulletTex);
 		projectile->SetPos(m_owner->GetPos());
 		projectile->SetDir(angle * i);
