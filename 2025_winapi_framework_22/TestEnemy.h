@@ -8,10 +8,8 @@ public :
     TestEnemy();
     ~TestEnemy();
     void Update() override;
-protected:
 
 private:
-    BezierPathData* pathData;
-    float fireTime;
+    float fireTime = 0;
 };
 

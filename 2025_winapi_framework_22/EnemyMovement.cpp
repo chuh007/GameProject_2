@@ -38,7 +38,7 @@ void EnemyMovement::LateUpdate()
             else
             {
                 m_distanceTraveled = 0.0f;
-                defaultPos = GetBezierPoint(moveOrder.front()->points, 1);
+                defaultPos += GetBezierPoint(moveOrder.front()->points, 1);
                 moveOrder.pop();
             }
         }

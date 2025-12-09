@@ -247,9 +247,6 @@
     <ClInclude Include="ButtonSelector.h">
       <Filter>Engine\07. UI</Filter>
     </ClInclude>
-    <ClInclude Include="CircleMoveEnemy.h">
-      <Filter>Engine\04. Scene</Filter>
-    </ClInclude>
     <ClInclude Include="TripleShotEnemy.h">
       <Filter>Engine\03. Object\Enemy</Filter>
     </ClInclude>
@@ -272,6 +269,12 @@
       <Filter>Engine\09. Pattern</Filter>
     </ClInclude>
     <ClInclude Include="BulletRenderManager.h" />
+    <ClInclude Include="ClearScene.h" />
+    <ClInclude Include="Panel.h" />
+    <ClInclude Include="ShotToPlayerEnemy.h" />
+    <ClInclude Include="CircleMoveEnemy.h">
+      <Filter>Engine\03. Object\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc">
@@ -455,9 +458,6 @@
     <ClCompile Include="ButtonSelector.cpp">
       <Filter>Engine\07. UI</Filter>
     </ClCompile>
-    <ClCompile Include="CircleMoveEnemy.cpp">
-      <Filter>Engine\04. Scene</Filter>
-    </ClCompile>
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="BombItem.cpp" />
     <ClCompile Include="Item.cpp" />
@@ -476,5 +476,12 @@
     </ClCompile>
     <ClCompile Include="PowerItem.cpp" />
     <ClCompile Include="GameOverScene.cpp" />
+    <ClCompile Include="BulletRenderManager.cpp" />
+    <ClCompile Include="ClearScene.cpp" />
+    <ClCompile Include="Panel.cpp" />
+    <ClCompile Include="ShotToPlayerEnemy.cpp" />
+    <ClCompile Include="CircleMoveEnemy.cpp">
+      <Filter>Engine\03. Object\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -29,6 +29,7 @@ public:
     {
         m_repeatType = type;
     }
+    float GetSpeed() { return m_speed; };
 
 private:
     Vec2 defaultPos = { 0,0 };
