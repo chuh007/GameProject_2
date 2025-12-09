@@ -120,5 +120,7 @@ void DevScene::Release() {
 		DeleteObject(m_hUIBitmap);
 		m_hUIBitmap = nullptr;
 	}
+
+	Scene::Release();
 }
 

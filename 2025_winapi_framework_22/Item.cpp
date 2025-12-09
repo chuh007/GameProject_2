@@ -14,7 +14,7 @@ void Item::Update()
 {
 	Vec2 curPos = GetPos();
 	SetPos({ curPos.x, curPos.y + m_currentSpeed * fDT });
-	m_currentSpeed += 120.f * fDT;
+	m_currentSpeed += 200.f * fDT;
 
 	if (curPos.y >= GAME_HEIGHT * 2)
 	{

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -176,6 +176,7 @@
     <ClInclude Include="CircleMoveEnemy.h" />
     <ClInclude Include="CirclePattern.h" />
     <ClInclude Include="CircleToPlayerPattern.h" />
+    <ClInclude Include="ClearScene.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="CombatCompo.h" />
@@ -223,6 +224,7 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SecondMagicPattern.h" />
+    <ClInclude Include="ShotToPlayerEnemy.h" />
     <ClInclude Include="StartButton.h" />
     <ClInclude Include="SpellNameText.h" />
     <ClInclude Include="SpiralPattern.h" />
@@ -254,6 +256,7 @@
     <ClCompile Include="CircleMoveEnemy.cpp" />
     <ClCompile Include="CirclePattern.cpp" />
     <ClCompile Include="CircleToPlayerPattern.cpp" />
+    <ClCompile Include="ClearScene.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="CombatCompo.cpp" />
@@ -299,6 +302,7 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SecondMagicPattern.cpp" />
+    <ClCompile Include="ShotToPlayerEnemy.cpp" />
     <ClCompile Include="SpellNameText.cpp" />
     <ClCompile Include="StartButton.cpp" />
     <ClCompile Include="SpiralPattern.cpp" />
