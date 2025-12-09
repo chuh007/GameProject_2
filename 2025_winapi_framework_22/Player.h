@@ -86,6 +86,6 @@ private:
 	float m_invincibleTime;
 	const float MAX_INVINCIBLE_TIME = 2.f;
 private:
-	const float HITBOX_RADIUS = 5.0f;
+	const float HITBOX_RADIUS = 3.0f;
 };
 

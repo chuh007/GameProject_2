@@ -29,7 +29,7 @@ col(nullptr), fsm(nullptr), m_health(nullptr),  m_proj(nullptr)
 	rb->SetUseGravity(false);
 	col = AddComponent<Collider>();
 	col->SetName(L"Player");
-	col->SetSize(5.0f);
+	col->SetSize(3.0f);
 	auto* animator = AddComponent<Animator>();
 	animator->CreateAnimation
 	(L"JiwooFront",
@@ -66,10 +66,10 @@ void Player::Render(HDC _hdc)
 
 	ComponentRender(_hdc);
 
-	HPEN hRedPen = CreatePen(PS_SOLID, 3, RGB(255, 0, 0));
+	HPEN hRedPen = CreatePen(PS_SOLID, 2, RGB(255, 0, 0));
 	HPEN hOldPen = (HPEN)SelectObject(_hdc, hRedPen);
 
-	HBRUSH hNullBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
+	HBRUSH hNullBrush = (HBRUSH)GetStockObject(WHITE_BRUSH);
 	HBRUSH hOldBrush = (HBRUSH)SelectObject(_hdc, hNullBrush);
 
 	float centerX = pos.x;
@@ -222,11 +222,11 @@ void Player::TryContinueFire(float _fDT) {
 }
 
 bool Player::UseBomb() {
-	DeleteBullet* delBullet = GET_SINGLE(SceneManager)->GetCurScene()->
-		Spawn<DeleteBullet>(Layer::PROJECTILEDELETER, GetPos(), GetSize());
-
 	if (m_bombCnt > 0) {
 		m_bombCnt--;
+
+		DeleteBullet* delBullet = GET_SINGLE(SceneManager)->GetCurScene()->
+			Spawn<DeleteBullet>(Layer::PROJECTILEDELETER, GetPos(), GetSize());
 
 		delBullet->Coroutine([=]()
 			{
