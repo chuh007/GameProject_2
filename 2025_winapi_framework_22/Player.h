@@ -50,6 +50,9 @@ public:
 	void PlusBombCount(int _bombCnt) {
 		m_bombCnt += _bombCnt;
 	}
+	void RequestGameOver() {
+		requestGameOver = true;
+	}
 public:
 	void SetInvincible(bool isInvincible);
 	float& GetInvincibleTime();
@@ -86,6 +89,7 @@ private:
 	float m_invincibleTime;
 	const float MAX_INVINCIBLE_TIME = 2.f;
 private:
+	bool requestGameOver = false;
 	const float HITBOX_RADIUS = 3.0f;
 };
 

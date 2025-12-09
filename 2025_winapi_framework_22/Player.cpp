@@ -44,7 +44,6 @@ col(nullptr), fsm(nullptr), m_health(nullptr),  m_proj(nullptr)
 	m_health = AddComponent<Health>();
 	m_health->SetMaxHP(3);
 	m_health->SetCurrentHP(3);
-	//m_bombCnt = MAX_BOMB_COUNT;
 	SetBombCount(MAX_BOMB_COUNT);
 
 	fsm = AddComponent<StateMachine>();
@@ -54,7 +53,7 @@ col(nullptr), fsm(nullptr), m_health(nullptr),  m_proj(nullptr)
 
 Player::~Player()
 {
-	// 여기 DELETE 해줘야해
+
 }
 
 void Player::Render(HDC _hdc)
@@ -116,6 +115,10 @@ void Player::Update()
 		}
 	}
 	Object::LateUpdate();
+
+	if (requestGameOver) {
+		GET_SINGLE(SceneManager)->LoadScene(L"GameOver");
+	}
 }
 
 void Player::CreateProjectile()
@@ -141,7 +144,7 @@ void Player::CreateProjectile()
 		start_angle_deg = -(num_proj - 1) * ANGLE_STEP / 2.f;
 	}
 
-	float baseDmg = 10.f;
+	float baseDmg = 1.f;
 	int totalDmg = baseDmg + m_amountDmg;
 
 	for (int i = 0; i < num_proj; ++i)
@@ -188,8 +191,6 @@ void Player::TakeDamage(int _damage) {
 	}
 
 	if (m_isDead) return;
-
-	cout << "P : " << _damage << endl;
 }
 
 void Player::HPZero() {
@@ -253,7 +254,7 @@ void Player::InvokeBomb() {
 
 void Player::GainPower(int _amount) {
 	m_powerLevel += _amount;
-	m_amountDmg += 1.f;
+	m_amountDmg += 0.1f;
 
 	m_powerLevel = std::min(m_powerLevel, MAX_POWER);
 	std::cout << "Power Level: " << m_powerLevel << std::endl;
