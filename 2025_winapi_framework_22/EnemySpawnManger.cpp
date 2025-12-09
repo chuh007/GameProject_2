@@ -129,7 +129,8 @@ void EnemySpawnManger::AssignPath()
 	BezierPathData* ArcMoveL = new BezierPathData;
 	ArcMoveL->BezierPathData::CalculateArcLengthMap({ {0,0},{400,-200},{400,-400}, {-100, -400 } });
 	m_calcedPath.insert({ L"ArcMoveL", ArcMoveL });
+
 	BezierPathData* ArcMoveR = new BezierPathData;
-	ArcMoveL->BezierPathData::CalculateArcLengthMap({ {0,0},{400,-200},{400,-400}, {-100, -400 } });
+	ArcMoveR->BezierPathData::CalculateArcLengthMap({ {0,0},{-400,-200},{-400,-400}, {100, -400 } });
 	m_calcedPath.insert({ L"ArcMoveR", ArcMoveR });
 }

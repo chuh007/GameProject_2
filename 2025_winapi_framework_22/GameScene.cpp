@@ -285,8 +285,109 @@ void GameScene::Init()
 		enemyManager->AddEnemySpawnQueue({ 50.f + (i / 2) * 0.5f, triple });
 	}
 
+	for (int i = 0; i < 4; i++)
+	{
+		ShotToPlayerEnemy* shotEnemy = new ShotToPlayerEnemy;
+		if (i == 0)
+		{
+			CREATE_ENEMY(shotEnemy, 200 + i * 150, -50, 50, 50, 25, 10.f, BombItem, 25.f, 25.f);
+		}
+		else
+		{
+			CREATE_ENEMY(shotEnemy, 200 + i * 150, -50, 50, 50, 25, 10.f, PowerItem, 25.f, 25.f);
+		}
+
+		auto* movecompo = shotEnemy->AddComponent<EnemyMovement>();
+
+		for (int i = 0; i < 10; ++i)
+		{
+			movecompo->AddPathData(down);
+		}
+
+		movecompo->SetSpeed(100.f);
+
+		enemyManager->AddEnemySpawnQueue({ 55.f + i * 0.5f, shotEnemy });
+	}
+
+	for (int i = 0; i < 9; ++i)
+	{
+		CircleMoveEnemy* fireEnemy = new CircleMoveEnemy;
+		if (i % 3 == 0)
+		{
+			CREATE_ENEMY(fireEnemy, 100 + (i % 3) * 175, 0, 75, 75, 75.f / 2, 5.0f, BombItem, 25.f, 25.f);
+		}
+		else
+		{
+			CREATE_ENEMY(fireEnemy, 100 + (i % 3) * 175, 0, 75, 75, 75.f / 2, 5.0f, PowerItem, 25.f, 25.f);
+		}
+		fireEnemy->SetShotCount(25);
 
 
+		auto* movecompo = fireEnemy->AddComponent<EnemyMovement>();
+		movecompo->SetRepeatType(MoveRepeatType::Stop);
+
+		for (int j = 0; j < 12; ++j)
+		{
+			movecompo->AddPathData(down);
+		}
+		movecompo->SetSpeed(150.f);
+
+		enemyManager->AddEnemySpawnQueue({ 55.f + 1.5f * i , fireEnemy });
+	}
+	// 1분대 채움
+
+	for (float i = 60; i < 63; i += 0.25f)
+	{
+		TestEnemy* testEnemy = new TestEnemy;
+		CREATE_ENEMY(testEnemy, -50, 100, 75, 75, 75.f / 2, 3.f, PowerItem, 25.f, 25.f);
+
+
+		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
+		movecompo->SetRepeatType(MoveRepeatType::Stop);
+		movecompo->AddPathData(wave1path);
+		movecompo->SetSpeed(300.f);
+
+		enemyManager->AddEnemySpawnQueue({ i , testEnemy });
+	}
+	for (float i = 60; i < 63; i += 0.25f)
+	{
+		TestEnemy* testEnemy = new TestEnemy;
+		CREATE_ENEMY(testEnemy, -50, 300, 75, 75, 75.f / 2, 3.f, PowerItem, 25.f, 25.f);
+
+
+		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
+		movecompo->SetRepeatType(MoveRepeatType::Stop);
+		movecompo->AddPathData(wave1path);
+		movecompo->SetSpeed(300.f);
+
+		enemyManager->AddEnemySpawnQueue({ i , testEnemy });
+	}
+
+	for (int i = 0; i < 3; ++i)
+	{
+		CircleMoveEnemy* fireEnemy = new CircleMoveEnemy;
+		if (i % 3 == 0)
+		{
+			CREATE_ENEMY(fireEnemy, 100 + (i % 3) * 175, 0, 75, 75, 75.f / 2, 5.0f, BombItem, 25.f, 25.f);
+		}
+		else
+		{
+			CREATE_ENEMY(fireEnemy, 100 + (i % 3) * 175, 0, 75, 75, 75.f / 2, 5.0f, PowerItem, 25.f, 25.f);
+		}
+		fireEnemy->SetShotCount(25);
+
+
+		auto* movecompo = fireEnemy->AddComponent<EnemyMovement>();
+		movecompo->SetRepeatType(MoveRepeatType::Stop);
+
+		for (int j = 0; j < 12; ++j)
+		{
+			movecompo->AddPathData(down);
+		}
+		movecompo->SetSpeed(150.f);
+
+		enemyManager->AddEnemySpawnQueue({ 60.f + i , fireEnemy });
+	}
 	//여기까지 적 세팅
 }
 
