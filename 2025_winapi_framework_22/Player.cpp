@@ -112,6 +112,7 @@ void Player::Update()
 	if (GET_KEYDOWN(KEY_TYPE::Z)) {
 		if (m_powerLevel <= MAX_POWER) {
 			GainPower(1);
+			m_bombCnt++;
 		}
 	}
 	Object::LateUpdate();
@@ -245,6 +246,10 @@ void Player::InvokeBomb() {
 		Spawn<DeleteBullet>(Layer::PROJECTILEDELETER, GetPos(), GetSize());
 
 	if (delBullet == nullptr) return;
+
+	if (m_bombCnt < 3) {
+		m_bombCnt = 3;
+	}
 
 	delBullet->Coroutine([=]()
 		{
