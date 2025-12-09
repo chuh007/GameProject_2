@@ -219,23 +219,74 @@ void GameScene::Init()
 
 		auto* movecompo = triple->AddComponent<EnemyMovement>();
 		movecompo->SetRepeatType(MoveRepeatType::Stop);
-		movecompo->AddPathData(down);
-		movecompo->AddPathData(down);
-		movecompo->AddPathData(down);
+		for (int j = 0; j < 5; ++j)
+		{
+			movecompo->AddPathData(down);
+		}
 		if(i%2 == 0)
 			movecompo->AddPathData(wave1path);
 		else
-			movecompo->SetSpeed(300.f);
+			movecompo->AddPathData(wave2path);
+
+		movecompo->SetSpeed(300.f);
 
 
 		enemyManager->AddEnemySpawnQueue({ 45.f + i , triple });
 	}
-	/*for (int i = 0; i < 4; ++i)
+
+	BezierPathData* arcPathL = enemyManager->GetPath(L"ArcMoveL");
+	BezierPathData* arcPathR = enemyManager->GetPath(L"ArcMoveR");
+	for (int i = 0; i < 10; ++i)
+	{
+		TestEnemy* testEnemy = new TestEnemy;
+		CREATE_ENEMY(testEnemy, 0, 500, 75, 75, 75.f / 2, 3.f, PowerItem, 25.f, 25.f);
+
+		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
+		movecompo->SetRepeatType(MoveRepeatType::Stop);
+		movecompo->AddPathData(arcPathL);
+		movecompo->SetSpeed(300.f);
+
+		enemyManager->AddEnemySpawnQueue({ 45.f + i , testEnemy });
+	}
+	for (int i = 0; i < 10; ++i)
+	{
+		TestEnemy* testEnemy = new TestEnemy;
+		CREATE_ENEMY(testEnemy, GAME_WIDTH, 500, 75, 75, 75.f / 2, 3.f, PowerItem, 25.f, 25.f);
+
+		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
+		movecompo->SetRepeatType(MoveRepeatType::Stop);
+		movecompo->AddPathData(arcPathR);
+		movecompo->SetSpeed(300.f);
+
+		enemyManager->AddEnemySpawnQueue({ 45.f + i , testEnemy });
+	}
+	for (int i = 0; i < 12; ++i)
 	{
 		TripleShotEnemy* triple = new TripleShotEnemy;
-		CREATE_ENEMY(triple, 200 + (i % 2) * 150, -50, 50, 50, 25, 10.f, PowerItem, 25.f, 25.f);
+		if (i <= 1)
+		{
+			CREATE_ENEMY(triple, 200 + (i % 2) * 200, -50, 50, 50, 25, 10.f, BombItem, 25.f, 25.f);
+		}
+		else
+		{
+			CREATE_ENEMY(triple, 200 + (i % 2) * 200, -50, 50, 50, 25, 10.f, PowerItem, 25.f, 25.f);
+		}
 
-	}*/
+		auto* movecompo = triple->AddComponent<EnemyMovement>();
+		movecompo->SetRepeatType(MoveRepeatType::Stop);
+
+		for (int i = 0; i < 10; ++i)
+		{
+			movecompo->AddPathData(down);
+		}
+
+		movecompo->SetSpeed(300.f);
+
+		enemyManager->AddEnemySpawnQueue({ 50.f + (i / 2) * 0.5f, triple });
+	}
+
+
+
 	//여기까지 적 세팅
 }
 
@@ -284,6 +335,7 @@ void GameScene::Render(HDC _hdc) {
 void GameScene::Release()
 {
 	Scene::Release();
+	GET_SINGLE(EnemySpawnManger)->Realese();
 	if (m_hdc != nullptr) {
 		SelectObject(m_hdc, m_hOldBitmap);
 		DeleteDC(m_hdc);

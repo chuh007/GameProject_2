@@ -17,7 +17,7 @@ private:
 
 public:
     EnemyMovement();
-
+    ~EnemyMovement();
     void Init() override;
     void LateUpdate() override;
     void Render(HDC hDC) override;

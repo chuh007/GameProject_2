@@ -58,8 +58,8 @@ void PlayerProjectile::EnterCollision(Collider* _other)
 	if (damageable)
 	{
 		damageable->TakeDamage(m_damage);
-		GetComponent<Collider>()->SetActive(false);
 		Reset();
+		GetComponent<Collider>()->SetActive(false);
 		GET_SINGLE(PoolManager)->Push<PlayerProjectile>(PoolType::PlayerProj, this);
 	}
 }
