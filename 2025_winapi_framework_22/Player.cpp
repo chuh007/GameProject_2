@@ -112,7 +112,6 @@ void Player::Update()
 	if (GET_KEYDOWN(KEY_TYPE::Z)) {
 		if (m_powerLevel <= MAX_POWER) {
 			GainPower(1);
-			m_bombCnt++;
 		}
 	}
 	Object::LateUpdate();
