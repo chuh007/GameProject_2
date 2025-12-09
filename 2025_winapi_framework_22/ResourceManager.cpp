@@ -48,7 +48,8 @@ void ResourceManager::RegisterSound()
 {
 	LoadSound(L"BGM", L"Sound\\Native Faith_orgin.mp3", true);
 	LoadSound(L"FireSound", L"Sound\\FireSound.mp3", false);
-	//LoadSound(L"BGM", L"Sound\\laserShoot.wav", false);
+	LoadSound(L"SpellEndSound", L"Sound\\se_enep00.wav", false);
+	LoadSound(L"SpellSound", L"Sound\\se_cardget.wav", false);
 }
 
 void ResourceManager::FmodUpdate()
@@ -195,7 +196,14 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"IceBullet", L"Texture\\IceBullet.bmp");
 	LoadTexture(L"Magic", L"Texture\\magic.bmp");
 	LoadTexture(L"Background", L"Texture\\Background.bmp");
-	LoadTexture(L"OrangeBullet", L"Texture\\2_Circle_Orange_3.bmp");
+	LoadTexture(L"OraneBullet3", L"Texture\\2_Circle_Orange_3.bmp");
+	LoadTexture(L"GreenBullet1", L"Texture\\2_Circle_Green_1.bmp");
+	LoadTexture(L"GreenBullet3", L"Texture\\2_Circle_Green_3.bmp");
+	LoadTexture(L"BlueBullet1", L"Texture\\2_Circle_Blue_1.bmp");
+	LoadTexture(L"GreenSword", L"Texture\\Sword_BrightGreen.bmp");
+	LoadTexture(L"RedSword", L"Texture\\Sword_Red.bmp");
+	LoadTexture(L"YellowSword", L"Texture\\Sword_Yellow.bmp");
+	LoadTexture(L"Boss", L"Texture\\Zelretch.bmp");
 
 }
 

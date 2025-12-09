@@ -4,6 +4,7 @@
 
 class PatternCompo;
 class Health;
+class Texture;
 class Boss :
     public Object
     , public IDamageable
@@ -32,5 +33,6 @@ private:
     Health* m_healthCompo;
     float m_decDamage;
     Object* m_target;
+    Texture* m_pTex;
 };
 

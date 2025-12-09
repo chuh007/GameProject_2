@@ -45,6 +45,7 @@ void PatternCompo::Render(HDC hDC)
 void PatternCompo::UseNomalPattern()
 {
 	DeleteProjectile();
+	GET_SINGLE(ResourceManager)->Play(L"SpellEndSound");
 	m_phase++;
 	m_curPattern = m_nomalPatternList[m_phase];
 	m_isUseSpell = false;
@@ -55,16 +56,17 @@ void PatternCompo::UseNomalPattern()
 void PatternCompo::UseSpellPattern()
 {
 	DeleteProjectile();
+	GET_SINGLE(ResourceManager)->Play(L"SpellSound");
 	m_curPattern = m_spellPatternList[m_phase];
 	m_isUseSpell = true;
 	auto* text = m_spellNameText;
 	int textSize = m_curPattern->GetName().size();
 	text->SetName(m_curPattern->GetName());
 	text->SetPos({ GAME_WIDTH + 20, GAME_HEIGHT - 50 });
-	text->MoveTo({ GAME_WIDTH - 15 * textSize, GAME_HEIGHT - 50 }, 0.5f);
+	text->MoveTo({ GAME_WIDTH - 14 * textSize, GAME_HEIGHT - 50 }, 0.5f);
 	text->Coroutine([=]()
 		{
-			text->MoveTo({ GAME_WIDTH - 15 * textSize, 25 }, 1.f);
+			text->MoveTo({ GAME_WIDTH - 14 * textSize, 25 }, 1.f);
 		}, 0.75f);
 	
 }

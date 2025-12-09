@@ -17,4 +17,6 @@ private:
     int m_basePortalCount; // 기본 사출 수
     int m_trailCount; // 쏠때 몇발 쏠지
     float m_baseSpeed; // 속도
+
+    Texture* m_swordTexs[3];
 };

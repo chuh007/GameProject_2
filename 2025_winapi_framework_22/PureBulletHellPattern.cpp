@@ -8,6 +8,8 @@ PureBulletHellPattern::PureBulletHellPattern(Object* _owner, Object* _target, fl
 	, m_fireCount(50)
 	, m_speed(150)
 {
+	m_decValue = 0.4f;
+	m_bulletTex = GET_SINGLE(ResourceManager)->GetTexture(L"BlueBullet1");
 }
 
 PureBulletHellPattern::~PureBulletHellPattern()
@@ -38,6 +40,7 @@ void PureBulletHellPattern::BaseShoot()
 			Pop<EnemyProjectile>(PoolType::EnemyProjectile);
 		projectile->SetSize({ 55.f, 55.f });
 		projectile->SetColliderSize(25.f);
+		projectile->SetTexture(m_bulletTex);
 		projectile->SetPos(m_owner->GetPos());
 		projectile->SetDir(angle * i);
 		projectile->SetSpeed(m_speed);

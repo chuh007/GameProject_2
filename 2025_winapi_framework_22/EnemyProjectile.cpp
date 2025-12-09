@@ -72,7 +72,7 @@ void EnemyProjectile::Render(HDC _hdc)
 	LONG height = m_pTex->GetHeight();
 
 	float angle = atan2(m_dir.y, m_dir.x);
-	angle -= PI / 2;
+	angle += PI / 2;
 	float cosA = cosf(angle);
 	float sinA = sinf(angle);
 
@@ -97,7 +97,7 @@ void EnemyProjectile::Render(HDC _hdc)
 		0, 0, width, height,
 		NULL, 0, 0);
 
-	ComponentRender(_hdc);
+	ComponentRender(GET_SINGLE(BulletRenderManager)->GetBulletDC());
 }
 
 void EnemyProjectile::EnterCollision(Collider* _other)

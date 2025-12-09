@@ -9,7 +9,9 @@ CircleToPlayerPattern::CircleToPlayerPattern(Object* _owner, Object* _target, fl
 	, m_fireCount(20)
 	, m_speed(250)
 {
-	m_decValue = 0.7f;
+	m_decValue = 0.5f;
+	m_bulletTex = GET_SINGLE(ResourceManager)->GetTexture(L"GreenBullet1");
+	m_swordTex = GET_SINGLE(ResourceManager)->GetTexture(L"GreenSword");
 }
 
 CircleToPlayerPattern::~CircleToPlayerPattern()
@@ -41,8 +43,9 @@ void CircleToPlayerPattern::BaseShoot()
 	{
 		auto* projectile = PoolManager::GetInst()->
 			Pop<EnemyProjectile>(PoolType::EnemyProjectile);
-		projectile->SetSize({ 10.f, 10.f });
-		projectile->SetColliderSize(7.5f);
+		projectile->SetSize({ 16.f, 16.f });
+		projectile->SetColliderSize(7.25f);
+		projectile->SetTexture(m_bulletTex);
 		projectile->SetPos(m_owner->GetPos());
 		projectile->SetDir(angle * i);
 		projectile->SetSpeed(speed);
@@ -60,8 +63,9 @@ void CircleToPlayerPattern::RayShout()
 	{
 		auto* projectile = PoolManager::GetInst()->
 			Pop<EnemyProjectile>(PoolType::EnemyProjectile);
-		projectile->SetSize({ 10.f, 10.f });
-		projectile->SetColliderSize(7.5f);
+		projectile->SetSize({ 16.f, 24.f });
+		projectile->SetColliderSize(8.f);
+		projectile->SetTexture(m_swordTex);
 		projectile->SetPos({ GAME_WIDTH / 6 * (i + 1), 0 });
 		projectile->SetDir({ 0.f, 1.f });
 		projectile->SetSpeed(m_speed);

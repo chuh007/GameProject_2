@@ -12,6 +12,7 @@
 SecondMagicPattern::SecondMagicPattern(Object* _owner, Object* _target, float _patternUseTime, BossMover* _mover, wstring _name)
     : Pattern(_owner, _target, _patternUseTime, _mover, _name)
 {
+	m_decValue = 0.4f;
 }
 
 SecondMagicPattern::~SecondMagicPattern()

@@ -12,7 +12,8 @@ SpiralPattern::SpiralPattern(Object* _owner, Object* _target, float _patternUseT
     , m_fireCount(20)
     , m_isleft(false)
 {
-    m_decValue = 0.8f;
+    m_decValue = 0.9f;
+    m_bulletTex = GET_SINGLE(ResourceManager)->GetTexture(L"GreenBullet3");
 }
 
 SpiralPattern::~SpiralPattern()
@@ -70,6 +71,7 @@ void SpiralPattern::BaseShoot()
             projectile->SetSize({ 10.f, 20.f });
             projectile->SetColliderSize(5.f);
             projectile->SetPos(spawnPos);
+            projectile->SetTexture(m_bulletTex);
 
             float finalAngle = angleStep * j;
 
