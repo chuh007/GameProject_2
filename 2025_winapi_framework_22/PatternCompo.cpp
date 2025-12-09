@@ -2,6 +2,7 @@
 #include "PatternCompo.h"
 #include "SceneManager.h"
 #include "DeleteBullet.h"
+#include "Boss.h"
 
 PatternCompo::PatternCompo()
 	: m_curPattern(nullptr)
@@ -45,6 +46,9 @@ void PatternCompo::Render(HDC hDC)
 void PatternCompo::UseNomalPattern()
 {
 	DeleteProjectile();
+	auto owner = dynamic_cast<Boss*>(GetOwner());
+	owner->GetBackground()
+		->SetTexture(GET_SINGLE(ResourceManager)->GetTexture(L"Background"));
 	GET_SINGLE(ResourceManager)->Play(L"SpellEndSound");
 	m_phase++;
 	m_curPattern = m_nomalPatternList[m_phase];
@@ -57,6 +61,9 @@ void PatternCompo::UseSpellPattern()
 {
 	DeleteProjectile();
 	GET_SINGLE(ResourceManager)->Play(L"SpellSound");
+	auto owner = dynamic_cast<Boss*>(GetOwner());
+	owner->GetBackground()
+		->SetTexture(GET_SINGLE(ResourceManager)->GetTexture(L"SpellBackground"));
 	m_curPattern = m_spellPatternList[m_phase];
 	m_isUseSpell = true;
 	auto* text = m_spellNameText;

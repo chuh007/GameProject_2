@@ -246,6 +246,10 @@ void Player::InvokeBomb() {
 
 	if (delBullet == nullptr) return;
 
+	if (m_bombCnt < 3) {
+		m_bombCnt = 3;
+	}
+
 	delBullet->Coroutine([=]()
 		{
 			GET_SINGLE(SceneManager)->RequestDestroy(delBullet);

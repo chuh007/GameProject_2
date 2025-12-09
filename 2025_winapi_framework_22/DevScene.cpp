@@ -24,24 +24,25 @@ void DevScene::Init()
 	//// obj->SetScene(this);
 	//AddObject(obj, Layer::PLAYER);
 	srand(time(nullptr));
-	Spawn<Background>(Layer::BACKGROUND, { GAME_WIDTH * 0.5f, GAME_HEIGHT * 0.5f }, { GAME_WIDTH, GAME_HEIGHT });
+	auto* background = Spawn<Background>(Layer::BACKGROUND, { GAME_WIDTH * 0.5f, GAME_HEIGHT * 0.5f }, { GAME_WIDTH, GAME_HEIGHT });
 	auto* player = Spawn<Player>(Layer::PLAYER, { GAME_WIDTH / 2, 500 }, { 100.f, 100.f });
 	GET_SINGLE(PlayerManager)->SetPlayer(player);
 	Boss* boss = Spawn<Boss>(Layer::ENEMY, { GAME_WIDTH / 2, GAME_HEIGHT / 4 }, { 30.f, 70.f });
+	boss->SetBackground(background);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PROJECTILE, Layer::ENEMY);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::DEFAULT);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::ENEMYPROJECTILE);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::ENEMYPROJECTILE, Layer::PROJECTILEDELETER);
 	GET_SINGLE(ResourceManager)->Play(L"BGM");
 	GET_SINGLE(PoolManager)->AddPool<EnemyProjectile>
-		(PoolType::EnemyProjectile, 100, Layer::ENEMYPROJECTILE);
-	GET_SINGLE(PoolManager)->AddPool<EnemyProjectile>
-		(PoolType::IceProj, 50, Layer::ENEMYPROJECTILE);
+		(PoolType::EnemyProjectile, 500, Layer::ENEMYPROJECTILE);
 	GET_SINGLE(PoolManager)->AddPool<PlayerProjectile>
 		(PoolType::PlayerProj, 100, Layer::PROJECTILE);
 	GET_SINGLE(PoolManager)->AddPool<Effect>
 		(PoolType::Effect, 10, Layer::ENEMYPROJECTILE);
 	//GET_SINGLE(PoolManager)->AddPool
+
+	boss->Start();
 
 	auto* hpBar = Spawn<BossHPBar>(Layer::UI, { GAME_WIDTH / 2, 25 }, { GAME_WIDTH - 20, 50 });
 	hpBar->SetBoss(boss);

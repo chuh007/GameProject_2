@@ -15,6 +15,7 @@ CirclePattern::CirclePattern(Object* _owner, Object* _target, float _patternUseT
 
 CirclePattern::~CirclePattern()
 {
+	Pattern::~Pattern();
 }
 
 void CirclePattern::Update()

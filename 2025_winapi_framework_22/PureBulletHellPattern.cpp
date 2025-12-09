@@ -14,6 +14,7 @@ PureBulletHellPattern::PureBulletHellPattern(Object* _owner, Object* _target, fl
 
 PureBulletHellPattern::~PureBulletHellPattern()
 {
+	Pattern::~Pattern();
 }
 
 void PureBulletHellPattern::Update()
@@ -38,8 +39,8 @@ void PureBulletHellPattern::BaseShoot()
 	{
 		auto* projectile = PoolManager::GetInst()->
 			Pop<EnemyProjectile>(PoolType::EnemyProjectile);
-		projectile->SetSize({ 55.f, 55.f });
-		projectile->SetColliderSize(25.f);
+		projectile->SetSize({ 55.5f, 55.5f });
+		projectile->SetColliderSize(27.5f);
 		projectile->SetTexture(m_bulletTex);
 		projectile->SetPos(m_owner->GetPos());
 		projectile->SetDir(angle * i);

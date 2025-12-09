@@ -27,14 +27,14 @@ void Collider::Render(HDC _hDC)
 	//GET_SINGLE(ResourceManager)->GetPen();
 
 	// RAII
-	PenType colorPen = PenType::GREEN;
-	if (m_showDebug)
-		colorPen = PenType::RED;
-	GDISelector pen(_hDC, colorPen);
-	GDISelector brush(_hDC, BrushType::HOLLOW);
+	//PenType colorPen = PenType::GREEN;
+	//if (m_showDebug)
+	//	colorPen = PenType::RED;
+	//GDISelector pen(_hDC, colorPen);
+	//GDISelector brush(_hDC, BrushType::HOLLOW);
 
-	ELLIPSE_RENDER(_hDC, m_updatedPos.x, m_updatedPos.y,
-		m_size * 2, m_size * 2);
+	//ELLIPSE_RENDER(_hDC, m_updatedPos.x, m_updatedPos.y,
+	//	m_size * 2, m_size * 2);
 }
 void Collider::EnterCollision(Collider* _other)
 {

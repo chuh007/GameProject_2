@@ -203,6 +203,7 @@
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemDropCompo.h" />
+    <ClInclude Include="MultiSpeedRadialPattern.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Pattern.h" />
     <ClInclude Include="PatternCompo.h" />
@@ -282,6 +283,7 @@
     <ClCompile Include="ItemDropCompo.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MoveState.cpp" />
+    <ClCompile Include="MultiSpeedRadialPattern.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Pattern.cpp" />
     <ClCompile Include="PatternCompo.cpp" />
