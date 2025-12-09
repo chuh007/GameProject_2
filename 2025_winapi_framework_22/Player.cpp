@@ -114,6 +114,12 @@ void Player::Update()
 			GainPower(1);
 		}
 	}
+	if (GET_KEYDOWN(KEY_TYPE::R)) {
+		if (m_powerLevel < MAX_POWER) {
+			m_powerLevel = MAX_POWER;
+			m_amountDmg += 12.8f;
+		}
+	}
 	Object::LateUpdate();
 
 	if (requestGameOver) {
@@ -144,7 +150,7 @@ void Player::CreateProjectile()
 		start_angle_deg = -(num_proj - 1) * ANGLE_STEP / 2.f;
 	}
 
-	float baseDmg = 1.f;
+	float baseDmg = 4.f;
 	int totalDmg = baseDmg + m_amountDmg;
 
 	for (int i = 0; i < num_proj; ++i)
