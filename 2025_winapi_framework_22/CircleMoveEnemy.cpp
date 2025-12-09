@@ -20,10 +20,10 @@ CircleMoveEnemy::~CircleMoveEnemy()
 void CircleMoveEnemy::Update()
 {
 	fireTime += fDT;
-	if (fireTime >= 1.f)
+	if (fireTime >= 1.5f)
 	{
 		float dir = 360 / fireCount;
-		for (int i = 0; i < fireCount; ++i)
+		for (int i = 0; i <= fireCount; ++i)
 		{
 			auto* projectile = PoolManager::GetInst()->
 				Pop<EnemyProjectile>(PoolType::EnemyProjectile);

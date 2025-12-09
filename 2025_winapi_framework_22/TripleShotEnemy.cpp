@@ -8,14 +8,6 @@
 TripleShotEnemy::TripleShotEnemy()
 	: pathData(nullptr)
 {
-	auto* col = GetComponent<Collider>();
-	auto* movement = AddComponent<EnemyMovement>();
-	col->SetSize(50.f);
-	movement->SetSpeed(50.f);
-	movement->SetDefaultPos({ 300,0 });
-	movement->AddPathData(GET_SINGLE(EnemySpawnManger)->GetPath(L"ZigzagR"));
-	movement->AddPathData(GET_SINGLE(EnemySpawnManger)->GetPath(L"ZigzagL"));
-	movement->SetRepeatType(MoveRepeatType::Repeat);
 	fireTime = 0;
 }
 
@@ -26,7 +18,7 @@ TripleShotEnemy::~TripleShotEnemy()
 void TripleShotEnemy::Update()
 {
 	fireTime += fDT;
-	if (fireTime >= 1.5f)
+	if (fireTime >= 0.5f)
 	{
 		for (int i = 0; i < 3; ++i)
 		{
