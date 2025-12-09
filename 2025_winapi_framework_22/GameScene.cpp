@@ -8,6 +8,7 @@
 #include "EnemySpawnManger.h"
 #include "EnemyProjectile.h"
 #include "CircleMoveEnemy.h"
+#include "TripleShotEnemy.h"
 #include "ShotToPlayerEnemy.h"
 #include "InputManager.h"
 #include "ItemDropCompo.h"
@@ -93,6 +94,8 @@ void GameScene::Init()
 	FillRect(m_hdc, &rect, hUIBrush);
 
 	DeleteObject(hUIBrush);
+
+
 	//여기서부터 적 세팅
 
 
@@ -104,7 +107,8 @@ void GameScene::Init()
 	for(float i = 0; i < 3; i += 0.25f)
 	{
 		TestEnemy* testEnemy = new TestEnemy;
-		CREATE_ENEMY(testEnemy, 0, 0, 75, 75, 75.f / 2, 20.f, PowerItem, 25.f, 25.f);
+		CREATE_ENEMY(testEnemy, -50, 100, 75, 75, 75.f / 2, 3.f, PowerItem, 25.f, 25.f);
+			
 
 		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
 		movecompo->SetRepeatType(MoveRepeatType::Stop);
@@ -118,7 +122,7 @@ void GameScene::Init()
 	{
 
 		TestEnemy* testEnemy = new TestEnemy;
-		CREATE_ENEMY(testEnemy, 800, 0, 75, 75, 75.f / 2, 20.f, PowerItem, 25.f, 25.f);
+		CREATE_ENEMY(testEnemy, 800, 100, 75, 75, 75.f / 2, 3.f, PowerItem, 25.f, 25.f);
 
 		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
 		movecompo->SetRepeatType(MoveRepeatType::Stop);
@@ -127,49 +131,65 @@ void GameScene::Init()
 
 		enemyManager->AddEnemySpawnQueue({i , testEnemy });
 	}
-
-	BezierPathData* upandDown = enemyManager->GetPath(L"Down-Up");
-	for (int i = 0; i < 4; ++i)
-	{
-		ShotToPlayerEnemy* fireEnemy = new ShotToPlayerEnemy;
-		CREATE_ENEMY(fireEnemy, 100 + i * 200, 0, 75,75,75.f/2,50, PowerItem, 25.f,25.f);
-		fireEnemy->SetFireTime(1.5f, 0.05f, 12, true);
-
-
-		auto* movecompo = fireEnemy->AddComponent<EnemyMovement>();
-		movecompo->SetRepeatType(MoveRepeatType::Stop);
-		movecompo->AddPathData(upandDown);
-		movecompo->SetSpeed(150.0f);
-
-		enemyManager->AddEnemySpawnQueue({ 12.f + i , fireEnemy });
-	}
 	BezierPathData* down = enemyManager->GetPath(L"Up");
 	BezierPathData* zigzagR = enemyManager->GetPath(L"ZigzagR");
 	BezierPathData* zigzagL = enemyManager->GetPath(L"ZigzagL");
 
-	for (int i = 0; i < 10; ++i)
+	for (int i = 0; i < 4; ++i)
+	{
+		ShotToPlayerEnemy* fireEnemy = new ShotToPlayerEnemy;
+		CREATE_ENEMY(fireEnemy, 100 + i * 200, -50, 75,75,75.f/2,5.f, PowerItem, 25.f,25.f);
+		fireEnemy->SetFireTime(1.5f, 0.05f, 12, true);
+
+		auto* movecompo = fireEnemy->AddComponent<EnemyMovement>();
+		movecompo->SetRepeatType(MoveRepeatType::Stop);
+		movecompo->AddPathData(down);
+		movecompo->AddPathData(down);
+		movecompo->AddPathData(i < 2 ? wave2path : wave1path);
+		movecompo->SetSpeed(150.0f);
+
+		enemyManager->AddEnemySpawnQueue({ 12.f + i , fireEnemy });
+	}
+
+	for (int i = 0; i < 9; ++i)
 	{
 		CircleMoveEnemy* fireEnemy = new CircleMoveEnemy;
-		CREATE_ENEMY(fireEnemy, 100 + i * 200, 0, 75,75,75.f/2,50, PowerItem, 25.f,25.f);
-		fireEnemy->SetShotCount(24);
+		if (i % 3 == 0)
+		{
+			CREATE_ENEMY(fireEnemy, 100 + (i % 3) * 175, 0, 75, 75, 75.f / 2, 5.0f, BombItem, 25.f, 25.f);
+		}
+		else
+		{
+			CREATE_ENEMY(fireEnemy, 100 + (i % 3) * 175, 0, 75,75,75.f/2,5.0f, PowerItem, 25.f,25.f);
+		}
+		fireEnemy->SetShotCount(25);
 
 
 		auto* movecompo = fireEnemy->AddComponent<EnemyMovement>();
 		movecompo->SetRepeatType(MoveRepeatType::Stop);
 
-		for (int i = 0; i < 3; ++i)
+		for (int j = 0; j < 6; ++j)
 		{
 			movecompo->AddPathData(zigzagR);
 			movecompo->AddPathData(zigzagL);
 		}
+		if (i%3 == 0)
+		{
+			movecompo->AddPathData(wave2path);
+		}
+		else
+		{
+			movecompo->AddPathData(wave1path);
+		}
 		movecompo->SetSpeed(150.f);
 
-		enemyManager->AddEnemySpawnQueue({ 20.f + i , fireEnemy });
+		enemyManager->AddEnemySpawnQueue({ 20.f + 1.5f*i , fireEnemy });
 	}
-	for (float i = 25; i < 28; i += 0.25f)
+
+	for (float i = 37; i < 40; i += 0.25f)
 	{
 		TestEnemy* testEnemy = new TestEnemy;
-		CREATE_ENEMY(testEnemy, 0, 0, 75, 75, 75.f / 2, 20.f, PowerItem, 25.f, 25.f);
+		CREATE_ENEMY(testEnemy, -50, 100, 75, 75, 75.f / 2, 3.f, PowerItem, 25.f, 25.f);
 
 		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
 		movecompo->SetRepeatType(MoveRepeatType::Stop);
@@ -178,11 +198,11 @@ void GameScene::Init()
 
 		enemyManager->AddEnemySpawnQueue({ i , testEnemy });
 	}
-	for (float i = 28; i < 30; i += 0.25f)
+	for (float i = 38; i < 41; i += 0.25f)
 	{
 
 		TestEnemy* testEnemy = new TestEnemy;
-		CREATE_ENEMY(testEnemy, 800, 0, 75, 75, 75.f / 2, 20.f, PowerItem, 25.f, 25.f);
+		CREATE_ENEMY(testEnemy, 800, 100, 75, 75, 75.f / 2, 3.f, PowerItem, 25.f, 25.f);
 
 		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
 		movecompo->SetRepeatType(MoveRepeatType::Stop);
@@ -192,6 +212,30 @@ void GameScene::Init()
 		enemyManager->AddEnemySpawnQueue({ i , testEnemy });
 	}
 
+	for (int i = 0; i < 8; ++i)
+	{
+		TripleShotEnemy* triple = new TripleShotEnemy;
+		CREATE_ENEMY(triple, 200 + (i % 2) * 150, -50, 50, 50, 25, 10.f, PowerItem, 25.f, 25.f);
+
+		auto* movecompo = triple->AddComponent<EnemyMovement>();
+		movecompo->SetRepeatType(MoveRepeatType::Stop);
+		movecompo->AddPathData(down);
+		movecompo->AddPathData(down);
+		movecompo->AddPathData(down);
+		if(i%2 == 0)
+			movecompo->AddPathData(wave1path);
+		else
+			movecompo->SetSpeed(300.f);
+
+
+		enemyManager->AddEnemySpawnQueue({ 45.f + i , triple });
+	}
+	/*for (int i = 0; i < 4; ++i)
+	{
+		TripleShotEnemy* triple = new TripleShotEnemy;
+		CREATE_ENEMY(triple, 200 + (i % 2) * 150, -50, 50, 50, 25, 10.f, PowerItem, 25.f, 25.f);
+
+	}*/
 	//여기까지 적 세팅
 }
 

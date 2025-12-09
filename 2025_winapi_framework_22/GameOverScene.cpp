@@ -50,10 +50,11 @@ void GameOverScene::Init()
 	exit->SetPos({ GAME_WIDTH / 2.0f, btnpositionY });
 	exit->SetText(L"Exit");
 
-	AddObject(RestartButton, Layer::UI);
 	AddObject(button, Layer::UI);
+	AddObject(RestartButton, Layer::UI);
 	AddObject(exit, Layer::UI);
 	selector->AssignButton(button);
+	selector->AssignButton(RestartButton);
 	selector->AssignButton(exit);
 }
 

@@ -118,15 +118,11 @@ void EnemySpawnManger::AssignPath()
 	m_calcedPath.insert({ L"ZigzagL", zigzagL });
 
 	BezierPathData* sideMove = new BezierPathData;
-	sideMove->BezierPathData::CalculateArcLengthMap({ {-50,0},{200,400},{800,0} });
+	sideMove->BezierPathData::CalculateArcLengthMap({ {0,0},{200,400},{900,0} });
 	m_calcedPath.insert({ L"Left-Right", sideMove });
 
 	BezierPathData* sideMove2 = new BezierPathData;
-	sideMove2->BezierPathData::CalculateArcLengthMap({ {50,0},{-200,400},{-800,0} });
+	sideMove2->BezierPathData::CalculateArcLengthMap({ {0,0},{-200,400},{-900,0} });
 	m_calcedPath.insert({ L"Right-Left", sideMove2 });
-
-	BezierPathData* downToUp = new BezierPathData;
-	downToUp->BezierPathData::CalculateArcLengthMap({ {0,0},{0,500}, {0,-300} });
-	m_calcedPath.insert({ L"Down-Up", downToUp });
 
 }

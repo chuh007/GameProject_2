@@ -204,7 +204,6 @@
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemDropCompo.h" />
     <ClInclude Include="Object.h" />
-    <ClInclude Include="Panel.h" />
     <ClInclude Include="Pattern.h" />
     <ClInclude Include="PatternCompo.h" />
     <ClInclude Include="pch.h" />
@@ -284,7 +283,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MoveState.cpp" />
     <ClCompile Include="Object.cpp" />
-    <ClCompile Include="Panel.cpp" />
     <ClCompile Include="Pattern.cpp" />
     <ClCompile Include="PatternCompo.cpp" />
     <ClCompile Include="Player.cpp" />
