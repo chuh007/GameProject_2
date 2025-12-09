@@ -193,6 +193,7 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"Bullet", L"Texture\\Bullet.bmp");
 	LoadTexture(L"Jiwoo", L"Texture\\jiwoo.bmp");
 	LoadTexture(L"BlueBullet", L"Texture\\2_Circle_Blue_2.bmp");
+	LoadTexture(L"BlueBullet3", L"Texture\\2_Circle_Blue_3.bmp");
 	LoadTexture(L"IceBullet", L"Texture\\IceBullet.bmp");
 	LoadTexture(L"Magic", L"Texture\\magic.bmp");
 	LoadTexture(L"Background", L"Texture\\Background.bmp");
@@ -200,11 +201,14 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"GreenBullet1", L"Texture\\2_Circle_Green_1.bmp");
 	LoadTexture(L"GreenBullet3", L"Texture\\2_Circle_Green_3.bmp");
 	LoadTexture(L"BlueBullet1", L"Texture\\2_Circle_Blue_1.bmp");
+	LoadTexture(L"RedBullet1", L"Texture\\2_Circle_Red_1.bmp");
+	LoadTexture(L"RedBullet2", L"Texture\\2_Circle_Red_2.bmp");
 	LoadTexture(L"GreenSword", L"Texture\\Sword_BrightGreen.bmp");
 	LoadTexture(L"RedSword", L"Texture\\Sword_Red.bmp");
 	LoadTexture(L"YellowSword", L"Texture\\Sword_Yellow.bmp");
 	LoadTexture(L"Boss", L"Texture\\Zelretch.bmp");
-
+	LoadTexture(L"SpellBackground", L"Texture\\SpellBackground.bmp");
+	
 }
 
 void ResourceManager::LoadTexture(const wstring& _key, const wstring& _path)

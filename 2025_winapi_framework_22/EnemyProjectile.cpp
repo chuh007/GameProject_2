@@ -93,6 +93,17 @@ void EnemyProjectile::Render(HDC _hdc)
 	vertices[2].x = (LONG)(pos.x + (-hW * cosA - hH * sinA));
 	vertices[2].y = (LONG)(pos.y + (-hW * sinA + hH * cosA));
 
+	/*::TransparentBlt(
+		GET_SINGLE(BulletRenderManager)->GetBulletDC(), 0, 0, width, height,
+		m_pTex->GetTextureDC(),
+		0, 0, width, height,
+		RGB(255, 0, 255));
+
+	::PlgBlt(_hdc, vertices, GET_SINGLE(BulletRenderManager)->GetBulletDC(),
+		0, 0, width, height,
+		NULL, 0, 0);*/
+
+
 	::PlgBlt(GET_SINGLE(BulletRenderManager)->GetBulletDC(), vertices, m_pTex->GetTextureDC(),
 		0, 0, width, height,
 		NULL, 0, 0);

@@ -271,7 +271,12 @@
     <ClInclude Include="SecondMagicPattern.h">
       <Filter>Engine\09. Pattern</Filter>
     </ClInclude>
-    <ClInclude Include="BulletRenderManager.h" />
+    <ClInclude Include="MultiSpeedRadialPattern.h">
+      <Filter>Engine\09. Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletRenderManager.h">
+      <Filter>Engine\02. Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc">
@@ -476,5 +481,11 @@
     </ClCompile>
     <ClCompile Include="PowerItem.cpp" />
     <ClCompile Include="GameOverScene.cpp" />
+    <ClCompile Include="MultiSpeedRadialPattern.cpp">
+      <Filter>Engine\09. Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletRenderManager.cpp">
+      <Filter>Engine\02. Manager</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

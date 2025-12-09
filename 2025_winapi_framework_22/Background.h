@@ -10,7 +10,7 @@ public:
 public:
     // Object을(를) 통해 상속됨
     void Render(HDC _hdc) override;
-
+    void SetTexture(Texture* _tex) { m_pTex = _tex; }
 private:
     Texture* m_pTex;
 };

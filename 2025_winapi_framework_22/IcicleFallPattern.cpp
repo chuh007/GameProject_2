@@ -57,7 +57,7 @@ void IcicleFallPattern::BaseShoot()
 		float speed = m_iceSpeed;
 		int cnt = m_curCnt;
 		auto* projectile1 = PoolManager::GetInst()->
-			Pop<EnemyProjectile>(PoolType::IceProj);
+			Pop<EnemyProjectile>(PoolType::EnemyProjectile);
 		projectile1->SetSize({ 16.f, 16.f });
 		projectile1->SetColliderSize(6.5f);
 		projectile1->SetTexture(m_iceTex);
