@@ -8,18 +8,8 @@
 #include "Health.h"
 
 CircleMoveEnemy::CircleMoveEnemy()
-	: pathData(nullptr)
 {
-	auto* col = GetComponent<Collider>();
-	auto* movement = AddComponent<EnemyMovement>();
-	col->SetSize(25.f);
-	movement->SetSpeed(200.0f);
-	movement->SetDefaultPos({ 300,300 });
-	movement->AddPathData(GET_SINGLE(EnemySpawnManger)->GetPath(L"Up"));
-	movement->AddPathData(GET_SINGLE(EnemySpawnManger)->GetPath(L"Right"));
-	movement->AddPathData(GET_SINGLE(EnemySpawnManger)->GetPath(L"Down"));
-	movement->AddPathData(GET_SINGLE(EnemySpawnManger)->GetPath(L"Left"));
-	movement->SetRepeatType(MoveRepeatType::Repeat);
+	fireCount = 0;
 	fireTime = 0;
 }
 
@@ -32,17 +22,23 @@ void CircleMoveEnemy::Update()
 	fireTime += fDT;
 	if (fireTime >= 1.f)
 	{
-		for (int i = 0; i < 6; ++i)
+		float dir = 360 / fireCount;
+		for (int i = 0; i < fireCount; ++i)
 		{
 			auto* projectile = PoolManager::GetInst()->
 				Pop<EnemyProjectile>(PoolType::EnemyProjectile);
 			projectile->SetSize({ 10.f, 10.f });
 			projectile->SetColliderSize(7.5f);
 			projectile->SetPos(GetPos());
-			projectile->SetDir(-90.f + i * 60.f);
-			projectile->SetSpeed(500.f);
+			projectile->SetDir(-90.f + i * dir);
+			projectile->SetSpeed(300.f);
 
 			fireTime = 0;
 		}
 	}
+}
+
+void CircleMoveEnemy::SetShotCount(int count)
+{
+	fireCount = count;
 }

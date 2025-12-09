@@ -37,12 +37,20 @@ void GameOverScene::Init()
 	button->SetSceneName(L"Title");
 
 	btnpositionY += 60.0f;
+	StartButton* RestartButton = new StartButton;
+	RestartButton->SetSize({ 200.f, 50.f });
+	RestartButton->SetPos({ GAME_WIDTH/2.0f , btnpositionY });
+	RestartButton->SetText(L"Restart");
+	RestartButton->SetSceneName(L"Game");
+
+	btnpositionY += 60.0f;
 
 	Button* exit = new ExitButton;
 	exit->SetSize({ 200.f, 50.f });
 	exit->SetPos({ GAME_WIDTH / 2.0f, btnpositionY });
 	exit->SetText(L"Exit");
 
+	AddObject(RestartButton, Layer::UI);
 	AddObject(button, Layer::UI);
 	AddObject(exit, Layer::UI);
 	selector->AssignButton(button);

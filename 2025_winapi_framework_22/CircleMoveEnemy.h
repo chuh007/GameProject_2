@@ -9,10 +9,13 @@ public:
     CircleMoveEnemy();
     ~CircleMoveEnemy();
     void Update() override;
+
+public:
+    void SetShotCount(int count);
 protected:
 
 private:
-    BezierPathData* pathData;
     float fireTime;
+    int fireCount;
 };
 

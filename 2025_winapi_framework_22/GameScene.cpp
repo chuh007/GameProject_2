@@ -8,13 +8,45 @@
 #include "EnemySpawnManger.h"
 #include "EnemyProjectile.h"
 #include "CircleMoveEnemy.h"
-#include "TripleShotEnemy.h"
+#include "ShotToPlayerEnemy.h"
 #include "InputManager.h"
 #include "ItemDropCompo.h"
 #include "BombItem.h"
+#include "PowerItem.h"
 #include "Background.h"
 #include "Effect.h"
+#include "EnemyMovement.h"
+#include "Health.h"
 #include "Boss.h"
+
+#pragma region 땜방용 매크로
+
+
+#define CREATE_ENEMY(enemyType, posX, posY, sizeW, sizeH, collSize, maxHP, itemType, itemSizeW, itemSizeH) \
+    Enemy* pEnemy = enemyType; \
+    pEnemy->SetPos({ (float)posX, (float)posY }); \
+    pEnemy->SetSize({ (float)sizeW, (float)sizeH }); \
+\
+    auto* coll = pEnemy->GetComponent<Collider>(); \
+    if (coll) { \
+        coll->SetSize((float)collSize); \
+    } \
+\
+    auto* health = pEnemy->GetComponent<Health>(); \
+    if (health) { \
+        health->SetMaxHP((float)maxHP); \
+        health->SetCurrentHP((float)maxHP); \
+    } \
+\
+    Item* item = new itemType; \
+    item->SetSize({ (float)itemSizeW, (float)itemSizeH }); \
+\
+    auto* itemDrop = pEnemy->AddComponent<ItemDropCompo>(); \
+    if (itemDrop) { \
+        itemDrop->SetItem(item); \
+    }
+
+#pragma endregion
 
 void GameScene::Init()
 {
@@ -54,38 +86,6 @@ void GameScene::Init()
 
 	m_hOldBitmap = (HBITMAP)SelectObject(m_hdc, m_hUIBitmap);
 
-	//여기서부터 적 세팅
-	TestEnemy* testEnemy = new TestEnemy;
-	CircleMoveEnemy* circleEnemy = new CircleMoveEnemy;
-	TripleShotEnemy* tripleshot = new TripleShotEnemy;
-
-	testEnemy->SetPos({ 100, 100 });
-	testEnemy->SetSize({ 75,75 });
-	circleEnemy->SetPos({ 100, 100 });
-	circleEnemy->SetSize({ 50,50 });
-	tripleshot->SetPos({ 100,100 });
-	tripleshot->SetSize({ 100,100 });
-
-	auto* itemCompo = tripleshot->AddComponent<ItemDropCompo>();
-	Item* bomb = new BombItem;
-	bomb->SetSize({ 50.f,50.f });
-	itemCompo->SetItem(bomb);
-	GET_SINGLE(EnemySpawnManger)->SetSpawnScene(this);
-	GET_SINGLE(EnemySpawnManger)->AddEnemySpawnQueue({ 3.f, testEnemy });
-	GET_SINGLE(EnemySpawnManger)->AddEnemySpawnQueue({ 6.f, circleEnemy });
-	GET_SINGLE(EnemySpawnManger)->AddEnemySpawnQueue({ 9.f, tripleshot });
-	GET_SINGLE(EnemySpawnManger)->AddBossSpawn(20.f);
-
-	for (float i = 0; i < 9; i+= 3)
-	{
-		TripleShotEnemy* enemy = new TripleShotEnemy;
-
-		enemy->SetPos({ 100, 100 });
-		enemy->SetSize({ 100,100 });
-		GET_SINGLE(EnemySpawnManger)->AddEnemySpawnQueue({ 12.f + i, enemy });
-	}
-
-	//여기까지 적 세팅
 
 	HBRUSH hUIBrush = CreateSolidBrush(RGB(230, 230, 230));
 	RECT rect = { 0, 0, m_uiWidth, m_uiHeight };
@@ -93,14 +93,112 @@ void GameScene::Init()
 	FillRect(m_hdc, &rect, hUIBrush);
 
 	DeleteObject(hUIBrush);
+	//여기서부터 적 세팅
+
+
+	EnemySpawnManger* enemyManager = GET_SINGLE(EnemySpawnManger);
+	enemyManager->SetSpawnScene(this);
+	BezierPathData* wave1path = enemyManager->GetPath(L"Left-Right");
+	BezierPathData* wave2path = enemyManager->GetPath(L"Right-Left");
+
+	for(float i = 0; i < 3; i += 0.25f)
+	{
+		TestEnemy* testEnemy = new TestEnemy;
+		CREATE_ENEMY(testEnemy, 0, 0, 75, 75, 75.f / 2, 20.f, PowerItem, 25.f, 25.f);
+
+		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
+		movecompo->SetRepeatType(MoveRepeatType::Stop);
+		movecompo->AddPathData(wave1path);
+		movecompo->SetSpeed(300.f);
+
+		enemyManager->AddEnemySpawnQueue({ i , testEnemy });
+	}
+
+	for(float i = 6; i < 9; i += 0.25f)
+	{
+
+		TestEnemy* testEnemy = new TestEnemy;
+		CREATE_ENEMY(testEnemy, 800, 0, 75, 75, 75.f / 2, 20.f, PowerItem, 25.f, 25.f);
+
+		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
+		movecompo->SetRepeatType(MoveRepeatType::Stop);
+		movecompo->AddPathData(wave2path);
+		movecompo->SetSpeed(300.f);
+
+		enemyManager->AddEnemySpawnQueue({i , testEnemy });
+	}
+
+	BezierPathData* upandDown = enemyManager->GetPath(L"Down-Up");
+	for (int i = 0; i < 4; ++i)
+	{
+		ShotToPlayerEnemy* fireEnemy = new ShotToPlayerEnemy;
+		CREATE_ENEMY(fireEnemy, 100 + i * 200, 0, 75,75,75.f/2,50, PowerItem, 25.f,25.f);
+		fireEnemy->SetFireTime(1.5f, 0.05f, 12, true);
+
+
+		auto* movecompo = fireEnemy->AddComponent<EnemyMovement>();
+		movecompo->SetRepeatType(MoveRepeatType::Stop);
+		movecompo->AddPathData(upandDown);
+		movecompo->SetSpeed(150.0f);
+
+		enemyManager->AddEnemySpawnQueue({ 12.f + i , fireEnemy });
+	}
+	BezierPathData* down = enemyManager->GetPath(L"Up");
+	BezierPathData* zigzagR = enemyManager->GetPath(L"ZigzagR");
+	BezierPathData* zigzagL = enemyManager->GetPath(L"ZigzagL");
+
+	for (int i = 0; i < 10; ++i)
+	{
+		CircleMoveEnemy* fireEnemy = new CircleMoveEnemy;
+		CREATE_ENEMY(fireEnemy, 100 + i * 200, 0, 75,75,75.f/2,50, PowerItem, 25.f,25.f);
+		fireEnemy->SetShotCount(24);
+
+
+		auto* movecompo = fireEnemy->AddComponent<EnemyMovement>();
+		movecompo->SetRepeatType(MoveRepeatType::Stop);
+
+		for (int i = 0; i < 3; ++i)
+		{
+			movecompo->AddPathData(zigzagR);
+			movecompo->AddPathData(zigzagL);
+		}
+		movecompo->SetSpeed(150.f);
+
+		enemyManager->AddEnemySpawnQueue({ 20.f + i , fireEnemy });
+	}
+	for (float i = 25; i < 28; i += 0.25f)
+	{
+		TestEnemy* testEnemy = new TestEnemy;
+		CREATE_ENEMY(testEnemy, 0, 0, 75, 75, 75.f / 2, 20.f, PowerItem, 25.f, 25.f);
+
+		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
+		movecompo->SetRepeatType(MoveRepeatType::Stop);
+		movecompo->AddPathData(wave1path);
+		movecompo->SetSpeed(300.f);
+
+		enemyManager->AddEnemySpawnQueue({ i , testEnemy });
+	}
+	for (float i = 28; i < 30; i += 0.25f)
+	{
+
+		TestEnemy* testEnemy = new TestEnemy;
+		CREATE_ENEMY(testEnemy, 800, 0, 75, 75, 75.f / 2, 20.f, PowerItem, 25.f, 25.f);
+
+		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
+		movecompo->SetRepeatType(MoveRepeatType::Stop);
+		movecompo->AddPathData(wave2path);
+		movecompo->SetSpeed(300.f);
+
+		enemyManager->AddEnemySpawnQueue({ i , testEnemy });
+	}
+
+	//여기까지 적 세팅
 }
 
 void GameScene::Update()
 {
-	GET_SINGLE(EnemySpawnManger)->Update();
 	Scene::Update();
-	if (GET_KEYDOWN(KEY_TYPE::ENTER))
-		GET_SINGLE(SceneManager)->LoadScene(L"TestScene");
+	GET_SINGLE(EnemySpawnManger)->Update();
 }
 
 void GameScene::Render(HDC _hdc) {

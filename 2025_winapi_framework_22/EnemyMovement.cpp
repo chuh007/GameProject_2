@@ -1,5 +1,6 @@
 #include "pch.h"
 #include "Object.h"
+#include "SceneManager.h"
 #include "EnemyMovement.h"
 
 EnemyMovement::EnemyMovement()
@@ -32,11 +33,12 @@ void EnemyMovement::LateUpdate()
             if (moveOrder.size()<=1)
             {
                 m_distanceTraveled = moveOrder.front()->totalLength;
+                GET_SINGLE(SceneManager)->RequestDestroy(GetOwner());
             }
             else
             {
                 m_distanceTraveled = 0.0f;
-                defaultPos = GetBezierPoint(moveOrder.front()->points, 1);
+                defaultPos += GetBezierPoint(moveOrder.front()->points, 1);
                 moveOrder.pop();
             }
         }
