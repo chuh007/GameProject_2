@@ -18,6 +18,7 @@
 #include "PlayerDeadState.h"
 #include "DeleteBullet.h"
 #include "TimeManager.h"
+#include "PowerItem.h"
 
 Player::Player() : m_isDead(false), m_life(3), m_powerLevel(0), m_isInvincible(false),
 m_projCooldown(0.f), m_bombCnt(0), m_invincibleTime(0.f), m_bombDurationTimer(0.f),
@@ -40,7 +41,7 @@ col(nullptr), fsm(nullptr), m_health(nullptr),  m_proj(nullptr)
 		5,0.1f
 	);
 	animator->Play(L"JiwooFront");*/
-
+	
 	m_health = AddComponent<Health>();
 	m_health->SetMaxHP(3);
 	m_health->SetCurrentHP(3);
@@ -48,7 +49,7 @@ col(nullptr), fsm(nullptr), m_health(nullptr),  m_proj(nullptr)
 
 	fsm = AddComponent<StateMachine>();
 	assert(fsm != nullptr && "fsm is null in player");
-	fsm->ChangeState(new PlayerIdleState());
+	fsm->ChangeState(PlayerIdleState::GetInstance());
 }
 
 Player::~Player()
@@ -115,7 +116,7 @@ void Player::Update()
 {
 	float _fDT = GET_SINGLE(TimeManager)->GetDT();
 
-	if (GET_KEYDOWN(KEY_TYPE::Q)) {
+	if (GET_KEYDOWN(KEY_TYPE::Q) && !m_isInvokedBomb) {
 		UseBomb();
 	}
 	if (GET_KEY(KEY_TYPE::Z)) {
@@ -249,17 +250,17 @@ void Player::TakeDamage(int _damage) {
 	if (m_life > -1) {
 		m_health->SetCurrentHP(m_health->GetMaxHP());
 		SetPos({ GAME_WIDTH / 2.f, 600.f });
-		fsm->ChangeState(new PlayerHitState());
+		fsm->ChangeState(PlayerHitState::GetInstance());
 	}
 	else {
-		fsm->ChangeState(new PlayerDeadState());
+		fsm->ChangeState(PlayerDeadState::GetInstance());
 	}
 
 	if (m_isDead) return;
 }
 
 void Player::HPZero() {
-	fsm->ChangeState(new PlayerDeadState());
+	fsm->ChangeState(PlayerDeadState::GetInstance());
 }
 
 void Player::SetInvincible(bool isInvincible) {
@@ -289,14 +290,18 @@ void Player::TryContinueFire(float _fDT) {
 
 bool Player::UseBomb() {
 	if (m_bombCnt > 0) {
+		m_isInvokedBomb = true;
 		m_bombCnt--;
 
 		DeleteBullet* delBullet = GET_SINGLE(SceneManager)->GetCurScene()->
 			Spawn<DeleteBullet>(Layer::PROJECTILEDELETER, GetPos(), GetSize());
 
+		GET_SINGLE(ResourceManager)->Play(L"Bomb");
+
 		delBullet->Coroutine([=]()
 			{
 				GET_SINGLE(SceneManager)->RequestDestroy(delBullet);
+				m_isInvokedBomb = false;
 			}, 2.f);
 
 		return true;
@@ -315,6 +320,10 @@ void Player::InvokeBomb() {
 		m_bombCnt = 3;
 	}
 
+	GET_SINGLE(ResourceManager)->Play(L"PlayerHit");
+
+	SpawnPower();
+
 	delBullet->Coroutine([=]()
 		{
 			GET_SINGLE(SceneManager)->RequestDestroy(delBullet);
@@ -330,6 +339,32 @@ void Player::GainPower(float _amount) {
 
 	m_amountDmg = std::max(0.f, m_amountDmg);
 	m_powerLevel = std::min(m_powerLevel, MAX_POWER);
+}
+
+void Player::SpawnPower() {
+	int itemCnt = 0;
+
+	const float Y_SPAWN_MIN = -20.f;
+	const float Y_SPAWN_MAX = 50.f;
+
+	Vec2 itemSize = { 25.f, 25.f };
+
+	if (m_powerLevel < 15) {
+		itemCnt = m_powerLevel;
+	}
+	else {
+		itemCnt = 13;
+	}
+
+	for (int i = 0; i < itemCnt; ++i) {
+		float randX = (float)rand() / RAND_MAX * GAME_WIDTH;
+		float randY = (float)rand() / RAND_MAX * (Y_SPAWN_MAX - Y_SPAWN_MIN) + Y_SPAWN_MIN;
+
+		Vec2 spawnPos = { randX, randY };
+
+		PowerItem* power = GET_SINGLE(SceneManager)->GetCurScene()->
+			Spawn<PowerItem>(Layer::ITEM, spawnPos, itemSize);
+	}
 }
 
 

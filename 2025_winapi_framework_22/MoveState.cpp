@@ -57,7 +57,7 @@ void PlayerMoveState::Excute(StateMachine* fsm) {
 
 	if (!isMoving)
 	{
-		fsm->ChangeState(new PlayerIdleState());
+		fsm->ChangeState(PlayerIdleState::GetInstance());
 		return;
 	}
 }

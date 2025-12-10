@@ -11,6 +11,11 @@ public:
 	virtual void Enter(StateMachine* fsm) override;
 	virtual void Excute(StateMachine* fsm) override;
 	virtual void Exit(StateMachine* fsm) override;
+public:
+	static PlayerAttackState* GetInstance() {
+		static PlayerAttackState instance;
+		return &instance;
+	}
 private:
 	Player* m_player = nullptr;
 	//전체 공격 상태를 유지할 시간
