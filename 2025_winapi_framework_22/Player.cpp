@@ -24,13 +24,13 @@ m_projCooldown(0.f), m_bombCnt(0), m_invincibleTime(0.f), m_bombDurationTimer(0.
 m_amountDmg(0.f),
 col(nullptr), fsm(nullptr), m_health(nullptr),  m_proj(nullptr)
 {
-	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Jiwoo");
+	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Player");
 	auto* rb = AddComponent<Rigidbody>();
 	rb->SetUseGravity(false);
 	col = AddComponent<Collider>();
 	col->SetName(L"Player");
 	col->SetSize(3.0f);
-	auto* animator = AddComponent<Animator>();
+	/*auto* animator = AddComponent<Animator>();
 	animator->CreateAnimation
 	(L"JiwooFront",
 		m_pTex, 
@@ -39,7 +39,7 @@ col(nullptr), fsm(nullptr), m_health(nullptr),  m_proj(nullptr)
 		{50.f,0.f},
 		5,0.1f
 	);
-	animator->Play(L"JiwooFront");
+	animator->Play(L"JiwooFront");*/
 
 	m_health = AddComponent<Health>();
 	m_health->SetMaxHP(3);
@@ -63,9 +63,18 @@ void Player::Render(HDC _hdc)
 	LONG width = m_pTex->GetWidth();
 	LONG height = m_pTex->GetHeight();
 
+	int render_x = (int)(pos.x - width / 2.f);
+	int render_y = (int)(pos.y - height / 2.f);
+
+	::TransparentBlt(
+		_hdc, render_x, render_y, width , height,
+		m_pTex->GetTextureDC(),
+		0, 0, width, height,
+		RGB(255, 0, 255));
+
 	ComponentRender(_hdc);
 
-	HPEN hRedPen = CreatePen(PS_SOLID, 2, RGB(255, 0, 0));
+	HPEN hRedPen = CreatePen(PS_SOLID, 2, RGB(255, 255, 255));
 	HPEN hOldPen = (HPEN)SelectObject(_hdc, hRedPen);
 
 	HBRUSH hNullBrush = (HBRUSH)GetStockObject(WHITE_BRUSH);
@@ -151,7 +160,8 @@ void Player::CreateProjectile()
 	}
 
 	float baseDmg = 4.f;
-	int totalDmg = baseDmg + m_amountDmg;
+	float totalDmg = baseDmg + m_amountDmg;
+	if (totalDmg < 0.f) totalDmg = baseDmg;
 
 	for (int i = 0; i < num_proj; ++i)
 	{
@@ -269,8 +279,8 @@ void Player::GainPower(float _amount) {
 		m_powerLevel = 0;
 	}
 
+	m_amountDmg = std::max(0.f, m_amountDmg);
 	m_powerLevel = std::min(m_powerLevel, MAX_POWER);
-	std::cout << "Power Level: " << m_powerLevel << std::endl;
 }
 
 
