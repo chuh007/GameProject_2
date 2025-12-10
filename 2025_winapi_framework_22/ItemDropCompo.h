@@ -7,6 +7,7 @@ class ItemDropCompo :
 {
 public:
     // Component을(를) 통해 상속됨
+    ~ItemDropCompo();
     void Init() override;
     void LateUpdate() override;
     void Render(HDC hDC) override;

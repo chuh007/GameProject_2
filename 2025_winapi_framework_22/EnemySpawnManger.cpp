@@ -7,6 +7,7 @@
 #include "BossMover.h"
 void EnemySpawnManger::Init()
 {
+	m_calcedPath.clear();
 	AssignPath();
 	m_currentTime = 0;
 	m_bossSpawned = false;
@@ -30,10 +31,12 @@ void EnemySpawnManger::Realese()
     {
         SpawnInfo info = m_enemySpawnQueue.top();
 
-		m_spawnTargetScene->RequestDestroy(info.enemy);
+		SAFE_DELETE(info.enemy);
 
         m_enemySpawnQueue.pop();
     }
+
+
 	for (std::pair<wstring, BezierPathData*> kvp : m_calcedPath)
 	{
 		SAFE_DELETE(kvp.second)
