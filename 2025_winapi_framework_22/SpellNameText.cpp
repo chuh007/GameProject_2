@@ -13,6 +13,7 @@ SpellNameText::SpellNameText()
 void SpellNameText::Render(HDC _hdc)
 {
 	if (m_name.empty()) return;
+	GDISelector font(_hdc, FontType::SKILLTEXT);
 	SetTextColor(_hdc, RGB(255, 255, 255));
 	SetBkColor(_hdc, RGB(0, 0, 255));
 	int oldMode = SetBkMode(_hdc, OPAQUE);

@@ -16,6 +16,8 @@
 #include "PureBulletHellPattern.h"
 #include "SecondMagicPattern.h"
 #include "MultiSpeedRadialPattern.h";
+#include "BoomEffect.h";
+#include "PowerItem.h"
 Boss::Boss()
 	: m_isDie(false)
 	, m_lifeCount(5)
@@ -28,8 +30,8 @@ Boss::Boss()
 	col->SetSize(40.f);
 	m_target = GET_SINGLE(PlayerManager)->GetPlayer();
 	m_healthCompo = AddComponent<Health>();
-	m_healthCompo->SetMaxHP(4500);
-	m_healthCompo->SetCurrentHP(4500);
+	m_healthCompo->SetMaxHP(5000);
+	m_healthCompo->SetCurrentHP(5000);
 	auto* mover = AddComponent<BossMover>();
 
 	m_patternCompo = AddComponent<PatternCompo>();
@@ -71,6 +73,7 @@ void Boss::Start()
 
 void Boss::Update()
 {
+	if (m_isDie) return;
 	Object::Update();
 }
 
@@ -119,9 +122,22 @@ void Boss::HPZero()
 		m_healthCompo->SetCurrentHP(m_healthCompo->GetMaxHP());
 		m_patternCompo->UseNomalPattern();
 		m_decDamage = m_patternCompo->GetCurrentPattern()->GetDecValue();
+		auto* effect = GET_SINGLE(SceneManager)->GetCurScene()
+			->Spawn<BoomEffect>(Layer::PROJECTILEDELETER, GetPos(), { 25,25 });
+		effect->DoScale(10.f, 0.3f);
+		for (int i = 0; i < 10; ++i)
+		{
+			Vec2 spawnPos = GetPos();
+			spawnPos += { rand() % 200 - 100, rand() % 200 - 100 };
+			GET_SINGLE(SceneManager)->GetCurScene()
+				->Spawn<PowerItem>(Layer::ITEM, spawnPos, { 25,25 });
+		}
 	}
 	else
 	{
+		auto* effect = GET_SINGLE(SceneManager)->GetCurScene()
+			->Spawn<BoomEffect>(Layer::PROJECTILEDELETER, GetPos(), { 25,25 });
+		effect->DoScale(20.f, 0.5f);
 		m_isDie = true;
 		GET_SINGLE(SceneManager)->RequestDestroy(this);
 	}

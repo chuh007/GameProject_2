@@ -68,9 +68,7 @@ void GameScene::Init()
 
 	GET_SINGLE(EnemySpawnManger)->Init();
 	GET_SINGLE(PoolManager)->AddPool<EnemyProjectile>
-		(PoolType::EnemyProjectile, 100, Layer::ENEMYPROJECTILE);
-	GET_SINGLE(PoolManager)->AddPool<EnemyProjectile>
-		(PoolType::IceProj, 50, Layer::ENEMYPROJECTILE);
+		(PoolType::EnemyProjectile, 500, Layer::ENEMYPROJECTILE);
 	GET_SINGLE(PoolManager)->AddPool<PlayerProjectile>
 		(PoolType::PlayerProj, 100, Layer::PROJECTILE);
 	GET_SINGLE(PoolManager)->AddPool<Effect>

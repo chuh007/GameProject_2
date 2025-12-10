@@ -23,6 +23,8 @@ private:
     float m_secondTimer;
     float m_thirdTimer;
 
-    Texture* m_bulletTex;
+    Texture* m_bulletTex1;
+    Texture* m_bulletTex2;
+    Texture* m_bulletTex3;
 };
 

@@ -167,6 +167,7 @@
     <ClInclude Include="BakBakDevScene.h" />
     <ClInclude Include="BaseWindow.h" />
     <ClInclude Include="BombItem.h" />
+    <ClInclude Include="BoomEffect.h" />
     <ClInclude Include="Boss.h" />
     <ClInclude Include="BossHPBar.h" />
     <ClInclude Include="BossMover.h" />
@@ -249,6 +250,7 @@
     <ClCompile Include="BakBakDevScene.cpp" />
     <ClCompile Include="BaseWindow.cpp" />
     <ClCompile Include="BombItem.cpp" />
+    <ClCompile Include="BoomEffect.cpp" />
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="BossHPBar.cpp" />
     <ClCompile Include="BossMover.cpp" />

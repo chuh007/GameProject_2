@@ -47,6 +47,7 @@ void ResourceManager::Release()
 void ResourceManager::RegisterSound()
 {
 	LoadSound(L"BossBGM", L"Sound\\Native Faith_orgin.mp3", true);
+	LoadSound(L"BGM", L"Sound\\Chinese Tea.mp3", true);
 	LoadSound(L"FireSound", L"Sound\\FireSound.mp3", false);
 	LoadSound(L"SpellEndSound", L"Sound\\se_enep00.wav", false);
 	LoadSound(L"SpellSound", L"Sound\\se_cardget.wav", false);
@@ -148,6 +149,7 @@ void ResourceManager::RegisterGDI()
 
 	// 폰트 등록
 	RegisterFont(FontType::TITLE, L"Eulyoo1945-Regular", 0);
+	RegisterFont(FontType::SKILLTEXT, L"Eulyoo1945-Regular", 18, 18);
 }
 
 void ResourceManager::ReleaseGDI()
@@ -212,6 +214,8 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"BombIcon", L"Texture\\Player_Icon_Bomb_Green.bmp");
 	LoadTexture(L"LifeIcon", L"Texture\\Player_Icon_Hp_Red.bmp");
 	LoadTexture(L"TitleBackground", L"Texture\\TitleBackground.bmp");
+	LoadTexture(L"BossBoom", L"Texture\\Boss_Circle.bmp");
+	LoadTexture(L"PurpleBullet1", L"Texture\\2_Circle_Purple_1.bmp");
 	
 }
 

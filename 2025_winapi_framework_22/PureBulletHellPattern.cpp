@@ -12,7 +12,9 @@ PureBulletHellPattern::PureBulletHellPattern(Object* _owner, Object* _target, fl
 	, m_thirdTimer(0)
 {
 	m_decValue = 0.2f;
-	m_bulletTex = GET_SINGLE(ResourceManager)->GetTexture(L"BlueBullet1");
+	m_bulletTex1 = GET_SINGLE(ResourceManager)->GetTexture(L"RedBullet1");
+	m_bulletTex2 = GET_SINGLE(ResourceManager)->GetTexture(L"PurpleBullet1");
+	m_bulletTex3 = GET_SINGLE(ResourceManager)->GetTexture(L"BlueBullet1");
 }
 
 PureBulletHellPattern::~PureBulletHellPattern()
@@ -59,7 +61,7 @@ void PureBulletHellPattern::BaseShoot()
 
 		projectile->SetSize({ 20.f, 20.f});
 		projectile->SetColliderSize(10.f);
-		projectile->SetTexture(m_bulletTex);
+		projectile->SetTexture(m_bulletTex1);
 
 		float currentAngle = angleStep * i;
 		float rad = currentAngle * D2R;
@@ -89,7 +91,7 @@ void PureBulletHellPattern::SecondFire()
 
 		projectile->SetSize({ 20.f, 20.f });
 		projectile->SetColliderSize(10.f);
-		projectile->SetTexture(m_bulletTex);
+		projectile->SetTexture(m_bulletTex2);
 
 		float currentAngle = angleStep * i + randomangle;
 		float rad = currentAngle * D2R;
@@ -111,7 +113,7 @@ void PureBulletHellPattern::SecondFire()
 
 		projectile->SetSize({ 20.f, 20.f });
 		projectile->SetColliderSize(10.f);
-		projectile->SetTexture(m_bulletTex);
+		projectile->SetTexture(m_bulletTex2);
 
 		float currentAngle = angleStep * i + randomangle;
 		float rad = currentAngle * D2R;
@@ -141,7 +143,7 @@ void PureBulletHellPattern::ThirdFire()
 
 		projectile->SetSize({ 20.f, 20.f });
 		projectile->SetColliderSize(10.f);
-		projectile->SetTexture(m_bulletTex);
+		projectile->SetTexture(m_bulletTex3);
 
 		float currentAngle = angleStep * i + randomangle;
 		float rad = currentAngle * D2R;
@@ -163,7 +165,7 @@ void PureBulletHellPattern::ThirdFire()
 
 		projectile->SetSize({ 20.f, 20.f });
 		projectile->SetColliderSize(10.f);
-		projectile->SetTexture(m_bulletTex);
+		projectile->SetTexture(m_bulletTex3);
 
 		float currentAngle = angleStep * i + randomangle;
 		float rad = currentAngle * D2R;

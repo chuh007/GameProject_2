@@ -16,6 +16,7 @@
 #include "Projectile.h"
 #include "Effect.h"
 #include "Background.h"
+#include "Texture.h"
 void DevScene::Init()
 {	
 	//Object* obj = new Player;
@@ -32,10 +33,11 @@ void DevScene::Init()
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PROJECTILE, Layer::ENEMY);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::DEFAULT);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::ENEMYPROJECTILE);
+	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::ITEM);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::ENEMYPROJECTILE, Layer::PROJECTILEDELETER);
 	GET_SINGLE(ResourceManager)->Play(L"BossBGM");
 	GET_SINGLE(PoolManager)->AddPool<EnemyProjectile>
-		(PoolType::EnemyProjectile, 1000, Layer::ENEMYPROJECTILE);
+		(PoolType::EnemyProjectile, 500, Layer::ENEMYPROJECTILE);
 	GET_SINGLE(PoolManager)->AddPool<PlayerProjectile>
 		(PoolType::PlayerProj, 100, Layer::PROJECTILE);
 	GET_SINGLE(PoolManager)->AddPool<Effect>
@@ -96,18 +98,72 @@ void DevScene::Render(HDC _hdc) {
 	SetTextColor(_hdc, RGB(0, 0, 0));
 	SetBkMode(_hdc, TRANSPARENT);
 
-	const int TEXT_START_X = GAME_WIDTH + 30;
+	HFONT hFont = GET_SINGLE(ResourceManager)->GetFont(FontType::TITLE);
+	HFONT hOldFont = nullptr;
+	if (hFont != nullptr)
+	{
+		hOldFont = (HFONT)SelectObject(_hdc, hFont);
+	}
 
-	TextOut(_hdc, TEXT_START_X, 10, L"Render Test", 11);
+	const int UI_START_X = GAME_WIDTH + 10;
 
-	wstring lifeStr = std::format(L"LIFE : {}", life);
-	TextOut(_hdc, TEXT_START_X, 50, lifeStr.c_str(), (int)lifeStr.length());
+	Texture* lTex = GET_SINGLE(ResourceManager)->GetTexture(L"LifeIcon");
+	Texture* bTex = GET_SINGLE(ResourceManager)->GetTexture(L"BombIcon");
 
-	wstring bombStr = std::format(L"BOMB : {}", bombCnt);
-	TextOut(_hdc, TEXT_START_X, 100, bombStr.c_str(), (int)bombStr.length());
+	LONG lifeWidth = lTex->GetWidth();
+	LONG lifeHeight = lTex->GetHeight();
+	LONG bombWidth = bTex->GetWidth();
+	LONG bombHeight = bTex->GetHeight();
+
+	const int ICON_GAP_LIFE = lifeWidth + 5;
+	const int ICON_GAP_BOMB = bombWidth + 5;
+
+	const int LIFE_TEXT_WIDTH_OFFSET = 80;
+	const int BOMB_TEXT_WIDTH_OFFSET = 80;
+
+	const int LIFE_START_Y = 50;
+
+	wstring lifePrefix = L"LIFE : ";
+	TextOut(_hdc, UI_START_X, LIFE_START_Y, lifePrefix.c_str(), (int)lifePrefix.length());
+
+	for (int i = 0; i < life; ++i)
+	{
+		::TransparentBlt(
+			_hdc,
+			UI_START_X + LIFE_TEXT_WIDTH_OFFSET + (i * ICON_GAP_LIFE),
+			LIFE_START_Y,
+			lifeWidth, lifeHeight,
+			lTex->GetTextureDC(),
+			0, 0, lifeWidth, lifeHeight,
+			RGB(255, 0, 255));
+	}
+
+	const int BOMB_START_Y = 100;
+
+	wstring bombPrefix = L"BOMB : ";
+	TextOut(_hdc, UI_START_X, BOMB_START_Y, bombPrefix.c_str(), (int)bombPrefix.length());
+
+	for (int i = 0; i < bombCnt; ++i)
+	{
+		::TransparentBlt(
+			_hdc,
+			UI_START_X + BOMB_TEXT_WIDTH_OFFSET + (i * ICON_GAP_BOMB),
+			BOMB_START_Y,
+			bombWidth, bombHeight,
+			bTex->GetTextureDC(),
+			0, 0, bombWidth, bombHeight,
+			RGB(255, 0, 255));
+	}
+
+	const int POWER_START_Y = 150;
 
 	wstring powerStr = std::format(L"POWER: {} / {}", power, 128);
-	TextOut(_hdc, TEXT_START_X, 150, powerStr.c_str(), (int)powerStr.length());
+	TextOut(_hdc, UI_START_X, POWER_START_Y, powerStr.c_str(), (int)powerStr.length());
+
+	if (hOldFont != nullptr)
+	{
+		SelectObject(_hdc, hOldFont);
+	}
 }
 
 void DevScene::Release() {

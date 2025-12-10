@@ -26,7 +26,7 @@ enum class BrushType
 
 enum class FontType
 {
-	UI, TITLE, END
+	UI, TITLE, SKILLTEXT, END
 };
 
 enum class PlayMode

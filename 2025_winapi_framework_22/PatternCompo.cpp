@@ -70,10 +70,10 @@ void PatternCompo::UseSpellPattern()
 	int textSize = m_curPattern->GetName().size();
 	text->SetName(m_curPattern->GetName());
 	text->SetPos({ GAME_WIDTH + 20, GAME_HEIGHT - 50 });
-	text->MoveTo({ GAME_WIDTH - 14 * textSize, GAME_HEIGHT - 50 }, 0.5f);
+	text->MoveTo({ GAME_WIDTH - 18 * textSize, GAME_HEIGHT - 50 }, 0.5f);
 	text->Coroutine([=]()
 		{
-			text->MoveTo({ GAME_WIDTH - 14 * textSize, 25 }, 1.f);
+			text->MoveTo({ GAME_WIDTH - 18 * textSize, 25 }, 1.f);
 		}, 0.75f);
 	
 }
