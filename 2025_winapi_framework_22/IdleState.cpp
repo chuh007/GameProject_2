@@ -24,7 +24,7 @@ void PlayerIdleState::Excute(StateMachine* fsm) {
 	m_player->TryContinueFire(_fDT);
 
 	if (m_player->IsMovingInputProcessed()) {
-		fsm->ChangeState(new PlayerMoveState());
+		fsm->ChangeState(PlayerMoveState::GetInstance());
 		return;
 	}
 

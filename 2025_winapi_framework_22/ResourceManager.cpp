@@ -51,6 +51,8 @@ void ResourceManager::RegisterSound()
 	LoadSound(L"FireSound", L"Sound\\FireSound.mp3", false);
 	LoadSound(L"SpellEndSound", L"Sound\\se_enep00.wav", false);
 	LoadSound(L"SpellSound", L"Sound\\se_cardget.wav", false);
+	LoadSound(L"PlayerHit", L"Sound\\playerHit.wav", false);
+	LoadSound(L"Bomb", L"Sound\\bomb.wav", false);
 }
 
 void ResourceManager::FmodUpdate()

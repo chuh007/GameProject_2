@@ -31,6 +31,7 @@ public:
 	bool UseBomb();
 	void InvokeBomb();
 	void GainPower(float _amount);
+	void SpawnPower();
 public:
 	virtual void TakeDamage(int _damage) override;
 	virtual void HPZero() override;
