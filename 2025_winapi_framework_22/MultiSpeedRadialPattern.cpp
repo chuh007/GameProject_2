@@ -9,7 +9,7 @@ MultiSpeedRadialPattern::MultiSpeedRadialPattern(Object* _owner, Object* _target
 	, m_speed(400)
 	, m_moveTime(0)
 {
-	m_decValue = 1.f;
+	m_decValue = 0.9f;
 	m_bulletTex = GET_SINGLE(ResourceManager)->GetTexture(L"BlueBullet3");
 }
 

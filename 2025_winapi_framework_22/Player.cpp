@@ -189,29 +189,32 @@ void Player::CreateProjectile()
 		case 2:
 			damage_multiplier = 0.75f;
 			pos_x_offset = -HORIZONTAL_SPREAD;
-			current_angle_deg = -5.f;
+			current_angle_deg = -1.5f;
 			pos_y_offset_extra = Y_SPREAD_OFFSET;
 			break;
 
 		case 3:
 			damage_multiplier = 0.75f;
 			pos_x_offset = HORIZONTAL_SPREAD;
-			current_angle_deg = 5.f;
+			current_angle_deg = 1.5f;
 			pos_y_offset_extra = Y_SPREAD_OFFSET;
 			break;
 
 		case 4:
 			damage_multiplier = 0.5f;
-			pos_x_offset = -HORIZONTAL_SPREAD * 2.f;
-			current_angle_deg = -30.f;
+			pos_x_offset = -HORIZONTAL_SPREAD * 1.5f;
+			current_angle_deg = -20.f;
 			textureName = SIDE_BULLET_TEX;
+			pos_y_offset_extra = Y_SPREAD_OFFSET + 20;
+
 			break;
 
 		case 5:
 			damage_multiplier = 0.5f;
-			pos_x_offset = HORIZONTAL_SPREAD * 2.f;
-			current_angle_deg = 30.f;
+			pos_x_offset = HORIZONTAL_SPREAD * 1.5f;
+			current_angle_deg = 20.f;
 			textureName = SIDE_BULLET_TEX;
+			pos_y_offset_extra = Y_SPREAD_OFFSET + 20;
 			break;
 
 		default:
