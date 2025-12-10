@@ -38,6 +38,12 @@ public:
 	int GetLifeCount() {
 		return m_life;
 	}
+	void SetLifeCount(int _life) {
+		m_life = _life;
+	}
+	void PlusLifeCount(int _life) {
+		m_life += _life;
+	}
 	int GetBombCount() {
 		return m_bombCnt;
 	}
