@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "GameScene.h"
 #include "Player.h"
 #include "CollisionManager.h"
@@ -19,8 +19,9 @@
 #include "EnemyMovement.h"
 #include "Health.h"
 #include "Boss.h"
+#include "Texture.h"
 
-#pragma region ¶«¹æ¿ë ¸ÅÅ©·Î
+#pragma region ë•œë°©ìš© ë§¤í¬ë¡œ
 
 
 #define CREATE_ENEMY(enemyType, posX, posY, sizeW, sizeH, collSize, maxHP, itemType, itemSizeW, itemSizeH) \
@@ -96,7 +97,7 @@ void GameScene::Init()
 	DeleteObject(hUIBrush);
 
 
-	//¿©±â¼­ºÎÅÍ Àû ¼¼ÆÃ
+	//ì—¬ê¸°ì„œë¶€í„° ì  ì„¸íŒ…
 
 
 	EnemySpawnManger* enemyManager = GET_SINGLE(EnemySpawnManger);
@@ -113,7 +114,7 @@ void GameScene::Init()
 		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
 		movecompo->SetRepeatType(MoveRepeatType::Stop);
 		movecompo->AddPathData(wave1path);
-		movecompo->SetSpeed(300.f);
+		movecompo->SetSpeed(250.f);
 
 		enemyManager->AddEnemySpawnQueue({ i , testEnemy });
 	}
@@ -127,7 +128,7 @@ void GameScene::Init()
 		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
 		movecompo->SetRepeatType(MoveRepeatType::Stop);
 		movecompo->AddPathData(wave2path);
-		movecompo->SetSpeed(300.f);
+		movecompo->SetSpeed(250.f);
 
 		enemyManager->AddEnemySpawnQueue({i , testEnemy });
 	}
@@ -146,7 +147,7 @@ void GameScene::Init()
 		movecompo->AddPathData(down);
 		movecompo->AddPathData(down);
 		movecompo->AddPathData(i < 2 ? wave2path : wave1path);
-		movecompo->SetSpeed(150.0f);
+		movecompo->SetSpeed(125.f);
 
 		enemyManager->AddEnemySpawnQueue({ 12.f + i , fireEnemy });
 	}
@@ -181,7 +182,7 @@ void GameScene::Init()
 		{
 			movecompo->AddPathData(wave1path);
 		}
-		movecompo->SetSpeed(150.f);
+		movecompo->SetSpeed(125.f);
 
 		enemyManager->AddEnemySpawnQueue({ 20.f + 1.5f*i , fireEnemy });
 	}
@@ -207,7 +208,7 @@ void GameScene::Init()
 		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
 		movecompo->SetRepeatType(MoveRepeatType::Stop);
 		movecompo->AddPathData(wave2path);
-		movecompo->SetSpeed(300.f);
+		movecompo->SetSpeed(250.f);
 
 		enemyManager->AddEnemySpawnQueue({ i , testEnemy });
 	}
@@ -228,7 +229,7 @@ void GameScene::Init()
 		else
 			movecompo->AddPathData(wave2path);
 
-		movecompo->SetSpeed(300.f);
+		movecompo->SetSpeed(250.f);
 
 
 		enemyManager->AddEnemySpawnQueue({ 45.f + i , triple });
@@ -244,7 +245,7 @@ void GameScene::Init()
 		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
 		movecompo->SetRepeatType(MoveRepeatType::Stop);
 		movecompo->AddPathData(arcPathL);
-		movecompo->SetSpeed(300.f);
+		movecompo->SetSpeed(250.f);
 
 		enemyManager->AddEnemySpawnQueue({ 45.f + i , testEnemy });
 	}
@@ -256,7 +257,7 @@ void GameScene::Init()
 		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
 		movecompo->SetRepeatType(MoveRepeatType::Stop);
 		movecompo->AddPathData(arcPathR);
-		movecompo->SetSpeed(300.f);
+		movecompo->SetSpeed(250.f);
 
 		enemyManager->AddEnemySpawnQueue({ 45.f + i , testEnemy });
 	}
@@ -280,7 +281,7 @@ void GameScene::Init()
 			movecompo->AddPathData(down);
 		}
 
-		movecompo->SetSpeed(300.f);
+		movecompo->SetSpeed(250.f);
 
 		enemyManager->AddEnemySpawnQueue({ 50.f + (i / 2) * 0.5f, triple });
 	}
@@ -304,7 +305,7 @@ void GameScene::Init()
 			movecompo->AddPathData(down);
 		}
 
-		movecompo->SetSpeed(100.f);
+		movecompo->SetSpeed(75.f);
 
 		enemyManager->AddEnemySpawnQueue({ 55.f + i * 0.5f, shotEnemy });
 	}
@@ -330,11 +331,11 @@ void GameScene::Init()
 		{
 			movecompo->AddPathData(down);
 		}
-		movecompo->SetSpeed(150.f);
+		movecompo->SetSpeed(125.f);
 
 		enemyManager->AddEnemySpawnQueue({ 55.f + 1.5f * i , fireEnemy });
 	}
-	// 1ºÐ´ë Ã¤¿ò
+	// 1ë¶„ëŒ€ ì±„ì›€
 
 	for (float i = 60; i < 63; i += 0.25f)
 	{
@@ -345,7 +346,7 @@ void GameScene::Init()
 		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
 		movecompo->SetRepeatType(MoveRepeatType::Stop);
 		movecompo->AddPathData(wave1path);
-		movecompo->SetSpeed(300.f);
+		movecompo->SetSpeed(250.f);
 
 		enemyManager->AddEnemySpawnQueue({ i , testEnemy });
 	}
@@ -358,7 +359,7 @@ void GameScene::Init()
 		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
 		movecompo->SetRepeatType(MoveRepeatType::Stop);
 		movecompo->AddPathData(wave1path);
-		movecompo->SetSpeed(300.f);
+		movecompo->SetSpeed(250.f);
 
 		enemyManager->AddEnemySpawnQueue({ i , testEnemy });
 	}
@@ -384,11 +385,13 @@ void GameScene::Init()
 		{
 			movecompo->AddPathData(down);
 		}
-		movecompo->SetSpeed(150.f);
+		movecompo->SetSpeed(125.f);
 
 		enemyManager->AddEnemySpawnQueue({ 60.f + i , fireEnemy });
 	}
-	//¿©±â±îÁö Àû ¼¼ÆÃ
+
+	enemyManager->AddBossSpawn(70.f);
+	//ì—¬ê¸°ê¹Œì§€ ì  ì„¸íŒ…
 }
 
 void GameScene::Update()
@@ -419,18 +422,72 @@ void GameScene::Render(HDC _hdc) {
 	SetTextColor(_hdc, RGB(0, 0, 0));
 	SetBkMode(_hdc, TRANSPARENT);
 
-	const int TEXT_START_X = GAME_WIDTH + 30;
+	HFONT hFont = GET_SINGLE(ResourceManager)->GetFont(FontType::TITLE);
+	HFONT hOldFont = nullptr;
+	if (hFont != nullptr)
+	{
+		hOldFont = (HFONT)SelectObject(_hdc, hFont);
+	}
 
-	TextOut(_hdc, TEXT_START_X, 10, L"Render Test", 11);
+	const int UI_START_X = GAME_WIDTH + 10;
 
-	wstring lifeStr = std::format(L"LIFE : {}", life);
-	TextOut(_hdc, TEXT_START_X, 50, lifeStr.c_str(), (int)lifeStr.length());
+	Texture* lTex = GET_SINGLE(ResourceManager)->GetTexture(L"LifeIcon");
+	Texture* bTex = GET_SINGLE(ResourceManager)->GetTexture(L"BombIcon");
 
-	wstring bombStr = std::format(L"BOMB : {}", bombCnt);
-	TextOut(_hdc, TEXT_START_X, 100, bombStr.c_str(), (int)bombStr.length());
+	LONG lifeWidth = lTex->GetWidth();
+	LONG lifeHeight = lTex->GetHeight();
+	LONG bombWidth = bTex->GetWidth();
+	LONG bombHeight = bTex->GetHeight();
+
+	const int ICON_GAP_LIFE = lifeWidth + 5;
+	const int ICON_GAP_BOMB = bombWidth + 5;
+
+	const int LIFE_TEXT_WIDTH_OFFSET = 80;
+	const int BOMB_TEXT_WIDTH_OFFSET = 80;
+
+	const int LIFE_START_Y = 50;
+
+	wstring lifePrefix = L"LIFE : ";
+	TextOut(_hdc, UI_START_X, LIFE_START_Y, lifePrefix.c_str(), (int)lifePrefix.length());
+
+	for (int i = 0; i < life; ++i)
+	{
+		::TransparentBlt(
+			_hdc,
+			UI_START_X + LIFE_TEXT_WIDTH_OFFSET + (i * ICON_GAP_LIFE),
+			LIFE_START_Y,
+			lifeWidth, lifeHeight,
+			lTex->GetTextureDC(),
+			0, 0, lifeWidth, lifeHeight,
+			RGB(255, 0, 255));
+	}
+
+	const int BOMB_START_Y = 100;
+
+	wstring bombPrefix = L"BOMB : ";
+	TextOut(_hdc, UI_START_X, BOMB_START_Y, bombPrefix.c_str(), (int)bombPrefix.length());
+
+	for (int i = 0; i < bombCnt; ++i)
+	{
+		::TransparentBlt(
+			_hdc,
+			UI_START_X + BOMB_TEXT_WIDTH_OFFSET + (i * ICON_GAP_BOMB),
+			BOMB_START_Y,
+			bombWidth, bombHeight,
+			bTex->GetTextureDC(),
+			0, 0, bombWidth, bombHeight,
+			RGB(255, 0, 255));
+	}
+
+	const int POWER_START_Y = 150;
 
 	wstring powerStr = std::format(L"POWER: {} / {}", power, 128);
-	TextOut(_hdc, TEXT_START_X, 150, powerStr.c_str(), (int)powerStr.length());
+	TextOut(_hdc, UI_START_X, POWER_START_Y, powerStr.c_str(), (int)powerStr.length());
+
+	if (hOldFont != nullptr)
+	{
+		SelectObject(_hdc, hOldFont);
+	}
 }
 
 void GameScene::Release()

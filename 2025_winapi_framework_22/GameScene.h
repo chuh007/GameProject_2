@@ -1,10 +1,10 @@
-#pragma once
+ï»¿#pragma once
 #include "Scene.h"
 class GameScene :
     public Scene
 {
 public:
-    // SceneÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
+    // Sceneì„(ë¥¼) í†µí•´ ìƒì†ë¨
     void Init() override;
     void Update() override;
     void Render(HDC _hdc) override;
