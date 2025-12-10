@@ -5,6 +5,7 @@
 #include "StartButton.h"
 #include "ButtonSelector.h"
 #include "ExitButton.h"
+#include "TitleBackground.h"
 
 void TitleScene::Init()
 {
@@ -32,7 +33,7 @@ void TitleScene::Init()
 	button->SetSize({ 200.f, 50.f });
 	button->SetPos({ GAME_WIDTH - button->GetSize().x / 2 - 25, btnpositionY});
 	button->SetText(L"Start");
-	button->SetSceneName(L"Game");
+	button->SetSceneName(L"DevScene");
 
 	btnpositionY += 60.0f;
 
@@ -46,6 +47,11 @@ void TitleScene::Init()
 	AddObject(exit, Layer::UI);
 	selector->AssignButton(button);
 	selector->AssignButton(exit);
+
+	Object* bg = new TitleBackground;
+	bg->SetPos({ GAME_WIDTH/2, GAME_HEIGHT/2 });
+	bg->SetSize({GAME_WIDTH, GAME_HEIGHT});
+	AddObject(bg, Layer::BACKGROUND);
 }
 
 void TitleScene::Render(HDC _hdc) {
@@ -65,8 +71,8 @@ void TitleScene::Render(HDC _hdc) {
 
 	const int TEXT_START_X = GAME_WIDTH + 30;
 
-	TextOut(_hdc, TEXT_START_X, 10, L"개발자들", 4);
-	TextOut(_hdc, TEXT_START_X, 40, L"정우형", 3);
-	TextOut(_hdc, TEXT_START_X, 70, L"조인우", 3);
-	TextOut(_hdc, TEXT_START_X, 100, L"박준서", 3);
+	TextOut(_hdc, TEXT_START_X, 10, L"조작법 :", 5);
+	TextOut(_hdc, TEXT_START_X, 50, L"W, A, S, D : 이동", 15);
+	TextOut(_hdc, TEXT_START_X, 75, L"Q : 봄", 5);
+	TextOut(_hdc, TEXT_START_X, 100, L"Space : 발사", 10);
 }
