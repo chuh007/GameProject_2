@@ -118,7 +118,7 @@ void Player::Update()
 	if (GET_KEYDOWN(KEY_TYPE::Q)) {
 		UseBomb();
 	}
-	if (GET_KEYDOWN(KEY_TYPE::Z)) {
+	if (GET_KEY(KEY_TYPE::Z)) {
 		if (m_powerLevel <= MAX_POWER) {
 			GainPower(1);
 		}
@@ -152,33 +152,71 @@ void Player::CreateProjectile()
 		num_proj = 2;
 	}
 
-	const float ANGLE_STEP = 8.f;
-	float start_angle_deg = 0.f;
-
-	if (num_proj > 1) {
-		start_angle_deg = -(num_proj - 1) * ANGLE_STEP / 2.f;
-	}
-
 	float baseDmg = 4.f;
 	float totalDmg = baseDmg + m_amountDmg;
 	if (totalDmg < 0.f) totalDmg = baseDmg;
 
-	for (int i = 0; i < num_proj; ++i)
+	const float POS_OFFSET_Y = GetSize().y / 2.f;
+	const float HORIZONTAL_SPREAD = 20.f;
+
+	for (int i = 1; i <= num_proj; ++i)
 	{
 		PlayerProjectile* proj = GET_SINGLE(PoolManager)->
 			Pop<PlayerProjectile>(PoolType::PlayerProj);
 
 		proj->Reset();
-		Vec2 pos = GetPos();
-		pos.y -= GetSize().y / 2.f;
-		proj->SetPos(pos);
 		proj->SetSize({ 30.f,30.f });
 
-		proj->SetDamage(totalDmg);
+		float damage_multiplier = 1.0f;
+		float current_angle_deg = 0.f;
+		float pos_x_offset = 0.f;
 
-		float current_angle_deg = start_angle_deg + (float)i * ANGLE_STEP;
+		switch (i)
+		{
+		case 1:
+			damage_multiplier = 1.0f;
+			pos_x_offset = 0.f;
+			current_angle_deg = 0.f;
+			break;
+
+		case 2:
+			damage_multiplier = 0.75f;
+			pos_x_offset = -HORIZONTAL_SPREAD;
+			current_angle_deg = 0.f;
+			break;
+
+		case 3:
+			damage_multiplier = 0.75f;
+			pos_x_offset = HORIZONTAL_SPREAD;
+			current_angle_deg = 0.f;
+			break;
+
+		case 4:
+			damage_multiplier = 0.5f;
+			pos_x_offset = -HORIZONTAL_SPREAD * 2.f;
+			current_angle_deg = -30.f;
+			break;
+
+		case 5:
+			damage_multiplier = 0.5f;
+			pos_x_offset = HORIZONTAL_SPREAD * 2.f;
+			current_angle_deg = 30.f;
+			break;
+
+		default:
+			break;
+		}
+
+		Vec2 pos = GetPos();
+		pos.y -= POS_OFFSET_Y;
+		pos.x += pos_x_offset;
+
+		proj->SetPos(pos);
+
+		float finalDmg = totalDmg * damage_multiplier;
+		proj->SetDamage(finalDmg);
+
 		float current_angle_rad = current_angle_deg * PI / 180.f;
-
 		proj->SetDir({ sinf(current_angle_rad), -cosf(current_angle_rad) });
 	}
 }
