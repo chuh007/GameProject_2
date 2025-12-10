@@ -332,11 +332,11 @@ void GameScene::Init()
 		}
 		movecompo->SetSpeed(125.f);
 
-		enemyManager->AddEnemySpawnQueue({ 55.f + 1.5f * i , fireEnemy });
+		enemyManager->AddEnemySpawnQueue({ 60.f + 1.5f * i , fireEnemy });
 	}
 	// 1분대 채움
 
-	for (float i = 60; i < 63; i += 0.25f)
+	for (float i = 62; i < 65; i += 0.25f)
 	{
 		TestEnemy* testEnemy = new TestEnemy;
 		CREATE_ENEMY(testEnemy, -50, 100, 75, 75, 75.f / 2, 3.f, PowerItem, 25.f, 25.f);
@@ -349,7 +349,7 @@ void GameScene::Init()
 
 		enemyManager->AddEnemySpawnQueue({ i , testEnemy });
 	}
-	for (float i = 60; i < 63; i += 0.25f)
+	for (float i = 62; i < 65; i += 0.25f)
 	{
 		TestEnemy* testEnemy = new TestEnemy;
 		CREATE_ENEMY(testEnemy, -50, 300, 75, 75, 75.f / 2, 3.f, PowerItem, 25.f, 25.f);

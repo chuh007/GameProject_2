@@ -208,6 +208,7 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"YellowSword", L"Texture\\Sword_Yellow.bmp");
 	LoadTexture(L"Boss", L"Texture\\Zelretch.bmp");
 	LoadTexture(L"SpellBackground", L"Texture\\SpellBackground.bmp");
+	LoadTexture(L"TitleBackground", L"Texture\\TitleBackground.bmp");
 	
 }
 
