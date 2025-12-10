@@ -213,6 +213,7 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"BlueSword", L"Texture\\Sword_Blue.bmp");
 	LoadTexture(L"YellowSword", L"Texture\\Sword_Yellow.bmp");
 	LoadTexture(L"Boss", L"Texture\\Zelretch.bmp");
+	LoadTexture(L"BossBoom", L"Texture\\Boss_Circle.bmp");
 	LoadTexture(L"SpellBackground", L"Texture\\SpellBackground.bmp");
 	LoadTexture(L"BombIcon", L"Texture\\Player_Icon_Bomb_Green.bmp");
 	LoadTexture(L"LifeIcon", L"Texture\\Player_Icon_Hp_Red.bmp");

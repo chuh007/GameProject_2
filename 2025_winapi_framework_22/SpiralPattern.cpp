@@ -12,7 +12,7 @@ SpiralPattern::SpiralPattern(Object* _owner, Object* _target, float _patternUseT
     , m_fireCount(20)
     , m_isleft(false)
 {
-    m_decValue = 0.8f;
+    m_decValue = 0.7f;
     m_bulletTex = GET_SINGLE(ResourceManager)->GetTexture(L"GreenBullet3");
 }
 

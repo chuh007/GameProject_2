@@ -19,7 +19,7 @@ GateOfBabylonPattern::GateOfBabylonPattern(Object* _owner, Object* _target, floa
 	, m_rotate(0)
 {
 
-	m_decValue = 0.6f;
+	m_decValue = 0.35f;
 	m_swordTexs[0] = GET_SINGLE(ResourceManager)->GetTexture(L"GreenSword");
 	m_swordTexs[1] = GET_SINGLE(ResourceManager)->GetTexture(L"RedSword");
 	m_swordTexs[2] = GET_SINGLE(ResourceManager)->GetTexture(L"YellowSword");

@@ -9,6 +9,7 @@ TripleCirclePattern::TripleCirclePattern(Object* _owner, Object* _target, float 
 	, m_speed(250)
 {
 	m_bulletTex = GET_SINGLE(ResourceManager)->GetTexture(L"BlueBullet3");
+	m_decValue = 1.1f;
 }
 
 TripleCirclePattern::~TripleCirclePattern()
@@ -52,7 +53,7 @@ void TripleCirclePattern::BaseShoot()
 		projectile->SetColliderSize(5.5f);
 		projectile->SetTexture(m_bulletTex);
 		projectile->SetPos(m_owner->GetPos());
-		projectile->SetDir(angle * i + 7);
+		projectile->SetDir(angle * i + 3);
 		projectile->SetSpeed(m_speed * 0.8f);
 	}
 	for (int i = 0; i < m_fireCount; ++i)
@@ -63,7 +64,7 @@ void TripleCirclePattern::BaseShoot()
 		projectile->SetColliderSize(5.5f);
 		projectile->SetTexture(m_bulletTex);
 		projectile->SetPos(m_owner->GetPos());
-		projectile->SetDir(angle * i + 14);
+		projectile->SetDir(angle * i + 6);
 		projectile->SetSpeed(m_speed * 0.6f);
 	}
 }

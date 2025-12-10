@@ -9,7 +9,7 @@ CirclePattern::CirclePattern(Object* _owner, Object* _target, float _patternUseT
 	, m_fireCount(30)
 	, m_speed(225)
 {
-	m_decValue = 1.f;
+	m_decValue = 1.3f;
 	m_bulletTex = GET_SINGLE(ResourceManager)->GetTexture(L"OraneBullet3");
 }
 

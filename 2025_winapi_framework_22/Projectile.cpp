@@ -25,14 +25,24 @@ void PlayerProjectile::Render(HDC _hdc)
 	Vec2 size = GetSize();
 	LONG width = m_pTex->GetWidth();
 	LONG height = m_pTex->GetHeight();
-	::TransparentBlt(_hdc
+
+	BLENDFUNCTION bf;
+	bf.BlendOp = AC_SRC_OVER;
+	bf.BlendFlags = 0;
+	bf.SourceConstantAlpha = 64;
+	bf.AlphaFormat = 0;
+
+	// DC 안만들고 그냥 하기.
+	// 생각보다 볼만하더라..ㅋㅋ
+	::AlphaBlend(_hdc
 		, (int)(pos.x - size.x / 2)
 		, (int)(pos.y - size.y / 2)
 		, size.x
 		, size.y
 		, m_pTex->GetTextureDC()
-		, 0, 0, width, height,
-		RGB(255, 0, 255));
+		, 0, 0, width, height
+		, bf);
+
 	ComponentRender(_hdc);
 }
 

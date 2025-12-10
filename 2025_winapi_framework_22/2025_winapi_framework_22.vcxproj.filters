@@ -220,7 +220,6 @@
     <ClInclude Include="DeleteBullet.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
-    <ClInclude Include="CombatCompo.h" />
     <ClInclude Include="PlayerDeadState.h" />
     <ClInclude Include="PlayerHitState.h" />
     <ClInclude Include="GateOfBabylonPattern.h">
@@ -280,7 +279,9 @@
     <ClInclude Include="BoomEffect.h" />
     <ClInclude Include="OneUpItem.h" />
     <ClInclude Include="TitleBackground.h" />
-    <ClInclude Include="TripleCirclePattern.h" />
+    <ClInclude Include="TripleCirclePattern.h">
+      <Filter>Engine\09. Pattern</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc">
@@ -434,7 +435,6 @@
     <ClCompile Include="DeleteBullet.cpp">
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
-    <ClCompile Include="CombatCompo.cpp" />
     <ClCompile Include="PlayerDeadState.cpp" />
     <ClCompile Include="PlayerHitState.cpp" />
     <ClCompile Include="GateOfBabylonPattern.cpp">
@@ -494,6 +494,8 @@
     <ClCompile Include="BoomEffect.cpp" />
     <ClCompile Include="OneUpItem.cpp" />
     <ClCompile Include="TitleBackground.cpp" />
-    <ClCompile Include="TripleCirclePattern.cpp" />
+    <ClCompile Include="TripleCirclePattern.cpp">
+      <Filter>Engine\09. Pattern</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
