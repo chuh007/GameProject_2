@@ -5,7 +5,6 @@
 #include "MoveState.h"
 #include "PlayerAttackState.h"
 #include "InputManager.h"
-#include "CombatCompo.h"
 #include "TimeManager.h"
 
 void PlayerIdleState::Enter(StateMachine* fsm) {
