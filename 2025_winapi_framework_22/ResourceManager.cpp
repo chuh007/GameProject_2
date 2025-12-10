@@ -192,7 +192,8 @@ void ResourceManager::RegisterTexture()
 {
 	// texture load
 	LoadTexture(L"Plane", L"Texture\\plane.bmp");
-	LoadTexture(L"Bullet", L"Texture\\Bullet.bmp");
+	LoadTexture(L"MiddleBullet", L"Texture\\Player_Bullet_Middle.bmp"); // 1 ~ 3번째 총알
+	LoadTexture(L"AngleBullet", L"Texture\\Player_Bullet_Angle.bmp"); // 4, 5번째 총알
 	LoadTexture(L"Player", L"Texture\\Player.bmp");
 	LoadTexture(L"BlueBullet", L"Texture\\2_Circle_Blue_2.bmp");
 	LoadTexture(L"BlueBullet3", L"Texture\\2_Circle_Blue_3.bmp");

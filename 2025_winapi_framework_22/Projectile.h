@@ -34,6 +34,7 @@ public:
     { m_damage = _damage; }
     int getDamage()
     { return m_damage; }
+    void SetTextureByName(const wstring& _texName);
 private:
     //float m_dir;
     float m_angle;
