@@ -2,6 +2,7 @@
 #include "Enemy.h"
 #include "MathHelper.h"
 
+class Texture;
 class CircleMoveEnemy :
     public Enemy
 {
@@ -17,5 +18,6 @@ protected:
 private:
     float fireTime;
     int fireCount;
+    Texture* m_pBulletTexture;
 };
 
