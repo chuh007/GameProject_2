@@ -74,7 +74,7 @@ void Player::Render(HDC _hdc)
 
 	ComponentRender(_hdc);
 
-	HPEN hRedPen = CreatePen(PS_SOLID, 2, RGB(255, 0, 0));
+	HPEN hRedPen = CreatePen(PS_SOLID, 2, RGB(255, 255, 255));
 	HPEN hOldPen = (HPEN)SelectObject(_hdc, hRedPen);
 
 	HBRUSH hNullBrush = (HBRUSH)GetStockObject(WHITE_BRUSH);
