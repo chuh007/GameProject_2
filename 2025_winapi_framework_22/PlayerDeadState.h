@@ -10,5 +10,10 @@ public:
 	virtual void Enter(StateMachine* _fsm) override;
 	virtual void Excute(StateMachine* _fsm) override;
 	virtual void Exit(StateMachine* _fsm) override;
+public:
+	static PlayerDeadState* GetInstance() {
+		static PlayerDeadState instance;
+		return &instance;
+	}
 };
 

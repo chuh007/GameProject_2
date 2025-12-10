@@ -8,7 +8,6 @@ StateMachine::StateMachine() : m_curState(nullptr) {
 StateMachine::~StateMachine() {
 	if (m_curState) {
 		m_curState->Exit(this);
-		delete m_curState;
 		m_curState = nullptr;
 	}
 }
@@ -38,7 +37,6 @@ void StateMachine::ChangeState(State* _newState) {
 
 	if (m_curState) {
 		m_curState->Exit(this);
-		delete m_curState;
 	}
 
 	m_curState = _newState;

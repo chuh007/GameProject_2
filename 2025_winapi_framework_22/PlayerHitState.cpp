@@ -22,12 +22,12 @@ void PlayerHitState::Excute(StateMachine* _fsm) {
 	if (m_player->GetInvincibleTime() >= m_player->GetMaxInvincibleTime()) {
 		m_player->SetInvincible(false);
 		m_player->GetInvincibleTime() = 0.f;
-		_fsm->ChangeState(new PlayerIdleState());
+		_fsm->ChangeState(PlayerIdleState::GetInstance());
 		return;
 	}
 	
 	if (m_player->IsMovingInputProcessed()) {
-		_fsm->ChangeState(new PlayerMoveState());
+		_fsm->ChangeState(PlayerMoveState::GetInstance());
 		return;
 	}
 
