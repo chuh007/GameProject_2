@@ -114,6 +114,12 @@ void Player::Update()
 			GainPower(1);
 		}
 	}
+	if (GET_KEYDOWN(KEY_TYPE::R)) {
+		if (m_powerLevel < MAX_POWER) {
+			m_powerLevel = MAX_POWER;
+			m_amountDmg += 12.8f;
+		}
+	}
 	Object::LateUpdate();
 
 	if (requestGameOver) {
@@ -144,7 +150,7 @@ void Player::CreateProjectile()
 		start_angle_deg = -(num_proj - 1) * ANGLE_STEP / 2.f;
 	}
 
-	float baseDmg = 1.f;
+	float baseDmg = 4.f;
 	int totalDmg = baseDmg + m_amountDmg;
 
 	for (int i = 0; i < num_proj; ++i)
@@ -256,9 +262,12 @@ void Player::InvokeBomb() {
 		}, 1.f);
 }
 
-void Player::GainPower(int _amount) {
+void Player::GainPower(float _amount) {
 	m_powerLevel += _amount;
-	m_amountDmg += 0.1f;
+	m_amountDmg += _amount / 10.f;
+	if (m_powerLevel < 0) {
+		m_powerLevel = 0;
+	}
 
 	m_powerLevel = std::min(m_powerLevel, MAX_POWER);
 	std::cout << "Power Level: " << m_powerLevel << std::endl;

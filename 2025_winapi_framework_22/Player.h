@@ -30,7 +30,7 @@ public:
 	void TryContinueFire(float _fDT);
 	bool UseBomb();
 	void InvokeBomb();
-	void GainPower(int _amount);
+	void GainPower(float _amount);
 public:
 	virtual void TakeDamage(int _damage) override;
 	virtual void HPZero() override;

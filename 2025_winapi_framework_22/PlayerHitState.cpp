@@ -10,6 +10,7 @@ void PlayerHitState::Enter(StateMachine* _fsm) {
 	m_player->InvokeBomb();
 	m_player->SetInvincible(true);
 	m_player->GetInvincibleTime() = 0.f;
+	m_player->GainPower(-15);
 
 	std::cout << "Player hit" << std::endl;
 }
@@ -36,7 +37,6 @@ void PlayerHitState::Excute(StateMachine* _fsm) {
 void PlayerHitState::Exit(StateMachine* _fsm) {
 	Player* player = static_cast<Player*>(_fsm->GetOwner());
 	if (player) {
-		//player->InvokeBomb();
 		player->SetInvincible(false);
 		player->GetInvincibleTime() = 0.f;
 	}
