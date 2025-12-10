@@ -54,7 +54,7 @@ void ShotToPlayerEnemy::TryToShot()
 			return;
 		}
 		auto* projectile = PoolManager::GetInst()->
-			Pop<EnemyProjectile>(PoolType::IceProj);
+			Pop<EnemyProjectile>(PoolType::EnemyProjectile);
 		projectile->SetSize({ 10.f, 10.f });
 		projectile->SetTexture(m_pBulletTexture);
 		projectile->SetColliderSize(7.5f);

@@ -12,6 +12,7 @@ Health::Health()
 
 Health::~Health()
 {
+	Component::~Component();
 }
 
 void Health::Init()

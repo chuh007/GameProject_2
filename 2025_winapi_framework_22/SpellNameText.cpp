@@ -10,6 +10,11 @@ SpellNameText::SpellNameText()
 {
 }
 
+SpellNameText::~SpellNameText()
+{
+	Object::~Object();
+}
+
 void SpellNameText::Render(HDC _hdc)
 {
 	if (m_name.empty()) return;

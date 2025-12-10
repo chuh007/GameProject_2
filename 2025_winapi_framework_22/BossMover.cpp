@@ -15,6 +15,7 @@ BossMover::BossMover()
 
 BossMover::~BossMover()
 {
+	Component::~Component();
 }
 
 void BossMover::Init()

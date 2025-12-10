@@ -167,6 +167,7 @@ void DevScene::Render(HDC _hdc) {
 }
 
 void DevScene::Release() {
+	Scene::Release();
 	if (m_hdc != nullptr) {
 		SelectObject(m_hdc, m_hOldBitmap);
 		DeleteDC(m_hdc);

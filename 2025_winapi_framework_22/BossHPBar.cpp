@@ -9,6 +9,7 @@ BossHPBar::BossHPBar()
 
 BossHPBar::~BossHPBar()
 {
+	Object::~Object();
 }
 
 void BossHPBar::Render(HDC _hdc)

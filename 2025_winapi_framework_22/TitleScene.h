@@ -5,6 +5,7 @@ class TitleScene : public Scene
 	// Scene을(를) 통해 상속됨
 	void Init() override;
 	void Render(HDC _hdc) override;
+    void Release() override;
 
 private:
 

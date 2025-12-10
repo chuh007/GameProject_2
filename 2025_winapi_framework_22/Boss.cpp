@@ -62,12 +62,15 @@ Boss::Boss()
 
 Boss::~Boss()
 {
+	Object::~Object();
 }
 
 
 void Boss::Start()
 {
 	m_patternCompo->UseNomalPattern();
+	GET_SINGLE(ResourceManager)->Stop(SOUND_CHANNEL::BGM);
+	GET_SINGLE(ResourceManager)->Play(L"BossBGM");
 }
 
 
@@ -125,7 +128,7 @@ void Boss::HPZero()
 		auto* effect = GET_SINGLE(SceneManager)->GetCurScene()
 			->Spawn<BoomEffect>(Layer::PROJECTILEDELETER, GetPos(), { 25,25 });
 		effect->DoScale(10.f, 0.3f);
-		for (int i = 0; i < 10; ++i)
+		for (int i = 0; i < 20; ++i)
 		{
 			Vec2 spawnPos = GetPos();
 			spawnPos += { rand() % 200 - 100, rand() % 200 - 100 };

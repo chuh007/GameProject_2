@@ -277,6 +277,10 @@
     <ClInclude Include="MultiSpeedRadialPattern.h">
       <Filter>Engine\09. Pattern</Filter>
     </ClInclude>
+    <ClInclude Include="BoomEffect.h" />
+    <ClInclude Include="OneUpItem.h" />
+    <ClInclude Include="TitleBackground.h" />
+    <ClInclude Include="TripleCirclePattern.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc">
@@ -487,5 +491,9 @@
     <ClCompile Include="MultiSpeedRadialPattern.cpp">
       <Filter>Engine\09. Pattern</Filter>
     </ClCompile>
+    <ClCompile Include="BoomEffect.cpp" />
+    <ClCompile Include="OneUpItem.cpp" />
+    <ClCompile Include="TitleBackground.cpp" />
+    <ClCompile Include="TripleCirclePattern.cpp" />
   </ItemGroup>
 </Project>

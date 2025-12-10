@@ -15,6 +15,7 @@ PatternCompo::PatternCompo()
 
 PatternCompo::~PatternCompo()
 {
+	Component::~Component();
 	for (auto* pattern : m_nomalPatternList)
 	{
 		SAFE_DELETE(pattern);

@@ -33,7 +33,7 @@ void TitleScene::Init()
 	button->SetSize({ 200.f, 50.f });
 	button->SetPos({ GAME_WIDTH - button->GetSize().x / 2 - 25, btnpositionY});
 	button->SetText(L"Start");
-	button->SetSceneName(L"Game");
+	button->SetSceneName(L"DevScene");
 
 	btnpositionY += 60.0f;
 
@@ -76,4 +76,9 @@ void TitleScene::Render(HDC _hdc) {
 	TextOut(_hdc, TEXT_START_X, 75, L"Q : 봄", 5);
 	TextOut(_hdc, TEXT_START_X, 100, L"Space : 발사", 10);
 	TextOut(_hdc, TEXT_START_X, 125, L"Shiift : 느린 이동", 14);
+}
+
+void TitleScene::Release()
+{
+	Scene::Release();
 }

@@ -54,7 +54,7 @@ void Collider::ExitCollision(Collider* _other)
 }
 Collider::~Collider()
 {
-
+	Component::~Component();
 }
 
 void Collider::Init()

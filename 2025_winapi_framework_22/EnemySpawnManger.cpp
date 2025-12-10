@@ -4,6 +4,7 @@
 #include "Boss.h"
 #include "EnemySpawnManger.h"
 #include "BossHPBar.h"
+#include "BossMover.h"
 void EnemySpawnManger::Init()
 {
 	AssignPath();
@@ -74,11 +75,15 @@ bool EnemySpawnManger::TryToSpawnBoss()
 		return true;
 	if (m_currentTime >= m_bossSpawnTime)
 	{
-		Boss* boss = m_spawnTargetScene->Spawn<Boss>(Layer::ENEMY, { GAME_WIDTH / 2, GAME_HEIGHT / 4 }, { 50.f,75.f });;
+		Boss* boss = m_spawnTargetScene->Spawn<Boss>(Layer::ENEMY, { GAME_WIDTH / 2, -100 }, { 30.f,70.f });;
 		auto* hpBar = m_spawnTargetScene->Spawn<BossHPBar>(Layer::UI, { GAME_WIDTH / 2, 25 }, { GAME_WIDTH - 20, 50 });
 		hpBar->SetBoss(boss);
 		boss->SetBackground(m_bg);
-		boss->Start();
+		boss->GetComponent<BossMover>()->MoveTo({ GAME_WIDTH / 2, GAME_HEIGHT / 4 }, 0.5f);
+		boss->Coroutine([=]()
+			{
+				boss->Start();
+			}, 0.5f);
 		return true;
 	}
 	return false;
