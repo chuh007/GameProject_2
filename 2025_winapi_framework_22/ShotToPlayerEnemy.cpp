@@ -4,9 +4,11 @@
 #include "PlayerManager.h"
 #include "EnemyMovement.h"
 #include "ShotToPlayerEnemy.h"
+#include "ResourceManager.h"
 
 ShotToPlayerEnemy::ShotToPlayerEnemy()
 {
+	m_pBulletTexture = GET_SINGLE(ResourceManager)->GetTexture(L"RedSword");
 }
 
 void ShotToPlayerEnemy::Update()
@@ -54,6 +56,7 @@ void ShotToPlayerEnemy::TryToShot()
 		auto* projectile = PoolManager::GetInst()->
 			Pop<EnemyProjectile>(PoolType::IceProj);
 		projectile->SetSize({ 10.f, 10.f });
+		projectile->SetTexture(m_pBulletTexture);
 		projectile->SetColliderSize(7.5f);
 		projectile->SetPos(GetPos());
 		projectile->SetDir(targetPos - GetPos());

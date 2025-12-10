@@ -7,14 +7,15 @@ Item::Item()
 {
 	auto* coll = AddComponent<Collider>();
 	coll->SetSize(50.f);
-	m_currentSpeed = -100;
+	m_currentSpeed = -150;
 }
 
 void Item::Update()
 {
 	Vec2 curPos = GetPos();
 	SetPos({ curPos.x, curPos.y + m_currentSpeed * fDT });
-	m_currentSpeed += 150.f * fDT;
+	if(m_currentSpeed<= 200.f)
+		m_currentSpeed += 300.f * fDT;
 
 	if (curPos.y >= GAME_HEIGHT * 2)
 	{

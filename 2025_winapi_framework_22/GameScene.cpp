@@ -14,6 +14,7 @@
 #include "ItemDropCompo.h"
 #include "BombItem.h"
 #include "PowerItem.h"
+#include "OneUpItem.h"
 #include "Background.h"
 #include "Effect.h"
 #include "EnemyMovement.h"
@@ -108,7 +109,7 @@ void GameScene::Init()
 	for(float i = 0; i < 3; i += 0.25f)
 	{
 		TestEnemy* testEnemy = new TestEnemy;
-		CREATE_ENEMY(testEnemy, -50, 100, 75, 75, 75.f / 2, 6.f, PowerItem, 25.f, 25.f);
+		CREATE_ENEMY(testEnemy, -50, 100, 75, 75, 75.f / 2, 12.f, PowerItem, 25.f, 25.f);
 			
 
 		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
@@ -123,7 +124,7 @@ void GameScene::Init()
 	{
 
 		TestEnemy* testEnemy = new TestEnemy;
-		CREATE_ENEMY(testEnemy, 800, 100, 75, 75, 75.f / 2, 6.f, PowerItem, 25.f, 25.f);
+		CREATE_ENEMY(testEnemy, 800, 100, 75, 75, 75.f / 2, 12.f, PowerItem, 25.f, 25.f);
 
 		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
 		movecompo->SetRepeatType(MoveRepeatType::Stop);
@@ -139,7 +140,7 @@ void GameScene::Init()
 	for (int i = 0; i < 4; ++i)
 	{
 		ShotToPlayerEnemy* fireEnemy = new ShotToPlayerEnemy;
-		CREATE_ENEMY(fireEnemy, 100 + i * 200, -50, 75,75,75.f/2,10.f, PowerItem, 25.f,25.f);
+		CREATE_ENEMY(fireEnemy, 100 + i * 200, -50, 75,75,75.f/2,20.f, PowerItem, 25.f,25.f);
 		fireEnemy->SetFireTime(1.5f, 0.05f, 12, true);
 
 		auto* movecompo = fireEnemy->AddComponent<EnemyMovement>();
@@ -157,11 +158,11 @@ void GameScene::Init()
 		CircleMoveEnemy* fireEnemy = new CircleMoveEnemy;
 		if (i  == 0)
 		{
-			CREATE_ENEMY(fireEnemy, 100 + (i % 3) * 175, 0, 75, 75, 75.f / 2, 10.0f, BombItem, 25.f, 25.f);
+			CREATE_ENEMY(fireEnemy, 100 + (i % 3) * 175, 0, 75, 75, 75.f / 2, 20.0f, BombItem, 25.f, 25.f);
 		}
 		else
 		{
-			CREATE_ENEMY(fireEnemy, 100 + (i % 3) * 175, 0, 75,75,75.f/2,5.0f, PowerItem, 25.f,25.f);
+			CREATE_ENEMY(fireEnemy, 100 + (i % 3) * 175, 0, 75,75,75.f/2,20.0f, PowerItem, 25.f,25.f);
 		}
 		fireEnemy->SetShotCount(25);
 
@@ -190,7 +191,7 @@ void GameScene::Init()
 	for (float i = 37; i < 40; i += 0.25f)
 	{
 		TestEnemy* testEnemy = new TestEnemy;
-		CREATE_ENEMY(testEnemy, -50, 100, 75, 75, 75.f / 2, 6.f, PowerItem, 25.f, 25.f);
+		CREATE_ENEMY(testEnemy, -50, 100, 75, 75, 75.f / 2, 12.f, PowerItem, 25.f, 25.f);
 
 		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
 		movecompo->SetRepeatType(MoveRepeatType::Stop);
@@ -203,7 +204,7 @@ void GameScene::Init()
 	{
 
 		TestEnemy* testEnemy = new TestEnemy;
-		CREATE_ENEMY(testEnemy, 800, 100, 75, 75, 75.f / 2, 6.f, PowerItem, 25.f, 25.f);
+		CREATE_ENEMY(testEnemy, 800, 100, 75, 75, 75.f / 2, 12.f, PowerItem, 25.f, 25.f);
 
 		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
 		movecompo->SetRepeatType(MoveRepeatType::Stop);
@@ -240,7 +241,7 @@ void GameScene::Init()
 	for (int i = 0; i < 10; ++i)
 	{
 		TestEnemy* testEnemy = new TestEnemy;
-		CREATE_ENEMY(testEnemy, 0, 500, 75, 75, 75.f / 2, 6.f, PowerItem, 25.f, 25.f);
+		CREATE_ENEMY(testEnemy, 0, 500, 75, 75, 75.f / 2, 12.f, PowerItem, 25.f, 25.f);
 
 		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
 		movecompo->SetRepeatType(MoveRepeatType::Stop);
@@ -252,7 +253,7 @@ void GameScene::Init()
 	for (int i = 0; i < 10; ++i)
 	{
 		TestEnemy* testEnemy = new TestEnemy;
-		CREATE_ENEMY(testEnemy, GAME_WIDTH, 500, 75, 75, 75.f / 2, 6.f, PowerItem, 25.f, 25.f);
+		CREATE_ENEMY(testEnemy, GAME_WIDTH, 500, 75, 75, 75.f / 2, 12.f, PowerItem, 25.f, 25.f);
 
 		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
 		movecompo->SetRepeatType(MoveRepeatType::Stop);
@@ -266,11 +267,11 @@ void GameScene::Init()
 		TripleShotEnemy* triple = new TripleShotEnemy;
 		if (i == 0)
 		{
-			CREATE_ENEMY(triple, 200 + (i % 2) * 300, -50, 50, 50, 25, 10.f, BombItem, 25.f, 25.f);
+			CREATE_ENEMY(triple, 200 + (i % 2) * 300, -50, 50, 50, 25, 15.f, OneUpItem, 25.f, 25.f);
 		}
 		else
 		{
-			CREATE_ENEMY(triple, 200 + (i % 2) * 300, -50, 50, 50, 25, 10.f, PowerItem, 25.f, 25.f);
+			CREATE_ENEMY(triple, 200 + (i % 2) * 300, -50, 50, 50, 25, 15.f, PowerItem, 25.f, 25.f);
 		}
 
 		auto* movecompo = triple->AddComponent<EnemyMovement>();
@@ -283,7 +284,7 @@ void GameScene::Init()
 
 		movecompo->SetSpeed(150.f);
 
-		enemyManager->AddEnemySpawnQueue({ 52.f + (i / 2) * 0.5f, triple });
+		enemyManager->AddEnemySpawnQueue({ 52.f + (i / 2) *1.f, triple });
 	}
 
 	for (int i = 0; i < 4; i++)
@@ -326,7 +327,7 @@ void GameScene::Init()
 	for (float i = 64; i < 67; i += 0.25f)
 	{
 		TestEnemy* testEnemy = new TestEnemy;
-		CREATE_ENEMY(testEnemy, -50, 100, 75, 75, 75.f / 2, 6.f, PowerItem, 25.f, 25.f);
+		CREATE_ENEMY(testEnemy, -50, 100, 75, 75, 75.f / 2, 9.f, PowerItem, 25.f, 25.f);
 
 
 		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
@@ -339,7 +340,7 @@ void GameScene::Init()
 	for (float i = 64; i < 67; i += 0.25f)
 	{
 		TestEnemy* testEnemy = new TestEnemy;
-		CREATE_ENEMY(testEnemy, -50, 300, 75, 75, 75.f / 2, 6.f, PowerItem, 25.f, 25.f);
+		CREATE_ENEMY(testEnemy, -50, 300, 75, 75, 75.f / 2, 9.f, PowerItem, 25.f, 25.f);
 
 
 		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();

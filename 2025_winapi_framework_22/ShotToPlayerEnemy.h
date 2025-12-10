@@ -24,6 +24,6 @@ private:
     Vec2 targetPos;
     int shotCount = 0;
     int m_curShot = 0;
-    Texture* m_pTexture;
+    Texture* m_pBulletTexture;
 };
 
