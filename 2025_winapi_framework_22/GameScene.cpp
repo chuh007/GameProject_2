@@ -110,7 +110,7 @@ void GameScene::Init()
 	for(float i = 0; i < 3; i += 0.25f)
 	{
 		TestEnemy* testEnemy = new TestEnemy;
-		CREATE_ENEMY(testEnemy, -50, 100, 75, 75, 75.f / 2, 12.f, PowerItem, 25.f, 25.f);
+		CREATE_ENEMY(testEnemy, -50, 100, 95, 55, 25.f, 12.f, PowerItem, 25.f, 25.f);
 		testEnemy->SetTexture(resourceManager->GetTexture(L"NormalEnemy"));
 
 		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();

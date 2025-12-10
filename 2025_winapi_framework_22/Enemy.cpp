@@ -34,7 +34,7 @@ void Enemy::Render(HDC _hdc)
 		_hdc,
 		pos.x - size.x/2,
 		pos.y - size.y/2,
-		texX, texY,
+		size.x, size.y,
 		m_pTex->GetTextureDC(),
 		0, 0, texX, texY,
 		RGB(255, 0, 255));
