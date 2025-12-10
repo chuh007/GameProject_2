@@ -194,13 +194,13 @@ void Player::CreateProjectile()
 		case 4:
 			damage_multiplier = 0.5f;
 			pos_x_offset = -HORIZONTAL_SPREAD * 2.f;
-			current_angle_deg = -30.f;
+			current_angle_deg = -20.f;
 			break;
 
 		case 5:
 			damage_multiplier = 0.5f;
 			pos_x_offset = HORIZONTAL_SPREAD * 2.f;
-			current_angle_deg = 30.f;
+			current_angle_deg = 20.f;
 			break;
 
 		default:
