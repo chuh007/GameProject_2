@@ -1,6 +1,7 @@
 #pragma once
 #include "Enemy.h"
 #include "MathHelper.h"
+class Texture;
 class TestEnemy :
     public Enemy
 {
@@ -11,5 +12,6 @@ public :
 
 private:
     float fireTime = 0;
+    Texture* m_pBulletTexture;
 };
 

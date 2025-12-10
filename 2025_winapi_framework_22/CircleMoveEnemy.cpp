@@ -5,10 +5,12 @@
 #include "EnemyMovement.h"
 #include "EnemySpawnManger.h"
 #include "EnemyProjectile.h"
+#include "ResourceManager.h"
 #include "Health.h"
 
 CircleMoveEnemy::CircleMoveEnemy()
 {
+	m_pBulletTexture = GET_SINGLE(ResourceManager)->GetTexture(L"IceBullet");
 	fireCount = 0;
 	fireTime = 0;
 }
@@ -22,7 +24,7 @@ void CircleMoveEnemy::Update()
 	fireTime += fDT;
 	if (fireTime >= 1.5f)
 	{
-		float dir = 360 / fireCount;
+		float dir = 360.f / fireCount;
 		for (int i = 0; i <= fireCount; ++i)
 		{
 			auto* projectile = PoolManager::GetInst()->
@@ -32,6 +34,7 @@ void CircleMoveEnemy::Update()
 			projectile->SetPos(GetPos());
 			projectile->SetDir(-90.f + i * dir);
 			projectile->SetSpeed(300.f);
+			projectile->SetTexture(m_pBulletTexture);
 
 			fireTime = 0;
 		}

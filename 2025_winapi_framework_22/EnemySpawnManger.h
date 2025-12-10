@@ -4,6 +4,7 @@
 class Enemy;
 class Scene;
 class Boss;
+class Background;
 struct SpawnInfo
 {
 	float spawnTime;
@@ -38,6 +39,7 @@ public:
 	{
 		m_spawnTargetScene = scene;
 	}
+	void SetBG(Background* bg) { m_bg = bg; };
 private: 
 	bool TryToSpawn();
 	bool TryToSpawnBoss();
@@ -45,6 +47,7 @@ private:
 private:
 	float m_currentTime;
 	Scene* m_spawnTargetScene;
+	Background* m_bg;
 	std::priority_queue<SpawnInfo, std::vector<SpawnInfo>, CompareSpawnInfo> m_enemySpawnQueue;
 	std::unordered_map<wstring, BezierPathData*> m_calcedPath;
 	float m_bossSpawnTime;
