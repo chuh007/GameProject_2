@@ -14,13 +14,16 @@ GateOfBabylonPattern::GateOfBabylonPattern(Object* _owner, Object* _target, floa
 	: Pattern(_owner, _target, _patternUseTime, _mover, _name)
 	, m_basePortalCount(4) 
 	, m_trailCount(5)
-	, m_baseSpeed(300.f)
+	, m_baseSpeed(250.f)
+	, m_timer(0)
+	, m_rotate(0)
 {
 
-	m_decValue = 0.4f;
+	m_decValue = 0.6f;
 	m_swordTexs[0] = GET_SINGLE(ResourceManager)->GetTexture(L"GreenSword");
 	m_swordTexs[1] = GET_SINGLE(ResourceManager)->GetTexture(L"RedSword");
 	m_swordTexs[2] = GET_SINGLE(ResourceManager)->GetTexture(L"YellowSword");
+	m_bulletTex = GET_SINGLE(ResourceManager)->GetTexture(L"BlueSword");
 }
 
 GateOfBabylonPattern::~GateOfBabylonPattern()
@@ -32,11 +35,17 @@ void GateOfBabylonPattern::Update()
 {
 	Pattern::Update();
 	m_curTime += fDT;
+	m_timer += fDT;
 
 	if (m_curTime > m_BaseShoutCooldown)
 	{
 		m_curTime = 0;
 		BaseShoot();
+	}
+	if (m_timer >= 1.f)
+	{
+		m_timer = 0;
+		CircleFire();
 	}
 }
 
@@ -44,7 +53,7 @@ void GateOfBabylonPattern::BaseShoot()
 {
 
 	int currentPortalCount = m_basePortalCount + (int)(m_patternUseTime / 5.0f);
-	float currentBaseSpeed = m_baseSpeed + (m_patternUseTime * 10.f);
+	float currentBaseSpeed = m_baseSpeed + (m_patternUseTime * 5.f);
 
 	for (int i = 0; i < currentPortalCount; ++i)
 	{
@@ -81,5 +90,22 @@ void GateOfBabylonPattern::BaseShoot()
 					projectile->SetSpeed(finalSpeed);
 				}, randomLaunchDelay);
 		}
+	}
+}
+
+void GateOfBabylonPattern::CircleFire()
+{
+	m_rotate += 20;
+	float angle = 360.f / (float)5;
+	for (int i = 0; i < 5; ++i)
+	{
+		auto* projectile = PoolManager::GetInst()->
+			Pop<EnemyProjectile>(PoolType::EnemyProjectile);
+		projectile->SetSize({ 15.f, 30.f });
+		projectile->SetColliderSize(10.f);
+		projectile->SetTexture(m_bulletTex);
+		projectile->SetPos(m_owner->GetPos());
+		projectile->SetDir(angle * i + m_rotate);
+		projectile->SetSpeed(300.f);
 	}
 }

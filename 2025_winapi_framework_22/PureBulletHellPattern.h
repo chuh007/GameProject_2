@@ -11,10 +11,17 @@ public:
     void Update() override;
     void BaseShoot() override;
 
+    void SecondFire();
+    void ThirdFire();
+
 private:
     PoolType m_projectileType;
     int m_fireCount;
     int m_speed;
+
+    float m_timer;
+    float m_secondTimer;
+    float m_thirdTimer;
 
     Texture* m_bulletTex;
 };

@@ -270,10 +270,12 @@
     </ClInclude>
     <ClInclude Include="BulletRenderManager.h" />
     <ClInclude Include="ClearScene.h" />
-    <ClInclude Include="Panel.h" />
     <ClInclude Include="ShotToPlayerEnemy.h" />
     <ClInclude Include="CircleMoveEnemy.h">
       <Filter>Engine\03. Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiSpeedRadialPattern.h">
+      <Filter>Engine\09. Pattern</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -478,10 +480,12 @@
     <ClCompile Include="GameOverScene.cpp" />
     <ClCompile Include="BulletRenderManager.cpp" />
     <ClCompile Include="ClearScene.cpp" />
-    <ClCompile Include="Panel.cpp" />
     <ClCompile Include="ShotToPlayerEnemy.cpp" />
     <ClCompile Include="CircleMoveEnemy.cpp">
       <Filter>Engine\03. Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="MultiSpeedRadialPattern.cpp">
+      <Filter>Engine\09. Pattern</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
