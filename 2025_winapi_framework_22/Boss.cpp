@@ -79,7 +79,6 @@ void Boss::TakeDamage(int _damage)
 {
 	m_healthCompo->TakeDamage(_damage * m_decDamage);
 	if (m_isDie) return;
-	cout << _damage * m_decDamage << endl;
 	if (m_patternCompo->IsUseSpell())
 		return;
 	if(m_healthCompo->GetHP() <= m_healthCompo->GetMaxHP() * 0.5f)
