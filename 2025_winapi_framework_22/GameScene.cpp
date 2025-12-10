@@ -113,7 +113,7 @@ void GameScene::Init()
 		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
 		movecompo->SetRepeatType(MoveRepeatType::Stop);
 		movecompo->AddPathData(wave1path);
-		movecompo->SetSpeed(300.f);
+		movecompo->SetSpeed(250.f);
 
 		enemyManager->AddEnemySpawnQueue({ i , testEnemy });
 	}
@@ -127,7 +127,7 @@ void GameScene::Init()
 		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
 		movecompo->SetRepeatType(MoveRepeatType::Stop);
 		movecompo->AddPathData(wave2path);
-		movecompo->SetSpeed(300.f);
+		movecompo->SetSpeed(250.f);
 
 		enemyManager->AddEnemySpawnQueue({i , testEnemy });
 	}
@@ -146,7 +146,7 @@ void GameScene::Init()
 		movecompo->AddPathData(down);
 		movecompo->AddPathData(down);
 		movecompo->AddPathData(i < 2 ? wave2path : wave1path);
-		movecompo->SetSpeed(150.0f);
+		movecompo->SetSpeed(125.f);
 
 		enemyManager->AddEnemySpawnQueue({ 12.f + i , fireEnemy });
 	}
@@ -181,7 +181,7 @@ void GameScene::Init()
 		{
 			movecompo->AddPathData(wave1path);
 		}
-		movecompo->SetSpeed(150.f);
+		movecompo->SetSpeed(125.f);
 
 		enemyManager->AddEnemySpawnQueue({ 20.f + 1.5f*i , fireEnemy });
 	}
@@ -207,7 +207,7 @@ void GameScene::Init()
 		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
 		movecompo->SetRepeatType(MoveRepeatType::Stop);
 		movecompo->AddPathData(wave2path);
-		movecompo->SetSpeed(300.f);
+		movecompo->SetSpeed(250.f);
 
 		enemyManager->AddEnemySpawnQueue({ i , testEnemy });
 	}
@@ -228,7 +228,7 @@ void GameScene::Init()
 		else
 			movecompo->AddPathData(wave2path);
 
-		movecompo->SetSpeed(300.f);
+		movecompo->SetSpeed(250.f);
 
 
 		enemyManager->AddEnemySpawnQueue({ 45.f + i , triple });
@@ -244,7 +244,7 @@ void GameScene::Init()
 		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
 		movecompo->SetRepeatType(MoveRepeatType::Stop);
 		movecompo->AddPathData(arcPathL);
-		movecompo->SetSpeed(300.f);
+		movecompo->SetSpeed(250.f);
 
 		enemyManager->AddEnemySpawnQueue({ 45.f + i , testEnemy });
 	}
@@ -256,7 +256,7 @@ void GameScene::Init()
 		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
 		movecompo->SetRepeatType(MoveRepeatType::Stop);
 		movecompo->AddPathData(arcPathR);
-		movecompo->SetSpeed(300.f);
+		movecompo->SetSpeed(250.f);
 
 		enemyManager->AddEnemySpawnQueue({ 45.f + i , testEnemy });
 	}
@@ -280,7 +280,7 @@ void GameScene::Init()
 			movecompo->AddPathData(down);
 		}
 
-		movecompo->SetSpeed(300.f);
+		movecompo->SetSpeed(250.f);
 
 		enemyManager->AddEnemySpawnQueue({ 50.f + (i / 2) * 0.5f, triple });
 	}
@@ -304,7 +304,7 @@ void GameScene::Init()
 			movecompo->AddPathData(down);
 		}
 
-		movecompo->SetSpeed(100.f);
+		movecompo->SetSpeed(75.f);
 
 		enemyManager->AddEnemySpawnQueue({ 55.f + i * 0.5f, shotEnemy });
 	}
@@ -330,7 +330,7 @@ void GameScene::Init()
 		{
 			movecompo->AddPathData(down);
 		}
-		movecompo->SetSpeed(150.f);
+		movecompo->SetSpeed(125.f);
 
 		enemyManager->AddEnemySpawnQueue({ 55.f + 1.5f * i , fireEnemy });
 	}
@@ -345,7 +345,7 @@ void GameScene::Init()
 		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
 		movecompo->SetRepeatType(MoveRepeatType::Stop);
 		movecompo->AddPathData(wave1path);
-		movecompo->SetSpeed(300.f);
+		movecompo->SetSpeed(250.f);
 
 		enemyManager->AddEnemySpawnQueue({ i , testEnemy });
 	}
@@ -358,7 +358,7 @@ void GameScene::Init()
 		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
 		movecompo->SetRepeatType(MoveRepeatType::Stop);
 		movecompo->AddPathData(wave1path);
-		movecompo->SetSpeed(300.f);
+		movecompo->SetSpeed(250.f);
 
 		enemyManager->AddEnemySpawnQueue({ i , testEnemy });
 	}
@@ -384,10 +384,12 @@ void GameScene::Init()
 		{
 			movecompo->AddPathData(down);
 		}
-		movecompo->SetSpeed(150.f);
+		movecompo->SetSpeed(125.f);
 
 		enemyManager->AddEnemySpawnQueue({ 60.f + i , fireEnemy });
 	}
+
+	enemyManager->AddBossSpawn(70.f);
 	//여기까지 적 세팅
 }
 
