@@ -33,7 +33,7 @@ void CircleMoveEnemy::Update()
 			projectile->SetColliderSize(7.5f);
 			projectile->SetPos(GetPos());
 			projectile->SetDir(-90.f + i * dir);
-			projectile->SetSpeed(300.f);
+			projectile->SetSpeed(200.f);
 			projectile->SetTexture(m_pBulletTexture);
 
 			fireTime = 0;

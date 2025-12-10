@@ -54,13 +54,13 @@ void ShotToPlayerEnemy::TryToShot()
 			return;
 		}
 		auto* projectile = PoolManager::GetInst()->
-			Pop<EnemyProjectile>(PoolType::IceProj);
+			Pop<EnemyProjectile>(PoolType::EnemyProjectile);
 		projectile->SetSize({ 10.f, 10.f });
 		projectile->SetTexture(m_pBulletTexture);
 		projectile->SetColliderSize(7.5f);
 		projectile->SetPos(GetPos());
 		projectile->SetDir(targetPos - GetPos());
-		projectile->SetSpeed(500.f);
+		projectile->SetSpeed(300.f);
 
 		m_currentTime = 0;
 		++m_curShot;

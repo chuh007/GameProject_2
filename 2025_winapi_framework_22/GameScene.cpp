@@ -100,7 +100,8 @@ void GameScene::Init()
 
 	//여기서부터 적 세팅
 
-
+	ResourceManager* resourceManager = GET_SINGLE(ResourceManager);
+	
 	EnemySpawnManger* enemyManager = GET_SINGLE(EnemySpawnManger);
 	enemyManager->SetSpawnScene(this);
 	BezierPathData* wave1path = enemyManager->GetPath(L"Left-Right");
@@ -110,7 +111,7 @@ void GameScene::Init()
 	{
 		TestEnemy* testEnemy = new TestEnemy;
 		CREATE_ENEMY(testEnemy, -50, 100, 75, 75, 75.f / 2, 12.f, PowerItem, 25.f, 25.f);
-			
+		testEnemy->SetTexture(resourceManager->GetTexture(L"NormalEnemy"));
 
 		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
 		movecompo->SetRepeatType(MoveRepeatType::Stop);

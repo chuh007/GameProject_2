@@ -4,8 +4,10 @@
 #include "SceneManager.h"
 #include "Rigidbody.h"
 #include "Health.h"
+#include "Texture.h"
 #include "ItemDropCompo.h"
 Enemy::Enemy()
+	: m_pTex(nullptr)
 {
 	AddComponent<Collider>();
 	auto* health = AddComponent<Health>();
@@ -21,12 +23,21 @@ void Enemy::Update()
 
 void Enemy::Render(HDC _hdc)
 {
-	
 	Vec2 pos = GetPos();
 	Vec2 size = GetSize();
-	RECT_RENDER(_hdc, pos.x, pos.y
-		, size.x, size.y);
 
+	if (m_pTex == NULL) return;
+
+	int texX = m_pTex->GetWidth();
+	int texY = m_pTex->GetHeight();
+	::TransparentBlt(
+		_hdc,
+		pos.x - size.x/2,
+		pos.y - size.y/2,
+		texX, texY,
+		m_pTex->GetTextureDC(),
+		0, 0, texX, texY,
+		RGB(255, 0, 255));
 	ComponentRender(_hdc);
 }
 
