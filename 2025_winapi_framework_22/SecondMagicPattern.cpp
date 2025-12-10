@@ -26,7 +26,6 @@ SecondMagicPattern::SecondMagicPattern(Object* _owner, Object* _target, float _p
 
 SecondMagicPattern::~SecondMagicPattern()
 {
-    Pattern::~Pattern();
     m_embers.clear();
 }
 

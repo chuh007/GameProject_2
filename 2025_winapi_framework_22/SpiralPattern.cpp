@@ -18,7 +18,6 @@ SpiralPattern::SpiralPattern(Object* _owner, Object* _target, float _patternUseT
 
 SpiralPattern::~SpiralPattern()
 {
-    Pattern::~Pattern();
 }
 
 void SpiralPattern::Update()

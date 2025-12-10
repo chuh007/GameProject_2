@@ -15,7 +15,6 @@ MultiSpeedRadialPattern::MultiSpeedRadialPattern(Object* _owner, Object* _target
 
 MultiSpeedRadialPattern::~MultiSpeedRadialPattern()
 {
-	Pattern::~Pattern();
 }
 
 void MultiSpeedRadialPattern::Update()

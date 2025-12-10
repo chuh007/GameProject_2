@@ -19,7 +19,6 @@ PureBulletHellPattern::PureBulletHellPattern(Object* _owner, Object* _target, fl
 
 PureBulletHellPattern::~PureBulletHellPattern()
 {
-	Pattern::~Pattern();
 }
 
 void PureBulletHellPattern::Update()

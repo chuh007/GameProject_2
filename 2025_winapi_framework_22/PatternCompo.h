@@ -33,11 +33,22 @@ public:
     {
         m_spellPatternList[phase] = pattern;
     }
+    void SetTarget(Object* _target)
+    {
+        m_target = _target;
+    }
+    void SetMover(BossMover* _mover)
+    {
+        m_mover = _mover;
+    }
 public:
     void UseNomalPattern();
     void UseSpellPattern();
     void DeleteProjectile();
+    void SetUpPattern();
 private:
+    Object* m_target;
+    BossMover* m_mover;
     SpellNameText* m_spellNameText;
     Pattern* m_curPattern;
     vector<Pattern*> m_nomalPatternList;
