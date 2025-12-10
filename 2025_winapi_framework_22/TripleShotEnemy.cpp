@@ -15,6 +15,8 @@ TripleShotEnemy::TripleShotEnemy()
 
 TripleShotEnemy::~TripleShotEnemy()
 {
+	Enemy::~Enemy();
+
 }
 
 void TripleShotEnemy::Update()

@@ -60,7 +60,7 @@ void ShotToPlayerEnemy::TryToShot()
 		projectile->SetColliderSize(7.5f);
 		projectile->SetPos(GetPos());
 		projectile->SetDir(targetPos - GetPos());
-		projectile->SetSpeed(500.f);
+		projectile->SetSpeed(300.f);
 
 		m_currentTime = 0;
 		++m_curShot;

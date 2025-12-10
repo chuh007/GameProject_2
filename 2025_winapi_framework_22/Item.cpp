@@ -10,6 +10,11 @@ Item::Item()
 	m_currentSpeed = -150;
 }
 
+Item::~Item()
+{
+	Object::~Object();
+}
+
 void Item::Update()
 {
 	Vec2 curPos = GetPos();

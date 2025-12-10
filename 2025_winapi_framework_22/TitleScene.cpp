@@ -7,6 +7,11 @@
 #include "ExitButton.h"
 #include "TitleBackground.h"
 
+TitleScene::~TitleScene()
+{
+	Scene::~Scene();
+}
+
 void TitleScene::Init()
 {
 	ButtonSelector* selector = new ButtonSelector;
@@ -33,7 +38,7 @@ void TitleScene::Init()
 	button->SetSize({ 200.f, 50.f });
 	button->SetPos({ GAME_WIDTH - button->GetSize().x / 2 - 25, btnpositionY});
 	button->SetText(L"Start");
-	button->SetSceneName(L"DevScene");
+	button->SetSceneName(L"Game");
 
 	btnpositionY += 60.0f;
 

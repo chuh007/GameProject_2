@@ -4,6 +4,7 @@ class ExitButton :
     public Button
 {
 public:
+    ~ExitButton() { Button::~Button(); };
     void OnClick() override;
 };
 

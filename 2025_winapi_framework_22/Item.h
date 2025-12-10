@@ -5,6 +5,7 @@ class Item :
 {
 public:
     Item();
+    virtual ~Item();
     void Update() override;
     void EnterCollision(Collider* _other) override;
 

@@ -51,6 +51,11 @@
 
 #pragma endregion
 
+GameScene::~GameScene()
+{
+	Release();
+}
+
 void GameScene::Init()
 {
 	auto* player = Spawn<Player>(Layer::PLAYER, { GAME_WIDTH / 2, 500 }, { 100.f, 100.f });
@@ -100,7 +105,8 @@ void GameScene::Init()
 
 	//여기서부터 적 세팅
 
-
+	ResourceManager* resourceManager = GET_SINGLE(ResourceManager);
+	
 	EnemySpawnManger* enemyManager = GET_SINGLE(EnemySpawnManger);
 	enemyManager->SetSpawnScene(this);
 	BezierPathData* wave1path = enemyManager->GetPath(L"Left-Right");
@@ -109,8 +115,8 @@ void GameScene::Init()
 	for(float i = 0; i < 3; i += 0.25f)
 	{
 		TestEnemy* testEnemy = new TestEnemy;
-		CREATE_ENEMY(testEnemy, -50, 100, 75, 75, 75.f / 2, 12.f, PowerItem, 25.f, 25.f);
-			
+		CREATE_ENEMY(testEnemy, -50, 100, 95, 55, 25.f, 12.f, PowerItem, 25.f, 25.f);
+		testEnemy->SetTexture(resourceManager->GetTexture(L"NormalEnemy"));
 
 		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
 		movecompo->SetRepeatType(MoveRepeatType::Stop);
@@ -124,8 +130,37 @@ void GameScene::Init()
 	{
 
 		TestEnemy* testEnemy = new TestEnemy;
-		CREATE_ENEMY(testEnemy, 800, 100, 75, 75, 75.f / 2, 12.f, PowerItem, 25.f, 25.f);
+		CREATE_ENEMY(testEnemy, 800, 100, 95, 55, 75.f / 2, 12.f, PowerItem, 25.f, 25.f);
 
+		testEnemy->SetTexture(resourceManager->GetTexture(L"NormalEnemy"));
+		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
+		movecompo->SetRepeatType(MoveRepeatType::Stop);
+		movecompo->AddPathData(wave2path);
+		movecompo->SetSpeed(200.f);
+
+		enemyManager->AddEnemySpawnQueue({i , testEnemy });
+	}
+	for(float i = 9; i < 12; i += 0.25f)
+	{
+		TestEnemy* testEnemy = new TestEnemy;
+		CREATE_ENEMY(testEnemy, -50, 100, 95, 55, 25.f, 12.f, PowerItem, 25.f, 25.f);
+		testEnemy->SetTexture(resourceManager->GetTexture(L"NormalEnemy"));
+
+		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
+		movecompo->SetRepeatType(MoveRepeatType::Stop);
+		movecompo->AddPathData(wave1path);
+		movecompo->SetSpeed(200.f);
+
+		enemyManager->AddEnemySpawnQueue({ i , testEnemy });
+	}
+
+	for(float i = 12; i < 15; i += 0.25f)
+	{
+
+		TestEnemy* testEnemy = new TestEnemy;
+		CREATE_ENEMY(testEnemy, 800, 100, 95, 55, 75.f / 2, 12.f, PowerItem, 25.f, 25.f);
+
+		testEnemy->SetTexture(resourceManager->GetTexture(L"NormalEnemy"));
 		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
 		movecompo->SetRepeatType(MoveRepeatType::Stop);
 		movecompo->AddPathData(wave2path);
@@ -150,7 +185,7 @@ void GameScene::Init()
 		movecompo->AddPathData(i < 2 ? wave2path : wave1path);
 		movecompo->SetSpeed(125.f);
 
-		enemyManager->AddEnemySpawnQueue({ 12.f + i , fireEnemy });
+		enemyManager->AddEnemySpawnQueue({ 15.f + i , fireEnemy });
 	}
 
 	for (int i = 0; i < 9; ++i)
@@ -185,14 +220,15 @@ void GameScene::Init()
 		}
 		movecompo->SetSpeed(125.f);
 
-		enemyManager->AddEnemySpawnQueue({ 20.f + 1.5f*i , fireEnemy });
+		enemyManager->AddEnemySpawnQueue({ 23.f + 1.5f*i , fireEnemy });
 	}
 
-	for (float i = 37; i < 40; i += 0.25f)
+	for (float i = 40; i < 43; i += 0.25f)
 	{
 		TestEnemy* testEnemy = new TestEnemy;
 		CREATE_ENEMY(testEnemy, -50, 100, 75, 75, 75.f / 2, 12.f, PowerItem, 25.f, 25.f);
 
+		testEnemy->SetTexture(resourceManager->GetTexture(L"NormalEnemy"));
 		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
 		movecompo->SetRepeatType(MoveRepeatType::Stop);
 		movecompo->AddPathData(wave1path);
@@ -200,12 +236,13 @@ void GameScene::Init()
 
 		enemyManager->AddEnemySpawnQueue({ i , testEnemy });
 	}
-	for (float i = 38; i < 41; i += 0.25f)
+	for (float i = 41; i < 44; i += 0.25f)
 	{
 
 		TestEnemy* testEnemy = new TestEnemy;
 		CREATE_ENEMY(testEnemy, 800, 100, 75, 75, 75.f / 2, 12.f, PowerItem, 25.f, 25.f);
 
+		testEnemy->SetTexture(resourceManager->GetTexture(L"NormalEnemy"));
 		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
 		movecompo->SetRepeatType(MoveRepeatType::Stop);
 		movecompo->AddPathData(wave2path);
@@ -233,7 +270,7 @@ void GameScene::Init()
 		movecompo->SetSpeed(250.f);
 
 
-		enemyManager->AddEnemySpawnQueue({ 45.f + i , triple });
+		enemyManager->AddEnemySpawnQueue({ 50.f + i , triple });
 	}
 
 	BezierPathData* arcPathL = enemyManager->GetPath(L"ArcMoveL");
@@ -241,26 +278,28 @@ void GameScene::Init()
 	for (int i = 0; i < 10; ++i)
 	{
 		TestEnemy* testEnemy = new TestEnemy;
-		CREATE_ENEMY(testEnemy, 0, 500, 75, 75, 75.f / 2, 12.f, PowerItem, 25.f, 25.f);
+		CREATE_ENEMY(testEnemy, 0, 500, 95, 55, 75.f / 2, 12.f, PowerItem, 25.f, 25.f);
 
+		testEnemy->SetTexture(resourceManager->GetTexture(L"NormalEnemy"));
 		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
 		movecompo->SetRepeatType(MoveRepeatType::Stop);
 		movecompo->AddPathData(arcPathL);
 		movecompo->SetSpeed(200);
 
-		enemyManager->AddEnemySpawnQueue({ 45.f + i , testEnemy });
+		enemyManager->AddEnemySpawnQueue({ 50.f + i , testEnemy });
 	}
 	for (int i = 0; i < 10; ++i)
 	{
 		TestEnemy* testEnemy = new TestEnemy;
-		CREATE_ENEMY(testEnemy, GAME_WIDTH, 500, 75, 75, 75.f / 2, 12.f, PowerItem, 25.f, 25.f);
+		CREATE_ENEMY(testEnemy, GAME_WIDTH, 500, 95, 55, 75.f / 2, 12.f, PowerItem, 25.f, 25.f);
 
+		testEnemy->SetTexture(resourceManager->GetTexture(L"NormalEnemy"));
 		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
 		movecompo->SetRepeatType(MoveRepeatType::Stop);
 		movecompo->AddPathData(arcPathR);
 		movecompo->SetSpeed(200.f);
 
-		enemyManager->AddEnemySpawnQueue({ 45.f + i , testEnemy });
+		enemyManager->AddEnemySpawnQueue({ 50.f + i , testEnemy });
 	}
 	for (int i = 0; i < 12; ++i)
 	{
@@ -284,7 +323,7 @@ void GameScene::Init()
 
 		movecompo->SetSpeed(150.f);
 
-		enemyManager->AddEnemySpawnQueue({ 52.f + (i / 2) *1.f, triple });
+		enemyManager->AddEnemySpawnQueue({ 57.f + (i / 2) *1.f, triple });
 	}
 
 	for (int i = 0; i < 4; i++)
@@ -302,7 +341,7 @@ void GameScene::Init()
 		shotEnemy->SetFireTime(2, 0.1, 5, false);
 		movecompo->SetRepeatType(MoveRepeatType::Stop);
 		movecompo->SetSpeed(75.f);
-		enemyManager->AddEnemySpawnQueue({ 57 + i * 0.5f, shotEnemy });
+		enemyManager->AddEnemySpawnQueue({ 62 + i * 0.5f, shotEnemy });
 	}
 
 	for (int i = 0; i < 9; ++i)
@@ -320,15 +359,16 @@ void GameScene::Init()
 		}
 		movecompo->SetSpeed(125.f);
 
-		enemyManager->AddEnemySpawnQueue({ 63.f + 1.5f * i , fireEnemy });
+		enemyManager->AddEnemySpawnQueue({ 68.f + 1.5f * i , fireEnemy });
 	}
 	// 1분대 채움
 
 	for (float i = 64; i < 67; i += 0.25f)
 	{
 		TestEnemy* testEnemy = new TestEnemy;
-		CREATE_ENEMY(testEnemy, -50, 100, 75, 75, 75.f / 2, 9.f, PowerItem, 25.f, 25.f);
+		CREATE_ENEMY(testEnemy, -50, 100, 95, 55, 75.f / 2, 9.f, PowerItem, 25.f, 25.f);
 
+		testEnemy->SetTexture(resourceManager->GetTexture(L"NormalEnemy"));
 
 		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
 		movecompo->SetRepeatType(MoveRepeatType::Stop);
@@ -340,8 +380,9 @@ void GameScene::Init()
 	for (float i = 64; i < 67; i += 0.25f)
 	{
 		TestEnemy* testEnemy = new TestEnemy;
-		CREATE_ENEMY(testEnemy, -50, 300, 75, 75, 75.f / 2, 9.f, PowerItem, 25.f, 25.f);
+		CREATE_ENEMY(testEnemy, -50, 300, 95, 55, 75.f / 2, 9.f, PowerItem, 25.f, 25.f);
 
+		testEnemy->SetTexture(resourceManager->GetTexture(L"NormalEnemy"));
 
 		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
 		movecompo->SetRepeatType(MoveRepeatType::Stop);
@@ -481,7 +522,6 @@ void GameScene::Render(HDC _hdc) {
 void GameScene::Release()
 {
 	Scene::Release();
-	GET_SINGLE(EnemySpawnManger)->Realese();
 	if (m_hdc != nullptr) {
 		SelectObject(m_hdc, m_hOldBitmap);
 		DeleteDC(m_hdc);
