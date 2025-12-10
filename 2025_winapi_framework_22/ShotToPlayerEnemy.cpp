@@ -5,6 +5,10 @@
 #include "EnemyMovement.h"
 #include "ShotToPlayerEnemy.h"
 
+ShotToPlayerEnemy::ShotToPlayerEnemy()
+{
+}
+
 void ShotToPlayerEnemy::Update()
 {
 	m_currentTime += fDT;

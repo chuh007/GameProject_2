@@ -7,7 +7,7 @@ Item::Item()
 {
 	auto* coll = AddComponent<Collider>();
 	coll->SetSize(50.f);
-	m_currentSpeed = 0;
+	m_currentSpeed = -100;
 }
 
 void Item::Update()

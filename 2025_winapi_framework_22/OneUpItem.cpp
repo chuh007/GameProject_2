@@ -4,5 +4,5 @@
 
 void OneUpItem::OnCollect()
 {
-	
+	GET_SINGLE(PlayerManager)->GetPlayer()->PlusLifeCount(1);
 }

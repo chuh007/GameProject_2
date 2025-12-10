@@ -77,6 +77,8 @@ bool EnemySpawnManger::TryToSpawnBoss()
 		Boss* boss = m_spawnTargetScene->Spawn<Boss>(Layer::ENEMY, { GAME_WIDTH / 2, GAME_HEIGHT / 4 }, { 50.f,75.f });;
 		auto* hpBar = m_spawnTargetScene->Spawn<BossHPBar>(Layer::UI, { GAME_WIDTH / 2, 25 }, { GAME_WIDTH - 20, 50 });
 		hpBar->SetBoss(boss);
+		boss->SetBackground(m_bg);
+		boss->Start();
 		return true;
 	}
 	return false;
