@@ -180,7 +180,6 @@
     <ClInclude Include="ClearScene.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="CollisionManager.h" />
-    <ClInclude Include="CombatCompo.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Core.h" />
     <ClInclude Include="DeleteBullet.h" />
@@ -264,7 +263,6 @@
     <ClCompile Include="ClearScene.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
-    <ClCompile Include="CombatCompo.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="DeleteBullet.cpp" />

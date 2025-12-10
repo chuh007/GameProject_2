@@ -1,7 +1,6 @@
 ﻿#pragma once
 #include "State.h"
 class Player;
-class CombatCompo;
 class PlayerAttackState : public State
 {
 public:
