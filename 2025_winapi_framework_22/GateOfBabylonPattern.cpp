@@ -28,7 +28,6 @@ GateOfBabylonPattern::GateOfBabylonPattern(Object* _owner, Object* _target, floa
 
 GateOfBabylonPattern::~GateOfBabylonPattern()
 {
-	Pattern::~Pattern();
 }
 
 void GateOfBabylonPattern::Update()

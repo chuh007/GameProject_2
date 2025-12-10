@@ -28,7 +28,6 @@ IcicleFallPattern::IcicleFallPattern(Object* _owner, Object* _target, float _pat
 
 IcicleFallPattern::~IcicleFallPattern()
 {
-	Pattern::~Pattern();
 }
 
 void IcicleFallPattern::Update()

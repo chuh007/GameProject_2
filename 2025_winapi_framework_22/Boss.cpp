@@ -7,15 +7,7 @@
 #include "SceneManager.h"
 #include "ResourceManager.h"
 #include "Texture.h"
-#include "CirclePattern.h"
-#include "CircleToPlayerPattern.h"
-#include "IcicleFallPattern.h"
-#include "GateOfBabylonPattern.h"
 #include "PlayerManager.h"
-#include "SpiralPattern.h";
-#include "PureBulletHellPattern.h"
-#include "SecondMagicPattern.h"
-#include "MultiSpeedRadialPattern.h";
 #include "BoomEffect.h";
 #include "PowerItem.h"
 Boss::Boss()
@@ -36,33 +28,14 @@ Boss::Boss()
 
 	m_patternCompo = AddComponent<PatternCompo>();
 	m_patternCompo->ResizePattenList(m_lifeCount + 1);
-
-	auto* pattern1 = new CirclePattern(this, m_target, 1.2f, mover, L"");
-	m_patternCompo->AddNomalPattern(1, pattern1);
-	auto* spell1 = new CircleToPlayerPattern(this, m_target, 0.75f, mover, L"구속「부여잡는 올가미」 ");
-	m_patternCompo->AddSpellPattern(1, spell1);
-	auto* pattern2 = new CirclePattern(this, m_target, 0.75f, mover, L"");
-	m_patternCompo->AddNomalPattern(2, pattern2);
-	auto* spell2 = new IcicleFallPattern(this, m_target, 0.5f, mover, L"빙설「아이시클 폴」 ");
-	m_patternCompo->AddSpellPattern(2, spell2);
-	auto* pattern3 = new MultiSpeedRadialPattern(this, m_target, 1.5f, mover, L"");
-	m_patternCompo->AddNomalPattern(3, pattern3);
-	auto* spell3 = new GateOfBabylonPattern(this, m_target, 0.7f, mover, L"보구「게이트 오브 바빌론」 ");
-	m_patternCompo->AddSpellPattern(3, spell3);
-	auto* pattern4 = new SpiralPattern(this, m_target, 2.25f, mover, L"");
-	m_patternCompo->AddNomalPattern(4, pattern4);
-	auto* spell4 = new SecondMagicPattern(this, m_target, 2.5f, mover, L"제 2마법「보석검 젤레치」 ");
-	m_patternCompo->AddSpellPattern(4, spell4);
-	auto* pattern5 = new SpiralPattern(this, m_target, 1.75f, mover, L"");
-	m_patternCompo->AddNomalPattern(5, pattern5);
-	auto* spell5 = new PureBulletHellPattern(this, m_target, 0.5f, mover, L"종막「순수한 탄막 지옥」 ");
-	m_patternCompo->AddSpellPattern(5, spell5);
-
+	m_patternCompo->SetOwner(this);
+	m_patternCompo->SetTarget(m_target);
+	m_patternCompo->SetMover(mover);
+	m_patternCompo->SetUpPattern();
 }
 
 Boss::~Boss()
 {
-	Object::~Object();
 }
 
 
