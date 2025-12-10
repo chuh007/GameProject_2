@@ -11,6 +11,7 @@ PlayerProjectile::PlayerProjectile()
 	, m_dir(1.f, 1.f)
 	, m_speed(400.f)
 	, m_damage(10)
+	, m_pTex(nullptr)
 {
 	//m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"MiddleBullet");
 	auto* col = AddComponent<Collider>();
