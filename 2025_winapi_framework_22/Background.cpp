@@ -8,6 +8,11 @@ Background::Background()
 	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Background");
 }
 
+Background::~Background()
+{
+    Object::~Object();
+}
+
 void Background::Render(HDC _hdc)
 {
 	Vec2 pos = GetPos();

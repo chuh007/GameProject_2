@@ -16,6 +16,8 @@
 #include "PureBulletHellPattern.h"
 #include "SecondMagicPattern.h"
 #include "MultiSpeedRadialPattern.h";
+#include "BoomEffect.h";
+#include "PowerItem.h"
 Boss::Boss()
 	: m_isDie(false)
 	, m_lifeCount(5)
@@ -47,30 +49,34 @@ Boss::Boss()
 	m_patternCompo->AddNomalPattern(3, pattern3);
 	auto* spell3 = new GateOfBabylonPattern(this, m_target, 0.7f, mover, L"보구「게이트 오브 바빌론」 ");
 	m_patternCompo->AddSpellPattern(3, spell3);
-	auto* pattern4 = new SpiralPattern(this, m_target, 2.f, mover, L"");
+	auto* pattern4 = new SpiralPattern(this, m_target, 2.25f, mover, L"");
 	m_patternCompo->AddNomalPattern(4, pattern4);
-	auto* spell4 = new PureBulletHellPattern(this, m_target, 2.5f, mover, L"「사람을 죽이기 위한 순수한 탄막」 ");
+	auto* spell4 = new SecondMagicPattern(this, m_target, 2.5f, mover, L"제 2마법「보석검 젤레치」 ");
 	m_patternCompo->AddSpellPattern(4, spell4);
 	auto* pattern5 = new SpiralPattern(this, m_target, 1.75f, mover, L"");
 	m_patternCompo->AddNomalPattern(5, pattern5);
-	auto* spell5 = new SecondMagicPattern(this, m_target, 1.5f, mover, L"제 2마법「보석검 젤레치」 ");
+	auto* spell5 = new PureBulletHellPattern(this, m_target, 0.5f, mover, L"종막「순수한 탄막 지옥」 ");
 	m_patternCompo->AddSpellPattern(5, spell5);
 
 }
 
 Boss::~Boss()
 {
+	Object::~Object();
 }
 
 
 void Boss::Start()
 {
 	m_patternCompo->UseNomalPattern();
+	GET_SINGLE(ResourceManager)->Stop(SOUND_CHANNEL::BGM);
+	GET_SINGLE(ResourceManager)->Play(L"BossBGM");
 }
 
 
 void Boss::Update()
 {
+	if (m_isDie) return;
 	Object::Update();
 }
 
@@ -119,9 +125,22 @@ void Boss::HPZero()
 		m_healthCompo->SetCurrentHP(m_healthCompo->GetMaxHP());
 		m_patternCompo->UseNomalPattern();
 		m_decDamage = m_patternCompo->GetCurrentPattern()->GetDecValue();
+		auto* effect = GET_SINGLE(SceneManager)->GetCurScene()
+			->Spawn<BoomEffect>(Layer::PROJECTILEDELETER, GetPos(), { 25,25 });
+		effect->DoScale(10.f, 0.3f);
+		for (int i = 0; i < 20; ++i)
+		{
+			Vec2 spawnPos = GetPos();
+			spawnPos += { rand() % 200 - 100, rand() % 200 - 100 };
+			GET_SINGLE(SceneManager)->GetCurScene()
+				->Spawn<PowerItem>(Layer::ITEM, spawnPos, { 25,25 });
+		}
 	}
 	else
 	{
+		auto* effect = GET_SINGLE(SceneManager)->GetCurScene()
+			->Spawn<BoomEffect>(Layer::PROJECTILEDELETER, GetPos(), { 25,25 });
+		effect->DoScale(20.f, 0.5f);
 		m_isDie = true;
 		GET_SINGLE(SceneManager)->RequestDestroy(this);
 	}

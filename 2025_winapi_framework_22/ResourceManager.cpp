@@ -46,7 +46,8 @@ void ResourceManager::Release()
 
 void ResourceManager::RegisterSound()
 {
-	LoadSound(L"BGM", L"Sound\\Native Faith_orgin.mp3", true);
+	LoadSound(L"BossBGM", L"Sound\\Native Faith_orgin.mp3", true);
+	LoadSound(L"BGM", L"Sound\\Chinese Tea.mp3", true);
 	LoadSound(L"FireSound", L"Sound\\FireSound.mp3", false);
 	LoadSound(L"SpellEndSound", L"Sound\\se_enep00.wav", false);
 	LoadSound(L"SpellSound", L"Sound\\se_cardget.wav", false);
@@ -148,6 +149,7 @@ void ResourceManager::RegisterGDI()
 
 	// 폰트 등록
 	RegisterFont(FontType::TITLE, L"Eulyoo1945-Regular", 0);
+	RegisterFont(FontType::SKILLTEXT, L"Eulyoo1945-Regular", 18, 18);
 }
 
 void ResourceManager::ReleaseGDI()
@@ -206,13 +208,14 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"RedBullet2", L"Texture\\2_Circle_Red_2.bmp");
 	LoadTexture(L"GreenSword", L"Texture\\Sword_BrightGreen.bmp");
 	LoadTexture(L"RedSword", L"Texture\\Sword_Red.bmp");
+	LoadTexture(L"BlueSword", L"Texture\\Sword_Blue.bmp");
 	LoadTexture(L"YellowSword", L"Texture\\Sword_Yellow.bmp");
 	LoadTexture(L"Boss", L"Texture\\Zelretch.bmp");
 	LoadTexture(L"SpellBackground", L"Texture\\SpellBackground.bmp");
 	LoadTexture(L"BombIcon", L"Texture\\Player_Icon_Bomb_Green.bmp");
 	LoadTexture(L"LifeIcon", L"Texture\\Player_Icon_Hp_Red.bmp");
 	LoadTexture(L"TitleBackground", L"Texture\\TitleBackground.bmp");
-	LoadTexture(L"NormalEnemy", L"Texture\\enemy_1.bmp");
+	
 }
 
 void ResourceManager::LoadTexture(const wstring& _key, const wstring& _path)

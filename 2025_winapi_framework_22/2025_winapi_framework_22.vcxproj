@@ -89,7 +89,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>Create</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(SolutionDir)Output\build\Resource\Fmod\inc</AdditionalIncludeDirectories>
@@ -109,7 +109,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(SolutionDir)Output\build\Resource\Fmod\inc</AdditionalIncludeDirectories>
@@ -127,7 +127,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>Create</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(SolutionDir)Output\build\Resource\Fmod\inc</AdditionalIncludeDirectories>
@@ -147,7 +147,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <AdditionalIncludeDirectories>$(SolutionDir)Output\build\Resource\Fmod\inc</AdditionalIncludeDirectories>
@@ -167,6 +167,7 @@
     <ClInclude Include="BakBakDevScene.h" />
     <ClInclude Include="BaseWindow.h" />
     <ClInclude Include="BombItem.h" />
+    <ClInclude Include="BoomEffect.h" />
     <ClInclude Include="Boss.h" />
     <ClInclude Include="BossHPBar.h" />
     <ClInclude Include="BossMover.h" />
@@ -239,6 +240,7 @@
     <ClInclude Include="TimeManager.h" />
     <ClInclude Include="TitleBackground.h" />
     <ClInclude Include="TitleScene.h" />
+    <ClInclude Include="TripleCirclePattern.h" />
     <ClInclude Include="TripleShotEnemy.h" />
     <ClInclude Include="Vec2.h" />
   </ItemGroup>
@@ -249,6 +251,7 @@
     <ClCompile Include="BakBakDevScene.cpp" />
     <ClCompile Include="BaseWindow.cpp" />
     <ClCompile Include="BombItem.cpp" />
+    <ClCompile Include="BoomEffect.cpp" />
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="BossHPBar.cpp" />
     <ClCompile Include="BossMover.cpp" />
@@ -317,6 +320,7 @@
     <ClCompile Include="TimeManager.cpp" />
     <ClCompile Include="TitleBackground.cpp" />
     <ClCompile Include="TitleScene.cpp" />
+    <ClCompile Include="TripleCirclePattern.cpp" />
     <ClCompile Include="TripleShotEnemy.cpp" />
   </ItemGroup>
   <ItemGroup>

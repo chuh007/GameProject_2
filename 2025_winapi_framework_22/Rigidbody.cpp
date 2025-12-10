@@ -18,6 +18,7 @@ Rigidbody::Rigidbody()
 }
 Rigidbody::~Rigidbody()
 {
+	Component::~Component();
 }
 
 void Rigidbody::Init()

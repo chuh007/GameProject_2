@@ -5,6 +5,7 @@ class SpellNameText :
 {
 public:
     SpellNameText();
+    ~SpellNameText();
 
 public:
     // Object을(를) 통해 상속됨

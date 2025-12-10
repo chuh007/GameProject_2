@@ -220,6 +220,9 @@
     <ClInclude Include="DeleteBullet.h">
       <Filter>Engine\03. Object</Filter>
     </ClInclude>
+    <ClInclude Include="CombatCompo.h" />
+    <ClInclude Include="PlayerDeadState.h" />
+    <ClInclude Include="PlayerHitState.h" />
     <ClInclude Include="GateOfBabylonPattern.h">
       <Filter>Engine\09. Pattern</Filter>
     </ClInclude>
@@ -247,6 +250,12 @@
     <ClInclude Include="TripleShotEnemy.h">
       <Filter>Engine\03. Object\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="GameScene.h" />
+    <ClInclude Include="PowerItem.h" />
+    <ClInclude Include="GameOverScene.h" />
+    <ClInclude Include="BombItem.h" />
+    <ClInclude Include="Item.h" />
+    <ClInclude Include="ItemDropCompo.h" />
     <ClInclude Include="PureBulletHellPattern.h">
       <Filter>Engine\09. Pattern</Filter>
     </ClInclude>
@@ -259,54 +268,19 @@
     <ClInclude Include="SecondMagicPattern.h">
       <Filter>Engine\09. Pattern</Filter>
     </ClInclude>
+    <ClInclude Include="BulletRenderManager.h" />
+    <ClInclude Include="ClearScene.h" />
+    <ClInclude Include="ShotToPlayerEnemy.h" />
     <ClInclude Include="CircleMoveEnemy.h">
       <Filter>Engine\03. Object\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="BombItem.h">
-      <Filter>Engine\03. Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>Engine\03. Object</Filter>
-    </ClInclude>
-    <ClInclude Include="PowerItem.h">
-      <Filter>Engine\03. Object</Filter>
-    </ClInclude>
-    <ClInclude Include="BulletRenderManager.h">
-      <Filter>Engine\02. Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="ClearScene.h">
-      <Filter>Engine\04. Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="GameScene.h">
-      <Filter>Engine\04. Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="GameOverScene.h">
-      <Filter>Engine\04. Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="CombatCompo.h">
-      <Filter>Engine\06. Component</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemDropCompo.h">
-      <Filter>Engine\06. Component</Filter>
     </ClInclude>
     <ClInclude Include="MultiSpeedRadialPattern.h">
       <Filter>Engine\09. Pattern</Filter>
     </ClInclude>
-    <ClInclude Include="OneUpItem.h">
-      <Filter>Engine\03. Object</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerDeadState.h">
-      <Filter>Engine\03. Object\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerHitState.h">
-      <Filter>Engine\03. Object\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleBackground.h">
-      <Filter>Engine\03. Object</Filter>
-    </ClInclude>
-    <ClInclude Include="ShotToPlayerEnemy.h">
-      <Filter>Engine\03. Object\Enemy</Filter>
-    </ClInclude>
+    <ClInclude Include="BoomEffect.h" />
+    <ClInclude Include="OneUpItem.h" />
+    <ClInclude Include="TitleBackground.h" />
+    <ClInclude Include="TripleCirclePattern.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc">
@@ -460,6 +434,9 @@
     <ClCompile Include="DeleteBullet.cpp">
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
+    <ClCompile Include="CombatCompo.cpp" />
+    <ClCompile Include="PlayerDeadState.cpp" />
+    <ClCompile Include="PlayerHitState.cpp" />
     <ClCompile Include="GateOfBabylonPattern.cpp">
       <Filter>Engine\09. Pattern</Filter>
     </ClCompile>
@@ -487,6 +464,10 @@
     <ClCompile Include="ButtonSelector.cpp">
       <Filter>Engine\07. UI</Filter>
     </ClCompile>
+    <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="BombItem.cpp" />
+    <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ItemDropCompo.cpp" />
     <ClCompile Include="PureBulletHellPattern.cpp">
       <Filter>Engine\09. Pattern</Filter>
     </ClCompile>
@@ -499,53 +480,20 @@
     <ClCompile Include="SecondMagicPattern.cpp">
       <Filter>Engine\09. Pattern</Filter>
     </ClCompile>
+    <ClCompile Include="PowerItem.cpp" />
+    <ClCompile Include="GameOverScene.cpp" />
+    <ClCompile Include="BulletRenderManager.cpp" />
+    <ClCompile Include="ClearScene.cpp" />
+    <ClCompile Include="ShotToPlayerEnemy.cpp" />
     <ClCompile Include="CircleMoveEnemy.cpp">
       <Filter>Engine\03. Object\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="BombItem.cpp">
-      <Filter>Engine\03. Object</Filter>
-    </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>Engine\03. Object</Filter>
-    </ClCompile>
-    <ClCompile Include="PowerItem.cpp">
-      <Filter>Engine\03. Object</Filter>
-    </ClCompile>
-    <ClCompile Include="BulletRenderManager.cpp">
-      <Filter>Engine\02. Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="ClearScene.cpp">
-      <Filter>Engine\04. Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="GameScene.cpp">
-      <Filter>Engine\04. Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="GameOverScene.cpp">
-      <Filter>Engine\04. Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="CombatCompo.cpp">
-      <Filter>Engine\06. Component</Filter>
-    </ClCompile>
-    <ClCompile Include="ItemDropCompo.cpp">
-      <Filter>Engine\06. Component</Filter>
     </ClCompile>
     <ClCompile Include="MultiSpeedRadialPattern.cpp">
       <Filter>Engine\09. Pattern</Filter>
     </ClCompile>
-    <ClCompile Include="OneUpItem.cpp">
-      <Filter>Engine\03. Object</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerDeadState.cpp">
-      <Filter>Engine\03. Object\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerHitState.cpp">
-      <Filter>Engine\03. Object\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleBackground.cpp">
-      <Filter>Engine\03. Object</Filter>
-    </ClCompile>
-    <ClCompile Include="ShotToPlayerEnemy.cpp">
-      <Filter>Engine\03. Object\Enemy</Filter>
-    </ClCompile>
+    <ClCompile Include="BoomEffect.cpp" />
+    <ClCompile Include="OneUpItem.cpp" />
+    <ClCompile Include="TitleBackground.cpp" />
+    <ClCompile Include="TripleCirclePattern.cpp" />
   </ItemGroup>
 </Project>

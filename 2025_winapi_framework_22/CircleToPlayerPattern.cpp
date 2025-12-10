@@ -9,7 +9,7 @@ CircleToPlayerPattern::CircleToPlayerPattern(Object* _owner, Object* _target, fl
 	, m_fireCount(20)
 	, m_speed(250)
 {
-	m_decValue = 0.5f;
+	m_decValue = 0.7f;
 	m_bulletTex = GET_SINGLE(ResourceManager)->GetTexture(L"GreenBullet1");
 	m_swordTex = GET_SINGLE(ResourceManager)->GetTexture(L"GreenSword");
 }

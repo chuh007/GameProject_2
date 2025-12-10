@@ -19,7 +19,7 @@ IcicleFallPattern::IcicleFallPattern(Object* _owner, Object* _target, float _pat
 	, circularShootCount(5)
 	, circularSpeed(200)
 {
-	m_decValue = 0.4f;
+	m_decValue = 0.5f;
 	m_iceTex = GET_SINGLE(ResourceManager)
 		->GetTexture(L"IceBullet");
 	m_bulletTex = GET_SINGLE(ResourceManager)
