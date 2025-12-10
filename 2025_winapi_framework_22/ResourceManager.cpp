@@ -218,6 +218,7 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"LifeIcon", L"Texture\\Player_Icon_Hp_Red.bmp");
 	LoadTexture(L"TitleBackground", L"Texture\\TitleBackground.bmp");
 	LoadTexture(L"NormalEnemy", L"Texture\\enemy_1.bmp");
+	LoadTexture(L"Enemy2", L"Texture\\Enemy_2.bmp");
 }
 
 void ResourceManager::LoadTexture(const wstring& _key, const wstring& _path)
