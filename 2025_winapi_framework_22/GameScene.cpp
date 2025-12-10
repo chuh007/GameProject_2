@@ -130,7 +130,7 @@ void GameScene::Init()
 	{
 
 		TestEnemy* testEnemy = new TestEnemy;
-		CREATE_ENEMY(testEnemy, 800, 100, 95, 55, 75.f / 2, 12.f, PowerItem, 25.f, 25.f);
+		CREATE_ENEMY(testEnemy, 800, 100, 95, 55, 25.f, 12.f, PowerItem, 25.f, 25.f);
 
 		testEnemy->SetTexture(resourceManager->GetTexture(L"NormalEnemy"));
 		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
@@ -158,7 +158,7 @@ void GameScene::Init()
 	{
 
 		TestEnemy* testEnemy = new TestEnemy;
-		CREATE_ENEMY(testEnemy, 800, 100, 95, 55, 75.f / 2, 12.f, PowerItem, 25.f, 25.f);
+		CREATE_ENEMY(testEnemy, 800, 100, 95, 55, 25.f, 12.f, PowerItem, 25.f, 25.f);
 
 		testEnemy->SetTexture(resourceManager->GetTexture(L"NormalEnemy"));
 		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
@@ -226,7 +226,7 @@ void GameScene::Init()
 	for (float i = 40; i < 43; i += 0.25f)
 	{
 		TestEnemy* testEnemy = new TestEnemy;
-		CREATE_ENEMY(testEnemy, -50, 100, 75, 75, 75.f / 2, 12.f, PowerItem, 25.f, 25.f);
+		CREATE_ENEMY(testEnemy, -50, 100, 92, 55, 25.f, 12.f, PowerItem, 25.f, 25.f);
 
 		testEnemy->SetTexture(resourceManager->GetTexture(L"NormalEnemy"));
 		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
@@ -240,7 +240,7 @@ void GameScene::Init()
 	{
 
 		TestEnemy* testEnemy = new TestEnemy;
-		CREATE_ENEMY(testEnemy, 800, 100, 75, 75, 75.f / 2, 12.f, PowerItem, 25.f, 25.f);
+		CREATE_ENEMY(testEnemy, 800, 100, 92, 55, 25.f, 12.f, PowerItem, 25.f, 25.f);
 
 		testEnemy->SetTexture(resourceManager->GetTexture(L"NormalEnemy"));
 		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
@@ -278,7 +278,7 @@ void GameScene::Init()
 	for (int i = 0; i < 10; ++i)
 	{
 		TestEnemy* testEnemy = new TestEnemy;
-		CREATE_ENEMY(testEnemy, 0, 500, 95, 55, 75.f / 2, 12.f, PowerItem, 25.f, 25.f);
+		CREATE_ENEMY(testEnemy, 0, 500, 95, 55, 25.f, 12.f, PowerItem, 25.f, 25.f);
 
 		testEnemy->SetTexture(resourceManager->GetTexture(L"NormalEnemy"));
 		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();
@@ -291,7 +291,7 @@ void GameScene::Init()
 	for (int i = 0; i < 10; ++i)
 	{
 		TestEnemy* testEnemy = new TestEnemy;
-		CREATE_ENEMY(testEnemy, GAME_WIDTH, 500, 95, 55, 75.f / 2, 12.f, PowerItem, 25.f, 25.f);
+		CREATE_ENEMY(testEnemy, GAME_WIDTH, 500, 95, 55, 25.f, 12.f, PowerItem, 25.f, 25.f);
 
 		testEnemy->SetTexture(resourceManager->GetTexture(L"NormalEnemy"));
 		auto* movecompo = testEnemy->AddComponent<EnemyMovement>();

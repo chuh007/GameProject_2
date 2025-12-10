@@ -42,15 +42,27 @@ void TitleScene::Init()
 
 	btnpositionY += 60.0f;
 
+	StartButton* enterBoss = new StartButton;
+	enterBoss->SetSize({ 200.f, 50.f });
+	enterBoss->SetPos({ GAME_WIDTH - button->GetSize().x / 2 - 25, btnpositionY });
+	enterBoss->SetText(L"ToBoss");
+	enterBoss->SetSceneName(L"DevScene");
+
+	btnpositionY += 60.0f;
+
 	Button* exit = new ExitButton;
 	exit->SetSize({ 200.f, 50.f });
 	exit->SetPos({ GAME_WIDTH - button->GetSize().x / 2 - 25, btnpositionY });
 	exit->SetText(L"Exit");
 
+	
+
 
 	AddObject(button, Layer::UI);
 	AddObject(exit, Layer::UI);
+	AddObject(enterBoss, Layer::UI);
 	selector->AssignButton(button);
+	selector->AssignButton(enterBoss);
 	selector->AssignButton(exit);
 
 	Object* bg = new TitleBackground;
