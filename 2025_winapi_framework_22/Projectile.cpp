@@ -12,7 +12,7 @@ PlayerProjectile::PlayerProjectile()
 	, m_speed(400.f)
 	, m_damage(10)
 {
-	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Bullet");
+	//m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"MiddleBullet");
 	auto* col = AddComponent<Collider>();
 	col->SetName(L"PlayerBullet");
 	col->SetTrigger(true);
@@ -65,9 +65,13 @@ void PlayerProjectile::EnterCollision(Collider* _other)
 }
 
 void PlayerProjectile::Reset() {
-	m_damage = 1;
+	m_damage = 4;
 	m_dir = { 0.f, 0.f };
 	m_angle = 0.f;
 	m_corutines.clear();
 	GetComponent<Collider>()->SetActive(true);
+}
+
+void PlayerProjectile::SetTextureByName(const wstring& _texName) {
+	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(_texName);
 }

@@ -157,7 +157,11 @@ void Player::CreateProjectile()
 	if (totalDmg < 0.f) totalDmg = baseDmg;
 
 	const float POS_OFFSET_Y = GetSize().y / 2.f;
-	const float HORIZONTAL_SPREAD = 20.f;
+	const float HORIZONTAL_SPREAD = 25.f;
+	const float Y_SPREAD_OFFSET = 10.f;
+
+	const std::wstring MIDDLE_BULLET_TEX = L"MiddleBullet";
+	const std::wstring SIDE_BULLET_TEX = L"AngleBullet";
 
 	for (int i = 1; i <= num_proj; ++i)
 	{
@@ -170,6 +174,8 @@ void Player::CreateProjectile()
 		float damage_multiplier = 1.0f;
 		float current_angle_deg = 0.f;
 		float pos_x_offset = 0.f;
+		float pos_y_offset_extra = 0.f;
+		std::wstring textureName = MIDDLE_BULLET_TEX;
 
 		switch (i)
 		{
@@ -182,25 +188,29 @@ void Player::CreateProjectile()
 		case 2:
 			damage_multiplier = 0.75f;
 			pos_x_offset = -HORIZONTAL_SPREAD;
-			current_angle_deg = 0.f;
+			current_angle_deg = -5.f;
+			pos_y_offset_extra = Y_SPREAD_OFFSET;
 			break;
 
 		case 3:
 			damage_multiplier = 0.75f;
 			pos_x_offset = HORIZONTAL_SPREAD;
-			current_angle_deg = 0.f;
+			current_angle_deg = 5.f;
+			pos_y_offset_extra = Y_SPREAD_OFFSET;
 			break;
 
 		case 4:
 			damage_multiplier = 0.5f;
 			pos_x_offset = -HORIZONTAL_SPREAD * 2.f;
-			current_angle_deg = -20.f;
+			current_angle_deg = -30.f;
+			textureName = SIDE_BULLET_TEX;
 			break;
 
 		case 5:
 			damage_multiplier = 0.5f;
 			pos_x_offset = HORIZONTAL_SPREAD * 2.f;
-			current_angle_deg = 20.f;
+			current_angle_deg = 30.f;
+			textureName = SIDE_BULLET_TEX;
 			break;
 
 		default:
@@ -208,9 +218,10 @@ void Player::CreateProjectile()
 		}
 
 		Vec2 pos = GetPos();
-		pos.y -= POS_OFFSET_Y;
+		pos.y -= POS_OFFSET_Y - pos_y_offset_extra;
 		pos.x += pos_x_offset;
 
+		proj->SetTextureByName(textureName);
 		proj->SetPos(pos);
 
 		float finalDmg = totalDmg * damage_multiplier;
