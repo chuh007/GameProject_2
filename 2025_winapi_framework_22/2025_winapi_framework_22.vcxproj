@@ -205,6 +205,7 @@
     <ClInclude Include="ItemDropCompo.h" />
     <ClInclude Include="MultiSpeedRadialPattern.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="OneUpItem.h" />
     <ClInclude Include="Pattern.h" />
     <ClInclude Include="PatternCompo.h" />
     <ClInclude Include="pch.h" />
@@ -236,6 +237,7 @@
     <ClInclude Include="TestScene.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TimeManager.h" />
+    <ClInclude Include="TitleBackground.h" />
     <ClInclude Include="TitleScene.h" />
     <ClInclude Include="TripleShotEnemy.h" />
     <ClInclude Include="Vec2.h" />
@@ -285,6 +287,7 @@
     <ClCompile Include="MoveState.cpp" />
     <ClCompile Include="MultiSpeedRadialPattern.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="OneUpItem.cpp" />
     <ClCompile Include="Pattern.cpp" />
     <ClCompile Include="PatternCompo.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -312,6 +315,7 @@
     <ClCompile Include="TestScene.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TimeManager.cpp" />
+    <ClCompile Include="TitleBackground.cpp" />
     <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="TripleShotEnemy.cpp" />
   </ItemGroup>
