@@ -7,6 +7,11 @@
 #include "ExitButton.h"
 #include "TitleBackground.h"
 
+TitleScene::~TitleScene()
+{
+	Scene::~Scene();
+}
+
 void TitleScene::Init()
 {
 	ButtonSelector* selector = new ButtonSelector;

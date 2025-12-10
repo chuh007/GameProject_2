@@ -3,6 +3,7 @@
 class BombItem :
     public Item
 {
+    ~BombItem();
 public:
     void OnCollect() override;
 };

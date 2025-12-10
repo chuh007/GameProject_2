@@ -17,6 +17,7 @@ CircleMoveEnemy::CircleMoveEnemy()
 
 CircleMoveEnemy::~CircleMoveEnemy()
 {
+	Enemy::~Enemy();
 }
 
 void CircleMoveEnemy::Update()

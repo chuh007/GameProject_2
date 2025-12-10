@@ -15,6 +15,8 @@ TestEnemy::TestEnemy()
 
 TestEnemy::~TestEnemy()
 {
+	Enemy::~Enemy();
+
 }
 
 void TestEnemy::Update()

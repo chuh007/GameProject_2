@@ -10,6 +10,7 @@ EnemyMovement::EnemyMovement()
 
 EnemyMovement::~EnemyMovement()
 {
+    Component::~Component();
     while (moveOrder.empty() == false)
     {
         moveOrder.pop();

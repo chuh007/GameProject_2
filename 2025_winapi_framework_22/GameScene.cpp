@@ -521,7 +521,6 @@ void GameScene::Render(HDC _hdc) {
 
 void GameScene::Release()
 {
-	
 	Scene::Release();
 	if (m_hdc != nullptr) {
 		SelectObject(m_hdc, m_hOldBitmap);

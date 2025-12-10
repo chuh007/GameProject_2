@@ -16,6 +16,7 @@ Enemy::Enemy()
 }
 Enemy::~Enemy()
 {
+	Object::~Object();
 }
 void Enemy::Update()
 {

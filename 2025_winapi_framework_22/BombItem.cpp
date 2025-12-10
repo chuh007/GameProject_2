@@ -1,6 +1,10 @@
 #include "pch.h"
 #include "BombItem.h"
 #include "PlayerManager.h"
+BombItem::~BombItem()
+{
+Item:: ~Item();
+}
 void BombItem::OnCollect()
 {
 	Player* p = GET_SINGLE(PlayerManager)->GetPlayer();

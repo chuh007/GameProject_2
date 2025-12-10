@@ -6,6 +6,7 @@
 #include "ResourceManager.h"
 #include "CollisionManager.h"
 #include "BulletRenderManager.h"
+#include "EnemySpawnManger.h"
 #include "Texture.h"
 bool Core::Init(HWND _hWnd)
 {
@@ -148,6 +149,8 @@ void Core::CleanUp()
     ::DeleteDC(m_hBackDC);
     ::ReleaseDC(m_hWnd, m_hDC);
     GET_SINGLE(ResourceManager)->Release();
+    GET_SINGLE(EnemySpawnManger)->Realese();
+    GET_SINGLE(SceneManager)->GetCurScene()->Release();
 }
 
 
