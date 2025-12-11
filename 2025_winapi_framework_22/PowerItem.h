@@ -1,10 +1,13 @@
-#pragma once
+ï»¿#pragma once
 #include "Item.h"
 class PowerItem :
     public Item
 {
+public:
+    PowerItem();
     ~PowerItem();
-    // ItemÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
+    // Itemì„(ë¥¼) í†µí•´ ìƒì†ë¨
     void OnCollect() override;
+    void Render(HDC _hdc) override;
 };
 

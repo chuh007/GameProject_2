@@ -1,9 +1,13 @@
-#pragma once
+ï»¿#pragma once
 #include "Item.h"
 class OneUpItem :
     public Item
 {
-    // ItemÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
+public:
+	OneUpItem();
+    ~OneUpItem();
+    // Itemì„(ë¥¼) í†µí•´ ìƒì†ë¨
     void OnCollect() override;
+	void Render(HDC _hdc) override;
 };
 
