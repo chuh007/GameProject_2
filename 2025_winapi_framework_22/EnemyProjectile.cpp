@@ -77,8 +77,8 @@ void EnemyProjectile::Render(HDC _hdc)
 
 	POINT vertices[3];
 
-	float hW = size.x / 2.0f;
-	float hH = size.y / 2.0f;
+	float hW = size.x * 0.5f;
+	float hH = size.y * 0.5f;
 
 	//аб╩С
 	vertices[0].x = (LONG)(pos.x + (-hW * cosA - -hH * sinA));

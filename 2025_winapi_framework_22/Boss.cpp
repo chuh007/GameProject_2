@@ -114,7 +114,9 @@ void Boss::HPZero()
 		auto* effect = GET_SINGLE(SceneManager)->GetCurScene()
 			->Spawn<BoomEffect>(Layer::PROJECTILEDELETER, GetPos(), { 25,25 });
 		effect->DoScale(20.f, 0.5f);
+		m_patternCompo->DeleteProjectile();
 		m_isDie = true;
+		m_backGround->ChangeScene();
 		GET_SINGLE(SceneManager)->RequestDestroy(this);
 	}
 }

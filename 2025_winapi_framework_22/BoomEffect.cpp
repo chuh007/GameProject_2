@@ -36,6 +36,7 @@ void BoomEffect::Render(HDC _hdc)
 
 void BoomEffect::Update()
 {
+	Object::Update();
 	if (!isTweening) return;
 	m_timer += fDT;
 	float t = m_timer / m_duration;

@@ -2,15 +2,18 @@
 #include "Background.h"
 #include "Texture.h"
 #include "ResourceManager.h"
+#include "SceneManager.h"
 
 Background::Background()
+    : m_curTime(0)
+    , m_isChangeing(false)
+    , m_str(L"GameOver")
 {
 	m_pTex = GET_SINGLE(ResourceManager)->GetTexture(L"Background");
 }
 
 Background::~Background()
 {
-    Object::~Object();
 }
 
 void Background::Render(HDC _hdc)
@@ -26,4 +29,20 @@ void Background::Render(HDC _hdc)
         , m_pTex->GetTextureDC()
         , 0, 0, width, height
         , SRCCOPY);
+}
+
+void Background::Update()
+{
+    Object::Update();
+    if (!m_isChangeing) return;
+    m_curTime += fDT;
+    if (m_curTime >= 1.f)
+    {
+        GET_SINGLE(SceneManager)->LoadScene((L"GameOver"));
+    }
+}
+
+void Background::ChangeScene()
+{
+    m_isChangeing = true;
 }

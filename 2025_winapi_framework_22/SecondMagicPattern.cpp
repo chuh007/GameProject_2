@@ -4,7 +4,7 @@
 #include "PoolManager.h"
 
 // 불사「불새 -봉익천상-」 모티브
-// 한쪽으로 움직이며, 플레이어를 향해 조준탄 발사
+// 움직이며 플레이어를 향해 조준탄 발사
 // 조준탄은 크고, 지나간 자리에 랜덤하게 탄막 흩어놓음
 // 조준탄 발사와 동시에 원형으로 탄 한번 뿌려줌
 // 이걸 3번쯤 반복하며, 한쪽 끝 위치에 도달
@@ -20,8 +20,8 @@ SecondMagicPattern::SecondMagicPattern(Object* _owner, Object* _target, float _p
 {
     m_decValue = 0.65f;
 
-    m_phoenixTex = GET_SINGLE(ResourceManager)->GetTexture(L"RedBullet2"); // 큰 탄
-    m_emberTex = GET_SINGLE(ResourceManager)->GetTexture(L"RedBullet1");   // 작은 탄
+    m_phoenixTex = GET_SINGLE(ResourceManager)->GetTexture(L"RedBullet2");
+    m_emberTex = GET_SINGLE(ResourceManager)->GetTexture(L"RedBullet1");
 }
 
 SecondMagicPattern::~SecondMagicPattern()
@@ -164,7 +164,7 @@ void SecondMagicPattern::FinalBurst()
             {
                 int count = 30;
                 float step = 360.f / count;
-                float startAngle = (wave % 2 == 0) ? 0.f : (step / 2.f); // 짝/홀수 발사 각도 엇갈리게
+                float startAngle = (wave % 2 == 0) ? 0.f : (step / 2.f);
 
                 for (int i = 0; i < count; ++i)
                 {
