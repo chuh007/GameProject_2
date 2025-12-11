@@ -25,8 +25,6 @@ void Button::Render(HDC _hdc)
 		RGB(255, 0, 255));
 
 	ComponentRender(_hdc);
-	GDISelector(_hdc, FontType::TITLE);
-	TextOut(_hdc, pos.x - size.x/2 + 15, pos.y - size.y/2 + 15 , m_text.c_str(), m_text.size());
 }
 
 void Button::Update()

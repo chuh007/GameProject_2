@@ -63,12 +63,27 @@ void DevScene::Init()
 
 	m_hOldBitmap = (HBITMAP)SelectObject(m_hdc, m_hUIBitmap);
 
-	HBRUSH hUIBrush = CreateSolidBrush(RGB(230, 230, 230));
-	RECT rect = { 0, 0, m_uiWidth, m_uiHeight };
+	Texture* bgTex = GET_SINGLE(ResourceManager)->GetTexture(L"UIBackground");
 
-	FillRect(m_hdc, &rect, hUIBrush);
+	if (bgTex != nullptr)
+	{
+		LONG bgWidth = bgTex->GetWidth();
+		LONG bgHeight = bgTex->GetHeight();
 
-	DeleteObject(hUIBrush);
+		::TransparentBlt(
+			m_hdc,
+			0, 0, m_uiWidth, m_uiHeight,
+			bgTex->GetTextureDC(),
+			0, 0, bgWidth, bgHeight,
+			RGB(255, 0, 255));
+	}
+	else
+	{
+		HBRUSH hUIBrush = CreateSolidBrush(RGB(230, 230, 230));
+		RECT rect = { 0, 0, m_uiWidth, m_uiHeight };
+		FillRect(m_hdc, &rect, hUIBrush);
+		DeleteObject(hUIBrush);
+	}
 }
 
 void DevScene::Update()
@@ -95,7 +110,7 @@ void DevScene::Render(HDC _hdc) {
 	int bombCnt = player->GetBombCount();
 	int power = player->GetPowerLevel();
 
-	SetTextColor(_hdc, RGB(0, 0, 0));
+	SetTextColor(_hdc, RGB(255, 255, 255));
 	SetBkMode(_hdc, TRANSPARENT);
 
 	HFONT hFont = GET_SINGLE(ResourceManager)->GetFont(FontType::TITLE);
@@ -109,6 +124,7 @@ void DevScene::Render(HDC _hdc) {
 
 	Texture* lTex = GET_SINGLE(ResourceManager)->GetTexture(L"LifeIcon");
 	Texture* bTex = GET_SINGLE(ResourceManager)->GetTexture(L"BombIcon");
+	Texture* gTex = GET_SINGLE(ResourceManager)->GetTexture(L"GameIcon");
 
 	LONG lifeWidth = lTex->GetWidth();
 	LONG lifeHeight = lTex->GetHeight();
@@ -156,9 +172,61 @@ void DevScene::Render(HDC _hdc) {
 	}
 
 	const int POWER_START_Y = 150;
+	const int MAX_POWER = 128;
+	const int BAR_HEIGHT = 18;
+	const int BAR_CENTER_Y = POWER_START_Y + (BAR_HEIGHT / 2.0f);
+	const float BAR_LEFT_X = (float)UI_START_X + 10;
+	const int TEXT_START_Y = POWER_START_Y + 1;
 
-	wstring powerStr = std::format(L"POWER: {} / {}", power, 128);
-	TextOut(_hdc, UI_START_X, POWER_START_Y, powerStr.c_str(), (int)powerStr.length());
+	wstring powerStr = std::format(L"POWER: {} / {}", power, MAX_POWER);
+	SIZE textSize;
+
+	GetTextExtentPoint32(_hdc, powerStr.c_str(), (int)powerStr.length(), &textSize);
+
+	const int BAR_WIDTH = textSize.cx + 10;
+	const float BAR_CENTER_X = BAR_LEFT_X + (BAR_WIDTH / 2.0f);
+
+	GDISelector bar(_hdc, BrushType::HOLLOW);
+	RECT_RENDER(_hdc, BAR_CENTER_X, BAR_CENTER_Y,
+		BAR_WIDTH, BAR_HEIGHT);
+
+	float powerRatio = (float)power / (float)MAX_POWER;
+	float currentBarWidth = (float)BAR_WIDTH * powerRatio;
+
+	GDISelector barFill(_hdc, BrushType::GREY);
+
+	float filledBarCenterX = BAR_LEFT_X + (currentBarWidth / 2.0f);
+
+	if (power > 0)
+	{
+		RECT_RENDER(_hdc, filledBarCenterX, BAR_CENTER_Y,
+			currentBarWidth, BAR_HEIGHT);
+	}
+
+	TextOut(_hdc, (int)BAR_LEFT_X + 5, TEXT_START_Y, powerStr.c_str(), (int)powerStr.length());
+
+	if (gTex != nullptr)
+	{
+		LONG gWidth = gTex->GetWidth();
+		LONG gHeight = gTex->GetHeight();
+
+		const int RENDER_WIDTH = 340;
+		const int RENDER_HEIGHT = 340;
+
+		const int UI_END_X = GAME_WIDTH + m_uiWidth;
+
+		const int RENDER_X = UI_END_X - RENDER_WIDTH - 10;
+		const int RENDER_Y = m_uiHeight - RENDER_HEIGHT - 10;
+
+		::TransparentBlt(
+			_hdc,
+			RENDER_X,
+			RENDER_Y,
+			RENDER_WIDTH, RENDER_HEIGHT,
+			gTex->GetTextureDC(),
+			0, 0, gWidth, gHeight,
+			RGB(255, 0, 255));
+	}
 
 	if (hOldFont != nullptr)
 	{

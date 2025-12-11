@@ -1,5 +1,6 @@
 #pragma once
 #include "Object.h"
+class Texture;
 class Button;
 class ButtonSelector : public Object
 {
@@ -19,5 +20,6 @@ private:
 	int curSelectedIdx;
 	float m_lastSelectTime;
 	bool m_isActive;
+	Texture* m_pTexture;
 };
 

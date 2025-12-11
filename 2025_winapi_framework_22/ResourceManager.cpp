@@ -234,9 +234,13 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"SettingBtn", L"Texture\\btn_Setting.bmp");
 	LoadTexture(L"ToBossBtn", L"Texture\\btn_ToBoss.bmp");
 	LoadTexture(L"ExitBtn", L"Texture\\btn_Exit.bmp");
+	LoadTexture(L"SelectIcon", L"Texture\\SelectIcon.bmp");
 	LoadTexture(L"GameIcon", L"Texture\\icon.bmp");
 	LoadTexture(L"UIBackground", L"Texture\\UI_Bg.bmp");
 	LoadTexture(L"TitleText", L"Texture\\TitleText.bmp");
+	LoadTexture(L"TitleBtn", L"Texture\\Btn_Title.bmp");
+	LoadTexture(L"GameOver", L"Texture\\GameOver.bmp");
+	LoadTexture(L"GameClearText", L"Texture\\GameClear.bmp");
 }
 
 void ResourceManager::LoadTexture(const wstring& _key, const wstring& _path)

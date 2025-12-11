@@ -98,5 +98,9 @@ private:
 private:
 	bool requestGameOver = false;
 	const float HITBOX_RADIUS = 3.0f;
+private:
+	bool m_isGameOverRequest = false;
+	float m_gameOverDelayTimer = 0.f; 
+	const float GAME_OVER_TIME = 1.0f;
 };
 
