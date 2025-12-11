@@ -3,6 +3,11 @@
 #include "InputManager.h"
 #include "Texture.h"
 
+Button::Button()
+	:m_pTex(nullptr)
+{
+}
+
 void Button::Render(HDC _hdc)
 {
 	if (m_pTex == NULL) return;

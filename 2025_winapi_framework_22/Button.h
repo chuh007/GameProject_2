@@ -5,7 +5,7 @@ class Button :
     public Object
 {
 public:
-    ~Button() { Object::~Object(); };
+    Button();
     // Object을(를) 통해 상속됨
     void Render(HDC _hdc) override;
     void Update() override;

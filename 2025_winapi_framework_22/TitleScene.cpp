@@ -19,7 +19,8 @@ void TitleScene::Init()
 	ButtonSelector* selector = new ButtonSelector;
 	selector->SetSize({ 50.f,50.f });
 	AddObject(selector, Layer::UI);
-	float btnpositionY = GAME_HEIGHT *2/3;
+	float btnpositionY = GAME_HEIGHT *3/5;
+	float btnpositionX = GAME_WIDTH * 3/4;
 
 	m_uiWidth = WINDOW_WIDTH - GAME_WIDTH;
 	m_uiHeight = WINDOW_HEIGHT;
@@ -56,25 +57,25 @@ void TitleScene::Init()
 	}
 
 	StartButton* button = new StartButton;
-	button->SetSize({ 200.f, 50.f });
-	button->SetPos({ GAME_WIDTH - button->GetSize().x / 2 - 25, btnpositionY});
-	button->SetText(L"Start");
+	button->SetSize({ 200.f, 65.f });
+	button->SetPos({ btnpositionX, btnpositionY});
 	button->SetSceneName(L"Game");
+	button->SetTexture(GET_SINGLE(ResourceManager)->GetTexture(L"StartBtn"));
 
-	btnpositionY += 60.0f;
+	btnpositionY += 80.f;
 
 	StartButton* enterBoss = new StartButton;
-	enterBoss->SetSize({ 200.f, 50.f });
-	enterBoss->SetPos({ GAME_WIDTH - button->GetSize().x / 2 - 25, btnpositionY });
-	enterBoss->SetText(L"ToBoss");
+	enterBoss->SetSize({ 200.f, 65.f });
+	enterBoss->SetPos({ btnpositionX, btnpositionY });
 	enterBoss->SetSceneName(L"DevScene");
+	enterBoss->SetTexture(GET_SINGLE(ResourceManager)->GetTexture(L"ToBossBtn"));
 
-	btnpositionY += 60.0f;
+	btnpositionY += 80.f;
 
 	Button* exit = new ExitButton;
-	exit->SetSize({ 200.f, 50.f });
-	exit->SetPos({ GAME_WIDTH - button->GetSize().x / 2 - 25, btnpositionY });
-	exit->SetText(L"Exit");
+	exit->SetSize({ 200.f, 65.f });
+	exit->SetPos({ btnpositionX, btnpositionY });
+	exit->SetTexture(GET_SINGLE(ResourceManager)->GetTexture(L"ExitBtn"));
 	GET_SINGLE(ResourceManager)->Stop(SOUND_CHANNEL::BGM);
 	GET_SINGLE(ResourceManager)->Play(L"TitleBGM");
 
