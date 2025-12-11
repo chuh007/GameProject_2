@@ -1,5 +1,6 @@
-#pragma once
+ï»¿#pragma once
 #include "Object.h"
+class Texture;
 class Item :
     public Object
 {
@@ -11,10 +12,13 @@ public:
 
 protected :
     virtual void OnCollect() abstract;
-    // ObjectÀ»(¸¦) ÅëÇØ »ó¼ÓµÊ
+    // Objectì„(ë¥¼) í†µí•´ ìƒì†ë¨
     void Render(HDC _hdc) override;
 
 private:
     float m_currentSpeed = 0;
+
+protected:
+    Texture* m_Tex;
 };
 

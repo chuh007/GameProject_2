@@ -19,6 +19,7 @@
 #include "PlayerBoom.h"
 #include "TimeManager.h"
 #include "PowerItem.h"
+#include "BoomEffect.h"
 
 Player::Player() : m_isDead(false), m_life(3), m_powerLevel(0), m_isInvincible(false),
 m_projCooldown(0.f), m_bombCnt(0), m_invincibleTime(0.f), m_bombDurationTimer(0.f),
@@ -251,6 +252,9 @@ void Player::TakeDamage(int _damage) {
 	m_life--;
 	m_health->TakeDamage(_damage);
 	if (m_life > -1) {
+		auto* effect = GET_SINGLE(SceneManager)->GetCurScene()
+			->Spawn<BoomEffect>(Layer::PROJECTILEDELETER, GetPos(), { 25,25 });
+		effect->DoScale(10.f, 0.3f);
 		m_health->SetCurrentHP(m_health->GetMaxHP());
 		SetPos({ GAME_WIDTH / 2.f, 600.f });
 		fsm->ChangeState(PlayerHitState::GetInstance());

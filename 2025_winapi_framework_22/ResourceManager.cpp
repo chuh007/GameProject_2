@@ -48,7 +48,11 @@ void ResourceManager::RegisterSound()
 {
 	LoadSound(L"BossBGM", L"Sound\\Native Faith_orgin.mp3", true);
 	LoadSound(L"BGM", L"Sound\\Chinese Tea.mp3", true);
+	LoadSound(L"TitleBGM", L"Sound\\ghkstkdgid.mp3", true);
 	LoadSound(L"FireSound", L"Sound\\FireSound.mp3", false);
+	LoadSound(L"FireSound2", L"Sound\\FireSound2.mp3", false);
+	LoadSound(L"SwordSound", L"Sound\\SwordSound.mp3", false);
+	LoadSound(L"CircleSound", L"Sound\\CircleSound.mp3", false);
 	LoadSound(L"SpellEndSound", L"Sound\\se_enep00.wav", false);
 	LoadSound(L"SpellSound", L"Sound\\se_cardget.wav", false);
 	LoadSound(L"PlayerHit", L"Sound\\playerHit.wav", false);
@@ -213,6 +217,7 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"BlueBullet1", L"Texture\\2_Circle_Blue_1.bmp");
 	LoadTexture(L"RedBullet1", L"Texture\\2_Circle_Red_1.bmp");
 	LoadTexture(L"RedBullet2", L"Texture\\2_Circle_Red_2.bmp");
+	LoadTexture(L"PurpleBullet1", L"Texture\\2_Circle_Purple_1.bmp");
 	LoadTexture(L"GreenSword", L"Texture\\Sword_BrightGreen.bmp");
 	LoadTexture(L"RedSword", L"Texture\\Sword_Red.bmp");
 	LoadTexture(L"BlueSword", L"Texture\\Sword_Blue.bmp");

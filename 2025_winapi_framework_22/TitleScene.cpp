@@ -6,6 +6,7 @@
 #include "ButtonSelector.h"
 #include "ExitButton.h"
 #include "TitleBackground.h"
+#include "ResourceManager.h";
 
 TitleScene::~TitleScene()
 {
@@ -59,6 +60,8 @@ void TitleScene::Init()
 
 	Button* exit = Spawn<ExitButton>(Layer::UI, { buttonX, btnpositionY }, { 200.f, 50.f });
 	exit->SetText(L"Exit");
+	GET_SINGLE(ResourceManager)->Stop(SOUND_CHANNEL::BGM);
+	GET_SINGLE(ResourceManager)->Play(L"TitleBGM");
 
 	selector->AssignButton(button);
 	selector->AssignButton(enterBoss);
@@ -91,7 +94,7 @@ void TitleScene::Render(HDC _hdc) {
 	TextOut(_hdc, TEXT_START_X, 10, L"조작법 :", 5);
 	TextOut(_hdc, TEXT_START_X, 50, L"W, A, S, D : 이동", 15);
 	TextOut(_hdc, TEXT_START_X, 75, L"Q : 봄", 5);
-	TextOut(_hdc, TEXT_START_X, 100, L"Space : 발사", 10);
+	TextOut(_hdc, TEXT_START_X, 100, L"Space, 위쪽 화살표 : 발사", 18);
 	TextOut(_hdc, TEXT_START_X, 125, L"Shiift : 느린 이동", 14);
 }
 

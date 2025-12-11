@@ -50,7 +50,7 @@ void GateOfBabylonPattern::Update()
 
 void GateOfBabylonPattern::BaseShoot()
 {
-
+	GET_SINGLE(ResourceManager)->Play(L"SwordSound");
 	int currentPortalCount = m_basePortalCount + (int)(m_patternUseTime / 5.0f);
 	float currentBaseSpeed = m_baseSpeed + (m_patternUseTime * 5.f);
 
