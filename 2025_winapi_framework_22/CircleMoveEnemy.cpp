@@ -10,7 +10,7 @@
 
 CircleMoveEnemy::CircleMoveEnemy()
 {
-	Enemy::SetTexture((GET_SINGLE(ResourceManager)->GetTexture(L"DownEnemy")));
+	Enemy::SetTexture((GET_SINGLE(ResourceManager)->GetTexture(L"Enemy_2")));
 	m_pBulletTexture = GET_SINGLE(ResourceManager)->GetTexture(L"IceBullet");
 	fireCount = 0;
 	fireTime = 0;
