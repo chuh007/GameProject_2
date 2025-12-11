@@ -133,9 +133,9 @@ void Player::Update()
 	//}
 	Object::LateUpdate();
 
-	if (requestGameOver) {
-		GET_SINGLE(SceneManager)->LoadScene(L"GameOver");
-	}
+	/*if (m_isDead) {
+		
+	}*/
 }
 
 void Player::CreateProjectile()
@@ -248,10 +248,12 @@ bool Player::IsMovingInputProcessed() const {
 
 void Player::TakeDamage(int _damage) {
 	if (m_isInvincible) return;
+	if (m_isDead) return;
 
 	m_life--;
 	m_health->TakeDamage(_damage);
 	if (m_life > -1) {
+		SetInvincible(true);
 		auto* effect = GET_SINGLE(SceneManager)->GetCurScene()
 			->Spawn<BoomEffect>(Layer::PROJECTILEDELETER, GetPos(), { 25,25 });
 		effect->DoScale(10.f, 0.3f);
@@ -260,14 +262,18 @@ void Player::TakeDamage(int _damage) {
 		fsm->ChangeState(PlayerHitState::GetInstance());
 	}
 	else {
-		fsm->ChangeState(PlayerDeadState::GetInstance());
+		Coroutine([=]()
+			{
+				GET_SINGLE(SceneManager)->RequestDestroy(this);
+			}, 1.f);
+		GET_SINGLE(SceneManager)->LoadScene(L"GameOver");
+		//fsm->ChangeState(PlayerDeadState::GetInstance());
 	}
-
-	if (m_isDead) return;
 }
 
 void Player::HPZero() {
-	fsm->ChangeState(PlayerDeadState::GetInstance());
+	//fsm->ChangeState(PlayerDeadState::GetInstance());
+	m_isDead = true;
 }
 
 void Player::SetInvincible(bool isInvincible) {
