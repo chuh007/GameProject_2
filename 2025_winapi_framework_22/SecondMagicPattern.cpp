@@ -18,7 +18,7 @@ SecondMagicPattern::SecondMagicPattern(Object* _owner, Object* _target, float _p
     , m_isBurstFired(false)
     , trailCount(15)
 {
-    m_decValue = 0.4f;
+    m_decValue = 0.5f;
 
     m_phoenixTex = GET_SINGLE(ResourceManager)->GetTexture(L"RedBullet2"); // ≈´ ≈∫
     m_emberTex = GET_SINGLE(ResourceManager)->GetTexture(L"RedBullet1");   // ¿€¿∫ ≈∫

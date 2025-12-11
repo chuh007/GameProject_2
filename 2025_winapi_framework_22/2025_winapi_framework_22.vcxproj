@@ -211,6 +211,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerAttackState.h" />
+    <ClInclude Include="PlayerBoom.h" />
     <ClInclude Include="PlayerDeadState.h" />
     <ClInclude Include="PlayerHitState.h" />
     <ClInclude Include="PlayerManager.h" />
@@ -293,6 +294,7 @@
     <ClCompile Include="PatternCompo.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerAttackState.cpp" />
+    <ClCompile Include="PlayerBoom.cpp" />
     <ClCompile Include="PlayerDeadState.cpp" />
     <ClCompile Include="PlayerHitState.cpp" />
     <ClCompile Include="PlayerManager.cpp" />
