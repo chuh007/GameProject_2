@@ -238,6 +238,7 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"GameIcon", L"Texture\\icon.bmp");
 	LoadTexture(L"UIBackground", L"Texture\\UI_Bg.bmp");
 	LoadTexture(L"TitleText", L"Texture\\TitleText.bmp");
+	LoadTexture(L"TitleBtn", L"Texture\\Btn_Title.bmp");
 }
 
 void ResourceManager::LoadTexture(const wstring& _key, const wstring& _path)

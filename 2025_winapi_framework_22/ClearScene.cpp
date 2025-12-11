@@ -2,6 +2,9 @@
 #include "ClearScene.h"
 #include "StartButton.h"
 #include "ExitButton.h"
+#include "Background.h"
+#include "Texture.h"
+#include "ResourceManager.h"
 #include "ButtonSelector.h"
 
 void ClearScene::Init()
@@ -13,6 +16,8 @@ void ClearScene::Init()
 	HDC hScreenDC = GetDC(hWnd);
 	m_hdc = CreateCompatibleDC(hScreenDC);
 
+	Background* bg = Spawn<Background>(Layer::BACKGROUND, { GAME_WIDTH / 2, GAME_HEIGHT / 2 }, { GAME_WIDTH, GAME_HEIGHT });
+	bg->SetTexture(GET_SINGLE(ResourceManager)->GetTexture(L"Title"));
 	m_hUIBitmap = CreateCompatibleBitmap(hScreenDC, m_uiWidth, m_uiHeight);
 	ReleaseDC(hWnd, hScreenDC);
 
@@ -31,22 +36,38 @@ void ClearScene::Init()
 
 	float btnpositionY = GAME_HEIGHT * 2 / 3;
 	StartButton* button = new StartButton;
-	button->SetSize({ 200.f, 50.f });
+	button->SetSize({ 200.f, 65.f });
 	button->SetPos({ GAME_WIDTH / 2.0f , btnpositionY });
-	button->SetText(L"Title");
+	button->SetTexture(GET_SINGLE(ResourceManager)->GetTexture(L"TitleBtn"));
 	button->SetSceneName(L"Title");
 
-	btnpositionY += 60.0f;
+	btnpositionY += 80.f;
 
 	Button* exit = new ExitButton;
-	exit->SetSize({ 200.f, 50.f });
+	exit->SetSize({ 200.f, 65.f });
 	exit->SetPos({ GAME_WIDTH / 2.0f, btnpositionY });
+	exit->SetTexture(GET_SINGLE(ResourceManager)->GetTexture(L"ExitBtn"));
 	exit->SetText(L"Exit");
 
 	AddObject(button, Layer::UI);
 	AddObject(exit, Layer::UI);
 	selector->AssignButton(button);
 	selector->AssignButton(exit);
+
+	Texture* bgTex = GET_SINGLE(ResourceManager)->GetTexture(L"UIBackground");
+
+	if (bgTex != nullptr)
+	{
+		LONG bgWidth = bgTex->GetWidth();
+		LONG bgHeight = bgTex->GetHeight();
+
+		::TransparentBlt(
+			m_hdc,
+			0, 0, m_uiWidth, m_uiHeight,
+			bgTex->GetTextureDC(),
+			0, 0, bgWidth, bgHeight,
+			RGB(255, 0, 255));
+	}
 }
 
 void ClearScene::Update()

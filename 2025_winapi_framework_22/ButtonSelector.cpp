@@ -73,6 +73,6 @@ void ButtonSelector::MoveToCurrentSelect()
 	float y = btns[curSelectedIdx]->GetPos().y;
 	float x = btns[curSelectedIdx]->GetPos().x;
 	x -= btns[curSelectedIdx]->GetSize().x / 2;
-	x -= 50.f;
+	x -= 25.f;
 	SetPos({x,y});
 }
