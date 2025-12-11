@@ -120,17 +120,17 @@ void Player::Update()
 	if (GET_KEYDOWN(KEY_TYPE::Q) && !m_isInvokedBomb) {
 		UseBomb();
 	}
-	if (GET_KEY(KEY_TYPE::Z)) {
-		if (m_powerLevel <= MAX_POWER) {
-			GainPower(1);
-		}
-	}
-	if (GET_KEYDOWN(KEY_TYPE::R)) {
-		if (m_powerLevel < MAX_POWER) {
-			m_powerLevel = MAX_POWER;
-			GainPower(100);
-		}
-	}
+	//if (GET_KEY(KEY_TYPE::Z)) {
+	//	if (m_powerLevel <= MAX_POWER) {
+	//		GainPower(1);
+	//	}
+	//}
+	//if (GET_KEYDOWN(KEY_TYPE::R)) {
+	//	if (m_powerLevel < MAX_POWER) {
+	//		m_powerLevel = MAX_POWER;
+	//		GainPower(100);
+	//	}
+	//}
 	Object::LateUpdate();
 
 	if (requestGameOver) {

@@ -70,6 +70,8 @@ void GameScene::Init()
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::ENEMYPROJECTILE);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::ENEMYPROJECTILE, Layer::PROJECTILEDELETER);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::ITEM);
+
+	GET_SINGLE(ResourceManager)->Stop(SOUND_CHANNEL::BGM);
 	GET_SINGLE(ResourceManager)->Play(L"BGM");
 
 	GET_SINGLE(EnemySpawnManger)->Init();
@@ -522,10 +524,40 @@ void GameScene::Render(HDC _hdc) {
 			RGB(255, 0, 255));
 	}
 
+	// 여기부터 파워
 	const int POWER_START_Y = 150;
+	const int MAX_POWER = 128;
+	const int BAR_HEIGHT = 18;
+	const int BAR_CENTER_Y = POWER_START_Y + (BAR_HEIGHT / 2.0f);
+	const float BAR_LEFT_X = (float)UI_START_X + 10;
+	const int TEXT_START_Y = POWER_START_Y + 1; 
 
-	wstring powerStr = std::format(L"POWER: {} / {}", power, 128);
-	TextOut(_hdc, UI_START_X, POWER_START_Y, powerStr.c_str(), (int)powerStr.length());
+	wstring powerStr = std::format(L"POWER: {} / {}", power, MAX_POWER);
+	SIZE textSize;
+
+	GetTextExtentPoint32(_hdc, powerStr.c_str(), (int)powerStr.length(), &textSize);
+
+	const int BAR_WIDTH = textSize.cx + 10; 
+	const float BAR_CENTER_X = BAR_LEFT_X + (BAR_WIDTH / 2.0f);
+
+	GDISelector bar(_hdc, BrushType::HOLLOW);
+	RECT_RENDER(_hdc, BAR_CENTER_X, BAR_CENTER_Y,
+		BAR_WIDTH, BAR_HEIGHT);
+
+	float powerRatio = (float)power / (float)MAX_POWER;
+	float currentBarWidth = (float)BAR_WIDTH * powerRatio;
+
+	GDISelector barFill(_hdc, BrushType::GREY);
+
+	float filledBarCenterX = BAR_LEFT_X + (currentBarWidth / 2.0f);
+
+	if (power > 0)
+	{
+		RECT_RENDER(_hdc, filledBarCenterX, BAR_CENTER_Y,
+			currentBarWidth, BAR_HEIGHT);
+	}
+
+	TextOut(_hdc, (int)BAR_LEFT_X + 5, TEXT_START_Y, powerStr.c_str(), (int)powerStr.length());
 
 	if (gTex != nullptr)
 	{

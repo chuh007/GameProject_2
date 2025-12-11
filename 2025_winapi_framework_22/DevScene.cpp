@@ -74,8 +74,6 @@ void DevScene::Init()
 void DevScene::Update()
 {
 	Scene::Update();
-	if (GET_KEYDOWN(KEY_TYPE::ENTER))
-		GET_SINGLE(SceneManager)->LoadScene(L"TestScene");
 }
 
 void DevScene::Render(HDC _hdc) {
