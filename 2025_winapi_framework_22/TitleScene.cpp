@@ -106,17 +106,17 @@ void TitleScene::Render(HDC _hdc) {
 			SRCCOPY);
 	}
 
-	Texture* gTex = GET_SINGLE(ResourceManager)->GetTexture(L"GameIcon");
+	Texture* gTex = GET_SINGLE(ResourceManager)->GetTexture(L"TitleText");
 
 	if (gTex != nullptr)
 	{
 		LONG logoWidth = gTex->GetWidth();
 		LONG logoHeight = gTex->GetHeight();
 		
-		const int RENDER_X = 10;
+		const int RENDER_X = 50;
 		const int RENDER_Y = 10;
-		const int RENDER_WIDTH = 350;
-		const int RENDER_HEIGHT = 350;
+		const int RENDER_WIDTH = 143;
+		const int RENDER_HEIGHT = 670;
 
 		::TransparentBlt(
 			_hdc,
