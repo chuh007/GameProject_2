@@ -6,7 +6,7 @@ PureBulletHellPattern::PureBulletHellPattern(Object* _owner, Object* _target, fl
     : Pattern(_owner, _target, _patternUseTime, _mover, _name)
 	, m_projectileType(PoolType::EnemyProjectile)
 	, m_fireCount(25)
-	, m_speed(150)
+	, m_speed(175)
 	, m_timer(0)
 	, m_secondTimer(0)
 	, m_thirdTimer(0)
@@ -82,7 +82,6 @@ void PureBulletHellPattern::SecondFire()
 	float randomangle = rand() % 60;
 	Vec2 ownerPos1 = { GAME_WIDTH / 5, GAME_HEIGHT / 3 };
 	ownerPos1 += {rand() % 100 - 50, rand() % 100 - 50};
-	GET_SINGLE(ResourceManager)->Play(L"FireSound");
 	for (int i = 0; i < 8; ++i)
 	{
 		auto* projectile = PoolManager::GetInst()->
@@ -134,7 +133,6 @@ void PureBulletHellPattern::ThirdFire()
 	float randomangle = rand() % 60;
 	Vec2 ownerPos1 = { 0, GAME_HEIGHT / 3 };
 	ownerPos1 += {0, rand() % 100 - 50};
-	GET_SINGLE(ResourceManager)->Play(L"FireSound");
 	for (int i = 0; i < 35; ++i)
 	{
 		auto* projectile = PoolManager::GetInst()->

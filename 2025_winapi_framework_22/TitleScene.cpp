@@ -91,7 +91,7 @@ void TitleScene::Render(HDC _hdc) {
 	TextOut(_hdc, TEXT_START_X, 10, L"조작법 :", 5);
 	TextOut(_hdc, TEXT_START_X, 50, L"W, A, S, D : 이동", 15);
 	TextOut(_hdc, TEXT_START_X, 75, L"Q : 봄", 5);
-	TextOut(_hdc, TEXT_START_X, 100, L"Space : 발사", 10);
+	TextOut(_hdc, TEXT_START_X, 100, L"Space, 위쪽 화살표 : 발사", 18);
 	TextOut(_hdc, TEXT_START_X, 125, L"Shiift : 느린 이동", 14);
 }
 

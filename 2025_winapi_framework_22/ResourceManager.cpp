@@ -208,6 +208,7 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"BlueBullet1", L"Texture\\2_Circle_Blue_1.bmp");
 	LoadTexture(L"RedBullet1", L"Texture\\2_Circle_Red_1.bmp");
 	LoadTexture(L"RedBullet2", L"Texture\\2_Circle_Red_2.bmp");
+	LoadTexture(L"PurpleBullet1", L"Texture\\2_Circle_Purple_1.bmp");
 	LoadTexture(L"GreenSword", L"Texture\\Sword_BrightGreen.bmp");
 	LoadTexture(L"RedSword", L"Texture\\Sword_Red.bmp");
 	LoadTexture(L"BlueSword", L"Texture\\Sword_Blue.bmp");

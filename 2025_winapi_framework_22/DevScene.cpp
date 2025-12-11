@@ -27,6 +27,7 @@ void DevScene::Init()
 	srand(time(nullptr));
 	auto* background = Spawn<Background>(Layer::BACKGROUND, { GAME_WIDTH * 0.5f, GAME_HEIGHT * 0.5f }, { GAME_WIDTH, GAME_HEIGHT });
 	auto* player = Spawn<Player>(Layer::PLAYER, { GAME_WIDTH / 2, 500 }, { 100.f, 100.f });
+	player->GainPower(128);
 	GET_SINGLE(PlayerManager)->SetPlayer(player);
 	Boss* boss = Spawn<Boss>(Layer::ENEMY, { GAME_WIDTH / 2, GAME_HEIGHT / 4 }, { 30.f, 70.f });
 	boss->SetBackground(background);
@@ -37,7 +38,7 @@ void DevScene::Init()
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::ENEMYPROJECTILE, Layer::PROJECTILEDELETER);
 	GET_SINGLE(ResourceManager)->Play(L"BossBGM");
 	GET_SINGLE(PoolManager)->AddPool<EnemyProjectile>
-		(PoolType::EnemyProjectile, 500, Layer::ENEMYPROJECTILE);
+		(PoolType::EnemyProjectile, 1000, Layer::ENEMYPROJECTILE);
 	GET_SINGLE(PoolManager)->AddPool<PlayerProjectile>
 		(PoolType::PlayerProj, 100, Layer::PROJECTILE);
 	GET_SINGLE(PoolManager)->AddPool<Effect>
