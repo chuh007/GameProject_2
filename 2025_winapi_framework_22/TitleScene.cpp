@@ -19,7 +19,7 @@ void TitleScene::Init()
 	ButtonSelector* selector = new ButtonSelector;
 	selector->SetSize({ 50.f,50.f });
 	AddObject(selector, Layer::UI);
-	float btnpositionY = GAME_HEIGHT *2/3;
+	float btnpositionY = GAME_HEIGHT / 2;
 
 	m_uiWidth = WINDOW_WIDTH - GAME_WIDTH;
 	m_uiHeight = WINDOW_HEIGHT;
@@ -39,27 +39,32 @@ void TitleScene::Init()
 
 	float buttonX = GAME_WIDTH - 125.f;
 
-	StartButton* button = Spawn<StartButton>(Layer::UI, { buttonX, btnpositionY }, { 200.f, 50.f });
+	StartButton* button = Spawn<StartButton>(Layer::UI, { buttonX, btnpositionY }, { 200.f, 77.f });
 	button->SetText(L"Start");
 	button->SetSceneName(L"Game");
+	button->SetTexture(GET_SINGLE(ResourceManager)->GetTexture(L"StartBtn"));
 
-	btnpositionY += 60.0f;
+	btnpositionY += 80.f;
 
-	StartButton* enterBoss = Spawn<StartButton>(Layer::UI, { buttonX, btnpositionY }, { 200.f, 50.f });
+	StartButton* enterBoss = Spawn<StartButton>(Layer::UI, { buttonX, btnpositionY }, { 200.f, 65.f });
 	enterBoss->SetText(L"ToBoss");
 	enterBoss->SetSceneName(L"DevScene");
+	enterBoss->SetTexture(GET_SINGLE(ResourceManager)->GetTexture(L"ToBossBtn"));
 
-	btnpositionY += 60.0f;
+	btnpositionY += 80.f;
 
-	StartButton* setting = Spawn<StartButton>(Layer::UI, { buttonX, btnpositionY }, { 200.f, 50.f });
+	StartButton* setting = Spawn<StartButton>(Layer::UI, { buttonX, btnpositionY }, { 200.f, 65.f });
 
 	setting->SetText(L"Setting");
 	setting->SetSceneName(L"Setting");
+	setting->SetTexture(GET_SINGLE(ResourceManager)->GetTexture(L"SettingBtn"));
 
-	btnpositionY += 60.0f;
+	btnpositionY += 80.f;
 
-	Button* exit = Spawn<ExitButton>(Layer::UI, { buttonX, btnpositionY }, { 200.f, 50.f });
+	Button* exit = Spawn<ExitButton>(Layer::UI, { buttonX, btnpositionY }, { 200.f, 65.f });
 	exit->SetText(L"Exit");
+	exit->SetTexture(GET_SINGLE(ResourceManager)->GetTexture(L"ExitBtn"));
+
 	GET_SINGLE(ResourceManager)->Stop(SOUND_CHANNEL::BGM);
 	GET_SINGLE(ResourceManager)->Play(L"TitleBGM");
 

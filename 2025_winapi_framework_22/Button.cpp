@@ -1,14 +1,25 @@
 #include "pch.h"
 #include "Button.h"
 #include "InputManager.h"
+#include "Texture.h"
 
 void Button::Render(HDC _hdc)
 {
+	if (m_pTex == NULL) return;
 	Vec2 pos = GetPos();
 	Vec2 size = GetSize();
-	RECT_RENDER(_hdc, pos.x, pos.y
-		, size.x, size.y);
+	int texX = m_pTex->GetWidth();
+	int texY = m_pTex->GetHeight();
+	::TransparentBlt(
+		_hdc,
+		pos.x - size.x / 2,
+		pos.y - size.y / 2,
+		size.x, size.y,
+		m_pTex->GetTextureDC(),
+		0, 0, texX, texY,
+		RGB(255, 0, 255));
 
+	ComponentRender(_hdc);
 	GDISelector(_hdc, FontType::TITLE);
 	TextOut(_hdc, pos.x - size.x/2 + 15, pos.y - size.y/2 + 15 , m_text.c_str(), m_text.size());
 }
