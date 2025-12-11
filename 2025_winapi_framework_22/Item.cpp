@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "Item.h"
 #include "Collider.h"
 #include "SceneManager.h"
@@ -36,8 +36,8 @@ void Item::EnterCollision(Collider* _other)
 
 void Item::Render(HDC _hdc)
 {
-	Vec2 pos = GetPos();
-	Vec2 size = GetSize();
+	//Vec2 pos = GetPos();
+	//Vec2 size = GetSize();
 
-	ELLIPSE_RENDER(_hdc, pos.x, pos.y, size.x, size.y);
+	//ELLIPSE_RENDER(_hdc, pos.x, pos.y, size.x, size.y);
 }
