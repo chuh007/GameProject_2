@@ -221,6 +221,7 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"NormalEnemy", L"Texture\\enemy_1.bmp");
 	LoadTexture(L"DownEnemy", L"Texture\\Enemy_Down.bmp");
 	LoadTexture(L"Enemy_2", L"Texture\\Enemy_2.bmp");
+	LoadTexture(L"Enemy_3", L"Texture\\Enemy_3.bmp");
 }
 
 void ResourceManager::LoadTexture(const wstring& _key, const wstring& _path)
