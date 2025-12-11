@@ -8,10 +8,10 @@ void PlayerDeadState::Enter(StateMachine* _fsm) {
 
 void PlayerDeadState::Excute(StateMachine* _fsm){
 	// 타이틀로 씬 전환 시켜주기
-	auto* player = static_cast<Player*>(_fsm->GetOwner());
-	if (player) {
-		player->RequestGameOver();
-	}
+	//auto* player = static_cast<Player*>(_fsm->GetOwner());
+	//if (player) {
+	//	player->RequestGameOver();
+	//}
 }
 
 void PlayerDeadState::Exit(StateMachine* _fsm) {
