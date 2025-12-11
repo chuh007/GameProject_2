@@ -17,7 +17,7 @@ void ClearScene::Init()
 	m_hdc = CreateCompatibleDC(hScreenDC);
 
 	Background* bg = Spawn<Background>(Layer::BACKGROUND, { GAME_WIDTH / 2, GAME_HEIGHT / 2 }, { GAME_WIDTH, GAME_HEIGHT });
-	bg->SetTexture(GET_SINGLE(ResourceManager)->GetTexture(L"Title"));
+	bg->SetTexture(GET_SINGLE(ResourceManager)->GetTexture(L"TitleBackground"));
 	m_hUIBitmap = CreateCompatibleBitmap(hScreenDC, m_uiWidth, m_uiHeight);
 	ReleaseDC(hWnd, hScreenDC);
 
