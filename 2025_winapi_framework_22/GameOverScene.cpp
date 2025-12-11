@@ -92,4 +92,26 @@ void GameOverScene::Render(HDC _hdc)
 			m_hdc, 0, 0,
 			SRCCOPY);
 	}
+
+	Texture* gTex = GET_SINGLE(ResourceManager)->GetTexture(L"GameOver");
+
+	if (gTex != nullptr)
+	{
+		LONG logoWidth = gTex->GetWidth();
+		LONG logoHeight = gTex->GetHeight();
+
+		const int RENDER_X = 100;
+		const int RENDER_Y = 10;
+		const int RENDER_WIDTH = 512;
+		const int RENDER_HEIGHT = 512;
+
+		::TransparentBlt(
+			_hdc,
+			RENDER_X,
+			RENDER_Y,
+			RENDER_WIDTH, RENDER_HEIGHT,
+			gTex->GetTextureDC(),
+			0, 0, logoWidth, logoHeight,
+			RGB(255, 0, 255));
+	}
 }
