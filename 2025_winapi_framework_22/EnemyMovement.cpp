@@ -114,31 +114,31 @@ void EnemyMovement::AddPathData(BezierPathData* path)
 
 void EnemyMovement::Render(HDC hDC)
 {
-    const std::vector<Vec2>& points = moveOrder.front()->points;
+    //const std::vector<Vec2>& points = moveOrder.front()->points;
 
-    if (points.size() < 2)
-    {
-        return;
-    }
+    //if (points.size() < 2)
+    //{
+    //    return;
+    //}
 
-    const int segments = 100;
+    //const int segments = 100;
 
-    Vec2 first_v = GetBezierPoint(points, 0.0) + defaultPos;
+    //Vec2 first_v = GetBezierPoint(points, 0.0) + defaultPos;
 
-    LONG first_x = static_cast<LONG>(std::roundf(first_v.x));
-    LONG first_y = static_cast<LONG>(std::roundf(first_v.y));
+    //LONG first_x = static_cast<LONG>(std::roundf(first_v.x));
+    //LONG first_y = static_cast<LONG>(std::roundf(first_v.y));
 
-    MoveToEx(hDC, first_x, first_y, NULL);
+    //MoveToEx(hDC, first_x, first_y, NULL);
 
-    for (int i = 1; i <= segments; ++i)
-    {
-        double t = (double)i / (double)segments;
+    //for (int i = 1; i <= segments; ++i)
+    //{
+    //    double t = (double)i / (double)segments;
 
-        Vec2 v = GetBezierPoint(points, t) + defaultPos;
+    //    Vec2 v = GetBezierPoint(points, t) + defaultPos;
 
-        LONG current_x = static_cast<LONG>(std::roundf(v.x));
-        LONG current_y = static_cast<LONG>(std::roundf(v.y));
+    //    LONG current_x = static_cast<LONG>(std::roundf(v.x));
+    //    LONG current_y = static_cast<LONG>(std::roundf(v.y));
 
-        LineTo(hDC, current_x, current_y);
-    }
+    //    LineTo(hDC, current_x, current_y);
+    //}
 }

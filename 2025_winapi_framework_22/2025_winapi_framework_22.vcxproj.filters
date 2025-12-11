@@ -506,4 +506,7 @@
     <ClCompile Include="SettingScene.cpp" />
     <ClCompile Include="VolumeButton.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+  </ItemGroup>
 </Project>
