@@ -7,11 +7,13 @@
 #include "BossMover.h"
 void EnemySpawnManger::Init()
 {
+	GET_SINGLE(EnemySpawnManger)->Realese();
 	m_calcedPath.clear();
 	AssignPath();
 	m_currentTime = 0;
 	m_bossSpawned = false;
 	m_bossSpawnTime = 20000.f;
+
 }
 
 void EnemySpawnManger::Update()

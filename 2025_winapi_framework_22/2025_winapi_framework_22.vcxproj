@@ -226,6 +226,7 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SecondMagicPattern.h" />
+    <ClInclude Include="SettingScene.h" />
     <ClInclude Include="ShotToPlayerEnemy.h" />
     <ClInclude Include="StartButton.h" />
     <ClInclude Include="SpellNameText.h" />
@@ -243,6 +244,7 @@
     <ClInclude Include="TripleCirclePattern.h" />
     <ClInclude Include="TripleShotEnemy.h" />
     <ClInclude Include="Vec2.h" />
+    <ClInclude Include="VolumeButton.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
@@ -308,6 +310,7 @@
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SecondMagicPattern.cpp" />
+    <ClCompile Include="SettingScene.cpp" />
     <ClCompile Include="ShotToPlayerEnemy.cpp" />
     <ClCompile Include="SpellNameText.cpp" />
     <ClCompile Include="StartButton.cpp" />
@@ -322,6 +325,7 @@
     <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="TripleCirclePattern.cpp" />
     <ClCompile Include="TripleShotEnemy.cpp" />
+    <ClCompile Include="VolumeButton.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc" />

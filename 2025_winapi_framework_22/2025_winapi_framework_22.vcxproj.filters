@@ -283,6 +283,8 @@
       <Filter>Engine\09. Pattern</Filter>
     </ClInclude>
     <ClInclude Include="PlayerBoom.h" />
+    <ClInclude Include="SettingScene.h" />
+    <ClInclude Include="VolumeButton.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2025_winapi_framework_22.rc">
@@ -501,5 +503,7 @@
     <ClCompile Include="PlayerBoom.cpp">
       <Filter>Engine\03. Object</Filter>
     </ClCompile>
+    <ClCompile Include="SettingScene.cpp" />
+    <ClCompile Include="VolumeButton.cpp" />
   </ItemGroup>
 </Project>

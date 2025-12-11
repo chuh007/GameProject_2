@@ -229,6 +229,11 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"Enemy_2", L"Texture\\Enemy_2.bmp");
 	LoadTexture(L"Enemy_3", L"Texture\\Enemy_3.bmp");
 	LoadTexture(L"PowerIcon", L"Texture\\Player_Bullet_Middle.bmp");
+
+	LoadTexture(L"StartBtn", L"Texture\\btn_start.bmp");
+	LoadTexture(L"SettingBtn", L"Texture\\btn_Setting.bmp");
+	LoadTexture(L"ToBossBtn", L"Texture\\btn_ToBoss.bmp");
+	LoadTexture(L"ExitBtn", L"Texture\\btn_Exit.bmp");
 	LoadTexture(L"GameIcon", L"Texture\\icon.bmp");
 	LoadTexture(L"UIBackground", L"Texture\\UI_Bg.bmp");
 }
