@@ -6,6 +6,7 @@
 #include "ButtonSelector.h"
 #include "ExitButton.h"
 #include "TitleBackground.h"
+#include "ResourceManager.h";
 
 TitleScene::~TitleScene()
 {
@@ -54,6 +55,8 @@ void TitleScene::Init()
 	exit->SetSize({ 200.f, 50.f });
 	exit->SetPos({ GAME_WIDTH - button->GetSize().x / 2 - 25, btnpositionY });
 	exit->SetText(L"Exit");
+	GET_SINGLE(ResourceManager)->Stop(SOUND_CHANNEL::BGM);
+	GET_SINGLE(ResourceManager)->Play(L"TitleBGM");
 
 	
 

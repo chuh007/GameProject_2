@@ -36,6 +36,7 @@ void DevScene::Init()
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::ENEMYPROJECTILE);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::PLAYER, Layer::ITEM);
 	GET_SINGLE(CollisionManager)->CheckLayer(Layer::ENEMYPROJECTILE, Layer::PROJECTILEDELETER);
+	GET_SINGLE(ResourceManager)->Stop(SOUND_CHANNEL::BGM);
 	GET_SINGLE(ResourceManager)->Play(L"BossBGM");
 	GET_SINGLE(PoolManager)->AddPool<EnemyProjectile>
 		(PoolType::EnemyProjectile, 1000, Layer::ENEMYPROJECTILE);

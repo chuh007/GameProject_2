@@ -48,7 +48,11 @@ void ResourceManager::RegisterSound()
 {
 	LoadSound(L"BossBGM", L"Sound\\Native Faith_orgin.mp3", true);
 	LoadSound(L"BGM", L"Sound\\Chinese Tea.mp3", true);
+	LoadSound(L"TitleBGM", L"Sound\\ghkstkdgid.mp3", true);
 	LoadSound(L"FireSound", L"Sound\\FireSound.mp3", false);
+	LoadSound(L"FireSound2", L"Sound\\FireSound2.mp3", false);
+	LoadSound(L"SwordSound", L"Sound\\SwordSound.mp3", false);
+	LoadSound(L"CircleSound", L"Sound\\CircleSound.mp3", false);
 	LoadSound(L"SpellEndSound", L"Sound\\se_enep00.wav", false);
 	LoadSound(L"SpellSound", L"Sound\\se_cardget.wav", false);
 	LoadSound(L"PlayerHit", L"Sound\\playerHit.wav", false);

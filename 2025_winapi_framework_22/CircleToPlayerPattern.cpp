@@ -35,6 +35,7 @@ void CircleToPlayerPattern::Update()
 void CircleToPlayerPattern::BaseShoot()
 {
 	GET_SINGLE(ResourceManager)->Play(L"FireSound");
+	GET_SINGLE(ResourceManager)->Play(L"CircleSound");
 	float angle = 360.f / (float)m_fireCount;
 	auto target = m_target;
 	float speed = m_speed;

@@ -52,7 +52,7 @@ void PureBulletHellPattern::BaseShoot()
 	float spawnRadius = 50.f; 
 	Vec2 ownerPos = m_owner->GetPos();
 	ownerPos += {rand() % 100 - 50, rand() % 100 - 50};
-	GET_SINGLE(ResourceManager)->Play(L"FireSound");
+	GET_SINGLE(ResourceManager)->Play(L"FireSound2");
 	for (int i = 0; i < m_fireCount; ++i)
 	{
 		auto* projectile = PoolManager::GetInst()->
@@ -81,6 +81,7 @@ void PureBulletHellPattern::SecondFire()
 	float spawnRadius = 50.f;
 	float randomangle = rand() % 60;
 	Vec2 ownerPos1 = { GAME_WIDTH / 5, GAME_HEIGHT / 3 };
+	GET_SINGLE(ResourceManager)->Play(L"FireSound");
 	ownerPos1 += {rand() % 100 - 50, rand() % 100 - 50};
 	for (int i = 0; i < 8; ++i)
 	{
