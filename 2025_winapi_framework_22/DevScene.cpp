@@ -110,7 +110,7 @@ void DevScene::Render(HDC _hdc) {
 	int bombCnt = player->GetBombCount();
 	int power = player->GetPowerLevel();
 
-	SetTextColor(_hdc, RGB(0, 0, 0));
+	SetTextColor(_hdc, RGB(255, 255, 255));
 	SetBkMode(_hdc, TRANSPARENT);
 
 	HFONT hFont = GET_SINGLE(ResourceManager)->GetFont(FontType::TITLE);
