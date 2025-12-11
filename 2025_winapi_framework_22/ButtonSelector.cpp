@@ -2,12 +2,16 @@
 #include "ButtonSelector.h"
 #include "InputManager.h"
 #include "Button.h"
+#include "Texture.h"
+#include "ResourceManager.h"
 ButtonSelector::ButtonSelector()
+	:m_pTexture(nullptr)
 {
+	m_pTexture = GET_SINGLE(ResourceManager)->GetTexture(L"SelectIcon");
 	btns = vector<Button*>(0);
 	curSelectedIdx = 0;
 	m_lastSelectTime = 0;
-	m_isActive = false;
+	m_isActive = true;
 }
 ButtonSelector::~ButtonSelector()
 {
@@ -17,10 +21,19 @@ void ButtonSelector::Render(HDC _hdc)
 {
 	if (m_isActive)
 	{
+		if (m_pTexture == NULL) return;
 		Vec2 pos = GetPos();
 		Vec2 size = GetSize();
-		RECT_RENDER(_hdc, pos.x, pos.y
-			, size.x, size.y);
+		int texX = m_pTexture->GetWidth();
+		int texY = m_pTexture->GetHeight();
+		::TransparentBlt(
+			_hdc,
+			pos.x - size.x / 2,
+			pos.y - size.y / 2,
+			size.x, size.y,
+			m_pTexture->GetTextureDC(),
+			0, 0, texX, texY,
+			RGB(255, 0, 255));
 	}
 }
 
@@ -46,16 +59,13 @@ void ButtonSelector::Update()
 		cout << curSelectedIdx << endl;
 		btns[curSelectedIdx]->OnClick();
 	}
-
-	if (m_lastSelectTime >= 3.f)
-	{
-		m_isActive = false;
-	}
 }
 
 void ButtonSelector::AssignButton(Button* button)
 {
 	btns.push_back(button);
+	curSelectedIdx = 0;
+	MoveToCurrentSelect();
 }
 
 void ButtonSelector::MoveToCurrentSelect()
