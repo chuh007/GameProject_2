@@ -8,7 +8,7 @@
 
 ShotToPlayerEnemy::ShotToPlayerEnemy()
 {
-	Enemy::SetTexture(GET_SINGLE(ResourceManager)->GetTexture(L"DownEnemy"));
+	Enemy::SetTexture(GET_SINGLE(ResourceManager)->GetTexture(L"Enemy_3"));
 	m_pBulletTexture = GET_SINGLE(ResourceManager)->GetTexture(L"RedSword");
 }
 

@@ -14,6 +14,7 @@ TitleScene::~TitleScene()
 
 void TitleScene::Init()
 {
+
 	ButtonSelector* selector = new ButtonSelector;
 	selector->SetSize({ 50.f,50.f });
 	AddObject(selector, Layer::UI);

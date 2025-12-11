@@ -7,7 +7,6 @@
 
 void SettingScene::Init()
 {
-
 	auto* background = Spawn<Background>(Layer::BACKGROUND, { GAME_WIDTH * 0.5f, GAME_HEIGHT * 0.5f }, { GAME_WIDTH, GAME_HEIGHT });
 	background->SetTexture(GET_SINGLE(ResourceManager)->GetTexture(L"TitleBackground"));
 	//Spawn<Boss>(Layer::ENEMY, { WINDOW_WIDTH / 2, WINDOW_HEIGHT / 4 }, { 100.f,100.f });
