@@ -115,6 +115,7 @@ void Player::ExitCollision(Collider* _other)
 
 void Player::Update()
 {
+	Object::Update();
 	float _fDT = GET_SINGLE(TimeManager)->GetDT();
 
 	if (GET_KEYDOWN(KEY_TYPE::Q) && !m_isInvokedBomb) {
@@ -133,9 +134,12 @@ void Player::Update()
 	//}
 	Object::LateUpdate();
 
-	/*if (m_isDead) {
-		
-	}*/
+	if (m_isDead) {
+		m_gameOverDelayTimer += _fDT;
+		if (m_gameOverDelayTimer >= GAME_OVER_TIME) {
+			GET_SINGLE(SceneManager)->LoadScene(L"GameOver");
+		}
+	}
 }
 
 void Player::CreateProjectile()
@@ -262,17 +266,17 @@ void Player::TakeDamage(int _damage) {
 		fsm->ChangeState(PlayerHitState::GetInstance());
 	}
 	else {
-		Coroutine([=]()
+		m_isDead = true;
+		/*this->Coroutine([=]()
 			{
-				GET_SINGLE(SceneManager)->RequestDestroy(this);
-			}, 1.f);
-		GET_SINGLE(SceneManager)->LoadScene(L"GameOver");
-		//fsm->ChangeState(PlayerDeadState::GetInstance());
+				cout << "1sec end" << endl;
+			}, 1.0f);*/
+		//SetActive(false);
+		m_gameOverDelayTimer = 0.f;
 	}
 }
 
 void Player::HPZero() {
-	//fsm->ChangeState(PlayerDeadState::GetInstance());
 	m_isDead = true;
 }
 
@@ -380,5 +384,3 @@ void Player::SpawnPower() {
 			Spawn<PowerItem>(Layer::ITEM, spawnPos, itemSize);
 	}
 }
-
-
