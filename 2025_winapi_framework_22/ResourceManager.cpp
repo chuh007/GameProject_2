@@ -121,6 +121,11 @@ void ResourceManager::Volume(SOUND_CHANNEL _channel, float _vol)
 
 }
 
+void ResourceManager::GetCurVolume(SOUND_CHANNEL _channel, float* _pVolume)
+{
+	m_pChannel[(UINT)_channel]->getVolume(_pVolume);
+}
+
 void ResourceManager::Pause(SOUND_CHANNEL _channel, bool _ispause)
 {
 	m_pChannel[(UINT)_channel]->setPaused(_ispause);

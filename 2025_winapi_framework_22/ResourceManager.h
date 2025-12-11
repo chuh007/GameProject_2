@@ -31,6 +31,7 @@ public:
 	void Play(const wstring& _key);
 	void Stop(SOUND_CHANNEL _channel);
 	void Volume(SOUND_CHANNEL _channel, float _vol);
+	void GetCurVolume(SOUND_CHANNEL _channel, float* _pVolume);
 	void Pause(SOUND_CHANNEL _channel, bool _ispause);
 public:
 	void LoadTexture(const wstring& _key, const wstring& _path);

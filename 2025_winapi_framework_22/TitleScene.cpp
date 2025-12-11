@@ -34,35 +34,34 @@ void TitleScene::Init()
 	RECT rect = { 0, 0, m_uiWidth, m_uiHeight };
 
 	FillRect(m_hdc, &rect, hUIBrush);
-	StartButton* button = new StartButton;
-	button->SetSize({ 200.f, 50.f });
-	button->SetPos({ GAME_WIDTH - button->GetSize().x / 2 - 25, btnpositionY});
+
+	float buttonX = GAME_WIDTH - 125.f;
+
+	StartButton* button = Spawn<StartButton>(Layer::UI, { buttonX, btnpositionY }, { 200.f, 50.f });
 	button->SetText(L"Start");
-	button->SetSceneName(L"DevScene");
+	button->SetSceneName(L"Game");
 
 	btnpositionY += 60.0f;
 
-	StartButton* enterBoss = new StartButton;
-	enterBoss->SetSize({ 200.f, 50.f });
-	enterBoss->SetPos({ GAME_WIDTH - button->GetSize().x / 2 - 25, btnpositionY });
+	StartButton* enterBoss = Spawn<StartButton>(Layer::UI, { buttonX, btnpositionY }, { 200.f, 50.f });
 	enterBoss->SetText(L"ToBoss");
 	enterBoss->SetSceneName(L"DevScene");
 
 	btnpositionY += 60.0f;
 
-	Button* exit = new ExitButton;
-	exit->SetSize({ 200.f, 50.f });
-	exit->SetPos({ GAME_WIDTH - button->GetSize().x / 2 - 25, btnpositionY });
+	StartButton* setting = Spawn<StartButton>(Layer::UI, { buttonX, btnpositionY }, { 200.f, 50.f });
+
+	setting->SetText(L"Setting");
+	setting->SetSceneName(L"Setting");
+
+	btnpositionY += 60.0f;
+
+	Button* exit = Spawn<ExitButton>(Layer::UI, { buttonX, btnpositionY }, { 200.f, 50.f });
 	exit->SetText(L"Exit");
 
-	
-
-
-	AddObject(button, Layer::UI);
-	AddObject(exit, Layer::UI);
-	AddObject(enterBoss, Layer::UI);
 	selector->AssignButton(button);
 	selector->AssignButton(enterBoss);
+	selector->AssignButton(setting);
 	selector->AssignButton(exit);
 
 	Object* bg = new TitleBackground;
