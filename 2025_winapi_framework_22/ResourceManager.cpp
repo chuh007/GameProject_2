@@ -46,7 +46,7 @@ void ResourceManager::Release()
 
 void ResourceManager::RegisterSound()
 {
-	LoadSound(L"BossBGM", L"Sound\\Native Faith_orgin.mp3", true);
+	LoadSound(L"BossBGM", L"Sound\\Necrofantasia.mp3", true);
 	LoadSound(L"BGM", L"Sound\\Chinese Tea.mp3", true);
 	LoadSound(L"TitleBGM", L"Sound\\ghkstkdgid.mp3", true);
 	LoadSound(L"FireSound", L"Sound\\FireSound.mp3", false);

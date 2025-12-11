@@ -108,7 +108,7 @@ void PatternCompo::SetUpPattern()
 	AddNomalPattern(1, pattern1);
 	auto* spell1 = new CircleToPlayerPattern(m_owner, m_target, 0.75f, m_mover, L"구속「부여잡는 올가미」 ");
 	AddSpellPattern(1, spell1);
-	auto* pattern2 = new TripleCirclePattern(m_owner, m_target, 0.8f, m_mover, L"");
+	auto* pattern2 = new TripleCirclePattern(m_owner, m_target, 0.9f, m_mover, L"");
 	AddNomalPattern(2, pattern2);
 	auto* spell2 = new IcicleFallPattern(m_owner, m_target, 0.5f, m_mover, L"빙설「아이시클 폴」 ");
 	AddSpellPattern(2, spell2);
@@ -120,7 +120,7 @@ void PatternCompo::SetUpPattern()
 	AddNomalPattern(4, pattern4);
 	auto* spell4 = new SecondMagicPattern(m_owner, m_target, 2.5f, m_mover, L"제 2마법「보석검 젤레치」 ");
 	AddSpellPattern(4, spell4);
-	auto* pattern5 = new SpiralPattern(m_owner, m_target, 1.75f, m_mover, L"");
+	auto* pattern5 = new SpiralPattern(m_owner, m_target, 1.9f, m_mover, L"");
 	AddNomalPattern(5, pattern5);
 	auto* spell5 = new PureBulletHellPattern(m_owner, m_target, 0.5f, m_mover, L"종막「순수한 탄막 지옥」 ");
 	AddSpellPattern(5, spell5);

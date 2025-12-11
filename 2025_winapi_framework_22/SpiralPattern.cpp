@@ -7,12 +7,12 @@
 SpiralPattern::SpiralPattern(Object* _owner, Object* _target, float _patternUseTime, BossMover* _mover, wstring _name)
     : Pattern(_owner, _target, _patternUseTime, _mover, _name)
     , m_projectileType(PoolType::EnemyProjectile)
-    , m_armCount(15)
+    , m_armCount(14)
     , m_speed(200)
     , m_fireCount(20)
     , m_isleft(false)
 {
-    m_decValue = 0.7f;
+    m_decValue = 0.9f;
     m_bulletTex = GET_SINGLE(ResourceManager)->GetTexture(L"GreenBullet3");
 }
 
