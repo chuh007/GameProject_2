@@ -279,7 +279,10 @@
     <ClInclude Include="BoomEffect.h" />
     <ClInclude Include="OneUpItem.h" />
     <ClInclude Include="TitleBackground.h" />
-    <ClInclude Include="TripleCirclePattern.h" />
+    <ClInclude Include="TripleCirclePattern.h">
+      <Filter>Engine\09. Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerBoom.h" />
     <ClInclude Include="SettingScene.h" />
     <ClInclude Include="VolumeButton.h" />
   </ItemGroup>
@@ -494,7 +497,12 @@
     <ClCompile Include="BoomEffect.cpp" />
     <ClCompile Include="OneUpItem.cpp" />
     <ClCompile Include="TitleBackground.cpp" />
-    <ClCompile Include="TripleCirclePattern.cpp" />
+    <ClCompile Include="TripleCirclePattern.cpp">
+      <Filter>Engine\09. Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerBoom.cpp">
+      <Filter>Engine\03. Object</Filter>
+    </ClCompile>
     <ClCompile Include="SettingScene.cpp" />
     <ClCompile Include="VolumeButton.cpp" />
   </ItemGroup>

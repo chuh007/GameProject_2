@@ -11,7 +11,7 @@ PureBulletHellPattern::PureBulletHellPattern(Object* _owner, Object* _target, fl
 	, m_secondTimer(0)
 	, m_thirdTimer(0)
 {
-	m_decValue = 0.15f;
+	m_decValue = 0.25f;
 	m_bulletTex1 = GET_SINGLE(ResourceManager)->GetTexture(L"RedBullet1");
 	m_bulletTex2 = GET_SINGLE(ResourceManager)->GetTexture(L"PurpleBullet1");
 	m_bulletTex3 = GET_SINGLE(ResourceManager)->GetTexture(L"BlueBullet1");

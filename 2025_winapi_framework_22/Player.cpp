@@ -16,7 +16,7 @@
 #include "Health.h"
 #include "PlayerHitState.h"
 #include "PlayerDeadState.h"
-#include "DeleteBullet.h"
+#include "PlayerBoom.h"
 #include "TimeManager.h"
 #include "PowerItem.h"
 
@@ -127,7 +127,7 @@ void Player::Update()
 	if (GET_KEYDOWN(KEY_TYPE::R)) {
 		if (m_powerLevel < MAX_POWER) {
 			m_powerLevel = MAX_POWER;
-			m_amountDmg += 12.8f;
+			GainPower(100);
 		}
 	}
 	Object::LateUpdate();
@@ -279,7 +279,7 @@ float Player::GetMaxInvincibleTime() const {
 }
 
 void Player::TryContinueFire(float _fDT) {
-	if (GET_KEY(KEY_TYPE::SPACE)) {
+	if (GET_KEY(KEY_TYPE::SPACE) || GET_KEY(KEY_TYPE::UP)) {
 		m_projCooldown += _fDT;
 		while (m_projCooldown >= PROJECTILE_INTERVAL) {
 			CreateProjectile();
@@ -296,8 +296,8 @@ bool Player::UseBomb() {
 		m_isInvokedBomb = true;
 		m_bombCnt--;
 
-		DeleteBullet* delBullet = GET_SINGLE(SceneManager)->GetCurScene()->
-			Spawn<DeleteBullet>(Layer::PROJECTILEDELETER, GetPos(), GetSize());
+		PlayerBoom* delBullet = GET_SINGLE(SceneManager)->GetCurScene()->
+			Spawn<PlayerBoom>(Layer::PROJECTILEDELETER, GetPos(), { 200,200 });
 
 		GET_SINGLE(ResourceManager)->Play(L"Bomb");
 
@@ -305,7 +305,7 @@ bool Player::UseBomb() {
 			{
 				GET_SINGLE(SceneManager)->RequestDestroy(delBullet);
 				m_isInvokedBomb = false;
-			}, 2.f);
+			}, 2.5f);
 
 		return true;
 	}
@@ -330,7 +330,7 @@ void Player::InvokeBomb() {
 	delBullet->Coroutine([=]()
 		{
 			GET_SINGLE(SceneManager)->RequestDestroy(delBullet);
-		}, 1.f);
+		}, 2.f);
 }
 
 void Player::GainPower(float _amount) {
@@ -340,8 +340,9 @@ void Player::GainPower(float _amount) {
 		m_powerLevel = 0;
 	}
 
-	m_amountDmg = std::max(0.f, m_amountDmg);
 	m_powerLevel = std::min(m_powerLevel, MAX_POWER);
+	m_amountDmg = std::max(0.f, m_amountDmg);
+	m_amountDmg = std::min(m_amountDmg, m_powerLevel * 0.1f);
 }
 
 void Player::SpawnPower() {

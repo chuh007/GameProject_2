@@ -221,10 +221,14 @@ void ResourceManager::RegisterTexture()
 	LoadTexture(L"BossBoom", L"Texture\\Boss_Circle.bmp");
 	LoadTexture(L"SpellBackground", L"Texture\\SpellBackground.bmp");
 	LoadTexture(L"BombIcon", L"Texture\\Player_Icon_Bomb_Green.bmp");
+	LoadTexture(L"PlayerBomb", L"Texture\\Bomb.bmp");
 	LoadTexture(L"LifeIcon", L"Texture\\Player_Icon_Hp_Red.bmp");
 	LoadTexture(L"TitleBackground", L"Texture\\TitleBackground.bmp");
 	LoadTexture(L"NormalEnemy", L"Texture\\enemy_1.bmp");
 	LoadTexture(L"DownEnemy", L"Texture\\Enemy_Down.bmp");
+	LoadTexture(L"Enemy_2", L"Texture\\Enemy_2.bmp");
+	LoadTexture(L"Enemy_3", L"Texture\\Enemy_3.bmp");
+	LoadTexture(L"PowerIcon", L"Texture\\Player_Bullet_Middle.bmp");
 }
 
 void ResourceManager::LoadTexture(const wstring& _key, const wstring& _path)

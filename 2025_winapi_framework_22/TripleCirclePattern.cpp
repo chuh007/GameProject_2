@@ -9,7 +9,7 @@ TripleCirclePattern::TripleCirclePattern(Object* _owner, Object* _target, float 
 	, m_speed(250)
 {
 	m_bulletTex = GET_SINGLE(ResourceManager)->GetTexture(L"BlueBullet3");
-	m_decValue = 1.1f;
+	m_decValue = 1.4f;
 }
 
 TripleCirclePattern::~TripleCirclePattern()
