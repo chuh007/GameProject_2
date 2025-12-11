@@ -94,14 +94,27 @@ void GameScene::Init()
 
 	m_hOldBitmap = (HBITMAP)SelectObject(m_hdc, m_hUIBitmap);
 
+	Texture* bgTex = GET_SINGLE(ResourceManager)->GetTexture(L"UIBackground");
 
-	HBRUSH hUIBrush = CreateSolidBrush(RGB(230, 230, 230));
-	RECT rect = { 0, 0, m_uiWidth, m_uiHeight };
+	if (bgTex != nullptr)
+	{
+		LONG bgWidth = bgTex->GetWidth();
+		LONG bgHeight = bgTex->GetHeight();
 
-	FillRect(m_hdc, &rect, hUIBrush);
-
-	DeleteObject(hUIBrush);
-
+		::TransparentBlt(
+			m_hdc,
+			0, 0, m_uiWidth, m_uiHeight,
+			bgTex->GetTextureDC(),
+			0, 0, bgWidth, bgHeight,
+			RGB(255, 0, 255));
+	}
+	else
+	{
+		HBRUSH hUIBrush = CreateSolidBrush(RGB(230, 230, 230));
+		RECT rect = { 0, 0, m_uiWidth, m_uiHeight };
+		FillRect(m_hdc, &rect, hUIBrush);
+		DeleteObject(hUIBrush);
+	}
 
 	//여기서부터 적 세팅
 
@@ -448,7 +461,7 @@ void GameScene::Render(HDC _hdc) {
 	int bombCnt = player->GetBombCount();
 	int power = player->GetPowerLevel();
 
-	SetTextColor(_hdc, RGB(0, 0, 0));
+	SetTextColor(_hdc, RGB(255, 255, 255));
 	SetBkMode(_hdc, TRANSPARENT);
 
 	HFONT hFont = GET_SINGLE(ResourceManager)->GetFont(FontType::TITLE);
@@ -462,6 +475,7 @@ void GameScene::Render(HDC _hdc) {
 
 	Texture* lTex = GET_SINGLE(ResourceManager)->GetTexture(L"LifeIcon");
 	Texture* bTex = GET_SINGLE(ResourceManager)->GetTexture(L"BombIcon");
+	Texture* gTex = GET_SINGLE(ResourceManager)->GetTexture(L"GameIcon");
 
 	LONG lifeWidth = lTex->GetWidth();
 	LONG lifeHeight = lTex->GetHeight();
@@ -512,6 +526,29 @@ void GameScene::Render(HDC _hdc) {
 
 	wstring powerStr = std::format(L"POWER: {} / {}", power, 128);
 	TextOut(_hdc, UI_START_X, POWER_START_Y, powerStr.c_str(), (int)powerStr.length());
+
+	if (gTex != nullptr)
+	{
+		LONG gWidth = gTex->GetWidth();
+		LONG gHeight = gTex->GetHeight();
+
+		const int RENDER_WIDTH = 340;  
+		const int RENDER_HEIGHT = 340;
+
+		const int UI_END_X = GAME_WIDTH + m_uiWidth;
+
+		const int RENDER_X = UI_END_X - RENDER_WIDTH - 10;
+		const int RENDER_Y = m_uiHeight - RENDER_HEIGHT - 10;
+
+		::TransparentBlt(
+			_hdc,
+			RENDER_X,
+			RENDER_Y,
+			RENDER_WIDTH, RENDER_HEIGHT,
+			gTex->GetTextureDC(),
+			0, 0, gWidth, gHeight,
+			RGB(255, 0, 255));
+	}
 
 	if (hOldFont != nullptr)
 	{

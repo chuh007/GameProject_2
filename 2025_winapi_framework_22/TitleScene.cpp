@@ -1,4 +1,4 @@
-#include "pch.h"
+Ôªø#include "pch.h"
 #include "SceneManager.h"
 #include "TitleScene.h"
 #include "Button.h"
@@ -7,6 +7,7 @@
 #include "ExitButton.h"
 #include "TitleBackground.h"
 #include "ResourceManager.h";
+#include "Texture.h"
 
 TitleScene::~TitleScene()
 {
@@ -15,11 +16,10 @@ TitleScene::~TitleScene()
 
 void TitleScene::Init()
 {
-
 	ButtonSelector* selector = new ButtonSelector;
 	selector->SetSize({ 50.f,50.f });
 	AddObject(selector, Layer::UI);
-	float btnpositionY = GAME_HEIGHT / 2;
+	float btnpositionY = GAME_HEIGHT *2/3;
 
 	m_uiWidth = WINDOW_WIDTH - GAME_WIDTH;
 	m_uiHeight = WINDOW_HEIGHT;
@@ -32,45 +32,60 @@ void TitleScene::Init()
 	ReleaseDC(hWnd, hScreenDC);
 
 	m_hOldBitmap = (HBITMAP)SelectObject(m_hdc, m_hUIBitmap);
-	HBRUSH hUIBrush = CreateSolidBrush(RGB(230, 230, 230));
-	RECT rect = { 0, 0, m_uiWidth, m_uiHeight };
 
-	FillRect(m_hdc, &rect, hUIBrush);
+	Texture* bgTex = GET_SINGLE(ResourceManager)->GetTexture(L"UIBackground");
 
-	float buttonX = GAME_WIDTH - 125.f;
+	if (bgTex != nullptr)
+	{
+		LONG bgWidth = bgTex->GetWidth();
+		LONG bgHeight = bgTex->GetHeight();
 
-	StartButton* button = Spawn<StartButton>(Layer::UI, { buttonX, btnpositionY }, { 200.f, 77.f });
+		::TransparentBlt(
+			m_hdc,
+			0, 0, m_uiWidth, m_uiHeight,
+			bgTex->GetTextureDC(),
+			0, 0, bgWidth, bgHeight,
+			RGB(255, 0, 255));
+	}
+	else
+	{
+		HBRUSH hUIBrush = CreateSolidBrush(RGB(230, 230, 230));
+		RECT rect = { 0, 0, m_uiWidth, m_uiHeight };
+		FillRect(m_hdc, &rect, hUIBrush);
+		DeleteObject(hUIBrush);
+	}
+
+	StartButton* button = new StartButton;
+	button->SetSize({ 200.f, 50.f });
+	button->SetPos({ GAME_WIDTH - button->GetSize().x / 2 - 25, btnpositionY});
 	button->SetText(L"Start");
 	button->SetSceneName(L"Game");
-	button->SetTexture(GET_SINGLE(ResourceManager)->GetTexture(L"StartBtn"));
 
-	btnpositionY += 80.f;
+	btnpositionY += 60.0f;
 
-	StartButton* enterBoss = Spawn<StartButton>(Layer::UI, { buttonX, btnpositionY }, { 200.f, 65.f });
+	StartButton* enterBoss = new StartButton;
+	enterBoss->SetSize({ 200.f, 50.f });
+	enterBoss->SetPos({ GAME_WIDTH - button->GetSize().x / 2 - 25, btnpositionY });
 	enterBoss->SetText(L"ToBoss");
 	enterBoss->SetSceneName(L"DevScene");
-	enterBoss->SetTexture(GET_SINGLE(ResourceManager)->GetTexture(L"ToBossBtn"));
 
-	btnpositionY += 80.f;
+	btnpositionY += 60.0f;
 
-	StartButton* setting = Spawn<StartButton>(Layer::UI, { buttonX, btnpositionY }, { 200.f, 65.f });
-
-	setting->SetText(L"Setting");
-	setting->SetSceneName(L"Setting");
-	setting->SetTexture(GET_SINGLE(ResourceManager)->GetTexture(L"SettingBtn"));
-
-	btnpositionY += 80.f;
-
-	Button* exit = Spawn<ExitButton>(Layer::UI, { buttonX, btnpositionY }, { 200.f, 65.f });
+	Button* exit = new ExitButton;
+	exit->SetSize({ 200.f, 50.f });
+	exit->SetPos({ GAME_WIDTH - button->GetSize().x / 2 - 25, btnpositionY });
 	exit->SetText(L"Exit");
-	exit->SetTexture(GET_SINGLE(ResourceManager)->GetTexture(L"ExitBtn"));
-
 	GET_SINGLE(ResourceManager)->Stop(SOUND_CHANNEL::BGM);
 	GET_SINGLE(ResourceManager)->Play(L"TitleBGM");
 
+	
+
+
+	AddObject(button, Layer::UI);
+	AddObject(exit, Layer::UI);
+	AddObject(enterBoss, Layer::UI);
 	selector->AssignButton(button);
 	selector->AssignButton(enterBoss);
-	selector->AssignButton(setting);
 	selector->AssignButton(exit);
 
 	Object* bg = new TitleBackground;
@@ -91,16 +106,38 @@ void TitleScene::Render(HDC _hdc) {
 			SRCCOPY);
 	}
 
-	SetTextColor(_hdc, RGB(0,0,0));
+	Texture* gTex = GET_SINGLE(ResourceManager)->GetTexture(L"GameIcon");
+
+	if (gTex != nullptr)
+	{
+		LONG logoWidth = gTex->GetWidth();
+		LONG logoHeight = gTex->GetHeight();
+		
+		const int RENDER_X = 10;
+		const int RENDER_Y = 10;
+		const int RENDER_WIDTH = 350;
+		const int RENDER_HEIGHT = 350;
+
+		::TransparentBlt(
+			_hdc,
+			RENDER_X,
+			RENDER_Y,
+			RENDER_WIDTH, RENDER_HEIGHT,
+			gTex->GetTextureDC(),
+			0, 0, logoWidth, logoHeight,
+			RGB(255, 0, 255));
+	}
+
+	SetTextColor(_hdc, RGB(255,255,255));
 	SetBkMode(_hdc, TRANSPARENT);
 
 	const int TEXT_START_X = GAME_WIDTH + 30;
 
-	TextOut(_hdc, TEXT_START_X, 10, L"¡∂¿€π˝ :", 5);
-	TextOut(_hdc, TEXT_START_X, 50, L"W, A, S, D : ¿Ãµø", 15);
-	TextOut(_hdc, TEXT_START_X, 75, L"Q : ∫Ω", 5);
-	TextOut(_hdc, TEXT_START_X, 100, L"Space, ¿ß¬  »≠ªÏ«• : πﬂªÁ", 18);
-	TextOut(_hdc, TEXT_START_X, 125, L"Shiift : ¥¿∏∞ ¿Ãµø", 14);
+	TextOut(_hdc, TEXT_START_X, 10, L"Ï°∞ÏûëÎ≤ï :", 5);
+	TextOut(_hdc, TEXT_START_X, 50, L"W, A, S, D : Ïù¥Îèô", 15);
+	TextOut(_hdc, TEXT_START_X, 75, L"Q : Î¥Ñ", 5);
+	TextOut(_hdc, TEXT_START_X, 100, L"Space, ÏúÑÏ™Ω ÌôîÏÇ¥Ìëú : Î∞úÏÇ¨", 18);
+	TextOut(_hdc, TEXT_START_X, 125, L"Shiift : ÎäêÎ¶∞ Ïù¥Îèô", 14);
 }
 
 void TitleScene::Release()
